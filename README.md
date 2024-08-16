@@ -1,26 +1,16 @@
 # GalaxyUnderChaosMod
 
 ### GalaxyUnderChaosMod Leader
-Destruction
+Vitiate
 
-### GalaxyUnderChaosMod is code edited by (Destruction, Collinvht, and Last_Dovahkiin)
+### GalaxyUnderChaosMod is code edited by (Vitiate)
 
 ### Developers
-
-Last_Dovahkiin
-
-Collinvht
+Vitiate
 
 ### Modelers / Sound Designers / Textures /  Concept Artists
 
-Boom
+Boss
 
-CreatarCreator
-
-WinterKILLER435
 
 ### Bug-Testers
-
-Firewolf786YT
-
-Spino mastermind

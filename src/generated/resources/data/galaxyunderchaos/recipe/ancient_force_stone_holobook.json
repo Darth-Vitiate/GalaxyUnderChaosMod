@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "GGG",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "galaxyunderchaos:ancient_force_stone"
+        },
+        "G": {
+            "item": "galaxyunderchaos:ancient_holobook"
+        }
+    },
+    "result": {
+        "id": "galaxyunderchaos:ancient_force_stone_holobook",
+        "count": 1
+    }
+}

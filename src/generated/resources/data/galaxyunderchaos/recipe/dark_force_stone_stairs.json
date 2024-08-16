@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "  #",
+        " ##",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "galaxyunderchaos:dark_force_stone"
+        }
+    },
+    "result": {
+        "id": "galaxyunderchaos:dark_force_stone_stairs",
+        "count": 4
+    },
+    "group": "misc"
+}

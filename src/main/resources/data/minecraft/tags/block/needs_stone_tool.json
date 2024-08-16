@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "galaxyunderchaos:force_stone",
+    "galaxyunderchaos:force_stone_holobook",
+    "galaxyunderchaos:force_stone_pillar",
+    "galaxyunderchaos:force_stone_slab",
+    "galaxyunderchaos:force_stone_stairs",
+    "galaxyunderchaos:dark_force_stone",
+    "galaxyunderchaos:dark_force_stone_holobook",
+    "galaxyunderchaos:dark_force_stone_pillar",
+    "galaxyunderchaos:dark_force_stone_slab",
+    "galaxyunderchaos:dark_force_stone_stairs",
+    "galaxyunderchaos:ancient_force_stone",
+    "galaxyunderchaos:ancient_force_stone_cracked",
+    "galaxyunderchaos:ancient_force_stone_pillar",
+    "galaxyunderchaos:ancient_force_stone_holobook",
+    "galaxyunderchaos:ancient_force_stone_stairs",
+    "galaxyunderchaos:ancient_force_stone_slab"
+  ]
+}
