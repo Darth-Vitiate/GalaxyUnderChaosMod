@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import server.galaxyunderchaos.galaxyunderchaos;
+import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 
 import java.util.function.Function;
 
@@ -43,7 +44,11 @@ public class ModTeleporter {
         entity.setYRot(yaw);
 
         if (insideDimension) {
-            entity.spawnAtLocation(galaxyunderchaos.TYTHON_PORTAL_ITEM.get().getDefaultInstance());
+            if (destinationWorld.dimension() == ModDimensions.TYTHON_LEVEL_KEY) {
+                entity.spawnAtLocation(galaxyunderchaos.TYTHON_PORTAL_ITEM.get().getDefaultInstance());
+            } else if (destinationWorld.dimension() == ModDimensions.NABOO_LEVEL_KEY) {
+                entity.spawnAtLocation(galaxyunderchaos.NABOO_PORTAL_ITEM.get().getDefaultInstance());
+            }
         }
 
         return entity;

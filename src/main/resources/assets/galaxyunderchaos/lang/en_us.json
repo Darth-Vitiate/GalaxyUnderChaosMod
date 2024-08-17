@@ -18,9 +18,11 @@
   "block.galaxyunderchaos.tython_grass": "Tython Grass",
   "block.galaxyunderchaos.tython_dirt": "Tython Dirt",
   "item.galaxyunderchaos.tython_portal": "Tython Hyperdrive",
+  "item.galaxyunderchaos.naboo_portal": "Naboo Hyperdrive",
   "item.galaxyunderchaos.shuura": "Shuura",
   "item.galaxyunderchaos.jedi_holobook": "Jedi Holobook",
   "item.galaxyunderchaos.sith_holobook": "Sith Holobook",
   "item.galaxyunderchaos.ancient_holobook": "Ancient Holobook",
-  "itemGroup.galaxyunderchaos.galaxy_under_chaos": "Galaxy Under Chaos"
+  "creativetab.galaxyunderchaos.galaxy_under_chaos_blocks": "Galaxy Under Chaos Blocks",
+  "creativetab.galaxyunderchaos.galaxy_under_chaos_items": "Galaxy Under Chaos Items"
 }

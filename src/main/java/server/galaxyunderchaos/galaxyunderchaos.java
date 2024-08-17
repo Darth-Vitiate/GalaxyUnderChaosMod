@@ -2,11 +2,8 @@ package server.galaxyunderchaos;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,17 +23,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
+import server.galaxyunderchaos.item.CreativeMenuTabs;
+import server.galaxyunderchaos.item.NabooPortalItem;
 import server.galaxyunderchaos.item.TythonPortalItem;
+import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
-@Mod(galaxyunderchaos.MODID)
+@Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
+    public static final String MODID="galaxyunderchaos";
+    private static final Logger LOGGER= LogUtils.getLogger();
 
-
-public class galaxyunderchaos {
-    public static final String MODID = "galaxyunderchaos";
-    private static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final RegistryObject<Block> FORCE_STONE = BLOCKS.register("force_stone", ForceStone::new);
     public static final RegistryObject<Item> FORCE_STONE_ITEM = ITEMS.register("force_stone", () -> new BlockItem(FORCE_STONE.get(), new Item.Properties()));
@@ -47,12 +44,12 @@ public class galaxyunderchaos {
     public static final RegistryObject<Block> FORCE_STONE_HOLOBOOK = BLOCKS.register("force_stone_holobook", ForceStoneHolobook::new);
     public static final RegistryObject<Item> FORCE_STONE_HOLOBOOK_ITEM = ITEMS.register("force_stone_holobook", () -> new BlockItem(FORCE_STONE_HOLOBOOK.get(), new Item.Properties()));
 
-
     public static final RegistryObject<Block> FORCE_STONE_STAIRS = BLOCKS.register("force_stone_stairs", () -> new ForceStoneStairs(FORCE_STONE.get().defaultBlockState()));
     public static final RegistryObject<Item> FORCE_STONE_STAIRS_ITEM = ITEMS.register("force_stone_stairs", () -> new BlockItem(FORCE_STONE_STAIRS.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> FORCE_STONE_SLAB = BLOCKS.register("force_stone_slab", ForceStoneSlab::new);
     public static final RegistryObject<Item> FORCE_STONE_SLAB_ITEM = ITEMS.register("force_stone_slab", () -> new BlockItem(FORCE_STONE_SLAB.get(), new Item.Properties()));
+
     public static final RegistryObject<Block> DARK_FORCE_STONE = BLOCKS.register("dark_force_stone", DarkForceStone::new);
     public static final RegistryObject<Item> DARK_FORCE_STONE_ITEM = ITEMS.register("dark_force_stone", () -> new BlockItem(DARK_FORCE_STONE.get(), new Item.Properties()));
 
@@ -61,7 +58,6 @@ public class galaxyunderchaos {
 
     public static final RegistryObject<Block> DARK_FORCE_STONE_HOLOBOOK = BLOCKS.register("dark_force_stone_holobook", DarkForceStoneHolobook::new);
     public static final RegistryObject<Item> DARK_FORCE_STONE_HOLOBOOK_ITEM = ITEMS.register("dark_force_stone_holobook", () -> new BlockItem(DARK_FORCE_STONE_HOLOBOOK.get(), new Item.Properties()));
-
 
     public static final RegistryObject<Block> DARK_FORCE_STONE_STAIRS = BLOCKS.register("dark_force_stone_stairs", () -> new DarkForceStoneStairs(DARK_FORCE_STONE.get().defaultBlockState()));
     public static final RegistryObject<Item> DARK_FORCE_STONE_STAIRS_ITEM = ITEMS.register("dark_force_stone_stairs", () -> new BlockItem(DARK_FORCE_STONE_STAIRS.get(), new Item.Properties()));
@@ -98,48 +94,18 @@ public class galaxyunderchaos {
     public static final RegistryObject<Item> TYTHON_PORTAL_ITEM = ITEMS.register("tython_portal",
             () -> new TythonPortalItem(new Item.Properties().stacksTo(1)));
 
-
-    public static final RegistryObject<CreativeModeTab> GALAXY_UNDER_CHAOS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos", () -> CreativeModeTab.builder()
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> FORCE_STONE.get().asItem().getDefaultInstance())  // Use asItem() to get the item form
-            .displayItems((parameters, output) -> {
-                output.accept(FORCE_STONE.get().asItem());
-                output.accept(FORCE_STONE_HOLOBOOK.get().asItem());
-                output.accept(FORCE_STONE_PILLAR.get().asItem());
-                output.accept(FORCE_STONE_STAIRS.get().asItem());
-                output.accept(FORCE_STONE_SLAB.get().asItem());
-                output.accept(DARK_FORCE_STONE.get().asItem());
-                output.accept(DARK_FORCE_STONE_HOLOBOOK.get().asItem());
-                output.accept(DARK_FORCE_STONE_PILLAR.get().asItem());
-                output.accept(DARK_FORCE_STONE_STAIRS.get().asItem());
-                output.accept(DARK_FORCE_STONE_SLAB.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE_HOLOBOOK.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE_PILLAR.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE_CRACKED.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE_STAIRS.get().asItem());
-                output.accept(ANCIENT_FORCE_STONE_SLAB.get().asItem());
-                output.accept(TYTHON_GRASS.get().asItem());
-                output.accept(TYTHON_DIRT.get().asItem());
-            }).build());
-    public static final RegistryObject<CreativeModeTab> GALAXY_UNDER_CHAOS_ITEMS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_items", () -> CreativeModeTab.builder()
-            .icon(() -> SHUURA.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(SHUURA.get());
-                output.accept(JEDI_HOLOBOOK.get());
-                output.accept(ANCIENT_HOLOBOOK.get());
-                output.accept(SITH_HOLOBOOK.get());
-                output.accept(TYTHON_PORTAL_ITEM.get());
-
-
-            }).build());
+    public static final RegistryObject<Item> NABOO_PORTAL_ITEM = ITEMS.register("naboo_portal",
+            () -> new NabooPortalItem(new Item.Properties().stacksTo(1)));
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
+
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
-        CREATIVE_MODE_TABS.register(modEventBus);
+        ModBiomes.BIOMES.register(modEventBus);
+        CreativeMenuTabs.register(modEventBus); // Register the creative tabs
+
         MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -154,13 +120,6 @@ public class galaxyunderchaos {
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-
-    }
-
-
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-        BLOCKS.register(eventBus);
     }
 
     @SubscribeEvent
@@ -177,4 +136,3 @@ public class galaxyunderchaos {
         }
     }
 }
-  
