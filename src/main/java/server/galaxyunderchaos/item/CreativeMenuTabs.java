@@ -37,8 +37,33 @@ public class CreativeMenuTabs {
                         output.accept(ANCIENT_FORCE_STONE_CRACKED.get().asItem());
                         output.accept(ANCIENT_FORCE_STONE_STAIRS.get().asItem());
                         output.accept(ANCIENT_FORCE_STONE_SLAB.get().asItem());
-                        output.accept(TYTHON_GRASS.get().asItem());
-                        output.accept(TYTHON_DIRT.get().asItem());
+                        output.accept(PURPLE_CRYSTAL_ORE.get().asItem());
+                        output.accept(MAGENTA_CRYSTAL_ORE.get().asItem());
+                        output.accept(PINK_CRYSTAL_ORE.get().asItem());
+                        output.accept(RED_CRYSTAL_ORE.get().asItem());
+                        output.accept(BLOOD_ORANGE_CRYSTAL_ORE.get().asItem());
+                        output.accept(ORANGE_CRYSTAL_ORE.get().asItem());
+                        output.accept(YELLOW_CRYSTAL_ORE.get().asItem());
+                        output.accept(LIME_GREEN_CRYSTAL_ORE.get().asItem());
+                        output.accept(GREEN_CRYSTAL_ORE.get().asItem());
+                        output.accept(TURQUOISE_CRYSTAL_ORE.get().asItem());
+                        output.accept(CYAN_CRYSTAL_ORE.get().asItem());
+                        output.accept(BLUE_CRYSTAL_ORE.get().asItem());
+                        output.accept(WHITE_CRYSTAL_ORE.get().asItem());
+//                        output.accept(PURPLE_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(MAGENTA_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(PINK_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(RED_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(BLOOD_ORANGE_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(ORANGE_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(YELLOW_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(LIME_GREEN_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(GREEN_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(TURQUOISE_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(CYAN_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(BLUE_CRYSTAL_BLOCK.get().asItem());
+//                        output.accept(WHITE_CRYSTAL_BLOCK.get().asItem());
+
                     }).build());
 
     public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_ITEMS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_items",
@@ -52,6 +77,20 @@ public class CreativeMenuTabs {
                         output.accept(SITH_HOLOBOOK.get());
                         output.accept(TYTHON_PORTAL_ITEM.get());
                         output.accept(NABOO_PORTAL_ITEM.get());
+                        output.accept(PURPLE_KYBER.get());
+                        output.accept(MAGENTA_KYBER.get());
+                        output.accept(PINK_KYBER.get());
+                        output.accept(RED_KYBER.get());
+                        output.accept(BLOOD_ORANGE_KYBER.get());
+                        output.accept(ORANGE_KYBER.get());
+                        output.accept(YELLOW_KYBER.get());
+                        output.accept(LIME_GREEN_KYBER.get());
+                        output.accept(GREEN_KYBER.get());
+                        output.accept(TURQUOISE_KYBER.get());
+                        output.accept(CYAN_KYBER.get());
+                        output.accept(BLUE_KYBER.get());
+                        output.accept(WHITE_KYBER.get());
+
 
                     }).build());
 

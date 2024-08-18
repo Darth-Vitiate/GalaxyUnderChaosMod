@@ -35,6 +35,62 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
+    public static final RegistryObject<Block> RED_CRYSTAL_ORE = BLOCKS.register("red_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> BLOOD_ORANGE_CRYSTAL_ORE = BLOCKS.register("blood_orange_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> BLUE_CRYSTAL_ORE = BLOCKS.register("blue_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> ORANGE_CRYSTAL_ORE = BLOCKS.register("orange_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> GREEN_CRYSTAL_ORE = BLOCKS.register("green_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> YELLOW_CRYSTAL_ORE = BLOCKS.register("yellow_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> CYAN_CRYSTAL_ORE = BLOCKS.register("cyan_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> WHITE_CRYSTAL_ORE = BLOCKS.register("white_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> MAGENTA_CRYSTAL_ORE = BLOCKS.register("magenta_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> PURPLE_CRYSTAL_ORE = BLOCKS.register("purple_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> PINK_CRYSTAL_ORE = BLOCKS.register("pink_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> LIME_GREEN_CRYSTAL_ORE = BLOCKS.register("lime_green_crystal_ore", CrystalOre::new);
+    public static final RegistryObject<Block> TURQUOISE_CRYSTAL_ORE = BLOCKS.register("turquoise_crystal_ore", CrystalOre::new);
+
+   public static final RegistryObject<Item> RED_CRYSTAL_ORE_ITEM = ITEMS.register("red_crystal_ore", () -> new BlockItem(RED_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("blood_orange_crystal_ore", () -> new BlockItem(BLOOD_ORANGE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("blue_crystal_ore", () -> new BlockItem(BLUE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("orange_crystal_ore", () -> new BlockItem(ORANGE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("green_crystal_ore", () -> new BlockItem(GREEN_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("yellow_crystal_ore", () -> new BlockItem(YELLOW_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("cyan_crystal_ore", () -> new BlockItem(CYAN_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("white_crystal_ore", () -> new BlockItem(WHITE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("magenta_crystal_ore", () -> new BlockItem(MAGENTA_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("purple_crystal_ore", () -> new BlockItem(PURPLE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("pink_crystal_ore", () -> new BlockItem(PINK_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("lime_green_crystal_ore", () -> new BlockItem(LIME_GREEN_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("turquoise_crystal_ore", () -> new BlockItem(TURQUOISE_CRYSTAL_ORE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> RED_CRYSTAL_BLOCK = BLOCKS.register("red_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> BLOOD_ORANGE_CRYSTAL_BLOCK = BLOCKS.register("blood_orange_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> BLUE_CRYSTAL_BLOCK = BLOCKS.register("blue_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> ORANGE_CRYSTAL_BLOCK = BLOCKS.register("orange_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> GREEN_CRYSTAL_BLOCK = BLOCKS.register("green_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> YELLOW_CRYSTAL_BLOCK = BLOCKS.register("yellow_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> CYAN_CRYSTAL_BLOCK = BLOCKS.register("cyan_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> WHITE_CRYSTAL_BLOCK = BLOCKS.register("white_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> MAGENTA_CRYSTAL_BLOCK = BLOCKS.register("magenta_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> PURPLE_CRYSTAL_BLOCK = BLOCKS.register("purple_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> PINK_CRYSTAL_BLOCK = BLOCKS.register("pink_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> LIME_GREEN_CRYSTAL_BLOCK = BLOCKS.register("lime_green_crystal_block", CrystalBlock::new);
+    public static final RegistryObject<Block> TURQUOISE_CRYSTAL_BLOCK = BLOCKS.register("turquoise_crystal_block", CrystalBlock::new);
+
+    public static final RegistryObject<Item> RED_CRYSTAL_BLOCK_ITEM = ITEMS.register("red_crystal_block", () -> new BlockItem(RED_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blood_orange_crystal_block", () -> new BlockItem(BLOOD_ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blue_crystal_block", () -> new BlockItem(BLUE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("orange_crystal_block", () -> new BlockItem(ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("green_crystal_block", () -> new BlockItem(GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("yellow_crystal_block", () -> new BlockItem(YELLOW_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("cyan_crystal_block", () -> new BlockItem(CYAN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("white_crystal_block", () -> new BlockItem(WHITE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("magenta_crystal_block", () -> new BlockItem(MAGENTA_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("purple_crystal_block", () -> new BlockItem(PURPLE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("pink_crystal_block", () -> new BlockItem(PINK_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("lime_green_crystal_block", () -> new BlockItem(LIME_GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("turquoise_crystal_block", () -> new BlockItem(TURQUOISE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+
+
     public static final RegistryObject<Block> FORCE_STONE = BLOCKS.register("force_stone", ForceStone::new);
     public static final RegistryObject<Item> FORCE_STONE_ITEM = ITEMS.register("force_stone", () -> new BlockItem(FORCE_STONE.get(), new Item.Properties()));
 
@@ -70,6 +126,30 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> JEDI_HOLOBOOK = ITEMS.register("jedi_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANCIENT_HOLOBOOK = ITEMS.register("ancient_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SITH_HOLOBOOK = ITEMS.register("sith_holobook", () -> new Item(new Item.Properties()));
+
+
+    public static final RegistryObject<Item> RED_KYBER = ITEMS.register("red_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER = ITEMS.register("blood_orange_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_KYBER = ITEMS.register("blue_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_KYBER = ITEMS.register("orange_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_KYBER = ITEMS.register("green_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_KYBER = ITEMS.register("yellow_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CYAN_KYBER = ITEMS.register("cyan_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_KYBER = ITEMS.register("white_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_KYBER = ITEMS.register("magenta_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_KYBER = ITEMS.register("purple_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_KYBER = ITEMS.register("pink_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_GREEN_KYBER = ITEMS.register("lime_green_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TURQUOISE_KYBER = ITEMS.register("turquoise_kyber", () -> new Item(new Item.Properties()));
+
+
 
     public static final RegistryObject<Block> ANCIENT_FORCE_STONE = BLOCKS.register("ancient_force_stone", AncientForceStone::new);
     public static final RegistryObject<Item> ANCIENT_FORCE_STONE_ITEM = ITEMS.register("ancient_force_stone", () -> new BlockItem(ANCIENT_FORCE_STONE.get(), new Item.Properties()));
