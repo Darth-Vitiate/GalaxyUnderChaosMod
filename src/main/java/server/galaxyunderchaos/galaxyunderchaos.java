@@ -6,7 +6,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -24,6 +23,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.item.CreativeMenuTabs;
+import server.galaxyunderchaos.item.IlumPortalItem;
 import server.galaxyunderchaos.item.NabooPortalItem;
 import server.galaxyunderchaos.item.TythonPortalItem;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
@@ -177,6 +177,9 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> NABOO_PORTAL_ITEM = ITEMS.register("naboo_portal",
             () -> new NabooPortalItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> ILUM_PORTAL_ITEM = ITEMS.register("ilum_portal",
+            () -> new IlumPortalItem(new Item.Properties().stacksTo(1)));
+
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
@@ -192,14 +195,14 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
+//        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+//        if (Config.logDirtBlock)
+//            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+//
+//        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+//        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
     @SubscribeEvent

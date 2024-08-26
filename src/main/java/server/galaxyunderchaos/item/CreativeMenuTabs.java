@@ -77,6 +77,7 @@ public class CreativeMenuTabs {
                         output.accept(SITH_HOLOBOOK.get());
                         output.accept(TYTHON_PORTAL_ITEM.get());
                         output.accept(NABOO_PORTAL_ITEM.get());
+                        output.accept(ILUM_PORTAL_ITEM.get());
                         output.accept(PURPLE_KYBER.get());
                         output.accept(MAGENTA_KYBER.get());
                         output.accept(PINK_KYBER.get());

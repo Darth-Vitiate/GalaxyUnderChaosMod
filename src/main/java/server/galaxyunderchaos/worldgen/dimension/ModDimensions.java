@@ -39,19 +39,33 @@ public class ModDimensions {
     public static final ResourceKey<DimensionType> NABOO_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_type"));
 
+    public static final ResourceKey<LevelStem> ILUM_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum"));
+    public static final ResourceKey<Level> ILUM_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum"));
+    public static final ResourceKey<DimensionType> ILUM_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum_type"));
+
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64,  384, 384,
+                -64, 384, 384,
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
 
         context.register(NABOO_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64,  384, 384,
+                -64, 384, 384,
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
+
+        context.register(ILUM_DIM_TYPE, new DimensionType(
+                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
+                -64, 384, 384,
+                BlockTags.INFINIBURN_OVERWORLD, // infiniburn
+                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
+
     }
 
     public static void bootstrapStem(BootstrapContext<LevelStem> context) {
@@ -59,40 +73,40 @@ public class ModDimensions {
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
-        NoiseBasedChunkGenerator tythonChunkGenerator=new NoiseBasedChunkGenerator(
+        NoiseBasedChunkGenerator tythonChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
-                        Pair.of(
-                                Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA)),
-                        Pair.of(
-                                Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.OCEAN)),
-                        Pair.of(
-                                Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.PLAINS)),
-                        Pair.of(
-                                Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.DEEP_OCEAN)),
-                        Pair.of(
-                                Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.WARM_OCEAN)),
-                        Pair.of(
-                                Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN)),
-                        Pair.of(
-                                Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN)),
-                        Pair.of(
-                                Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(Biomes.WINDSWEPT_HILLS))
-                ))),
+                                Pair.of(
+                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.PLAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.DEEP_OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.WARM_OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.WINDSWEPT_HILLS))
+                        ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
 
-        LevelStem tythonStem=new LevelStem(dimTypes.getOrThrow(ModDimensions.TYTHON_DIM_TYPE), tythonChunkGenerator);
+        LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.TYTHON_DIM_TYPE), tythonChunkGenerator);
         context.register(TYTHON_KEY, tythonStem);
 
-        NoiseBasedChunkGenerator nabooChunkGenerator=new NoiseBasedChunkGenerator(
+        NoiseBasedChunkGenerator nabooChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(
@@ -113,10 +127,25 @@ public class ModDimensions {
                                 Pair.of(
                                         Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN))
-                ))),
+                        ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
 
-        LevelStem nabooStem=new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
+        LevelStem nabooStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
         context.register(NABOO_KEY, nabooStem);
+
+        NoiseBasedChunkGenerator ilumChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(-1.0F, 0.9F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME)),
+                                Pair.of(
+                                        Climate.parameters(-1.0F, 0.9F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME_FOREST))
+                        ))),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.LARGE_BIOMES));
+
+        LevelStem ilumStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.ILUM_DIM_TYPE), ilumChunkGenerator);
+        context.register(ILUM_KEY, ilumStem);
     }
 }
