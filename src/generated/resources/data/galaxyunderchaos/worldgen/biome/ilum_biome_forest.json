@@ -11,10 +11,16 @@
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
       "block_search_extent": 8,
-      "offset": 2
+      "offset": 2.0
     }
   },
-  "spawners": {},
+  "spawners": {
+    "creature": [],
+    "monster": [],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": []
+  },
   "spawn_costs": {},
   "carvers": {
     "air": [
@@ -23,8 +29,8 @@
       "minecraft:canyon"
     ]
   },
-  "features": [
-    [],
+"features": [
+    [], 
     [
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
@@ -36,8 +42,8 @@
       "minecraft:monster_room",
       "minecraft:monster_room_deep"
     ],
-    [],
-    [],
+    [], 
+    [], 
     [
       "minecraft:ore_dirt",
       "minecraft:ore_gravel",
@@ -67,12 +73,28 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "minecraft:ore_emerald",
+      "galaxyunderchaos:blue_crystal_ore",
+      "galaxyunderchaos:orange_crystal_ore",
+      "galaxyunderchaos:green_crystal_ore",
+      "galaxyunderchaos:yellow_crystal_ore",
+      "galaxyunderchaos:cyan_crystal_ore",
+      "galaxyunderchaos:white_crystal_ore",
+      "galaxyunderchaos:magenta_crystal_ore",
+      "galaxyunderchaos:purple_crystal_ore",
+      "galaxyunderchaos:pink_crystal_ore",
+      "galaxyunderchaos:lime_green_crystal_ore",
+      "galaxyunderchaos:turquoise_crystal_ore"
+    ],
+    [
+      "minecraft:ore_infested"
     ],
     [],
     [
       "minecraft:spring_water",
       "minecraft:spring_lava"
+
     ],
     [
       "minecraft:glow_lichen",

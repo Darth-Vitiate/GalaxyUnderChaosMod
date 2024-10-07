@@ -62,10 +62,11 @@ public class ModDimensions {
 
         context.register(ILUM_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384,
-                BlockTags.INFINIBURN_OVERWORLD, // infiniburn
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
-
+                -64, 384, 384, // Adjust height and Y min as needed
+                BlockTags.INFINIBURN_OVERWORLD,
+                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // Change this to create a different environment feel
+                1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
+        ));
     }
 
     public static void bootstrapStem(BootstrapContext<LevelStem> context) {
@@ -110,22 +111,22 @@ public class ModDimensions {
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.1F, 0.2F, 0.3F, 0.4F, 0.2F, 0.1F, 0.0F),
                                         biomeRegistry.getOrThrow(ModBiomes.NABOO_BIOME)), // Custom biome
                                 Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.3F, 0.7F, 0.6F, 0.2F, -0.2F, 0.0F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.OCEAN)),
                                 Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.7F, 0.9F, 0.4F, 0.3F, -0.1F, 0.2F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.WARM_OCEAN)),
                                 Pair.of(
-                                        Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.4F, 0.4F, 0.5F, 0.2F, 0.3F, 0.1F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.FOREST)),
                                 Pair.of(
-                                        Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.6F, 0.6F, 0.7F, 0.3F, 0.4F, 0.2F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.FLOWER_FOREST)),
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(0.5F, 0.8F, 0.3F, 0.5F, -0.1F, 0.1F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN))
                         ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
@@ -140,7 +141,7 @@ public class ModDimensions {
                                         Climate.parameters(-1.0F, 0.9F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
                                         biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME)),
                                 Pair.of(
-                                        Climate.parameters(-1.0F, 0.9F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        Climate.parameters(-0.8F, 1.0F, 0.2F, 0.1F, 0.2F, 0.1F, 0.0F),
                                         biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME_FOREST))
                         ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.LARGE_BIOMES));

@@ -1,8 +1,6 @@
 {
     "replace": false,
     "values": [
-        "galaxyunderchaos:red_crystal_ore",
-        "galaxyunderchaos:blood_orange_crystal_ore",
         "galaxyunderchaos:blue_crystal_ore",
         "galaxyunderchaos:orange_crystal_ore",
         "galaxyunderchaos:green_crystal_ore",
@@ -26,6 +24,9 @@
         "galaxyunderchaos:purple_crystal_block",
         "galaxyunderchaos:pink_crystal_block",
         "galaxyunderchaos:lime_green_crystal_block",
+        "galaxyunderchaos:bleeding_table",
+        "galaxyunderchaos:jedi_guard_statue",
+        "galaxyunderchaos:sith_guard_statue",
         "galaxyunderchaos:turquoise_crystal_block"
     ]
 }

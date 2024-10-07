@@ -40,8 +40,6 @@ public class CreativeMenuTabs {
                         output.accept(PURPLE_CRYSTAL_ORE.get().asItem());
                         output.accept(MAGENTA_CRYSTAL_ORE.get().asItem());
                         output.accept(PINK_CRYSTAL_ORE.get().asItem());
-                        output.accept(RED_CRYSTAL_ORE.get().asItem());
-                        output.accept(BLOOD_ORANGE_CRYSTAL_ORE.get().asItem());
                         output.accept(ORANGE_CRYSTAL_ORE.get().asItem());
                         output.accept(YELLOW_CRYSTAL_ORE.get().asItem());
                         output.accept(LIME_GREEN_CRYSTAL_ORE.get().asItem());
@@ -50,6 +48,8 @@ public class CreativeMenuTabs {
                         output.accept(CYAN_CRYSTAL_ORE.get().asItem());
                         output.accept(BLUE_CRYSTAL_ORE.get().asItem());
                         output.accept(WHITE_CRYSTAL_ORE.get().asItem());
+                        output.accept(BLEEDING_TABLE.get().asItem());
+                        output.accept(JEDI_GUARD_STATUE.get().asItem());
 //                        output.accept(PURPLE_CRYSTAL_BLOCK.get().asItem());
 //                        output.accept(MAGENTA_CRYSTAL_BLOCK.get().asItem());
 //                        output.accept(PINK_CRYSTAL_BLOCK.get().asItem());

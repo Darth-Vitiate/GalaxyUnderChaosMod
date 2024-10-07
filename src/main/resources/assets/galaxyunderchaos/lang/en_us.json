@@ -15,8 +15,6 @@
   "block.galaxyunderchaos.ancient_force_stone_stairs": "Ancient Force Stone Stairs",
   "block.galaxyunderchaos.ancient_force_stone_pillar": "Ancient Force Stone Pillar",
   "block.galaxyunderchaos.ancient_force_stone_slab": "Ancient Force Stone Slab",
-  "block.galaxyunderchaos.red_crystal_ore": "Red Crystal Ore",
-  "block.galaxyunderchaos.blood_orange_crystal_ore": "Blood Orange Crystal Ore",
   "block.galaxyunderchaos.blue_crystal_ore": "Blue Crystal Ore",
   "block.galaxyunderchaos.orange_crystal_ore": "Orange Crystal Ore",
   "block.galaxyunderchaos.green_crystal_ore": "Green Crystal Ore",
@@ -63,6 +61,9 @@
   "item.galaxyunderchaos.magenta_kyber": "Magenta Kyber",
   "item.galaxyunderchaos.yellow_kyber": "Yellow Kyber",
   "item.galaxyunderchaos.turquoise_kyber": "Turquoise Kyber",
+  "block.galaxyunderchaos.bleeding_table": "Crystal Bleeding Table",
+  "block.galaxyunderchaos.jedi_guard_statue": "Jedi Guard Statue",
+  "block.galaxyunderchaos.sith_guard_statue": "Sith Guard Statue",
   "creativetab.galaxyunderchaos.galaxy_under_chaos_blocks": "Galaxy Under Chaos Blocks",
   "creativetab.galaxyunderchaos.galaxy_under_chaos_items": "Galaxy Under Chaos Items"
 }
