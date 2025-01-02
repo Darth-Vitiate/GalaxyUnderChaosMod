@@ -48,8 +48,13 @@ public class CreativeMenuTabs {
                         output.accept(CYAN_CRYSTAL_ORE.get().asItem());
                         output.accept(BLUE_CRYSTAL_ORE.get().asItem());
                         output.accept(WHITE_CRYSTAL_ORE.get().asItem());
+                        output.accept(CHROMIUM_ORE.get().asItem());
+                        output.accept(CHROMIUM_DEEPSLATE_ORE.get().asItem());
+                        output.accept(TITANIUM_ORE.get().asItem());
+                        output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
                         output.accept(JEDI_GUARD_STATUE.get().asItem());
+                        output.accept(SITH_GUARD_STATUE_ITEM.get().asItem());
 //                        output.accept(PURPLE_CRYSTAL_BLOCK.get().asItem());
 //                        output.accept(MAGENTA_CRYSTAL_BLOCK.get().asItem());
 //                        output.accept(PINK_CRYSTAL_BLOCK.get().asItem());
@@ -71,10 +76,12 @@ public class CreativeMenuTabs {
                     .icon(() -> new ItemStack(SHUURA.get()))
                     .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_items"))
                     .displayItems((parameters, output) -> {
-                        output.accept(SHUURA.get());
-                        output.accept(JEDI_HOLOBOOK.get());
-                        output.accept(ANCIENT_HOLOBOOK.get());
-                        output.accept(SITH_HOLOBOOK.get());
+                        output.accept(CHROMIUM_INGOT.get());
+                        output.accept(TITANIUM_INGOT.get());
+                        output.accept(TITANIUM_CHROMIUM_INGOT.get());
+//                        output.accept(REACTOR_ASSEMBLY.get());
+                        output.accept(NAVIGATION_COMPUTER.get());
+                        output.accept(PORTAL_ITEM.get());
                         output.accept(TYTHON_PORTAL_ITEM.get());
                         output.accept(NABOO_PORTAL_ITEM.get());
                         output.accept(ILUM_PORTAL_ITEM.get());
@@ -91,6 +98,11 @@ public class CreativeMenuTabs {
                         output.accept(CYAN_KYBER.get());
                         output.accept(BLUE_KYBER.get());
                         output.accept(WHITE_KYBER.get());
+                        output.accept(JEDI_HOLOBOOK.get());
+                        output.accept(ANCIENT_HOLOBOOK.get());
+                        output.accept(SITH_HOLOBOOK.get());
+                        output.accept(SHUURA.get());
+
 
 
                     }).build());
