@@ -50,6 +50,8 @@ public class ModTeleporter {
                 entity.spawnAtLocation(galaxyunderchaos.NABOO_PORTAL_ITEM.get().getDefaultInstance());
             } else if (destinationWorld.dimension() == ModDimensions.ILUM_LEVEL_KEY) {
                 entity.spawnAtLocation(galaxyunderchaos.ILUM_PORTAL_ITEM.get().getDefaultInstance());
+            } else if (destinationWorld.dimension() == ModDimensions.MUSTAFAR_LEVEL_KEY) {
+                entity.spawnAtLocation(galaxyunderchaos.MUSTAFAR_PORTAL_ITEM.get().getDefaultInstance());
             }
         }
 

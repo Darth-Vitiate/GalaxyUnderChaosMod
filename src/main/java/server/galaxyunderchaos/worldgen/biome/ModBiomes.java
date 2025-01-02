@@ -18,6 +18,10 @@ public class ModBiomes {
     public static final ResourceKey<Biome> ILUM_BIOME = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum_biome"));
 
     public static final ResourceKey<Biome> ILUM_BIOME_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum_biome_forest"));
+    public static final ResourceKey<Biome> MUSTAFAR_LAVA_FIELD = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_lava_field"));
+    public static final ResourceKey<Biome> MUSTAFAR_VOLCANIC_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_volcanic_plains"));
+    public static final ResourceKey<Biome> MUSTAFAR_MAGMA_LAKE = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_magma_lake"));
+
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -26,6 +30,9 @@ public class ModBiomes {
         context.register(NABOO_BIOME, createNabooBiome(context));
         context.register(ILUM_BIOME, createIlumBiome(context));
         context.register(ILUM_BIOME_FOREST, createIlumBiomeForest(context));
+        context.register(MUSTAFAR_LAVA_FIELD, createMustafarLavaField(context));
+        context.register(MUSTAFAR_VOLCANIC_PLAINS, createMustafarVolcanicPlains(context));
+        context.register(MUSTAFAR_MAGMA_LAKE, createMustafarMagmaLake(context));
 
     }
     private static Biome createNabooBiome(BootstrapContext<Biome> context) {
@@ -88,6 +95,62 @@ public class ModBiomes {
                         .foliageColorOverride(0xA0A0A0) // Slightly darker gray for foliage
                         .fogColor(0xF0F0F0) // Light gray fog color
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+    private static Biome createMustafarLavaField(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(2.0f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0xFF4500)
+                        .waterFogColor(0x8B0000)
+                        .skyColor(0xAA3300)
+                        .fogColor(0xCC1100)
+                        .build())
+                .build();
+    }
+
+    private static Biome createMustafarVolcanicPlains(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(1.5f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x8B0000)
+                        .waterFogColor(0x550000)
+                        .skyColor(0xFF3300)
+                        .fogColor(0xAA1100)
+                        .build())
+                .build();
+    }
+
+    private static Biome createMustafarMagmaLake(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(2.5f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0xFF6347)
+                        .waterFogColor(0xB22222)
+                        .skyColor(0xFF4500)
+                        .fogColor(0x800000)
                         .build())
                 .build();
     }

@@ -22,10 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
-import server.galaxyunderchaos.item.CreativeMenuTabs;
-import server.galaxyunderchaos.item.IlumPortalItem;
-import server.galaxyunderchaos.item.NabooPortalItem;
-import server.galaxyunderchaos.item.TythonPortalItem;
+import server.galaxyunderchaos.item.*;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
 @Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
@@ -192,6 +189,9 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
     public static final RegistryObject<Item> TYTHON_PORTAL_ITEM = ITEMS.register("tython_portal",
             () -> new TythonPortalItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> MUSTAFAR_PORTAL_ITEM = ITEMS.register("mustafar_portal",
+            () -> new MustafarPortalItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> NABOO_PORTAL_ITEM = ITEMS.register("naboo_portal",
             () -> new NabooPortalItem(new Item.Properties().stacksTo(1)));

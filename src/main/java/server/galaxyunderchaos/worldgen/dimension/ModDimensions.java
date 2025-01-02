@@ -46,6 +46,13 @@ public class ModDimensions {
     public static final ResourceKey<DimensionType> ILUM_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum_type"));
 
+    public static final ResourceKey<LevelStem> MUSTAFAR_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar"));
+    public static final ResourceKey<Level> MUSTAFAR_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar"));
+    public static final ResourceKey<DimensionType> MUSTAFAR_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_type"));
+
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
@@ -59,6 +66,12 @@ public class ModDimensions {
                 -64, 384, 384,
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
+        context.register(MUSTAFAR_DIM_TYPE, new DimensionType(
+                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
+                -64, 384, 384,
+                BlockTags.INFINIBURN_NETHER,
+                BuiltinDimensionTypes.NETHER_EFFECTS, 1.0f,
+                new DimensionType.MonsterSettings(true, false, ConstantInt.of(10), 8)));
 
         context.register(ILUM_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
@@ -148,5 +161,23 @@ public class ModDimensions {
 
         LevelStem ilumStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.ILUM_DIM_TYPE), ilumChunkGenerator);
         context.register(ILUM_KEY, ilumStem);
+
+        NoiseBasedChunkGenerator mustafarChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(-0.5F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_LAVA_FIELD)),
+                                Pair.of(
+                                        Climate.parameters(0.0F, 0.8F, 0.2F, 0.0F, 0.1F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_VOLCANIC_PLAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.2F, 0.7F, 0.3F, 0.1F, 0.2F, 0.1F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_MAGMA_LAKE))
+                        ))),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+
+        LevelStem mustafarStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.MUSTAFAR_DIM_TYPE), mustafarChunkGenerator);
+        context.register(MUSTAFAR_KEY, mustafarStem);
     }
 }
