@@ -28,6 +28,9 @@ public class ModBiomes {
     public static final ResourceKey<Biome> OSSUS_DEEP_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_deep_ocean"));
     public static final ResourceKey<Biome> MALACHOR_UPPER_LAYER = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_upper_layer"));
     public static final ResourceKey<Biome> MALACHOR_LOWER_SURFACE = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_lower_surface"));
+    public static final ResourceKey<Biome> NABOO_SWAMP = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_swamp"));
+    public static final ResourceKey<Biome> NABOO_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_plains"));
+    public static final ResourceKey<Biome> NABOO_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_ocean"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -45,6 +48,77 @@ public class ModBiomes {
         context.register(OSSUS_DEEP_OCEAN, createOssusDeepOcean(context));
         context.register(MALACHOR_UPPER_LAYER, createMalachorUpperLayer(context));
         context.register(MALACHOR_LOWER_SURFACE, createMalachorLowerSurface(context));
+        context.register(NABOO_SWAMP, createNabooSwamp(context));
+        context.register(NABOO_PLAINS, createNabooPlains(context));
+        context.register(NABOO_OCEAN, createNabooOcean(context));
+
+    }
+    private static Biome createNabooBiome(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.8f)
+                .downfall(0.9f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(14083839)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .waterColor(2995897)
+                        .waterFogColor(3983048)
+                        .skyColor(5358054)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+    private static Biome createNabooPlains(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.8f)
+                .downfall(0.4f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(14083839)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .waterColor(2995897)
+                        .waterFogColor(3983048)
+                        .skyColor(5358054)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+    private static Biome createNabooOcean(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.3f)
+                .downfall(0.4f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(14083839)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .waterColor(2995897)
+                        .waterFogColor(3983048)
+                        .skyColor(5358054)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+
+    private static Biome createNabooSwamp(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.8f)
+                .downfall(0.9f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12898531)
+                        .grassColorOverride(876050)
+                        .foliageColorOverride(486144)
+                        .waterColor(7388600)
+                        .waterFogColor(6599859)
+                        .skyColor(9613498)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
     }
     private static Biome createMalachorUpperLayer(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
@@ -185,27 +259,6 @@ public class ModBiomes {
                         .grassColorOverride(0x535745) // 5458976
                         .foliageColorOverride(0x575E4E) // 5722926
                         .fogColor(0xD6E7FF) // 14083839
-                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
-                        .build())
-                .build();
-    }
-    private static Biome createNabooBiome(BootstrapContext<Biome> context) {
-        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
-        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
-
-        return new Biome.BiomeBuilder()
-                .hasPrecipitation(true)
-                .downfall(0.9f)
-                .temperature(0.8f)
-                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
-                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0x3C88DA)
-                        .waterFogColor(0x050533)
-                        .skyColor(0x87CEEB)
-                        .grassColorOverride(0x91BD59)
-                        .foliageColorOverride(0x77AB59)
-                        .fogColor(0xC0D8FF)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
                         .build())
                 .build();

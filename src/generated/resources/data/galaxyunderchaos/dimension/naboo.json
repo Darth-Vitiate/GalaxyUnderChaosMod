@@ -10,17 +10,41 @@
                 {
                     "biome": "galaxyunderchaos:naboo_biome",
                     "parameters": {
-                        "temperature": 0.1,
-                        "humidity": 0.2,
+                        "temperature": 0.7,
+                        "humidity": 0.7,
                         "continentalness": 0.3,
+                        "erosion": 0.2,
+                        "depth": 0.125,
+                        "weirdness": 0.3,
+                        "offset": 0.0
+                    }
+                },
+                {
+                    "biome": "galaxyunderchaos:naboo_swamp",
+                    "parameters": {
+                        "temperature": 0.9,
+                        "humidity": 0.9,
+                        "continentalness": 0.2,
                         "erosion": 0.4,
-                        "depth": 0.2,
+                        "depth": 0.05,
+                        "weirdness": 0.2,
+                        "offset": 0.0
+                    }
+                },
+                {
+                    "biome": "galaxyunderchaos:naboo_plains",
+                    "parameters": {
+                        "temperature": 0.8,
+                        "humidity": 0.4,
+                        "continentalness": 0.6,
+                        "erosion": 0.3,
+                        "depth": 0.1,
                         "weirdness": 0.1,
                         "offset": 0.0
                     }
                 },
                 {
-                    "biome": "minecraft:ocean",
+                    "biome": "galaxyunderchaos:naboo_ocean",
                     "parameters": {
                         "temperature": 0.3,
                         "humidity": 0.7,
@@ -28,54 +52,6 @@
                         "erosion": 0.2,
                         "depth": -0.2,
                         "weirdness": 0.0,
-                        "offset": 0.0
-                    }
-                },
-                {
-                    "biome": "minecraft:warm_ocean",
-                    "parameters": {
-                        "temperature": 0.7,
-                        "humidity": 0.9,
-                        "continentalness": 0.4,
-                        "erosion": 0.3,
-                        "depth": -0.1,
-                        "weirdness": 0.2,
-                        "offset": 0.0
-                    }
-                },
-                {
-                    "biome": "minecraft:forest",
-                    "parameters": {
-                        "temperature": 0.4,
-                        "humidity": 0.4,
-                        "continentalness": 0.5,
-                        "erosion": 0.2,
-                        "depth": 0.3,
-                        "weirdness": 0.1,
-                        "offset": 0.0
-                    }
-                },
-                {
-                    "biome": "minecraft:flower_forest",
-                    "parameters": {
-                        "temperature": 0.6,
-                        "humidity": 0.6,
-                        "continentalness": 0.7,
-                        "erosion": 0.3,
-                        "depth": 0.4,
-                        "weirdness": 0.2,
-                        "offset": 0.0
-                    }
-                },
-                {
-                    "biome": "minecraft:lukewarm_ocean",
-                    "parameters": {
-                        "temperature": 0.5,
-                        "humidity": 0.8,
-                        "continentalness": 0.3,
-                        "erosion": 0.5,
-                        "depth": -0.1,
-                        "weirdness": 0.1,
                         "offset": 0.0
                     }
                 }

@@ -150,28 +150,24 @@ public class ModDimensions {
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.3F, 0.4F, 0.2F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_BIOME)), // Custom biome
+                                        Climate.parameters(0.9F, 0.9F, 0.2F, 0.4F, 0.05F, 0.2F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_SWAMP)),
+                                Pair.of(
+                                        Climate.parameters(0.8F, 0.4F, 0.6F, 0.3F, 0.1F, 0.1F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_PLAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.7F, 0.7F, 0.3F, 0.2F, 0.125F, 0.3F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_BIOME)),
                                 Pair.of(
                                         Climate.parameters(0.3F, 0.7F, 0.6F, 0.2F, -0.2F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.7F, 0.9F, 0.4F, 0.3F, -0.1F, 0.2F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.WARM_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.4F, 0.4F, 0.5F, 0.2F, 0.3F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.FOREST)),
-                                Pair.of(
-                                        Climate.parameters(0.6F, 0.6F, 0.7F, 0.3F, 0.4F, 0.2F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.FLOWER_FOREST)),
-                                Pair.of(
-                                        Climate.parameters(0.5F, 0.8F, 0.3F, 0.5F, -0.1F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN))
+                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_OCEAN))
                         ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+        );
 
         LevelStem nabooStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
         context.register(NABOO_KEY, nabooStem);
+
 
         NoiseBasedChunkGenerator ilumChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
