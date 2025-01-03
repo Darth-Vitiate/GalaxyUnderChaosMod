@@ -86,6 +86,7 @@ public class CreativeMenuTabs {
                         output.accept(NABOO_PORTAL_ITEM.get());
                         output.accept(ILUM_PORTAL_ITEM.get());
                         output.accept(MUSTAFAR_PORTAL_ITEM.get());
+                        output.accept(OSSUS_PORTAL_ITEM.get());
                         output.accept(PURPLE_KYBER.get());
                         output.accept(MAGENTA_KYBER.get());
                         output.accept(PINK_KYBER.get());

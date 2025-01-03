@@ -53,6 +53,13 @@ public class ModDimensions {
     public static final ResourceKey<DimensionType> MUSTAFAR_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_type"));
 
+    public static final ResourceKey<LevelStem> OSSUS_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus"));
+    public static final ResourceKey<Level> OSSUS_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus"));
+    public static final ResourceKey<DimensionType> OSSUS_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_type"));
+
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
@@ -60,7 +67,6 @@ public class ModDimensions {
                 -64, 384, 384,
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
-
         context.register(NABOO_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
                 -64, 384, 384,
@@ -72,6 +78,13 @@ public class ModDimensions {
                 BlockTags.INFINIBURN_NETHER,
                 BuiltinDimensionTypes.NETHER_EFFECTS, 1.0f,
                 new DimensionType.MonsterSettings(true, false, ConstantInt.of(10), 8)));
+        context.register(OSSUS_DIM_TYPE, new DimensionType(
+                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
+                -64, 384, 384,
+                BlockTags.INFINIBURN_OVERWORLD,
+                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f,
+                new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
+        ));
 
         context.register(ILUM_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
@@ -179,5 +192,31 @@ public class ModDimensions {
 
         LevelStem mustafarStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.MUSTAFAR_DIM_TYPE), mustafarChunkGenerator);
         context.register(MUSTAFAR_KEY, mustafarStem);
+
+        NoiseBasedChunkGenerator ossusChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.5F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_FOREST)),
+                                Pair.of(
+                                        Climate.parameters(0.2F, 0.4F, 0.1F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_PLAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.1F, 0.3F, 0.1F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_MOUNTAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.5F, 0.6F, -0.2F, 0.2F, -0.3F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.5F, 0.7F, -0.3F, 0.1F, -0.5F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_DEEP_OCEAN))
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+        );
+        LevelStem ossusStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.OSSUS_DIM_TYPE), ossusChunkGenerator);
+        context.register(OSSUS_KEY, ossusStem);
+
     }
 }

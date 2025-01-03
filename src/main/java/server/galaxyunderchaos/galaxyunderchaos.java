@@ -199,6 +199,9 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> ILUM_PORTAL_ITEM = ITEMS.register("ilum_portal",
             () -> new IlumPortalItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> OSSUS_PORTAL_ITEM = ITEMS.register("ossus_portal",
+            () -> new OssusPortalItem(new Item.Properties().stacksTo(1)));
+
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -207,8 +210,7 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         ModBiomes.BIOMES.register(modEventBus);
-        CreativeMenuTabs.register(modEventBus); // Register the creative tabs
-
+        CreativeMenuTabs.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
