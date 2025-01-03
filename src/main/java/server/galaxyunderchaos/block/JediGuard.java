@@ -24,6 +24,7 @@ public class JediGuard extends Block {
                 .strength(3.0f, 10.0f)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.STONE)
+                .lightLevel((state) -> 9)
                 .pushReaction(PushReaction.NORMAL));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }

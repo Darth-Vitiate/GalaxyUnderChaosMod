@@ -1,3 +1,6 @@
 {
-  "parent": "galaxyunderchaos:block/sith_guard_statue"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "galaxyunderchaos:item/sith_guard_statue"
+  }
 }

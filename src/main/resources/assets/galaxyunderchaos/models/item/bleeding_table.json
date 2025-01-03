@@ -1,3 +1,6 @@
 {
-  "parent": "galaxyunderchaos:block/bleeding_table"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "galaxyunderchaos:item/bleeding_table"
+  }
 }
