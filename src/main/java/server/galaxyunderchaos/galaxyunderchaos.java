@@ -110,6 +110,9 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Block> DARK_FORCE_STONE = BLOCKS.register("dark_force_stone", DarkForceStone::new);
     public static final RegistryObject<Item> DARK_FORCE_STONE_ITEM = ITEMS.register("dark_force_stone", () -> new BlockItem(DARK_FORCE_STONE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> MALACHITE_OBSIDIAN = BLOCKS.register("malachite_obsidian", DarkForceStone::new);
+    public static final RegistryObject<Item> MALACHITE_OBSIDIAN_ITEM = ITEMS.register("malachite_obsidian", () -> new BlockItem(MALACHITE_OBSIDIAN.get(), new Item.Properties()));
+
     public static final RegistryObject<Block> DARK_FORCE_STONE_PILLAR = BLOCKS.register("dark_force_stone_pillar", DarkForceStonePillar::new);
     public static final RegistryObject<Item> DARK_FORCE_STONE_PILLAR_ITEM = ITEMS.register("dark_force_stone_pillar", () -> new BlockItem(DARK_FORCE_STONE_PILLAR.get(), new Item.Properties()));
 
@@ -201,6 +204,9 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
     public static final RegistryObject<Item> OSSUS_PORTAL_ITEM = ITEMS.register("ossus_portal",
             () -> new OssusPortalItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> MALACHOR_PORTAL_ITEM = ITEMS.register("malachor_portal",
+            () -> new MalachorPortalItem(new Item.Properties().stacksTo(1)));
 
 
     public galaxyunderchaos() {

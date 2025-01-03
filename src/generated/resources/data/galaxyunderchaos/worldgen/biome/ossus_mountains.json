@@ -134,9 +134,9 @@
     "monster": [
       {
         "type": "minecraft:frog",
-        "weight": 100,
-        "minCount": 3,
-        "maxCount": 20
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 5
       },
       {
         "type": "minecraft:ocelot",

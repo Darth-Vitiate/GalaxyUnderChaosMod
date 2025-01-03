@@ -60,6 +60,13 @@ public class ModDimensions {
     public static final ResourceKey<DimensionType> OSSUS_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_type"));
 
+    public static final ResourceKey<LevelStem> MALACHOR_KEY = ResourceKey.create(
+            Registries.LEVEL_STEM, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor"));
+    public static final ResourceKey<Level> MALACHOR_LEVEL_KEY = ResourceKey.create(
+            Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor"));
+    public static final ResourceKey<DimensionType> MALACHOR_DIM_TYPE = ResourceKey.create(
+            Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_type"));
+
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
@@ -85,7 +92,13 @@ public class ModDimensions {
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f,
                 new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
         ));
-
+        context.register(MALACHOR_DIM_TYPE, new DimensionType(
+                OptionalLong.of(18000), false, false, false, false, 1.0, false, true,
+                -64, 384, 256,
+                BlockTags.INFINIBURN_NETHER,
+                BuiltinDimensionTypes.NETHER_EFFECTS, 0.05f,
+                new DimensionType.MonsterSettings(true, false, ConstantInt.of(7), 0)
+        ));
         context.register(ILUM_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
                 -64, 384, 384, // Adjust height and Y min as needed
@@ -218,5 +231,26 @@ public class ModDimensions {
         LevelStem ossusStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.OSSUS_DIM_TYPE), ossusChunkGenerator);
         context.register(OSSUS_KEY, ossusStem);
 
+        MultiNoiseBiomeSource biomeSource = MultiNoiseBiomeSource.createFromList(
+                new Climate.ParameterList<>(List.of(
+                        Pair.of(
+                                Climate.parameters(-0.8F, 0.4F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                biomeRegistry.getOrThrow(ModBiomes.MALACHOR_UPPER_LAYER)
+                        ),
+                        Pair.of(
+                                Climate.parameters(0.0F, 0.2F, 0.3F, 0.1F, 0.0F, 0.0F, 0.0F),
+                                biomeRegistry.getOrThrow(ModBiomes.MALACHOR_LOWER_SURFACE)
+                        )
+                ))
+        );
+
+        NoiseBasedChunkGenerator malachorChunkGenerator = new NoiseBasedChunkGenerator(biomeSource,
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.NETHER)
+        );
+
+        LevelStem malachorStem = new LevelStem(dimTypes.getOrThrow(MALACHOR_DIM_TYPE),
+                malachorChunkGenerator);
+        context.register(MALACHOR_KEY, malachorStem);
     }
+
 }

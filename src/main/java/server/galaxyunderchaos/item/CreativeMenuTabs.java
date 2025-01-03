@@ -48,6 +48,7 @@ public class CreativeMenuTabs {
                         output.accept(CYAN_CRYSTAL_ORE.get().asItem());
                         output.accept(BLUE_CRYSTAL_ORE.get().asItem());
                         output.accept(WHITE_CRYSTAL_ORE.get().asItem());
+                        output.accept(MALACHITE_OBSIDIAN.get().asItem());
                         output.accept(CHROMIUM_ORE.get().asItem());
                         output.accept(CHROMIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(TITANIUM_ORE.get().asItem());
@@ -87,6 +88,7 @@ public class CreativeMenuTabs {
                         output.accept(ILUM_PORTAL_ITEM.get());
                         output.accept(MUSTAFAR_PORTAL_ITEM.get());
                         output.accept(OSSUS_PORTAL_ITEM.get());
+                        output.accept(MALACHOR_PORTAL_ITEM.get());
                         output.accept(PURPLE_KYBER.get());
                         output.accept(MAGENTA_KYBER.get());
                         output.accept(PINK_KYBER.get());

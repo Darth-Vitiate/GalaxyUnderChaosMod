@@ -26,6 +26,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> OSSUS_MOUNTAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_mountains"));
     public static final ResourceKey<Biome> OSSUS_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_ocean"));
     public static final ResourceKey<Biome> OSSUS_DEEP_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_deep_ocean"));
+    public static final ResourceKey<Biome> MALACHOR_UPPER_LAYER = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_upper_layer"));
+    public static final ResourceKey<Biome> MALACHOR_LOWER_SURFACE = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_lower_surface"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -41,11 +43,46 @@ public class ModBiomes {
         context.register(OSSUS_MOUNTAINS, createOssusMountains(context));
         context.register(OSSUS_OCEAN, createOssusOcean(context));
         context.register(OSSUS_DEEP_OCEAN, createOssusDeepOcean(context));
+        context.register(MALACHOR_UPPER_LAYER, createMalachorUpperLayer(context));
+        context.register(MALACHOR_LOWER_SURFACE, createMalachorLowerSurface(context));
+    }
+    private static Biome createMalachorUpperLayer(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(-0.8f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0x1A1A1A)
+                        .skyColor(0x2C2F33)
+                        .build())
+                .build();
     }
 
+    private static Biome createMalachorLowerSurface(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .downfall(0.0f)
+                .temperature(0.0f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0x3D3D3D)
+                        .skyColor(0x1C1C1C)
+                        .build())
+                .build();
+    }
     private static Biome createOssusOcean(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
