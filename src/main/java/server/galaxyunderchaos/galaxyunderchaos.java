@@ -219,6 +219,10 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> MALACHOR_PORTAL_ITEM = ITEMS.register("malachor_portal",
             () -> new MalachorPortalItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> KORRIBAN_PORTAL_ITEM = ITEMS.register("korriban_portal",
+            () -> new KorribanPortalItem(new Item.Properties().stacksTo(1)));
+
+
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
             () -> new LightsaberItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",

@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -31,6 +32,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> NABOO_SWAMP = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_swamp"));
     public static final ResourceKey<Biome> NABOO_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_plains"));
     public static final ResourceKey<Biome> NABOO_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_ocean"));
+    public static final ResourceKey<Biome> KORRIBAN_DRY_CANYON = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_dry_canyon"));
+    public static final ResourceKey<Biome> KORRIBAN_SITH_TOMB = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_sith_tomb"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -51,8 +54,58 @@ public class ModBiomes {
         context.register(NABOO_SWAMP, createNabooSwamp(context));
         context.register(NABOO_PLAINS, createNabooPlains(context));
         context.register(NABOO_OCEAN, createNabooOcean(context));
+        context.register(KORRIBAN_DRY_CANYON, createKorribanDryCanyon(context));
+        context.register(KORRIBAN_SITH_TOMB, createKorribanSithTomb(context));
 
     }
+    private static Biome createKorribanDryCanyon(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .temperature(1.2f)
+                .downfall(0.0f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder()
+//                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.KORRIBAN_GHOST, 10, 1, 4))
+                        .build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0x804020) // Desert-like fog
+                        .skyColor(0xFFAA00)
+                        .waterColor(0xAA0000) // Sith-inspired water color
+                        .waterFogColor(0x550000)
+                        .grassColorOverride(0x804040)
+                        .foliageColorOverride(0x703030)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+    private static Biome createKorribanSithTomb(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .temperature(1.0f)
+                .downfall(0.0f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder()
+//                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SITH_SPIRIT, 10, 1, 2))
+                        .build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0x550000) // Sith tomb ambiance
+                        .skyColor(0x660000)
+                        .waterColor(0x440000)
+                        .waterFogColor(0x220000)
+                        .grassColorOverride(0x403030)
+                        .foliageColorOverride(0x502020)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
     private static Biome createNabooBiome(BootstrapContext<Biome> context) {
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

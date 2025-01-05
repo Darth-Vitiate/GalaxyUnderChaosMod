@@ -67,6 +67,13 @@ public class ModDimensions {
     public static final ResourceKey<DimensionType> MALACHOR_DIM_TYPE = ResourceKey.create(
             Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_type"));
 
+    public static final ResourceKey<LevelStem> KORRIBAN_KEY = ResourceKey.create(
+            Registries.LEVEL_STEM, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban"));
+    public static final ResourceKey<Level> KORRIBAN_LEVEL_KEY = ResourceKey.create(
+            Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban"));
+    public static final ResourceKey<DimensionType> KORRIBAN_DIM_TYPE = ResourceKey.create(
+            Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_type"));
+
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
@@ -105,6 +112,14 @@ public class ModDimensions {
                 BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, // Change this to create a different environment feel
                 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
+        ));
+        context.register(KORRIBAN_DIM_TYPE, new DimensionType(
+                OptionalLong.of(18000), false, false, false, false, 1.0, false, true,
+                -64, 384, 256,
+                BlockTags.INFINIBURN_NETHER, // Use NETHER infiniburn for Sith-like ambiance
+                BuiltinDimensionTypes.NETHER_EFFECTS, // Sith ambiance effects
+                0.1f, // Ambient light for a dark and foreboding atmosphere
+                new DimensionType.MonsterSettings(true, false, ConstantInt.of(7), 0)
         ));
     }
 
@@ -167,6 +182,24 @@ public class ModDimensions {
 
         LevelStem nabooStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
         context.register(NABOO_KEY, nabooStem);
+
+        NoiseBasedChunkGenerator korribanChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(1.2F, 0.0F, 0.5F, 0.5F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.KORRIBAN_DRY_CANYON)),
+                                Pair.of(
+                                        Climate.parameters(1.0F, -0.2F, 0.7F, 0.4F, 0.1F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.KORRIBAN_SITH_TOMB))
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.NETHER) // Adjust settings if needed
+        );
+
+        LevelStem korribanStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.KORRIBAN_DIM_TYPE),
+                korribanChunkGenerator);
+        context.register(KORRIBAN_KEY, korribanStem);
 
 
         NoiseBasedChunkGenerator ilumChunkGenerator = new NoiseBasedChunkGenerator(
