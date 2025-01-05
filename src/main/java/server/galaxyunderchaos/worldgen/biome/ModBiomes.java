@@ -34,6 +34,9 @@ public class ModBiomes {
     public static final ResourceKey<Biome> NABOO_OCEAN = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_ocean"));
     public static final ResourceKey<Biome> KORRIBAN_DRY_CANYON = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_dry_canyon"));
     public static final ResourceKey<Biome> KORRIBAN_SITH_TOMB = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_sith_tomb"));
+    public static final ResourceKey<Biome> TYTHON_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_forest"));
+    public static final ResourceKey<Biome> TYTHON_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_plains"));
+    public static final ResourceKey<Biome> TYTHON_MOUNTAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_mountains"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -56,8 +59,76 @@ public class ModBiomes {
         context.register(NABOO_OCEAN, createNabooOcean(context));
         context.register(KORRIBAN_DRY_CANYON, createKorribanDryCanyon(context));
         context.register(KORRIBAN_SITH_TOMB, createKorribanSithTomb(context));
+        context.register(TYTHON_FOREST, createTythonForest(context));
+        context.register(TYTHON_PLAINS, createTythonPlains(context));
+        context.register(TYTHON_MOUNTAINS, createTythonMountains(context));
+
 
     }
+    private static Biome createTythonForest(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.7f)
+                .downfall(0.8f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12638463)
+                        .skyColor(7842047)
+                        .waterColor(4159204)
+                        .waterFogColor(329011)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+    private static Biome createTythonPlains(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.8f)
+                .downfall(0.6f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12638463)
+                        .skyColor(7842047)
+                        .waterColor(4159204)
+                        .waterFogColor(329011)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+    private static Biome createTythonMountains(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.5f)
+                .downfall(0.4f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12638463)
+                        .skyColor(7842047)
+                        .waterColor(4159204)
+                        .waterFogColor(329011)
+                        .grassColorOverride(5676610)
+                        .foliageColorOverride(8367671)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
     private static Biome createKorribanDryCanyon(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);

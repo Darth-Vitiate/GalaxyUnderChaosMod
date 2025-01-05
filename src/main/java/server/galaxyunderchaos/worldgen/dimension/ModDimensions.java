@@ -78,13 +78,14 @@ public class ModDimensions {
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(TYTHON_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384,
-                BlockTags.INFINIBURN_OVERWORLD, // infiniburn
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
+                -64, 320, 256,
+                BlockTags.INFINIBURN_OVERWORLD,
+                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.8f, new DimensionType.MonsterSettings(false, true, ConstantInt.of(7), 0) // Monster spawn rules
+        ));
         context.register(NABOO_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
                 -64, 384, 384,
-                BlockTags.INFINIBURN_OVERWORLD, // infiniburn
+                BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
         context.register(MUSTAFAR_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
@@ -132,33 +133,20 @@ public class ModDimensions {
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.OLD_GROWTH_PINE_TAIGA)),
+                                        Climate.parameters(0.7F, 0.8F, 0.3F, 0.4F, 0.1F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_FOREST)),
                                 Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.OCEAN)),
+                                        Climate.parameters(0.8F, 0.6F, 0.5F, 0.3F, 0.0F, 0.0F, 0.1F),
+                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_PLAINS)),
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.DEEP_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.WARM_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.LUKEWARM_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.WINDSWEPT_HILLS))
-                        ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+                                        Climate.parameters(0.5F, 0.3F, 0.7F, 0.2F, 0.0F, 0.1F, 0.1F),
+                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_MOUNTAINS))
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+        );
 
-        LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.TYTHON_DIM_TYPE), tythonChunkGenerator);
+        LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(TYTHON_DIM_TYPE), tythonChunkGenerator);
         context.register(TYTHON_KEY, tythonStem);
 
         NoiseBasedChunkGenerator nabooChunkGenerator = new NoiseBasedChunkGenerator(
