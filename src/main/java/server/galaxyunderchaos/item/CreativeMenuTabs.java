@@ -103,13 +103,43 @@ public class CreativeMenuTabs {
                         output.accept(BLUE_KYBER.get());
                         output.accept(WHITE_KYBER.get());
                         output.accept(JEDI_HOLOBOOK.get());
+                        output.accept(JEDI_HOLOCRON.get());
                         output.accept(ANCIENT_HOLOBOOK.get());
                         output.accept(SITH_HOLOBOOK.get());
+//                        output.accept(SITH_HOLOCRON.get());
                         output.accept(SHUURA.get());
 
 
 
                     }).build());
+
+    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_WEAPONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_weapons",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(AEGIS_HILT.get()))
+                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_weapons"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(LOST_HILT.get());
+                        output.accept(AEGIS_HILT.get());
+                        output.accept(APPRENTICE_HILT.get());
+                        output.accept(CHOSEN_HILT.get());
+                        output.accept(EMPEROR_HILT.get());
+                        output.accept(FALLEN_HILT.get());
+                        output.accept(GRACE_HILT.get());
+                        output.accept(GUARD_HILT.get());
+                        output.accept(HARMONY_HILT.get());
+                        output.accept(LEGACY_HILT.get());
+                        output.accept(PADAWAN_HILT.get());
+                        output.accept(RESOLVE_HILT.get());
+                        output.accept(SKUSTELL_HILT.get());
+                        output.accept(TALON_HILT.get());
+                        output.accept(VALOR_HILT.get());
+                        output.accept(WISDOM_HILT.get());
+
+
+
+
+                    }).build());
+
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

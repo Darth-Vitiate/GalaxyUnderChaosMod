@@ -162,6 +162,13 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Block> BLEEDING_TABLE = BLOCKS.register("bleeding_table", BleedingTable::new);
     public static final RegistryObject<Item> BLEEDING_TABLE_ITEM = ITEMS.register("bleeding_table", () -> new BlockItem(BLEEDING_TABLE.get(), new Item.Properties()));
 
+
+    public static final RegistryObject<Block> JEDI_HOLOCRON = BLOCKS.register("jedi_holocron", Holocron::new);
+    public static final RegistryObject<Item> JEDI_HOLOCRON_ITEM = ITEMS.register("jedi_holocron", () -> new BlockItem(JEDI_HOLOCRON.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> SITH_HOLOCRON = BLOCKS.register("sith_holocron", Holocron::new);
+    public static final RegistryObject<Item> SITH_HOLOCRON_ITEM = ITEMS.register("sith_holocron", () -> new BlockItem(SITH_HOLOCRON.get(), new Item.Properties()));
+
     public static final RegistryObject<Block> JEDI_GUARD_STATUE = BLOCKS.register("jedi_guard_statue", JediGuard::new);
     public static final RegistryObject<Item> JEDI_GUARD_STATUE_ITEM = ITEMS.register("jedi_guard_statue", () -> new BlockItem(JEDI_GUARD_STATUE.get(), new Item.Properties()));
 
@@ -208,6 +215,51 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> MALACHOR_PORTAL_ITEM = ITEMS.register("malachor_portal",
             () -> new MalachorPortalItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
+            () -> new LightsaberItem("green", new Item.Properties()));
+    public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> APPRENTICE_HILT = ITEMS.register("apprentice_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> CHOSEN_HILT = ITEMS.register("chosen_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> EMPEROR_HILT = ITEMS.register("emperor_hilt",
+            () -> new LightsaberItem("red", new Item.Properties()));
+    public static final RegistryObject<Item> FALLEN_HILT = ITEMS.register("fallen_hilt",
+            () -> new LightsaberItem("red", new Item.Properties()));
+    public static final RegistryObject<Item> GRACE_HILT = ITEMS.register("grace_hilt",
+            () -> new LightsaberItem("red", new Item.Properties()));
+    public static final RegistryObject<Item> GUARD_HILT = ITEMS.register("guard_hilt",
+            () -> new LightsaberItem("red", new Item.Properties()));
+    public static final RegistryObject<Item> HARMONY_HILT = ITEMS.register("harmony_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> LEGACY_HILT = ITEMS.register("legacy_hilt",
+            () -> new LightsaberItem("green", new Item.Properties()));
+    public static final RegistryObject<Item> PADAWAN_HILT = ITEMS.register("padawan_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> RESOLVE_HILT = ITEMS.register("resolve_hilt",
+            () -> new LightsaberItem("purple", new Item.Properties()));
+    public static final RegistryObject<Item> SKUSTELL_HILT = ITEMS.register("skustell_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> TALON_HILT = ITEMS.register("talon_hilt",
+            () -> new LightsaberItem("orange", new Item.Properties()));
+    public static final RegistryObject<Item> VALOR_HILT = ITEMS.register("valor_hilt",
+            () -> new LightsaberItem("green", new Item.Properties()));
+    public static final RegistryObject<Item> WISDOM_HILT = ITEMS.register("wisdom_hilt",
+            () -> new LightsaberItem("blue", new Item.Properties()));
+
+
+
+
+    public static void registerLightsabers() {
+        String[] crystalColors = {"red", "blue", "green", "yellow", "cyan", "white",
+                "magenta", "purple", "pink", "lime_green", "turquoise"};
+
+        for (String color : crystalColors) {
+            ITEMS.register(color + "_lightsaber",
+                    () -> new LightsaberItem(color, new Item.Properties()));
+        }
+    }
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
