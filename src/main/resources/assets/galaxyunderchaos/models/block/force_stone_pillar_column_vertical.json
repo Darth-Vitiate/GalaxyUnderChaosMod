@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "galaxyunderchaos:block/force_stone_pillar_top",
-    "side": "galaxyunderchaos:block/force_stone_pillar_side"
-  }
-}

@@ -18,25 +18,28 @@ public class CreativeMenuTabs {
 
     public static final java.util.function.Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(FORCE_STONE.get())) // Use ModBlocks.FORCE_STONE
+                    .icon(() -> new ItemStack(TEMPLE_STONE.get())) // Use ModBlocks.TEMPLE_STONE
                     .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_blocks"))
                     .displayItems((parameters, output) -> {
-                        output.accept(FORCE_STONE.get().asItem());
-                        output.accept(FORCE_STONE_HOLOBOOK.get().asItem());
-                        output.accept(FORCE_STONE_PILLAR.get().asItem());
-                        output.accept(FORCE_STONE_STAIRS.get().asItem());
-                        output.accept(FORCE_STONE_SLAB.get().asItem());
-                        output.accept(DARK_FORCE_STONE.get().asItem());
-                        output.accept(DARK_FORCE_STONE_HOLOBOOK.get().asItem());
-                        output.accept(DARK_FORCE_STONE_PILLAR.get().asItem());
-                        output.accept(DARK_FORCE_STONE_STAIRS.get().asItem());
-                        output.accept(DARK_FORCE_STONE_SLAB.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE_HOLOBOOK.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE_PILLAR.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE_CRACKED.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE_STAIRS.get().asItem());
-                        output.accept(ANCIENT_FORCE_STONE_SLAB.get().asItem());
+                        output.accept(TEMPLE_STONE.get().asItem());
+                        output.accept(TEMPLE_STONE_HOLOBOOK.get().asItem());
+                        output.accept(TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(TEMPLE_STONE_WALL.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_HOLOBOOK.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_WALL.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_HOLOBOOK.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_CRACKED.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(ANCIENT_TEMPLE_STONE_WALL.get().asItem());
                         output.accept(PURPLE_CRYSTAL_ORE.get().asItem());
                         output.accept(MAGENTA_CRYSTAL_ORE.get().asItem());
                         output.accept(PINK_CRYSTAL_ORE.get().asItem());

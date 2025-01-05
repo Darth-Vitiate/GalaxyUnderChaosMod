@@ -6,11 +6,11 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:force_stone"
+            "item": "galaxyunderchaos:temple_stone"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:force_stone_pillar",
+        "id": "galaxyunderchaos:temple_stone_pillar",
         "count": 2
     },
     "group": "misc"

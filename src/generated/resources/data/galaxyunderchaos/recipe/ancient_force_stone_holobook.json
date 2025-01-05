@@ -7,14 +7,14 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:ancient_force_stone"
+            "item": "galaxyunderchaos:ancient_temple_stone"
         },
         "G": {
             "item": "galaxyunderchaos:ancient_holobook"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:ancient_force_stone_holobook",
+        "id": "galaxyunderchaos:ancient_temple_stone_holobook",
         "count": 1
     }
 }

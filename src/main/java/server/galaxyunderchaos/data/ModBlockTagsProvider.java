@@ -17,7 +17,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(galaxyunderchaos.ANCIENT_FORCE_STONE.get());
-        tag(BlockTags.NEEDS_STONE_TOOL).add(galaxyunderchaos.ANCIENT_FORCE_STONE.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(galaxyunderchaos.ANCIENT_TEMPLE_STONE.get());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(galaxyunderchaos.ANCIENT_TEMPLE_STONE.get());
     }
 }

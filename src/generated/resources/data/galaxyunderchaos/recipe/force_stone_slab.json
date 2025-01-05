@@ -5,11 +5,11 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:force_stone"
+            "item": "galaxyunderchaos:temple_stone"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:force_stone_slab",
+        "id": "galaxyunderchaos:temple_stone_slab",
         "count": 6
     },
     "group": "misc"

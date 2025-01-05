@@ -1,10 +1,10 @@
 {
     "type": "minecraft:stonecutting",
     "ingredient": {
-        "item": "galaxyunderchaos:dark_force_stone"
+        "item": "galaxyunderchaos:dark_temple_stone"
     },
     "result": {
-        "id": "galaxyunderchaos:dark_force_stone_pillar",
+        "id": "galaxyunderchaos:dark_temple_stone_pillar",
         "count": 1
     },
     "group": "misc"

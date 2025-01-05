@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "galaxyunderchaos:block/force_stone",
-    "top": "galaxyunderchaos:block/force_stone",
-    "side": "galaxyunderchaos:block/force_stone"
-  }
-}

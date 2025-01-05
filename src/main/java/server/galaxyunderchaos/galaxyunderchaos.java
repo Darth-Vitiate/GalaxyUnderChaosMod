@@ -6,6 +6,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -92,38 +93,38 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("turquoise_crystal_block", () -> new BlockItem(TURQUOISE_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
 
-    public static final RegistryObject<Block> FORCE_STONE = BLOCKS.register("force_stone", ForceStone::new);
-    public static final RegistryObject<Item> FORCE_STONE_ITEM = ITEMS.register("force_stone", () -> new BlockItem(FORCE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TEMPLE_STONE = BLOCKS.register("temple_stone", TempleStone::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_ITEM = ITEMS.register("temple_stone", () -> new BlockItem(TEMPLE_STONE.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> FORCE_STONE_PILLAR = BLOCKS.register("force_stone_pillar", ForceStonePillar::new);
-    public static final RegistryObject<Item> FORCE_STONE_PILLAR_ITEM = ITEMS.register("force_stone_pillar", () -> new BlockItem(FORCE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TEMPLE_STONE_PILLAR = BLOCKS.register("temple_stone_pillar", TempleStonePillar::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("temple_stone_pillar", () -> new BlockItem(TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> FORCE_STONE_HOLOBOOK = BLOCKS.register("force_stone_holobook", ForceStoneHolobook::new);
-    public static final RegistryObject<Item> FORCE_STONE_HOLOBOOK_ITEM = ITEMS.register("force_stone_holobook", () -> new BlockItem(FORCE_STONE_HOLOBOOK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TEMPLE_STONE_HOLOBOOK = BLOCKS.register("temple_stone_holobook", TempleStoneHolobook::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_HOLOBOOK_ITEM = ITEMS.register("temple_stone_holobook", () -> new BlockItem(TEMPLE_STONE_HOLOBOOK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> FORCE_STONE_STAIRS = BLOCKS.register("force_stone_stairs", () -> new ForceStoneStairs(FORCE_STONE.get().defaultBlockState()));
-    public static final RegistryObject<Item> FORCE_STONE_STAIRS_ITEM = ITEMS.register("force_stone_stairs", () -> new BlockItem(FORCE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TEMPLE_STONE_STAIRS = BLOCKS.register("temple_stone_stairs", () -> new TempleStoneStairs(TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("temple_stone_stairs", () -> new BlockItem(TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> FORCE_STONE_SLAB = BLOCKS.register("force_stone_slab", ForceStoneSlab::new);
-    public static final RegistryObject<Item> FORCE_STONE_SLAB_ITEM = ITEMS.register("force_stone_slab", () -> new BlockItem(FORCE_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TEMPLE_STONE_SLAB = BLOCKS.register("temple_stone_slab", TempleStoneSlab::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_SLAB_ITEM = ITEMS.register("temple_stone_slab", () -> new BlockItem(TEMPLE_STONE_SLAB.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> DARK_FORCE_STONE = BLOCKS.register("dark_force_stone", DarkForceStone::new);
-    public static final RegistryObject<Item> DARK_FORCE_STONE_ITEM = ITEMS.register("dark_force_stone", () -> new BlockItem(DARK_FORCE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE = BLOCKS.register("dark_temple_stone", DarkTempleStone::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_ITEM = ITEMS.register("dark_temple_stone", () -> new BlockItem(DARK_TEMPLE_STONE.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> MALACHITE_OBSIDIAN = BLOCKS.register("malachite_obsidian", DarkForceStone::new);
+    public static final RegistryObject<Block> MALACHITE_OBSIDIAN = BLOCKS.register("malachite_obsidian", DarkTempleStone::new);
     public static final RegistryObject<Item> MALACHITE_OBSIDIAN_ITEM = ITEMS.register("malachite_obsidian", () -> new BlockItem(MALACHITE_OBSIDIAN.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> DARK_FORCE_STONE_PILLAR = BLOCKS.register("dark_force_stone_pillar", DarkForceStonePillar::new);
-    public static final RegistryObject<Item> DARK_FORCE_STONE_PILLAR_ITEM = ITEMS.register("dark_force_stone_pillar", () -> new BlockItem(DARK_FORCE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE_PILLAR = BLOCKS.register("dark_temple_stone_pillar", DarkTempleStonePillar::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("dark_temple_stone_pillar", () -> new BlockItem(DARK_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> DARK_FORCE_STONE_HOLOBOOK = BLOCKS.register("dark_force_stone_holobook", DarkForceStoneHolobook::new);
-    public static final RegistryObject<Item> DARK_FORCE_STONE_HOLOBOOK_ITEM = ITEMS.register("dark_force_stone_holobook", () -> new BlockItem(DARK_FORCE_STONE_HOLOBOOK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE_HOLOBOOK = BLOCKS.register("dark_temple_stone_holobook", DarkTempleStoneHolobook::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_HOLOBOOK_ITEM = ITEMS.register("dark_temple_stone_holobook", () -> new BlockItem(DARK_TEMPLE_STONE_HOLOBOOK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> DARK_FORCE_STONE_STAIRS = BLOCKS.register("dark_force_stone_stairs", () -> new DarkForceStoneStairs(DARK_FORCE_STONE.get().defaultBlockState()));
-    public static final RegistryObject<Item> DARK_FORCE_STONE_STAIRS_ITEM = ITEMS.register("dark_force_stone_stairs", () -> new BlockItem(DARK_FORCE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE_STAIRS = BLOCKS.register("dark_temple_stone_stairs", () -> new DarkTempleStoneStairs(DARK_TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("dark_temple_stone_stairs", () -> new BlockItem(DARK_TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> DARK_FORCE_STONE_SLAB = BLOCKS.register("dark_force_stone_slab", DarkForceStoneSlab::new);
-    public static final RegistryObject<Item> DARK_FORCE_STONE_SLAB_ITEM = ITEMS.register("dark_force_stone_slab", () -> new BlockItem(DARK_FORCE_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE_SLAB = BLOCKS.register("dark_temple_stone_slab", DarkTempleStoneSlab::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("dark_temple_stone_slab", () -> new BlockItem(DARK_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> SHUURA = ITEMS.register("shuura", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEdible().nutrition(6).saturationModifier(2f).build())));
@@ -177,25 +178,28 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
 
 
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE = BLOCKS.register("ancient_force_stone", AncientForceStone::new);
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_ITEM = ITEMS.register("ancient_force_stone", () -> new BlockItem(ANCIENT_FORCE_STONE.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE_CRACKED = BLOCKS.register("ancient_force_stone_cracked", AncientForceStoneCracked::new);
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_CRACKED_ITEM = ITEMS.register("ancient_force_stone_cracked", () -> new BlockItem(ANCIENT_FORCE_STONE_CRACKED.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE_PILLAR = BLOCKS.register("ancient_force_stone_pillar", AncientForceStonePillar::new);
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_PILLAR_ITEM = ITEMS.register("ancient_force_stone_pillar", () -> new BlockItem(ANCIENT_FORCE_STONE_PILLAR.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE_HOLOBOOK = BLOCKS.register("ancient_force_stone_holobook", AncientForceStoneHolobook::new);
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_HOLOBOOK_ITEM = ITEMS.register("ancient_force_stone_holobook", () -> new BlockItem(ANCIENT_FORCE_STONE_HOLOBOOK.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE_STAIRS = BLOCKS.register("ancient_force_stone_stairs", () -> new AncientForceStoneStairs(ANCIENT_FORCE_STONE.get().defaultBlockState()));
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_STAIRS_ITEM = ITEMS.register("ancient_force_stone_stairs", () -> new BlockItem(ANCIENT_FORCE_STONE_STAIRS.get(), new Item.Properties()));
-
-    public static final RegistryObject<Block> ANCIENT_FORCE_STONE_SLAB = BLOCKS.register("ancient_force_stone_slab", AncientForceStoneSlab::new);
-    public static final RegistryObject<Item> ANCIENT_FORCE_STONE_SLAB_ITEM = ITEMS.register("ancient_force_stone_slab", () -> new BlockItem(ANCIENT_FORCE_STONE_SLAB.get(), new Item.Properties()));
-
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE = BLOCKS.register("ancient_temple_stone", AncientTempleStone::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_ITEM = ITEMS.register("ancient_temple_stone", () -> new BlockItem(ANCIENT_TEMPLE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_CRACKED = BLOCKS.register("ancient_temple_stone_cracked", AncientTempleStoneCracked::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_CRACKED_ITEM = ITEMS.register("ancient_temple_stone_cracked", () -> new BlockItem(ANCIENT_TEMPLE_STONE_CRACKED.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_PILLAR = BLOCKS.register("ancient_temple_stone_pillar", AncientTempleStonePillar::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("ancient_temple_stone_pillar", () -> new BlockItem(ANCIENT_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_HOLOBOOK = BLOCKS.register("ancient_temple_stone_holobook", AncientTempleStoneHolobook::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_HOLOBOOK_ITEM = ITEMS.register("ancient_temple_stone_holobook", () -> new BlockItem(ANCIENT_TEMPLE_STONE_HOLOBOOK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_STAIRS = BLOCKS.register("ancient_temple_stone_stairs", () -> new AncientTempleStoneStairs(ANCIENT_TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("ancient_temple_stone_stairs", () -> new BlockItem(ANCIENT_TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_SLAB = BLOCKS.register("ancient_temple_stone_slab", AncientTempleStoneSlab::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("ancient_temple_stone_slab", () -> new BlockItem(ANCIENT_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
     public static final RegistryObject<Block> TYTHON_GRASS = BLOCKS.register("tython_grass", TythonGrass::new);
     public static final RegistryObject<Item> TYTHON_GRASS_ITEM = ITEMS.register("tython_grass", () -> new BlockItem(TYTHON_GRASS.get(), new Item.Properties()));
-
     public static final RegistryObject<Block> TYTHON_DIRT = BLOCKS.register("tython_dirt", TythonDirt::new);
     public static final RegistryObject<Item> TYTHON_DIRT_ITEM = ITEMS.register("tython_dirt", () -> new BlockItem(TYTHON_DIRT.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> ANCIENT_TEMPLE_STONE_WALL = BLOCKS.register("ancient_temple_stone_wall", AncientTempleStoneWall::new);
+    public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_WALL_ITEM = ITEMS.register("ancient_temple_stone_wall", () -> new BlockItem(ANCIENT_TEMPLE_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> TEMPLE_STONE_WALL = BLOCKS.register("temple_stone_wall", TempleStoneWall::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_WALL_ITEM = ITEMS.register("temple_stone_wall", () -> new BlockItem(TEMPLE_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> DARK_TEMPLE_STONE_WALL = BLOCKS.register("dark_temple_stone_wall", DarkTempleStoneWall::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_WALL_ITEM = ITEMS.register("dark_temple_stone_wall", () -> new BlockItem(DARK_TEMPLE_STONE_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> TYTHON_PORTAL_ITEM = ITEMS.register("tython_portal",
             () -> new TythonPortalItem(new Item.Properties().stacksTo(1)));

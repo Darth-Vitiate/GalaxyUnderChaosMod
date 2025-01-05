@@ -7,11 +7,11 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:dark_force_stone"
+            "item": "galaxyunderchaos:dark_temple_stone"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:dark_force_stone_stairs",
+        "id": "galaxyunderchaos:dark_temple_stone_stairs",
         "count": 4
     },
     "group": "misc"

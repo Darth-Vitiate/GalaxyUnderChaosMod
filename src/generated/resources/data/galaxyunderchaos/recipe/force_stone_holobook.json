@@ -7,14 +7,14 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:force_stone"
+            "item": "galaxyunderchaos:temple_stone"
         },
         "G": {
             "item": "galaxyunderchaos:jedi_holobook"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:force_stone_holobook",
+        "id": "galaxyunderchaos:temple_stone_holobook",
         "count": 1
     }
 }

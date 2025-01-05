@@ -7,14 +7,14 @@
     ],
     "key": {
         "#": {
-            "item": "galaxyunderchaos:dark_force_stone"
+            "item": "galaxyunderchaos:dark_temple_stone"
         },
         "G": {
             "item": "galaxyunderchaos:sith_holobook"
         }
     },
     "result": {
-        "id": "galaxyunderchaos:dark_force_stone_holobook",
+        "id": "galaxyunderchaos:dark_temple_stone_holobook",
         "count": 1
     }
 }
