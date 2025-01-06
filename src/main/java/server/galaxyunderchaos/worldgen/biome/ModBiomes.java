@@ -37,6 +37,9 @@ public class ModBiomes {
     public static final ResourceKey<Biome> TYTHON_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_forest"));
     public static final ResourceKey<Biome> TYTHON_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_plains"));
     public static final ResourceKey<Biome> TYTHON_MOUNTAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_mountains"));
+    public static final ResourceKey<Biome> DANTOOINE_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_plains"));
+    public static final ResourceKey<Biome> DANTOOINE_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_forest"));
+    public static final ResourceKey<Biome> DANTOOINE_HILLS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_hills"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -62,8 +65,76 @@ public class ModBiomes {
         context.register(TYTHON_FOREST, createTythonForest(context));
         context.register(TYTHON_PLAINS, createTythonPlains(context));
         context.register(TYTHON_MOUNTAINS, createTythonMountains(context));
+        context.register(DANTOOINE_PLAINS, createDantooinePlains(context));
+        context.register(DANTOOINE_FOREST, createDantooineForest(context));
+        context.register(DANTOOINE_HILLS, createDantooineHills(context));
 
 
+    }
+    private static Biome createDantooinePlains(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.8f)
+                .downfall(0.5f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(7842047)
+                        .skyColor(8027785)
+                        .waterColor(6579816)
+                        .waterFogColor(6579896)
+                        .grassColorOverride(8352038)
+                        .foliageColorOverride(8414762)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+    private static Biome createDantooineForest(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.7f)
+                .downfall(0.8f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(7842047)
+                        .skyColor(8027785)
+                        .waterColor(6579816)
+                        .waterFogColor(6579896)
+                        .grassColorOverride(8352038)
+                        .foliageColorOverride(8414762)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+
+    private static Biome createDantooineHills(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.6f)
+                .downfall(0.6f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(7842047)
+                        .skyColor(8027785)
+                        .waterColor(6579816)
+                        .waterFogColor(6579896)
+                        .grassColorOverride(8352038)
+                        .foliageColorOverride(8414762)
+                        .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
     }
     private static Biome createTythonForest(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);

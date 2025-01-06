@@ -200,6 +200,8 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> TEMPLE_STONE_WALL_ITEM = ITEMS.register("temple_stone_wall", () -> new BlockItem(TEMPLE_STONE_WALL.get(), new Item.Properties()));
     public static final RegistryObject<WallBlock> DARK_TEMPLE_STONE_WALL = BLOCKS.register("dark_temple_stone_wall", DarkTempleStoneWall::new);
     public static final RegistryObject<Item> DARK_TEMPLE_STONE_WALL_ITEM = ITEMS.register("dark_temple_stone_wall", () -> new BlockItem(DARK_TEMPLE_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Block> BLBA_SAPLING = BLOCKS.register("blba_sapling", () -> new SaplingBlock(ModTreeGrowers.BLBA, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Item> BLBA_SAPLING_ITEM = ITEMS.register("blba_sapling", () -> new BlockItem(BLBA_SAPLING.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> TYTHON_PORTAL_ITEM = ITEMS.register("tython_portal",
             () -> new TythonPortalItem(new Item.Properties().stacksTo(1)));
@@ -223,6 +225,8 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
             () -> new KorribanPortalItem(new Item.Properties().stacksTo(1)));
 
 
+    public static final RegistryObject<Item> DANTOOINE_PORTAL_ITEM = ITEMS.register("dantooine_portal",
+            () -> new DantooinePortalItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
             () -> new LightsaberItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",

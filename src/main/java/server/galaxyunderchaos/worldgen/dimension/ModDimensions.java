@@ -73,6 +73,12 @@ public class ModDimensions {
             Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban"));
     public static final ResourceKey<DimensionType> KORRIBAN_DIM_TYPE = ResourceKey.create(
             Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_type"));
+    public static final ResourceKey<LevelStem> DANTOOINE_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine"));
+    public static final ResourceKey<Level> DANTOOINE_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine"));
+    public static final ResourceKey<DimensionType> DANTOOINE_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_type"));
 
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
@@ -82,6 +88,13 @@ public class ModDimensions {
                 BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.8f, new DimensionType.MonsterSettings(false, true, ConstantInt.of(7), 0) // Monster spawn rules
         ));
+            context.register(DANTOOINE_DIM_TYPE, new DimensionType(
+                    OptionalLong.empty(),
+                    true, false, false, true, 1.0, true, true,
+                    -64, 384, 384,
+                    BlockTags.INFINIBURN_OVERWORLD,
+                    BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0) // Monster spawning rules
+            ));
         context.register(NABOO_DIM_TYPE, new DimensionType(
                 OptionalLong.empty(), true, false, false, true, 1.0, true, true,
                 -64, 384, 384,
@@ -148,6 +161,24 @@ public class ModDimensions {
 
         LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(TYTHON_DIM_TYPE), tythonChunkGenerator);
         context.register(TYTHON_KEY, tythonStem);
+        NoiseBasedChunkGenerator dantooineChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(0.8F, 0.7F, 0.3F, 0.4F, 0.1F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_PLAINS)),
+                                Pair.of(
+                                        Climate.parameters(0.6F, 0.6F, 0.5F, 0.3F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_FOREST)),
+                                Pair.of(
+                                        Climate.parameters(0.4F, 0.5F, 0.7F, 0.2F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_HILLS))
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+        );
+        LevelStem dantooineStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.DANTOOINE_DIM_TYPE), dantooineChunkGenerator);
+        context.register(DANTOOINE_KEY, dantooineStem);
 
         NoiseBasedChunkGenerator nabooChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
