@@ -57,6 +57,7 @@ public class CreativeMenuTabs {
                         output.accept(TITANIUM_ORE.get().asItem());
                         output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
+                        output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
                         output.accept(JEDI_GUARD_STATUE.get().asItem());
                         output.accept(SITH_GUARD_STATUE_ITEM.get().asItem());
 //                        output.accept(PURPLE_CRYSTAL_BLOCK.get().asItem());
@@ -138,6 +139,7 @@ public class CreativeMenuTabs {
                         output.accept(SKUSTELL_HILT.get());
                         output.accept(TALON_HILT.get());
                         output.accept(VALOR_HILT.get());
+                        output.accept(WISDOM_HILT.get());
                         output.accept(WISDOM_HILT.get());
 
 

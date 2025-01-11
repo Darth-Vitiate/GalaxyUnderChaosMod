@@ -6,7 +6,10 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -25,6 +28,10 @@ import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.item.*;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
+import server.galaxyunderchaos.worldgen.tree.ModTreeGrowers;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
     public static final String MODID="galaxyunderchaos";
@@ -131,8 +138,6 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> JEDI_HOLOBOOK = ITEMS.register("jedi_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANCIENT_HOLOBOOK = ITEMS.register("ancient_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SITH_HOLOBOOK = ITEMS.register("sith_holobook", () -> new Item(new Item.Properties()));
-
-
     public static final RegistryObject<Item> RED_KYBER = ITEMS.register("red_kyber", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BLOOD_ORANGE_KYBER = ITEMS.register("blood_orange_kyber", () -> new Item(new Item.Properties()));
@@ -175,8 +180,8 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
     public static final RegistryObject<Block> SITH_GUARD_STATUE = BLOCKS.register("sith_guard_statue", SithGuard::new);
     public static final RegistryObject<Item> SITH_GUARD_STATUE_ITEM = ITEMS.register("sith_guard_statue", () -> new BlockItem(SITH_GUARD_STATUE.get(), new Item.Properties()));
-
-
+    public static final RegistryObject<Block> LIGHTSABER_CRAFTING_TABLE = BLOCKS.register("lightsaber_crafting_table", () -> new LightsaberCraftingTableBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Item> LIGHTSABER_CRAFTING_TABLE_ITEM = ITEMS.register("lightsaber_crafting_table", () -> new BlockItem(LIGHTSABER_CRAFTING_TABLE.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE = BLOCKS.register("ancient_temple_stone", AncientTempleStone::new);
     public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_ITEM = ITEMS.register("ancient_temple_stone", () -> new BlockItem(ANCIENT_TEMPLE_STONE.get(), new Item.Properties()));
@@ -227,6 +232,7 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
     public static final RegistryObject<Item> DANTOOINE_PORTAL_ITEM = ITEMS.register("dantooine_portal",
             () -> new DantooinePortalItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
             () -> new LightsaberItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
@@ -260,18 +266,35 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
     public static final RegistryObject<Item> WISDOM_HILT = ITEMS.register("wisdom_hilt",
             () -> new LightsaberItem("blue", new Item.Properties()));
 
-
-
+    public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
     public static void registerLightsabers() {
-        String[] crystalColors = {"red", "blue", "green", "yellow", "cyan", "white",
-                "magenta", "purple", "pink", "lime_green", "turquoise"};
+        String[] bladeColors = {
+                "red", "blue", "green", "yellow", "cyan",
+                "white", "magenta", "purple", "pink",
+                "lime_green", "turquoise", "orange", "blood_orange"
+        };
 
-        for (String color : crystalColors) {
-            ITEMS.register(color + "_lightsaber",
-                    () -> new LightsaberItem(color, new Item.Properties()));
+        String[] hiltNames = {
+                "apprentice", "chosen", "emperor", "legacy", "padawan",
+                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony", "skustell" , "fallen"
+        };
+
+        for (String color : bladeColors) {
+            for (String hilt : hiltNames) {
+                String id = color + "_" + hilt + "_lightsaber";
+                LIGHTSABERS.put(id, ITEMS.register(
+                        id,
+                        () -> new LightsaberItem(color, new Item.Properties())
+                ));
+            }
         }
     }
+
+
+
+
+
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -282,7 +305,7 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
         ModBiomes.BIOMES.register(modEventBus);
         CreativeMenuTabs.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
-
+        registerLightsabers();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
@@ -310,4 +333,5 @@ import server.galaxyunderchaos.worldgen.biome.ModBiomes;
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
+
 }

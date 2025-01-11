@@ -1,5 +1,6 @@
 package server.galaxyunderchaos.item;
 
+//import client.renderer.LightsaberRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -8,6 +9,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import java.util.function.Consumer;
 
 public class LightsaberItem extends Item {
+
     private final String bladeColor;
 
     public LightsaberItem(String bladeColor, Properties properties) {
@@ -28,5 +30,4 @@ public class LightsaberItem extends Item {
 //            }
 //        });
 //    }
-
 }
