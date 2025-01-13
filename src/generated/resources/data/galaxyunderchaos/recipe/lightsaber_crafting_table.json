@@ -1,25 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "lightsaber",
   "category": "equipment",
+  "group": "lightsaber",
   "key": {
     "#": {
-      "item": "minecraft:diamond"
-    },
-    "R": {
-      "item": "minecraft:glass"
-    },
-    "T": {
-      "tag": "galaxyunderchaos:titanium_ingot"
+      "item": "minecraft:gray_concrete"
     },
     "X": {
-      "item": "minecraft:compass"
+      "item": "galaxyunderchaos:ancient_holobook"
+    },
+    "C": {
+      "item": "minecraft:light_gray_concrete"
     }
   },
   "pattern": [
-    "TTT",
+    "CCC",
     "#X#",
-    "#R#"
+    "#X#"
   ],
   "result": {
     "count": 1,

@@ -1,28 +1,47 @@
 package server.galaxyunderchaos.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
-import server.galaxyunderchaos.item.LightsaberItem;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import server.galaxyunderchaos.item.HiltItem;
 import server.galaxyunderchaos.lightsaber.LightsaberCrafting;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LightsaberCraftingTableBlock extends Block {
-    public LightsaberCraftingTableBlock(Properties properties) {
-        super(properties);
+    public static final DirectionProperty FACING = DirectionProperty.create("facing");
+    public static final VoxelShape SHAPE = Block.box(-8, 0.1, 0.1, 24, 16, 17);
+
+    public LightsaberCraftingTableBlock() {
+        super(Properties.of()
+                .strength(4.0f)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.COPPER)
+                .pushReaction(PushReaction.NORMAL));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -78,7 +97,7 @@ public class LightsaberCraftingTableBlock extends Block {
 
     // Helper Method: Check if an item is a hilt
     private boolean isHilt(ItemStack itemStack) {
-        return itemStack.getItem() instanceof LightsaberItem;
+        return itemStack.getItem() instanceof HiltItem;
     }
 
     // Helper Method: Check if an item is a kyber crystal
@@ -92,7 +111,47 @@ public class LightsaberCraftingTableBlock extends Block {
         ResourceLocation itemName = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
         return itemName != null && Arrays.asList(validKybers).contains(itemName.getPath());
     }
+    @Override
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+        pTooltipComponents.add(Component.translatable("tooltip.galaxyunderchaos.lightsaber_crafting_table.tooltip"));
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+    }
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
+    }
 
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        }
+    }
 
     // Spawn crafting particles
     private void spawnCraftingParticles(Level level, BlockPos pos) {

@@ -1,5 +1,6 @@
 package server.galaxyunderchaos;
 
+import client.renderer.LightsaberBeltRenderer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.food.FoodProperties;
@@ -26,7 +27,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
+import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.item.*;
+import server.galaxyunderchaos.sound.ModSounds;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 import server.galaxyunderchaos.worldgen.tree.ModTreeGrowers;
 
@@ -180,7 +183,7 @@ import java.util.Map;
 
     public static final RegistryObject<Block> SITH_GUARD_STATUE = BLOCKS.register("sith_guard_statue", SithGuard::new);
     public static final RegistryObject<Item> SITH_GUARD_STATUE_ITEM = ITEMS.register("sith_guard_statue", () -> new BlockItem(SITH_GUARD_STATUE.get(), new Item.Properties()));
-    public static final RegistryObject<Block> LIGHTSABER_CRAFTING_TABLE = BLOCKS.register("lightsaber_crafting_table", () -> new LightsaberCraftingTableBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> LIGHTSABER_CRAFTING_TABLE = BLOCKS.register("lightsaber_crafting_table", () -> new LightsaberCraftingTableBlock());
     public static final RegistryObject<Item> LIGHTSABER_CRAFTING_TABLE_ITEM = ITEMS.register("lightsaber_crafting_table", () -> new BlockItem(LIGHTSABER_CRAFTING_TABLE.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE = BLOCKS.register("ancient_temple_stone", AncientTempleStone::new);
@@ -234,37 +237,37 @@ import java.util.Map;
             () -> new DantooinePortalItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
-            () -> new LightsaberItem("green", new Item.Properties()));
+            () -> new HiltItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> APPRENTICE_HILT = ITEMS.register("apprentice_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> CHOSEN_HILT = ITEMS.register("chosen_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> EMPEROR_HILT = ITEMS.register("emperor_hilt",
-            () -> new LightsaberItem("red", new Item.Properties()));
+            () -> new HiltItem("red", new Item.Properties()));
     public static final RegistryObject<Item> FALLEN_HILT = ITEMS.register("fallen_hilt",
-            () -> new LightsaberItem("red", new Item.Properties()));
+            () -> new HiltItem("red", new Item.Properties()));
     public static final RegistryObject<Item> GRACE_HILT = ITEMS.register("grace_hilt",
-            () -> new LightsaberItem("red", new Item.Properties()));
+            () -> new HiltItem("red", new Item.Properties()));
     public static final RegistryObject<Item> GUARD_HILT = ITEMS.register("guard_hilt",
-            () -> new LightsaberItem("red", new Item.Properties()));
+            () -> new HiltItem("red", new Item.Properties()));
     public static final RegistryObject<Item> HARMONY_HILT = ITEMS.register("harmony_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> LEGACY_HILT = ITEMS.register("legacy_hilt",
-            () -> new LightsaberItem("green", new Item.Properties()));
+            () -> new HiltItem("green", new Item.Properties()));
     public static final RegistryObject<Item> PADAWAN_HILT = ITEMS.register("padawan_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> RESOLVE_HILT = ITEMS.register("resolve_hilt",
-            () -> new LightsaberItem("purple", new Item.Properties()));
+            () -> new HiltItem("purple", new Item.Properties()));
     public static final RegistryObject<Item> SKUSTELL_HILT = ITEMS.register("skustell_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> TALON_HILT = ITEMS.register("talon_hilt",
-            () -> new LightsaberItem("orange", new Item.Properties()));
+            () -> new HiltItem("orange", new Item.Properties()));
     public static final RegistryObject<Item> VALOR_HILT = ITEMS.register("valor_hilt",
-            () -> new LightsaberItem("green", new Item.Properties()));
+            () -> new HiltItem("green", new Item.Properties()));
     public static final RegistryObject<Item> WISDOM_HILT = ITEMS.register("wisdom_hilt",
-            () -> new LightsaberItem("blue", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
 
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
@@ -306,6 +309,9 @@ import java.util.Map;
         CreativeMenuTabs.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLightsabers();
+        KeyBindings.init();
+        ModSounds.register(modEventBus);
+        MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
@@ -325,12 +331,11 @@ import java.util.Map;
         LOGGER.info("HELLO from server starting");
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = galaxyunderchaos.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
         }
     }
 

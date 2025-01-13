@@ -389,5 +389,9 @@
   "item.galaxyunderchaos.orange_chosen_lightsaber": "Orange Chosen Lightsaber",
   "item.galaxyunderchaos.blood_orange_chosen_lightsaber": "Blood Orange Chosen Lightsaber",
   "item.galaxyunderchaos.orange_apprentice_lightsaber": "Orange Apprentice Lightsaber",
-  "item.galaxyunderchaos.blood_orange_apprentice_lightsaber": "Blood Orange Apprentice Lightsaber"
+  "item.galaxyunderchaos.blood_orange_apprentice_lightsaber": "Blood Orange Apprentice Lightsaber",
+  "tooltip.galaxyunderchaos.bleeding_table.tooltip": "Throw Kyber on the table to bleed the crystal!",
+  "tooltip.galaxyunderchaos.lightsaber_crafting_table.tooltip": "Throw a hilt and kyber crystal to craft your lightsaber!",
+  "key.categories.galaxyunderchaos": "Galaxy Under Chaos",
+  "key.galaxyunderchaos.toggle_lightsaber": "Toggle Lightsaber"
 }

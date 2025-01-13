@@ -9,15 +9,15 @@
     "R": {
       "item": "minecraft:glass"
     },
-    "T": {
-      "tag": "galaxyunderchaos:titanium_ingot"
+    "C": {
+      "item": "galaxyunderchaos:titanium_ingot"
     },
     "X": {
       "item": "minecraft:compass"
     }
   },
   "pattern": [
-    "TTT",
+    "CCC",
     "#X#",
     "#R#"
   ],
