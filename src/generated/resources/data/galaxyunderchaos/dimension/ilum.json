@@ -3,7 +3,7 @@
     "generator": {
         "type": "minecraft:noise",
         "seed": 987654321,
-        "settings": "minecraft:overworld",
+        "settings": "galaxyunderchaos:ilum_noise_settings",
         "biome_source": {
             "type": "minecraft:multi_noise",
             "biomes": [

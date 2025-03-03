@@ -13,6 +13,9 @@
       }
     ],
     "size": 3,
-    "discard_chance_on_air_exposure": 0.0
+    "discard_chance_on_air_exposure": 0.0,
+    "can_place_on_ceiling": true,
+    "can_place_on_floor": true,
+    "can_place_on_wall": true
   }
 }

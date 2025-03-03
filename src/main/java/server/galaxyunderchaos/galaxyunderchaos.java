@@ -186,6 +186,9 @@ import java.util.Map;
     public static final RegistryObject<Block> LIGHTSABER_CRAFTING_TABLE = BLOCKS.register("lightsaber_crafting_table", () -> new LightsaberCraftingTableBlock());
     public static final RegistryObject<Item> LIGHTSABER_CRAFTING_TABLE_ITEM = ITEMS.register("lightsaber_crafting_table", () -> new BlockItem(LIGHTSABER_CRAFTING_TABLE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> ILUM_STONE = BLOCKS.register("ilum_stone", AncientTempleStone::new);
+    public static final RegistryObject<Item> ILUM_STONE_ITEM = ITEMS.register("ilum_stone", () -> new BlockItem(ILUM_STONE.get(), new Item.Properties()));
+
     public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE = BLOCKS.register("ancient_temple_stone", AncientTempleStone::new);
     public static final RegistryObject<Item> ANCIENT_TEMPLE_STONE_ITEM = ITEMS.register("ancient_temple_stone", () -> new BlockItem(ANCIENT_TEMPLE_STONE.get(), new Item.Properties()));
     public static final RegistryObject<Block> ANCIENT_TEMPLE_STONE_CRACKED = BLOCKS.register("ancient_temple_stone_cracked", AncientTempleStoneCracked::new);
