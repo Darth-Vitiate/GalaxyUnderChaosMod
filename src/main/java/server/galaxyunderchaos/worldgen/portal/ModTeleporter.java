@@ -1,5 +1,7 @@
 package server.galaxyunderchaos.worldgen.portal;
 
+import client.renderer.HyperspaceAnimation;
+import client.renderer.HyperspaceManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -9,7 +11,9 @@ import net.minecraft.world.phys.Vec3;
 import server.galaxyunderchaos.galaxyunderchaos;
 import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 
+import java.util.Random;
 import java.util.function.Function;
+
 
 public class ModTeleporter {
     private final BlockPos thisPos;
@@ -28,7 +32,8 @@ public class ModTeleporter {
             y = thisPos.getY();
         }
 
-        BlockPos destinationPos = new BlockPos(thisPos.getX(), y, thisPos.getZ());
+        int safeY = findSafeLandingY(destinationWorld, thisPos.getX(), thisPos.getZ());
+        BlockPos destinationPos = new BlockPos(thisPos.getX(), safeY, thisPos.getZ());
 
         int tries = 0;
         while ((destinationWorld.getBlockState(destinationPos).getBlock() != Blocks.AIR ||
@@ -39,22 +44,45 @@ public class ModTeleporter {
             tries++;
         }
 
-        entity.setPos(destinationPos.getX() + 0.5, destinationPos.getY(), destinationPos.getZ() + 0.5);
-        entity.setDeltaMovement(Vec3.ZERO);
-        entity.setYRot(yaw);
-
-        if (insideDimension) {
-            if (destinationWorld.dimension() == ModDimensions.TYTHON_LEVEL_KEY) {
-                entity.spawnAtLocation(galaxyunderchaos.TYTHON_PORTAL_ITEM.get().getDefaultInstance());
-            } else if (destinationWorld.dimension() == ModDimensions.NABOO_LEVEL_KEY) {
-                entity.spawnAtLocation(galaxyunderchaos.NABOO_PORTAL_ITEM.get().getDefaultInstance());
-            } else if (destinationWorld.dimension() == ModDimensions.ILUM_LEVEL_KEY) {
-                entity.spawnAtLocation(galaxyunderchaos.ILUM_PORTAL_ITEM.get().getDefaultInstance());
-            } else if (destinationWorld.dimension() == ModDimensions.MUSTAFAR_LEVEL_KEY) {
-                entity.spawnAtLocation(galaxyunderchaos.MUSTAFAR_PORTAL_ITEM.get().getDefaultInstance());
-            }
-        }
+        // Start the hyperspace cutscene
+        HyperspaceManager.startHyperspace(entity, destinationWorld, destinationPos, yaw);
 
         return entity;
+    }
+
+    private int findSafeLandingY(ServerLevel world, int x, int z) {
+        int y = world.getHeight() - 1;
+        while (y > 60) {
+            BlockPos pos = new BlockPos(x, y, z);
+            if (world.getBlockState(pos).isAir() &&
+                    world.getBlockState(pos.below()).isSolid() &&
+                    !world.getBlockState(pos.below()).is(Blocks.LAVA) &&
+                    !world.getBlockState(pos.below()).is(Blocks.WATER)) {
+                return y;
+            }
+            y--;
+        }
+        return 75; // Raise the fallback landing height
+    }
+
+
+    private void spawnPortalItem(Entity entity, ServerLevel world) {
+        if (world.dimension() == ModDimensions.TYTHON_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.TYTHON_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.NABOO_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.NABOO_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.ILUM_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.ILUM_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.MUSTAFAR_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.MUSTAFAR_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.DANTOOINE_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.DANTOOINE_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.OSSUS_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.OSSUS_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.MALACHOR_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.MALACHOR_PORTAL_ITEM.get().getDefaultInstance());
+        } else if (world.dimension() == ModDimensions.KORRIBAN_LEVEL_KEY) {
+            entity.spawnAtLocation(galaxyunderchaos.KORRIBAN_PORTAL_ITEM.get().getDefaultInstance());
+        }
     }
 }

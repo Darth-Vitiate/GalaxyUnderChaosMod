@@ -141,6 +141,14 @@ public class ModDimensions {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
+        long nabooSeed = 123456789L;
+        long ilumSeed = 987654321L;
+        long korribanSeed = 456789123L;
+        long malachorSeed = 789123456L;
+        long mustafarSeed = 654321987L;
+        long dantooineSeed = 321987654L;
+        long ossusSeed = 159753258L;
+        long tythonSeed = 753951852L;
 
         NoiseBasedChunkGenerator tythonChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(

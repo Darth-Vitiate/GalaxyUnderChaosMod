@@ -1,6 +1,8 @@
 package server.galaxyunderchaos.item;
 
+import client.renderer.ModItemRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import server.galaxyunderchaos.sound.ModSounds;
@@ -29,6 +32,7 @@ import server.galaxyunderchaos.sound.ModSounds;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class LightsaberItem extends SwordItem {
     private final String bladeColor;
@@ -107,16 +111,24 @@ public class LightsaberItem extends SwordItem {
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return isActive();
+    }
 
 
     public String getTextureLocation() {
-        if (isActive) {
-            // Active lightsaber model: color + hilt + "_lightsaber"
-            return "galaxyunderchaos:item/" + bladeColor + "_lightsaber";
-        } else {
-            // Inactive lightsaber model: just hilt
-            return "galaxyunderchaos:item/" + bladeColor + "_hilt";  // Only hilt for inactive lightsaber
+        return isActive ?
+                "galaxyunderchaos:item/" + bladeColor + "_blade" :
+                "galaxyunderchaos:item/" + getHilt(new ItemStack(this)); // Dynamically get hilt
+    }
+
+
+    public static int getLightLevel(ItemStack stack) {
+        if (stack.getItem() instanceof LightsaberItem lightsaber && lightsaber.isActive()) {
+            return 15; // Full torch brightness
         }
+        return 0; // No light when inactive
     }
 
     @Override
@@ -165,8 +177,17 @@ public class LightsaberItem extends SwordItem {
                         0.5F
                 );
             }
+            if (!level.isClientSide && entity instanceof Player) {
+                level.getChunkSource().getLightEngine().checkBlock(entity.blockPosition());
+            }
+            if (isActive()) {
+                entity.setGlowingTag(true);
+            } else {
+                entity.setGlowingTag(false);
+            }
         }
     }
+
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
         if (isActive) {
@@ -244,6 +265,21 @@ public class LightsaberItem extends SwordItem {
                 Items.COD, Items.COOKED_COD
         );
         return cookingMap.getOrDefault(rawFood, null);
+    }
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private final BlockEntityWithoutLevelRenderer customRenderer = new ModItemRenderer();
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return customRenderer;
+            }
+        });
+    }
+
+    public boolean shouldRenderBlade(ItemStack stack) {
+        return isActive(); // ✅ Only render the blade (layer1) when active
     }
 
 }

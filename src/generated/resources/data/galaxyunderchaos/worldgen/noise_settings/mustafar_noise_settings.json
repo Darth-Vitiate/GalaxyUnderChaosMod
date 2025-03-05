@@ -336,49 +336,49 @@
   "spawn_target": [
     {
       "continentalness": [
-        -0.11,
-        1
+        0.2,
+        1.3
       ],
       "depth": 0,
       "erosion": [
-        -1,
-        1
+        -0.8,
+        0.1
       ],
       "humidity": [
         -1,
         1
       ],
-      "offset": 0,
+      "offset": 1.0,
       "temperature": [
         -1,
         1
       ],
       "weirdness": [
-        -1,
-        -0.16
+        -0.5,
+        1
       ]
     },
     {
       "continentalness": [
-        -0.11,
-        1
+        0.2,
+        1.3
       ],
       "depth": 0,
       "erosion": [
-        -1,
-        1
+        -0.8,
+        0.1
       ],
       "humidity": [
         -1,
         1
       ],
-      "offset": 0,
+      "offset": 1.0,
       "temperature": [
         -1,
         1
       ],
       "weirdness": [
-        0.16,
+        -0.5,
         1
       ]
     }

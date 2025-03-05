@@ -33,13 +33,28 @@ import java.util.List;
 
 public class LightsaberCraftingTableBlock extends Block {
     public static final DirectionProperty FACING = DirectionProperty.create("facing");
-    public static final VoxelShape SHAPE = Block.box(-8, 0.1, 0.1, 24, 16, 17);
+    private static final VoxelShape NORTH_SHAPE = Block.box(-8, 0.1, 0.1, 24, 16, 17);
+    private static final VoxelShape WEST_SHAPE = Block.box(0.1, 0.1, -8, 17, 16, 24);
+    private static final VoxelShape SOUTH_SHAPE = Block.box(-8, 0.1, -1, 24, 16, 16);
+    private static final VoxelShape EAST_SHAPE = Block.box(-1, 0.1, -8, 16, 16, 24);
 
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Direction facing = state.getValue(FACING);
+        switch (facing) {
+            case NORTH: return NORTH_SHAPE;
+            case EAST: return EAST_SHAPE;
+            case SOUTH: return SOUTH_SHAPE;
+            case WEST: return WEST_SHAPE;
+            default: return NORTH_SHAPE;
+        }
+    }
     public LightsaberCraftingTableBlock() {
         super(Properties.of()
                 .strength(4.0f)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.COPPER)
+                .noOcclusion()
                 .pushReaction(PushReaction.NORMAL));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
@@ -115,10 +130,6 @@ public class LightsaberCraftingTableBlock extends Block {
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         pTooltipComponents.add(Component.translatable("tooltip.galaxyunderchaos.lightsaber_crafting_table.tooltip"));
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    }
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
     }
 
     @Override

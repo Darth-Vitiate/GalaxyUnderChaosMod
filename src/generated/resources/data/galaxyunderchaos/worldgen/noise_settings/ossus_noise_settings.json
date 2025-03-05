@@ -10,7 +10,7 @@
     }
   },
   "disable_mob_generation": false,
-  "legacy_random_source": false,
+  "legacy_random_source": true,
   "noise": {
     "height": 384,
     "min_y": -64,
@@ -348,7 +348,7 @@
         -1,
         1
       ],
-      "offset": 0,
+      "offset": 1.0,
       "temperature": [
         -1,
         1
@@ -372,7 +372,7 @@
         -1,
         1
       ],
-      "offset": 0,
+      "offset": 1.0,
       "temperature": [
         -1,
         1

@@ -2,6 +2,7 @@
   "type": "galaxyunderchaos:tython_type",
   "generator": {
     "type": "minecraft:noise",
+    "seed": 753951852,
     "settings": "galaxyunderchaos:tython_noise_settings",
     "biome_source": {
       "type": "minecraft:multi_noise",

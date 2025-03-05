@@ -2,6 +2,7 @@
     "type": "galaxyunderchaos:dantooine_type",
     "generator": {
         "type": "minecraft:noise",
+        "seed": 321987654,
         "biome_source": {
             "type": "minecraft:multi_noise",
             "biomes": [

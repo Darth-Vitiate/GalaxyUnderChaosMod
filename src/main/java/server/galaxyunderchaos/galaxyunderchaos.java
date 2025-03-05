@@ -1,8 +1,13 @@
 package server.galaxyunderchaos;
 
+import client.renderer.ClientSetup;
+import client.renderer.HyperspaceOverlayRenderer;
 import client.renderer.LightsaberBeltRenderer;
+import client.renderer.ModItemRenderer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -29,6 +34,7 @@ import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.item.*;
+import server.galaxyunderchaos.loot.ModLootModifiers;
 import server.galaxyunderchaos.sound.ModSounds;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 import server.galaxyunderchaos.worldgen.tree.ModTreeGrowers;
@@ -37,8 +43,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
-    public static final String MODID="galaxyunderchaos";
-    private static final Logger LOGGER= LogUtils.getLogger();
+    public static final String MODID = "galaxyunderchaos";
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
@@ -283,7 +289,7 @@ import java.util.Map;
 
         String[] hiltNames = {
                 "apprentice", "chosen", "emperor", "legacy", "padawan",
-                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony", "skustell" , "fallen"
+                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony", "skustell", "fallen"
         };
 
         for (String color : bladeColors) {
@@ -291,15 +297,11 @@ import java.util.Map;
                 String id = color + "_" + hilt + "_lightsaber";
                 LIGHTSABERS.put(id, ITEMS.register(
                         id,
-                        () -> new LightsaberItem(color, new Item.Properties())
+                        () -> new LightsaberItem(color, new Item.Properties().stacksTo(1))
                 ));
             }
         }
     }
-
-
-
-
 
 
     public galaxyunderchaos() {
@@ -316,17 +318,18 @@ import java.util.Map;
         ModSounds.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modEventBus.addListener(this::clientSetup); // ✅ Correct way to add client-side setup
+        MinecraftForge.EVENT_BUS.register(HyperspaceOverlayRenderer.class);
+        ModLootModifiers.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-//        LOGGER.info("HELLO FROM COMMON SETUP");
+        LOGGER.info("HELLO FROM COMMON SETUP");
+    }
 
-//        if (Config.logDirtBlock)
-//            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-//
-//        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-//        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+    private void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+        });
     }
 
     @SubscribeEvent
@@ -338,8 +341,10 @@ import java.util.Map;
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            // ✅ Iterate through all registered lightsabers and apply the correct render type
+            galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
+                    ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
+            );
         }
     }
-
 }
