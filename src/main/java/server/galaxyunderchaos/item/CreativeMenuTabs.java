@@ -124,6 +124,27 @@ public class CreativeMenuTabs {
                     .icon(() -> new ItemStack(AEGIS_HILT.get()))
                     .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_weapons"))
                     .displayItems((parameters, output) -> {
+//                        for (String color : new String[]{"red", "blue", "green", "yellow", "cyan", "white", "magenta", "purple", "pink", "lime_green", "turquoise", "orange", "blood_orange"}) {
+//                            for (String hilt : new String[]{"apprentice", "chosen", "emperor", "legacy", "padawan", "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony", "skustell", "fallen"}) {
+//                                output.accept(galaxyunderchaos.LIGHTSABERS.get(color + "_" + hilt + "_lightsaber").get());
+//                            }
+//                        }
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("green_lost_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_aegis_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_apprentice_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_chosen_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("red_emperor_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("red_fallen_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("red_grace_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("red_guard_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_harmony_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("green_legacy_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_padawan_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("purple_resolve_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_skustell_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("orange_talon_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("green_valor_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_wisdom_lightsaber").get());
                         output.accept(LOST_HILT.get());
                         output.accept(AEGIS_HILT.get());
                         output.accept(APPRENTICE_HILT.get());

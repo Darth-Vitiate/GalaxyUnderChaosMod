@@ -33,6 +33,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.KeyBindings;
+import server.galaxyunderchaos.data.ModDataComponentTypes;
 import server.galaxyunderchaos.item.*;
 import server.galaxyunderchaos.loot.ModLootModifiers;
 import server.galaxyunderchaos.sound.ModSounds;
@@ -316,6 +317,7 @@ import java.util.Map;
         registerLightsabers();
         KeyBindings.init();
         ModSounds.register(modEventBus);
+        ModDataComponentTypes.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         modEventBus.addListener(this::clientSetup); // ✅ Correct way to add client-side setup
@@ -341,7 +343,7 @@ import java.util.Map;
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            // ✅ Iterate through all registered lightsabers and apply the correct render type
+            ModItemProperties.addCustomItemProperties();
             galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
                     ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
             );

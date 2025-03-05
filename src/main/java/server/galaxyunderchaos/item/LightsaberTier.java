@@ -1,5 +1,4 @@
 package server.galaxyunderchaos.item;
-
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -10,7 +9,7 @@ public class LightsaberTier implements Tier {
 
     @Override
     public int getUses() {
-        return 2500; // Durability of the lightsaber
+        return -1;
     }
 
     @Override
@@ -31,7 +30,7 @@ public class LightsaberTier implements Tier {
     @Override
     public Ingredient getRepairIngredient() {
         // Use a futuristic material for repairs; obsidian as a placeholder
-        return Ingredient.of(Blocks.OBSIDIAN);
+        return Ingredient.of(Blocks.NETHERITE_BLOCK);
     }
 
     @Override

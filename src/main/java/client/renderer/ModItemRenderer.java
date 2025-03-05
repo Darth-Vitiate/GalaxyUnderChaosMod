@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import server.galaxyunderchaos.item.LightsaberItem;
+import server.galaxyunderchaos.data.ModDataComponentTypes;
 
 import java.util.function.Consumer;
 
@@ -26,23 +27,20 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
         ItemRenderer renderer = mc.getItemRenderer();
         BakedModel model = renderer.getModel(stack, null, null, 0);
 
-        if (stack.getItem() instanceof LightsaberItem lightsaber) {
-            boolean isActive = lightsaber.isActive();
+        if (stack.getItem() instanceof LightsaberItem) {
+            boolean isActive = stack.getOrDefault(ModDataComponentTypes.ACTIVE.get(), false);
 
             // ✅ Always render hilt
             renderer.render(stack, displayContext, false, poseStack, buffer, light, overlay, model);
 
             if (isActive) {
-                // ✅ Render blade only when active
-                renderer.render(stack, displayContext, false, poseStack, buffer, 15728880, overlay, model);
+                // ✅ Render blade only when active with maximum brightness
+                int glowLightLevel = 15728880; // Full brightness
+
+                renderer.render(stack, displayContext, false, poseStack, buffer, glowLightLevel, overlay, model);
             }
         }
     }
-
-
-
-
-
 
 
     public static void registerItemRenderer(Consumer<IClientItemExtensions> consumer) {

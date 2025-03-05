@@ -1,7 +1,14 @@
 {
     "parent": "minecraft:item/handheld",
     "textures": {
-        "layer0": "galaxyunderchaos:item/guard_hilt",
-        "layer1": "galaxyunderchaos:item/pink_blade"
-    }
+        "layer0": "galaxyunderchaos:item/guard_hilt"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "galaxyunderchaos:active": 1
+            },
+            "model": "galaxyunderchaos:item/pink_guard_lightsaber_active"
+        }
+    ]
 }
