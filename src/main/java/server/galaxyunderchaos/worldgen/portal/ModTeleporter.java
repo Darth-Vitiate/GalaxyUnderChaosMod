@@ -14,7 +14,6 @@ import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 import java.util.Random;
 import java.util.function.Function;
 
-
 public class ModTeleporter {
     private final BlockPos thisPos;
     private final boolean insideDimension;
@@ -26,44 +25,67 @@ public class ModTeleporter {
 
     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld, float yaw, Function<Entity, Entity> repositionEntity) {
         entity = repositionEntity.apply(entity);
-        int y = 61;
+        int y = insideDimension ? 61 : thisPos.getY();
 
-        if (!insideDimension) {
-            y = thisPos.getY();
-        }
+        BlockPos safePos = findLeveledPosition(destinationWorld, thisPos);
+        entity.teleportTo(safePos.getX(), safePos.getY(), safePos.getZ());
 
-        int safeY = findSafeLandingY(destinationWorld, thisPos.getX(), thisPos.getZ());
-        BlockPos destinationPos = new BlockPos(thisPos.getX(), safeY, thisPos.getZ());
+        entity.setNoGravity(true); // Temporarily disable gravity to prevent falling
+        entity.invulnerableTime = 5; // Short invulnerability after teleport
 
-        int tries = 0;
-        while ((destinationWorld.getBlockState(destinationPos).getBlock() != Blocks.AIR ||
-                !destinationWorld.getBlockState(destinationPos).canBeReplaced(Fluids.WATER)) &&
-                (destinationWorld.getBlockState(destinationPos.above()).getBlock() != Blocks.AIR ||
-                        !destinationWorld.getBlockState(destinationPos.above()).canBeReplaced(Fluids.WATER)) && tries < 25) {
-            destinationPos = destinationPos.above(2);
-            tries++;
-        }
+        Entity finalEntity = entity;
+        destinationWorld.getServer().execute(() -> finalEntity.setNoGravity(false)); // Re-enable gravity after a tick
 
         // Start the hyperspace cutscene
-        HyperspaceManager.startHyperspace(entity, destinationWorld, destinationPos, yaw);
+        HyperspaceManager.startHyperspace(entity, destinationWorld, safePos, yaw);
 
         return entity;
+    }
+
+    private BlockPos findLeveledPosition(ServerLevel world, BlockPos pos) {
+        int searchRadius = 8; // Search area radius
+        for (int dx = -searchRadius; dx <= searchRadius; dx++) {
+            for (int dz = -searchRadius; dz <= searchRadius; dz++) {
+                BlockPos checkPos = new BlockPos(pos.getX() + dx, findSafeLandingY(world, pos.getX() + dx, pos.getZ() + dz), pos.getZ() + dz);
+                if (isLeveledArea(world, checkPos)) {
+                    return checkPos;
+                }
+            }
+        }
+        return pos; // Fallback if no leveled area found
+    }
+
+    private boolean isLeveledArea(ServerLevel world, BlockPos pos) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dz = -1; dz <= 1; dz++) {
+                BlockPos checkPos = pos.offset(dx, 0, dz);
+                if (!world.getBlockState(checkPos).isSolid() || !world.getBlockState(checkPos.above()).isAir() || !world.getBlockState(checkPos.above(2)).isAir()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private int findSafeLandingY(ServerLevel world, int x, int z) {
         int y = world.getHeight() - 1;
         while (y > 60) {
             BlockPos pos = new BlockPos(x, y, z);
+            BlockPos below = pos.below();
+            BlockPos above = pos.above();
+
             if (world.getBlockState(pos).isAir() &&
-                    world.getBlockState(pos.below()).isSolid() &&
-                    !world.getBlockState(pos.below()).is(Blocks.LAVA) &&
-                    !world.getBlockState(pos.below()).is(Blocks.WATER)) {
+                    world.getBlockState(above).isAir() &&
+                    world.getBlockState(below).isSolid() &&
+                    !world.getBlockState(below).is(Blocks.LAVA) &&
+                    !world.getBlockState(below).is(Blocks.WATER)) {
                 return y;
             }
             y--;
         }
-        return 75; // Raise the fallback landing height
+        return 75; // Raise fallback height
     }
+
 
 
     private void spawnPortalItem(Entity entity, ServerLevel world) {

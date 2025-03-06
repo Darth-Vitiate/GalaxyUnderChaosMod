@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 
 public class KorribanPortalItem extends Item {
@@ -23,13 +24,13 @@ public class KorribanPortalItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             BlockPos playerPos = serverPlayer.blockPosition(); // Get the player's current position
-            handlMalachorPortal(serverPlayer, playerPos);
+            handleKorribanPortal(serverPlayer, playerPos);
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
-    private void handlMalachorPortal(ServerPlayer player, BlockPos pPos) {
+    private void handleKorribanPortal(ServerPlayer player, BlockPos pPos) {
         if (player.level() instanceof ServerLevel serverLevel) {
             MinecraftServer minecraftServer = serverLevel.getServer();
             ResourceKey<Level> targetDimension = player.level().dimension() == ModDimensions.KORRIBAN_LEVEL_KEY ?
@@ -37,8 +38,15 @@ public class KorribanPortalItem extends Item {
 
             ServerLevel targetServerLevel = minecraftServer.getLevel(targetDimension);
             if (targetServerLevel != null && !player.isPassenger()) {
-                player.teleportTo(targetServerLevel, pPos.getX(), pPos.getY(), pPos.getZ(), player.getYRot(), player.getXRot());
+                clearLandingArea(targetServerLevel, pPos);
+                player.teleportTo(targetServerLevel, pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5, player.getYRot(), player.getXRot());
             }
+        }
+    }
+    private void clearLandingArea(ServerLevel world, BlockPos pos) {
+        for (int dy = 0; dy <= 1; dy++) { // Clears only a 1x2 space
+            BlockPos blockPos = pos.above(dy);
+            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
         }
     }
 }

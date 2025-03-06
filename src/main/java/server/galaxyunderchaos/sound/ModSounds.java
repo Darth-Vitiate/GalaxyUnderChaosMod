@@ -17,6 +17,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> LIGHTSABER_IDLE = registerSoundEvent("lightsaber_idle");
     public static final RegistryObject<SoundEvent> LIGHTSABER_TURN_ON = registerSoundEvent("lightsaber_on");
     public static final RegistryObject<SoundEvent> LIGHTSABER_TURN_OFF = registerSoundEvent("lightsaber_off");
+    public static final RegistryObject<SoundEvent> HYPERSPACE = registerSoundEvent("hyperspace");
     public static final RegistryObject<SoundEvent> LIGHTSABER_DEFLECT = registerSoundEvent("lightsaber_deflect");
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, name)));

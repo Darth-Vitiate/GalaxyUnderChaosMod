@@ -38,6 +38,12 @@
       "galaxyunderchaos:lightsaber_off"
     ]
   },
+  "hyperspace": {
+    "subtitle": "sounds.galaxyunderchaos.hyperspace",
+    "sounds": [
+      "galaxyunderchaos:hyperspace"
+    ]
+  },
   "lightsaber_deflect": {
     "subtitle": "sounds.galaxyunderchaos.lightsaber_deflect",
     "sounds": [

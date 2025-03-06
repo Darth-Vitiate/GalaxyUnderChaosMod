@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 
 public class IlumPortalItem extends Item {
@@ -22,7 +23,8 @@ public class IlumPortalItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            BlockPos playerPos = serverPlayer.blockPosition(); // Get the player's current position
+            BlockPos playerPos = serverPlayer.blockPosition(); // Use player's current position
+            clearLandingArea((ServerLevel) serverPlayer.level(), playerPos);
             handleIlumPortal(serverPlayer, playerPos);
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
@@ -37,8 +39,30 @@ public class IlumPortalItem extends Item {
 
             ServerLevel targetServerLevel = minecraftServer.getLevel(targetDimension);
             if (targetServerLevel != null && !player.isPassenger()) {
-                player.teleportTo(targetServerLevel, pPos.getX(), pPos.getY(), pPos.getZ(), player.getYRot(), player.getXRot());
+                clearLandingArea(targetServerLevel, pPos);
+                player.teleportTo(targetServerLevel, pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5, player.getYRot(), player.getXRot());
+
+                if (targetDimension == ModDimensions.ILUM_LEVEL_KEY) {
+                    forceSnowstorm(targetServerLevel);
+                } else {
+                    resetWeather(targetServerLevel); // Reset weather when leaving Ilum
+                }
             }
+        }
+    }
+
+    private void forceSnowstorm(ServerLevel level) {
+        level.setWeatherParameters(99999, 99999, true, false); // Keeps constant snowstorm
+    }
+
+    private void resetWeather(ServerLevel level) {
+        level.setWeatherParameters(0, 0, false, false); // Clears weather upon leaving
+    }
+
+    private void clearLandingArea(ServerLevel world, BlockPos pos) {
+        for (int dy = 0; dy <= 1; dy++) { // Clears only a 1x2 space
+            BlockPos blockPos = pos.above(dy);
+            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
         }
     }
 }

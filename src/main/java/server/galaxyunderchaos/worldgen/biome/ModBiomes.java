@@ -464,7 +464,7 @@ public class ModBiomes {
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .downfall(0.9f) // Matching JSON value
+                .downfall(2.0f) // Matching JSON value
                 .temperature(-1.0f) // Matching JSON value
                 .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
@@ -485,7 +485,7 @@ public class ModBiomes {
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
-                .downfall(0.9f) // Matching JSON value
+                .downfall(2.0f) // Matching JSON value
                 .temperature(-1.0f) // Matching JSON value
                 .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())

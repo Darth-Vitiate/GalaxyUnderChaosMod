@@ -23,13 +23,13 @@ public class MalachorPortalItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             BlockPos playerPos = serverPlayer.blockPosition(); // Get the player's current position
-            handlMalachorPortal(serverPlayer, playerPos);
+            handleMalachorPortal(serverPlayer, playerPos);
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
-    private void handlMalachorPortal(ServerPlayer player, BlockPos pPos) {
+    private void handleMalachorPortal(ServerPlayer player, BlockPos pPos) {
         if (player.level() instanceof ServerLevel serverLevel) {
             MinecraftServer minecraftServer = serverLevel.getServer();
             ResourceKey<Level> targetDimension = player.level().dimension() == ModDimensions.MALACHOR_LEVEL_KEY ?

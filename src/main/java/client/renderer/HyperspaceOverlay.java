@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class HyperspaceOverlay extends Overlay {
     private static final ResourceLocation HYPERSPACE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("galaxyunderchaos", "textures/gui/hyperspace.png");
+            ResourceLocation.fromNamespaceAndPath("galaxyunderchaos", "textures/gui/hyperspace_animation.png");
 
     private static boolean isWarping = false;
     private static boolean isOverlayActive = false;
@@ -40,8 +40,6 @@ public class HyperspaceOverlay extends Overlay {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (!isWarping && !isOverlayActive) return;
 
-        System.out.println("Rendering hyperspace overlay..."); // Debugging statement
-
         long elapsed = System.currentTimeMillis() - startTime;
         if (elapsed > warpDuration) {
             stopWarpEffect();
@@ -49,12 +47,27 @@ public class HyperspaceOverlay extends Overlay {
         }
 
         Minecraft minecraft = Minecraft.getInstance();
-        int width = minecraft.getWindow().getGuiScaledWidth();
-        int height = minecraft.getWindow().getGuiScaledHeight();
+        int screenWidth = minecraft.getWindow().getGuiScaledWidth();
+        int screenHeight = minecraft.getWindow().getGuiScaledHeight();
+
+        int totalFrames = 3;  // You have 6 frames
+        int frameWidth = 1024; // Each frame is exactly 1024px
+        int frameHeight = 1024; // Each frame is 1024px tall
+        int frameIndex = (int) ((elapsed / 100) % totalFrames); // Cycle through frames
+
+        int drawX = (screenWidth - frameWidth) / 2; // Center horizontally
+        int drawY = (screenHeight - frameHeight) / 2; // Center vertically
 
         RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F); // Ensure full visibility
-        guiGraphics.blit(HYPERSPACE_TEXTURE, 0, 0, 0, 0, width, height, width, height);
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShaderTexture(0, HYPERSPACE_TEXTURE);
+
+        // Correctly extract the frame based on its position in the sprite sheet
+        guiGraphics.blit(HYPERSPACE_TEXTURE, drawX, drawY, frameIndex * frameWidth, 0, frameWidth, frameHeight, frameWidth * totalFrames, frameHeight);
+
         RenderSystem.disableBlend();
     }
+
+
+
 }

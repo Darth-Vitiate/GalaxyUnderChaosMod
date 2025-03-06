@@ -114,7 +114,7 @@ public class ModDimensions {
                 new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
         ));
         context.register(MALACHOR_DIM_TYPE, new DimensionType(
-                OptionalLong.of(18000), false, false, false, false, 1.0, false, true,
+                OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
                 -64, 384, 256,
                 BlockTags.INFINIBURN_NETHER,
                 BuiltinDimensionTypes.NETHER_EFFECTS, 0.05f,
@@ -128,7 +128,7 @@ public class ModDimensions {
                 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
         ));
         context.register(KORRIBAN_DIM_TYPE, new DimensionType(
-                OptionalLong.of(18000), false, false, false, false, 1.0, false, true,
+                OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
                 -64, 384, 256,
                 BlockTags.INFINIBURN_NETHER, // Use NETHER infiniburn for Sith-like ambiance
                 BuiltinDimensionTypes.NETHER_EFFECTS, // Sith ambiance effects
