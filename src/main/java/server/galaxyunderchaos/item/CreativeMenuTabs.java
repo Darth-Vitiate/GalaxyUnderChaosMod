@@ -130,8 +130,8 @@ public class CreativeMenuTabs {
 //                            }
 //                        }
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("green_lost_lightsaber").get());
-                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_aegis_lightsaber").get());
-                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_apprentice_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("orange_aegis_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("pink_apprentice_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_chosen_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("red_emperor_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("red_fallen_lightsaber").get());
@@ -140,11 +140,14 @@ public class CreativeMenuTabs {
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_harmony_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("green_legacy_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_padawan_lightsaber").get());
-                        output.accept(galaxyunderchaos.LIGHTSABERS.get("purple_resolve_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_resolve_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_skustell_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("orange_talon_lightsaber").get());
-                        output.accept(galaxyunderchaos.LIGHTSABERS.get("green_valor_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("purple_valor_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_wisdom_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_knightfall_lightsaber").get());                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_padawan_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_baroshe_lightsaber").get());
+                        output.accept(galaxyunderchaos.LIGHTSABERS.get("blue_negotiator_lightsaber").get());
                         output.accept(LOST_HILT.get());
                         output.accept(AEGIS_HILT.get());
                         output.accept(APPRENTICE_HILT.get());
@@ -162,9 +165,9 @@ public class CreativeMenuTabs {
                         output.accept(VALOR_HILT.get());
                         output.accept(WISDOM_HILT.get());
                         output.accept(WISDOM_HILT.get());
-
-
-
+                        output.accept(KNIGHTFALL_HILT.get());
+                        output.accept(NEGOTIATOR_HILT.get());
+                        output.accept(BAROSHE_HILT.get());
 
                     }).build());
 

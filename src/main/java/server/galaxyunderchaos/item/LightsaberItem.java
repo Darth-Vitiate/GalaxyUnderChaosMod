@@ -108,6 +108,14 @@ public class LightsaberItem extends SwordItem {
 
         return parts[1]; // Extract hilt name (e.g., "apprentice")
     }
+    public static String getBladeColor(ItemStack stack) {
+        if (stack.getItem() instanceof LightsaberItem saber) {
+            return saber.bladeColor; // Retrieves the predefined blade color
+        }
+        return "white"; // Default to white if no color is found
+    }
+
+
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slot, isSelected);

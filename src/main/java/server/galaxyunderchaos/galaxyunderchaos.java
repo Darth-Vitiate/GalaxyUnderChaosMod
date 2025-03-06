@@ -81,33 +81,32 @@ import java.util.Map;
     public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("pink_crystal_ore", () -> new BlockItem(PINK_CRYSTAL_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("lime_green_crystal_ore", () -> new BlockItem(LIME_GREEN_CRYSTAL_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("turquoise_crystal_ore", () -> new BlockItem(TURQUOISE_CRYSTAL_ORE.get(), new Item.Properties()));
-    public static final RegistryObject<Block> RED_CRYSTAL_BLOCK = BLOCKS.register("red_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> BLOOD_ORANGE_CRYSTAL_BLOCK = BLOCKS.register("blood_orange_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> BLUE_CRYSTAL_BLOCK = BLOCKS.register("blue_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> ORANGE_CRYSTAL_BLOCK = BLOCKS.register("orange_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> GREEN_CRYSTAL_BLOCK = BLOCKS.register("green_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> YELLOW_CRYSTAL_BLOCK = BLOCKS.register("yellow_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> CYAN_CRYSTAL_BLOCK = BLOCKS.register("cyan_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> WHITE_CRYSTAL_BLOCK = BLOCKS.register("white_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> MAGENTA_CRYSTAL_BLOCK = BLOCKS.register("magenta_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> PURPLE_CRYSTAL_BLOCK = BLOCKS.register("purple_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> PINK_CRYSTAL_BLOCK = BLOCKS.register("pink_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> LIME_GREEN_CRYSTAL_BLOCK = BLOCKS.register("lime_green_crystal_block", CrystalBlock::new);
-    public static final RegistryObject<Block> TURQUOISE_CRYSTAL_BLOCK = BLOCKS.register("turquoise_crystal_block", CrystalBlock::new);
-
-    public static final RegistryObject<Item> RED_CRYSTAL_BLOCK_ITEM = ITEMS.register("red_crystal_block", () -> new BlockItem(RED_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blood_orange_crystal_block", () -> new BlockItem(BLOOD_ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blue_crystal_block", () -> new BlockItem(BLUE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("orange_crystal_block", () -> new BlockItem(ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("green_crystal_block", () -> new BlockItem(GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("yellow_crystal_block", () -> new BlockItem(YELLOW_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("cyan_crystal_block", () -> new BlockItem(CYAN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("white_crystal_block", () -> new BlockItem(WHITE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("magenta_crystal_block", () -> new BlockItem(MAGENTA_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("purple_crystal_block", () -> new BlockItem(PURPLE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("pink_crystal_block", () -> new BlockItem(PINK_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("lime_green_crystal_block", () -> new BlockItem(LIME_GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("turquoise_crystal_block", () -> new BlockItem(TURQUOISE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Block> RED_CRYSTAL_BLOCK = BLOCKS.register("red_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> BLOOD_ORANGE_CRYSTAL_BLOCK = BLOCKS.register("blood_orange_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> BLUE_CRYSTAL_BLOCK = BLOCKS.register("blue_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> ORANGE_CRYSTAL_BLOCK = BLOCKS.register("orange_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> GREEN_CRYSTAL_BLOCK = BLOCKS.register("green_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> YELLOW_CRYSTAL_BLOCK = BLOCKS.register("yellow_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> CYAN_CRYSTAL_BLOCK = BLOCKS.register("cyan_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> WHITE_CRYSTAL_BLOCK = BLOCKS.register("white_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> MAGENTA_CRYSTAL_BLOCK = BLOCKS.register("magenta_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> PURPLE_CRYSTAL_BLOCK = BLOCKS.register("purple_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> PINK_CRYSTAL_BLOCK = BLOCKS.register("pink_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> LIME_GREEN_CRYSTAL_BLOCK = BLOCKS.register("lime_green_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Block> TURQUOISE_CRYSTAL_BLOCK = BLOCKS.register("turquoise_crystal_block", CrystalBlock::new);
+//    public static final RegistryObject<Item> RED_CRYSTAL_BLOCK_ITEM = ITEMS.register("red_crystal_block", () -> new BlockItem(RED_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blood_orange_crystal_block", () -> new BlockItem(BLOOD_ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> BLUE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blue_crystal_block", () -> new BlockItem(BLUE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("orange_crystal_block", () -> new BlockItem(ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("green_crystal_block", () -> new BlockItem(GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> YELLOW_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("yellow_crystal_block", () -> new BlockItem(YELLOW_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> CYAN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("cyan_crystal_block", () -> new BlockItem(CYAN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> WHITE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("white_crystal_block", () -> new BlockItem(WHITE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> MAGENTA_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("magenta_crystal_block", () -> new BlockItem(MAGENTA_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> PURPLE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("purple_crystal_block", () -> new BlockItem(PURPLE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("pink_crystal_block", () -> new BlockItem(PINK_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("lime_green_crystal_block", () -> new BlockItem(LIME_GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("turquoise_crystal_block", () -> new BlockItem(TURQUOISE_CRYSTAL_BLOCK.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Block> TEMPLE_STONE = BLOCKS.register("temple_stone", TempleStone::new);
@@ -249,9 +248,9 @@ import java.util.Map;
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
             () -> new HiltItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
-            () -> new HiltItem("blue", new Item.Properties()));
+            () -> new HiltItem("orange", new Item.Properties()));
     public static final RegistryObject<Item> APPRENTICE_HILT = ITEMS.register("apprentice_hilt",
-            () -> new HiltItem("blue", new Item.Properties()));
+            () -> new HiltItem("pink", new Item.Properties()));
     public static final RegistryObject<Item> CHOSEN_HILT = ITEMS.register("chosen_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> EMPEROR_HILT = ITEMS.register("emperor_hilt",
@@ -269,14 +268,20 @@ import java.util.Map;
     public static final RegistryObject<Item> PADAWAN_HILT = ITEMS.register("padawan_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> RESOLVE_HILT = ITEMS.register("resolve_hilt",
-            () -> new HiltItem("purple", new Item.Properties()));
+            () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> SKUSTELL_HILT = ITEMS.register("skustell_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> TALON_HILT = ITEMS.register("talon_hilt",
             () -> new HiltItem("orange", new Item.Properties()));
     public static final RegistryObject<Item> VALOR_HILT = ITEMS.register("valor_hilt",
-            () -> new HiltItem("green", new Item.Properties()));
+            () -> new HiltItem("purple", new Item.Properties()));
     public static final RegistryObject<Item> WISDOM_HILT = ITEMS.register("wisdom_hilt",
+            () -> new HiltItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> NEGOTIATOR_HILT = ITEMS.register("negotiator_hilt",
+            () -> new HiltItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> KNIGHTFALL_HILT = ITEMS.register("knightfall_hilt",
+            () -> new HiltItem("blue", new Item.Properties()));
+    public static final RegistryObject<Item> BAROSHE_HILT = ITEMS.register("baroshe_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
 
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
@@ -290,7 +295,8 @@ import java.util.Map;
 
         String[] hiltNames = {
                 "apprentice", "chosen", "emperor", "legacy", "padawan",
-                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony", "skustell", "fallen"
+                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony",
+                "skustell", "fallen", "negotiator","baroshe","knightfall"
         };
 
         for (String color : bladeColors) {
@@ -320,7 +326,7 @@ import java.util.Map;
         ModDataComponentTypes.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        modEventBus.addListener(this::clientSetup); // ✅ Correct way to add client-side setup
+        modEventBus.addListener(this::clientSetup);
         MinecraftForge.EVENT_BUS.register(HyperspaceOverlayRenderer.class);
         ModLootModifiers.register(modEventBus);
     }
