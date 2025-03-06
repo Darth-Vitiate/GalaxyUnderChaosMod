@@ -1,6 +1,12 @@
 package server.galaxyunderchaos.data;
 
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraftforge.registries.RegistryObject;
 import server.galaxyunderchaos.loot.AddItemModifier;
 import net.minecraft.core.HolderLookup;
@@ -13,6 +19,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 import server.galaxyunderchaos.galaxyunderchaos;
+import server.galaxyunderchaos.worldgen.dimension.ModDimensions;
 
 import java.util.List;
 import java.util.Random;
@@ -25,14 +32,18 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
 
     @Override
     protected void start(HolderLookup.Provider registries) {
-        this.add("shuura_from_short_grass",
+        this.add("shuura_from_oak_leaves",
                 new AddItemModifier(new LootItemCondition[] {
-                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.SHORT_GRASS).build(),
-                        LootItemRandomChanceCondition.randomChance(0.25f).build() }, galaxyunderchaos.SHUURA.get()));
-        this.add("shuura_from_tall_grass",
-                new AddItemModifier(new LootItemCondition[] {
-                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS).build(),
-                        LootItemRandomChanceCondition.randomChance(0.25f).build() }, galaxyunderchaos.SHUURA.get()));
+                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.OAK_LEAVES).build(),
+                        LootItemRandomChanceCondition.randomChance(0.10f).build(),
+                        LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS,
+                                EntityPredicate.Builder.entity()
+                                        .located(LocationPredicate.Builder.inDimension(
+                                                ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath("galaxyunderchaos", "naboo"))
+                                        ))
+                        ).build()
+                }, galaxyunderchaos.SHUURA.get()));
+
 
         List<RegistryObject<Item>> hilts = List.of(
                 galaxyunderchaos.LOST_HILT,
@@ -50,6 +61,9 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                 galaxyunderchaos.SKUSTELL_HILT,
                 galaxyunderchaos.TALON_HILT,
                 galaxyunderchaos.VALOR_HILT,
+                galaxyunderchaos.NEGOTIATOR_HILT,
+                galaxyunderchaos.BAROSHE_HILT,
+                galaxyunderchaos.KNIGHTFALL_HILT,
                 galaxyunderchaos.WISDOM_HILT
         );
 
@@ -65,11 +79,9 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                         new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/desert_pyramid")).build()
                 }, chosenHilt.get()));
 
-
-
         add("titanium_chromium_from_zombie", new AddItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("entities/zombie"))
-                        .and(LootItemRandomChanceCondition.randomChance(0.5f)).build() }, // modified by the creeper's own loot table
+                        .and(LootItemRandomChanceCondition.randomChance(0.01f)).build() }, // modified by the creeper's own loot table
                 galaxyunderchaos.TITANIUM_CHROMIUM_INGOT.get()));
 
     }
