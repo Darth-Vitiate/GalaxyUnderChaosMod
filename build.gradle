@@ -5,7 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
 }
 
-version = '0.0.1'
+version = '0.0.2'
 group = 'server.galaxyunderchaos' // Set your group ID
 
 base {
@@ -156,7 +156,7 @@ tasks.named('processResources', ProcessResources).configure {
             mod_id: 'galaxyunderchaos', // Define your mod id
             mod_name: 'Galaxy Under Chaos', // Define your mod name
             mod_license: 'MIT', // Define your mod license
-            mod_version: '0.0.1', // Define your mod version
+            mod_version: '0.0.2', // Define your mod version
             mod_authors: 'Vitiate', // Define the authors
             mod_description: 'A mod that introduces the galaxy from far far away.', // Define the description
     ]
