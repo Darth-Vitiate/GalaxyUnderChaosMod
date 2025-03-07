@@ -242,6 +242,12 @@ import java.util.Map;
             () -> new KorribanPortalItem(new Item.Properties().stacksTo(1)));
 
 
+    public static final RegistryObject<Item> BOGAN_PORTAL_ITEM = ITEMS.register("bogan_portal",
+            () -> new BoganPortalItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> ASHLA_PORTAL_ITEM = ITEMS.register("ashla_portal",
+            () -> new AshlaPortalItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> DANTOOINE_PORTAL_ITEM = ITEMS.register("dantooine_portal",
             () -> new DantooinePortalItem(new Item.Properties().stacksTo(1)));
 

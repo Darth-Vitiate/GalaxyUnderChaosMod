@@ -40,6 +40,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> DANTOOINE_PLAINS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_plains"));
     public static final ResourceKey<Biome> DANTOOINE_FOREST = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_forest"));
     public static final ResourceKey<Biome> DANTOOINE_HILLS = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_hills"));
+    public static final ResourceKey<Biome> ASHLA_BIOME = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla_biome"));
+    public static final ResourceKey<Biome> BOGAN_BIOME = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan_biome"));
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
 
@@ -68,6 +70,8 @@ public class ModBiomes {
         context.register(DANTOOINE_PLAINS, createDantooinePlains(context));
         context.register(DANTOOINE_FOREST, createDantooineForest(context));
         context.register(DANTOOINE_HILLS, createDantooineHills(context));
+        context.register(BOGAN_BIOME, createBoganBiome(context));
+        context.register(ASHLA_BIOME, createAshlaBiome(context));
 
 
     }
@@ -89,6 +93,34 @@ public class ModBiomes {
                         .grassColorOverride(8352038)
                         .foliageColorOverride(8414762)
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
+                        .build())
+                .build();
+    }
+    private static Biome createAshlaBiome(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false)
+                .temperature(0.9f)
+                .downfall(0.0f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0xE6F7FF) // Light blue fog
+                        .skyColor(0xAAD4FF) // Soft blue sky
+                        .waterColor(0x88E1FF) // Glowing cyan water
+                        .grassColorOverride(0x77FFAA) // Bright green grass
+                        .build())
+                .build();
+    }
+
+    private static Biome createBoganBiome(BootstrapContext<Biome> context) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.5f)
+                .downfall(0.9f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(0x220011) // Dark red fog
+                        .skyColor(0x550000) // Blood-red sky
+                        .waterColor(0x330022) // Dark purple water
+                        .grassColorOverride(0x8B4513)
+                        .foliageColorOverride(0x8B4513)
                         .build())
                 .build();
     }

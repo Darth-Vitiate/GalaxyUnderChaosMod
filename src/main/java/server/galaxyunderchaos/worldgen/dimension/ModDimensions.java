@@ -59,6 +59,19 @@ public class ModDimensions {
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus"));
     public static final ResourceKey<DimensionType> OSSUS_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_type"));
+    public static final ResourceKey<LevelStem> ASHLA_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla"));
+    public static final ResourceKey<Level> ASHLA_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla"));
+    public static final ResourceKey<DimensionType> ASHLA_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla_type"));
+
+    public static final ResourceKey<LevelStem> BOGAN_KEY = ResourceKey.create(Registries.LEVEL_STEM,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan"));
+    public static final ResourceKey<Level> BOGAN_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan"));
+    public static final ResourceKey<DimensionType> BOGAN_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan_type"));
 
     public static final ResourceKey<LevelStem> MALACHOR_KEY = ResourceKey.create(
             Registries.LEVEL_STEM, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor"));
@@ -135,7 +148,24 @@ public class ModDimensions {
                 0.1f, // Ambient light for a dark and foreboding atmosphere
                 new DimensionType.MonsterSettings(true, false, ConstantInt.of(7), 0)
         ));
-    }
+            context.register(ASHLA_DIM_TYPE, new DimensionType(
+                    OptionalLong.empty(), true, false, false, true, 1.0, true, true,
+                    -64, 384, 384, // Adjust height and Y min as needed
+                    BlockTags.INFINIBURN_OVERWORLD,
+                    BuiltinDimensionTypes.OVERWORLD_EFFECTS,
+                    1.0f,
+                    new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
+            ));
+
+            context.register(BOGAN_DIM_TYPE, new DimensionType(
+                    OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
+                    -64, 384, 256,
+                    BlockTags.INFINIBURN_NETHER, // Use Nether infiniburn for dark ambiance
+                    BuiltinDimensionTypes.NETHER_EFFECTS,
+                    0.05f, // Low ambient light for darkness
+                    new DimensionType.MonsterSettings(true, false, ConstantInt.of(10), 0)
+            ));
+        }
 
     public static void bootstrapStem(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
@@ -307,6 +337,30 @@ public class ModDimensions {
         LevelStem malachorStem = new LevelStem(dimTypes.getOrThrow(MALACHOR_DIM_TYPE),
                 malachorChunkGenerator);
         context.register(MALACHOR_KEY, malachorStem);
-    }
+            NoiseBasedChunkGenerator ashlaChunkGenerator = new NoiseBasedChunkGenerator(
+                    MultiNoiseBiomeSource.createFromList(
+                            new Climate.ParameterList<>(List.of(
+                                    Pair.of(Climate.parameters(1.0F, 0.5F, 0.2F, 0.3F, 0.1F, 0.0F, 0.0F),
+                                            biomeRegistry.getOrThrow(ModBiomes.ASHLA_BIOME))
+                            ))
+                    ),
+                    noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+            );
 
+            LevelStem ashlaStem = new LevelStem(dimTypes.getOrThrow(ASHLA_DIM_TYPE), ashlaChunkGenerator);
+            context.register(ASHLA_KEY, ashlaStem);
+
+            NoiseBasedChunkGenerator boganChunkGenerator = new NoiseBasedChunkGenerator(
+                    MultiNoiseBiomeSource.createFromList(
+                            new Climate.ParameterList<>(List.of(
+                                    Pair.of(Climate.parameters(0.0F, -0.5F, 0.4F, 0.7F, 0.3F, 0.2F, 0.1F),
+                                            biomeRegistry.getOrThrow(ModBiomes.BOGAN_BIOME))
+                            ))
+                    ),
+                    noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+            );
+
+            LevelStem boganStem = new LevelStem(dimTypes.getOrThrow(BOGAN_DIM_TYPE), boganChunkGenerator);
+            context.register(BOGAN_KEY, boganStem);
+        }
 }

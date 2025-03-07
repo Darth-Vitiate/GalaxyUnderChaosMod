@@ -88,6 +88,8 @@ public class CreativeMenuTabs {
                         output.accept(NAVIGATION_COMPUTER.get());
                         output.accept(PORTAL_ITEM.get());
                         output.accept(TYTHON_PORTAL_ITEM.get());
+                        output.accept(ASHLA_PORTAL_ITEM.get());
+                        output.accept(BOGAN_PORTAL_ITEM.get());
                         output.accept(NABOO_PORTAL_ITEM.get());
                         output.accept(ILUM_PORTAL_ITEM.get());
                         output.accept(MUSTAFAR_PORTAL_ITEM.get());
