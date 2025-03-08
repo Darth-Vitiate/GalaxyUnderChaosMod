@@ -20,9 +20,14 @@ public class ModRecipeHandler extends RecipeProvider implements IConditionBuilde
                 galaxyunderchaos.TITANIUM_ORE.get(), galaxyunderchaos.TITANIUM_DEEPSLATE_ORE.get());
         List<ItemLike> CHROMIUM_SMELTABLES = List.of(galaxyunderchaos.CHROMIUM_INGOT.get(),
                 galaxyunderchaos.CHROMIUM_ORE.get(), galaxyunderchaos.CHROMIUM_DEEPSLATE_ORE.get());
-
+        List<ItemLike> CHITIN_SMELTABLES = List.of(galaxyunderchaos.ACID_FORGED_PLATE.get(),
+                galaxyunderchaos.CHITIN_FRAGMENTS.get());
+        oreSmelting(pRecipeOutput, CHROMIUM_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.CHROMIUM_INGOT.get(), 0.25f, 200, "chromium");
         oreSmelting(pRecipeOutput, TITANIUM_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.TITANIUM_INGOT.get(), 0.25f, 200, "titanium");
+        oreBlasting(pRecipeOutput, TITANIUM_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.TITANIUM_INGOT.get(), 0.25f, 100, "titanium");
         oreBlasting(pRecipeOutput, CHROMIUM_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.CHROMIUM_INGOT.get(), 0.25f, 100, "chromium");
+        oreBlasting(pRecipeOutput, CHITIN_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.CHITIN_FRAGMENTS.get(), 0.25f, 100, "chitin_fragments");
+        oreSmelting(pRecipeOutput, CHITIN_SMELTABLES, RecipeCategory.MISC, galaxyunderchaos.CHITIN_FRAGMENTS.get(), 0.25f, 200, "chitin_fragments");
     }
     protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,
                                       float pExperience, int pCookingTIme, String pGroup) {

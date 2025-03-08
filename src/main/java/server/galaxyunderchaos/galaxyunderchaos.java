@@ -1,13 +1,13 @@
 package server.galaxyunderchaos;
 
-import client.renderer.ClientSetup;
-import client.renderer.HyperspaceOverlayRenderer;
-import client.renderer.LightsaberBeltRenderer;
-import client.renderer.ModItemRenderer;
+import client.renderer.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -34,6 +35,7 @@ import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
+import server.galaxyunderchaos.entity.AcidSpiderEntity;
 import server.galaxyunderchaos.item.*;
 import server.galaxyunderchaos.loot.ModLootModifiers;
 import server.galaxyunderchaos.sound.ModSounds;
@@ -49,7 +51,9 @@ import java.util.Map;
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
 
+    // #BLOCKS
     public static final RegistryObject<Block> CHROMIUM_ORE = BLOCKS.register("chromium_ore", EarthCrystalOre::new);
     public static final RegistryObject<Block> CHROMIUM_DEEPSLATE_ORE = BLOCKS.register("chromium_deepslate_ore", EarthCrystalOre::new);
     public static final RegistryObject<Block> TITANIUM_ORE = BLOCKS.register("titanium_ore", EarthCrystalOre::new);
@@ -141,39 +145,6 @@ import java.util.Map;
 
     public static final RegistryObject<Block> DARK_TEMPLE_STONE_SLAB = BLOCKS.register("dark_temple_stone_slab", DarkTempleStoneSlab::new);
     public static final RegistryObject<Item> DARK_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("dark_temple_stone_slab", () -> new BlockItem(DARK_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> SHUURA = ITEMS.register("shuura", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(6).saturationModifier(2f).build())));
-    public static final RegistryObject<Item> JEDI_HOLOBOOK = ITEMS.register("jedi_holobook", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> ANCIENT_HOLOBOOK = ITEMS.register("ancient_holobook", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SITH_HOLOBOOK = ITEMS.register("sith_holobook", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> RED_KYBER = ITEMS.register("red_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER = ITEMS.register("blood_orange_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> BLUE_KYBER = ITEMS.register("blue_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> ORANGE_KYBER = ITEMS.register("orange_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> GREEN_KYBER = ITEMS.register("green_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> YELLOW_KYBER = ITEMS.register("yellow_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> CHROMIUM_INGOT = ITEMS.register("chromium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PORTAL_ITEM = ITEMS.register("portal_item", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> NAVIGATION_COMPUTER = ITEMS.register("navigation_computer", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> REACTOR_ASSEMBLY = ITEMS.register("reactor_assembly", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> TITANIUM_CHROMIUM_INGOT = ITEMS.register("titanium_chromium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_KYBER = ITEMS.register("cyan_kyber", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_KYBER = ITEMS.register("white_kyber", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_KYBER = ITEMS.register("magenta_kyber", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_KYBER = ITEMS.register("purple_kyber", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PINK_KYBER = ITEMS.register("pink_kyber", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> LIME_GREEN_KYBER = ITEMS.register("lime_green_kyber", () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> TURQUOISE_KYBER = ITEMS.register("turquoise_kyber", () -> new Item(new Item.Properties()));
-
     public static final RegistryObject<Block> BLEEDING_TABLE = BLOCKS.register("bleeding_table", BleedingTable::new);
     public static final RegistryObject<Item> BLEEDING_TABLE_ITEM = ITEMS.register("bleeding_table", () -> new BlockItem(BLEEDING_TABLE.get(), new Item.Properties()));
 
@@ -219,38 +190,70 @@ import java.util.Map;
     public static final RegistryObject<Item> DARK_TEMPLE_STONE_WALL_ITEM = ITEMS.register("dark_temple_stone_wall", () -> new BlockItem(DARK_TEMPLE_STONE_WALL.get(), new Item.Properties()));
     public static final RegistryObject<Block> BLBA_SAPLING = BLOCKS.register("blba_sapling", () -> new SaplingBlock(ModTreeGrowers.BLBA, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Item> BLBA_SAPLING_ITEM = ITEMS.register("blba_sapling", () -> new BlockItem(BLBA_SAPLING.get(), new Item.Properties()));
+    // #ITEMS
+
+    public static final RegistryObject<Item> SHUURA = ITEMS.register("shuura", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+            .alwaysEdible().nutrition(6).saturationModifier(2f).build())));
+    public static final RegistryObject<Item> JEDI_HOLOBOOK = ITEMS.register("jedi_holobook", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANCIENT_HOLOBOOK = ITEMS.register("ancient_holobook", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SITH_HOLOBOOK = ITEMS.register("sith_holobook", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RED_KYBER = ITEMS.register("red_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER = ITEMS.register("blood_orange_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_KYBER = ITEMS.register("blue_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_KYBER = ITEMS.register("orange_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_KYBER = ITEMS.register("green_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_KYBER = ITEMS.register("yellow_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CHROMIUM_INGOT = ITEMS.register("chromium_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PORTAL_ITEM = ITEMS.register("portal_item", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NAVIGATION_COMPUTER = ITEMS.register("navigation_computer", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> REACTOR_ASSEMBLY = ITEMS.register("reactor_assembly", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TITANIUM_CHROMIUM_INGOT = ITEMS.register("titanium_chromium_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_KYBER = ITEMS.register("cyan_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_KYBER = ITEMS.register("white_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_KYBER = ITEMS.register("magenta_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_KYBER = ITEMS.register("purple_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_KYBER = ITEMS.register("pink_kyber", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_GREEN_KYBER = ITEMS.register("lime_green_kyber", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> TURQUOISE_KYBER = ITEMS.register("turquoise_kyber", () -> new Item(new Item.Properties()));
+
 
     public static final RegistryObject<Item> TYTHON_PORTAL_ITEM = ITEMS.register("tython_portal",
             () -> new TythonPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> MUSTAFAR_PORTAL_ITEM = ITEMS.register("mustafar_portal",
             () -> new MustafarPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> NABOO_PORTAL_ITEM = ITEMS.register("naboo_portal",
             () -> new NabooPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> ILUM_PORTAL_ITEM = ITEMS.register("ilum_portal",
             () -> new IlumPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> OSSUS_PORTAL_ITEM = ITEMS.register("ossus_portal",
             () -> new OssusPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> MALACHOR_PORTAL_ITEM = ITEMS.register("malachor_portal",
             () -> new MalachorPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> KORRIBAN_PORTAL_ITEM = ITEMS.register("korriban_portal",
             () -> new KorribanPortalItem(new Item.Properties().stacksTo(1)));
-
-
     public static final RegistryObject<Item> BOGAN_PORTAL_ITEM = ITEMS.register("bogan_portal",
             () -> new BoganPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> ASHLA_PORTAL_ITEM = ITEMS.register("ashla_portal",
             () -> new AshlaPortalItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> DANTOOINE_PORTAL_ITEM = ITEMS.register("dantooine_portal",
             () -> new DantooinePortalItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> ACID_FORGED_PLATE = ITEMS.register("acid_forged_plate",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ACIDIC_VENOM_SAC = ITEMS.register("acidic_venom_sac",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SILK_THREAD = ITEMS.register("silk_thread",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHITIN_FRAGMENTS = ITEMS.register("chitin_fragments",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
             () -> new HiltItem("green", new Item.Properties()));
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
@@ -289,7 +292,8 @@ import java.util.Map;
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> BAROSHE_HILT = ITEMS.register("baroshe_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
-
+    public static final RegistryObject<Item> ACID_SPIDER_SPAWN_EGG = ITEMS.register("acid_spider_spawn_egg",
+            () -> new ForgeSpawnEggItem(galaxyunderchaos.ACID_SPIDER, 0x53524b, 0xdac741, new Item.Properties()));
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
     public static void registerLightsabers() {
@@ -315,12 +319,15 @@ import java.util.Map;
             }
         }
     }
-
+// #ENTITIES
+public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
+        ENTITY_TYPES.register("acid_spider", () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
+                .sized(1.5f, 1.5f).build("acid_spider"));
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-
+        ENTITY_TYPES.register(modEventBus);
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         ModBiomes.BIOMES.register(modEventBus);
@@ -342,6 +349,7 @@ import java.util.Map;
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
         event.enqueueWork(() -> {
         });
     }

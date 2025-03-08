@@ -115,6 +115,12 @@ public class CreativeMenuTabs {
                         output.accept(ANCIENT_HOLOBOOK.get());
                         output.accept(SITH_HOLOBOOK.get());
 //                        output.accept(SITH_HOLOCRON.get());
+                        output.accept(ACID_SPIDER_SPAWN_EGG.get());
+                        output.accept(ACIDIC_VENOM_SAC.get());
+                        output.accept(SILK_THREAD.get());
+                        output.accept(CHITIN_FRAGMENTS.get());
+                        output.accept(ACID_FORGED_PLATE.get());
+
                         output.accept(SHUURA.get());
 
 
