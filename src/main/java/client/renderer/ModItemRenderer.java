@@ -6,11 +6,12 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
 import server.galaxyunderchaos.item.LightsaberItem;
 
@@ -21,7 +22,6 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
     public ModItemRenderer() {
         super(null, null);
     }
-
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay) {
         ItemRenderer renderer = net.minecraft.client.Minecraft.getInstance().getItemRenderer();
@@ -34,6 +34,8 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
             renderer.render(stack, displayContext, false, poseStack, buffer, light, overlay, model);
 
             if (isActive) {
+                overlay = OverlayTexture.NO_OVERLAY;
+
                 // Render glow
                 int glowColor = getGlowColor(LightsaberItem.getBladeColor(stack));
                 renderColoredGlow(poseStack, buffer, glowColor);
@@ -43,20 +45,20 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     private int getGlowColor(String bladeColor) {
         return switch (bladeColor) {
-            case "red" -> 0xFF0000;
-            case "blue" -> 0x0000FF;
-            case "green" -> 0x00FF00;
-            case "yellow" -> 0xFFFF00;
-            case "cyan" -> 0x00FFFF;
-            case "white" -> 0xFFFFFF;
-            case "magenta" -> 0xFF00FF;
-            case "purple" -> 0x8000FF;
-            case "pink" -> 0xFF69B4;
-            case "lime_green" -> 0x32CD32;
-            case "turquoise" -> 0x40E0D0;
-            case "orange" -> 0xFFA500;
-            case "blood_orange" -> 0xCC5500;
-            default -> 0xFFFFFF;
+            case "red" -> 0xFFA91B23;
+            case "blue" -> 0xFF2985D0;
+            case "green" -> 0xFF8AED54;
+            case "yellow" -> 0xFFFFF645;
+            case "cyan" -> 0xFF29C8D0;
+            case "white" -> 0xFFDDDDDD;
+            case "magenta" -> 0xFFD835B6;
+            case "purple" -> 0xFFAC2FC1;
+            case "pink" -> 0xFFDD7BAC;
+            case "lime_green" -> 0xFFCAD95B;
+            case "turquoise" -> 0xFF4AAA92;
+            case "orange" -> 0xFFE58416;
+            case "blood_orange" -> 0xFFCC2C25;
+            default -> 0xFFDDDDDD;
         };
     }
 

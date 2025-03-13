@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "galaxyunderchaos:temple_stone",
     "galaxyunderchaos:temple_stone_holobook",
@@ -22,7 +21,6 @@
     "galaxyunderchaos:ancient_temple_stone_stairs",
     "galaxyunderchaos:ancient_temple_stone_slab" ,
     "galaxyunderchaos:bleeding_table",
-    "galaxyunderchaos:ilum_stone",
     "galaxyunderchaos:jedi_guard_statue",
     "galaxyunderchaos:sith_guard_statue",
     "galaxyunderchaos:blue_crystal_ore",
@@ -40,19 +38,6 @@
         "galaxyunderchaos:pink_crystal_ore",
         "galaxyunderchaos:lime_green_crystal_ore",
         "galaxyunderchaos:turquoise_crystal_ore" ,
-        "galaxyunderchaos:red_crystal_block",
-        "galaxyunderchaos:blood_orange_crystal_block",
-        "galaxyunderchaos:blue_crystal_block",
-        "galaxyunderchaos:orange_crystal_block",
-        "galaxyunderchaos:green_crystal_block",
-        "galaxyunderchaos:yellow_crystal_block",
-        "galaxyunderchaos:cyan_crystal_block",
-        "galaxyunderchaos:white_crystal_block",
-        "galaxyunderchaos:magenta_crystal_block",
-        "galaxyunderchaos:purple_crystal_block",
-        "galaxyunderchaos:pink_crystal_block",
-        "galaxyunderchaos:lime_green_crystal_block",
-        "galaxyunderchaos:turquoise_crystal_block",
         "galaxyunderchaos:lightsaber_crafting_table"
 
   ]

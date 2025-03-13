@@ -33,7 +33,7 @@ public class HyperspaceManager {
         yaw = entityYaw;
 
         System.out.println("Starting Hyperspace Jump..."); // Debugging
-        HyperspaceOverlay.startWarpEffect(); // 🔹 Ensure overlay starts
+//        HyperspaceOverlay.startWarpEffect(); // 🔹 Ensure overlay starts
 
         scheduler.schedule(HyperspaceManager::performTeleport, 5, TimeUnit.SECONDS);
     }

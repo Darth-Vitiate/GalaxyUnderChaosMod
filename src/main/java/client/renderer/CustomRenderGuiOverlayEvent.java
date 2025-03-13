@@ -1,6 +1,6 @@
 package client.renderer;
 
-import net.minecraftforge.eventbus.api.Event;
+import jdk.jfr.Event;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.Minecraft;
 

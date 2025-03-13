@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "galaxyunderchaos:temple_stone",
     "galaxyunderchaos:temple_stone_holobook",
@@ -11,7 +10,6 @@
     "galaxyunderchaos:ancient_temple_stone_wall",
     "galaxyunderchaos:malachite_obsidian",
     "galaxyunderchaos:dark_temple_stone",
-    "galaxyunderchaos:ilum_stone",
     "galaxyunderchaos:dark_temple_stone_holobook",
     "galaxyunderchaos:dark_temple_stone_pillar",
     "galaxyunderchaos:dark_temple_stone_slab",

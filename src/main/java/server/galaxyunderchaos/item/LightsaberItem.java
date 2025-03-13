@@ -1,11 +1,11 @@
 package server.galaxyunderchaos.item;
 
 import client.renderer.ModItemRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,11 +23,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
 import server.galaxyunderchaos.sound.ModSounds;
 
@@ -42,7 +38,7 @@ public class LightsaberItem extends SwordItem {
 
     public LightsaberItem(String bladeColor, Item.Properties properties) {
         super(ModToolTiers.LIGHTSABER, new Item.Properties()
-                .attributes(SwordItem.createAttributes(ModToolTiers.LIGHTSABER, 2, -2.4F)));
+                .attributes(SwordItem.createAttributes(ModToolTiers.LIGHTSABER, 21, -2.4F)));
         this.bladeColor = bladeColor;
     }
 
@@ -80,6 +76,7 @@ public class LightsaberItem extends SwordItem {
     public static int getLightLevel(ItemStack stack) {
         return (stack.getItem() instanceof LightsaberItem ls && ls.isActive(stack)) ? 15 : 0;
     }
+
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
         if (isActive(stack) && level.isClientSide && entity instanceof Player player) {
@@ -95,7 +92,7 @@ public class LightsaberItem extends SwordItem {
         return super.mineBlock(stack, level, state, pos, entity);
     }
     public String getHilt(ItemStack stack) {
-        ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        ResourceLocation registryName = stack.getItem().builtInRegistryHolder().key().location();
         if (registryName == null) {
             return "unknown";
         }

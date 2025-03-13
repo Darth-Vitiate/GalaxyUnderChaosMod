@@ -11,8 +11,8 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import server.galaxyunderchaos.galaxyunderchaos;
 
 public class ModBiomes {
@@ -43,7 +43,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> ASHLA_BIOME = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla_biome"));
     public static final ResourceKey<Biome> BOGAN_BIOME = ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan_biome"));
 
-    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, "galaxyunderchaos");
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(Registries.BIOME, galaxyunderchaos.MODID);
 
     public static void bootstrap(BootstrapContext<Biome> context) {
         context.register(NABOO_BIOME, createNabooBiome(context));

@@ -4,7 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import server.galaxyunderchaos.galaxyunderchaos;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 import server.galaxyunderchaos.worldgen.dimension.ModDimensions;

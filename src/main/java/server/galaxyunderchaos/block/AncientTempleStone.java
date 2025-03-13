@@ -9,7 +9,7 @@ public class AncientTempleStone extends Block {
     public AncientTempleStone() {
         super(BlockBehaviour.Properties.of()
                 .strength(3.0f, 10.0f)
-                .requiresCorrectToolForDrops()
+                .noLootTable()
                 .sound(SoundType.STONE)
                 .pushReaction(PushReaction.NORMAL));
     }

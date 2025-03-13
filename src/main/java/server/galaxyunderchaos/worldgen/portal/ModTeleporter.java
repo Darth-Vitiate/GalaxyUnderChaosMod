@@ -1,6 +1,5 @@
 package server.galaxyunderchaos.worldgen.portal;
 
-import client.renderer.HyperspaceAnimation;
 import client.renderer.HyperspaceManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

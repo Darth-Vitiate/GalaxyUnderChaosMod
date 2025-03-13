@@ -8,9 +8,9 @@
 //import net.minecraft.world.level.chunk.LevelChunk;
 //import net.minecraft.world.level.block.Blocks;
 //import net.minecraft.world.level.block.state.BlockState;
-//import net.minecraftforge.event.level.ChunkEvent;
-//import net.minecraftforge.eventbus.api.SubscribeEvent;
-//import net.minecraftforge.fml.common.Mod;
+//import net.neoforged.event.level.ChunkEvent;
+//import net.neoforged.eventbus.api.SubscribeEvent;
+//import net.neoforged.fml.common.Mod;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 //import server.galaxyunderchaos.galaxyunderchaos;
