@@ -1,7 +1,9 @@
 package server.galaxyunderchaos;
 
+import client.renderer.AcidSpiderRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -56,16 +58,12 @@ import java.util.function.Supplier;
 @Mod(galaxyunderchaos.MODID)
 public class galaxyunderchaos
 {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "galaxyunderchaos";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "examplemod" namespace
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, galaxyunderchaos.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, galaxyunderchaos.MODID);
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final DeferredHolder<Block, EarthCrystalOre> CHROMIUM_ORE = BLOCKS.register("chromium_ore", EarthCrystalOre::new);
@@ -501,6 +499,7 @@ public class galaxyunderchaos
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             ModItemProperties.addCustomItemProperties();
+            EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
             galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
                     ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
             );
