@@ -114,8 +114,7 @@ public class CreativeMenuTabs {
                         output.accept(JEDI_HOLOCRON.get());
                         output.accept(ANCIENT_HOLOBOOK.get());
                         output.accept(SITH_HOLOBOOK.get());
-//                        output.accept(SITH_HOLOCRON.get());
-                        output.accept(ACID_SPIDER_SPAWN_EGG.get());
+                        output.accept(SITH_HOLOCRON.get());
                         output.accept(ACIDIC_VENOM_SAC.get());
                         output.accept(SILK_THREAD.get());
                         output.accept(CHITIN_FRAGMENTS.get());
@@ -126,6 +125,18 @@ public class CreativeMenuTabs {
 
 
                     }).build());
+
+    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_ENTITIES_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_entities",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ACID_SPIDER_SPAWN_EGG.get()))
+                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_entities"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ACID_SPIDER_SPAWN_EGG.get());
+
+
+
+                    }).build());
+
 
     public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_WEAPONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_weapons",
             () -> CreativeModeTab.builder()
