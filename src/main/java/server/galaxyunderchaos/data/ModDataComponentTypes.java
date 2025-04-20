@@ -13,7 +13,8 @@ import java.util.function.UnaryOperator;
 public class ModDataComponentTypes {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
             DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, galaxyunderchaos.MODID);
-
+    public static final RegistryObject<DataComponentType<DoubleSaberData>> DOUBLE_SABER_DATA =
+            DATA_COMPONENT_TYPES.register("double_saber_data", () -> DataComponentType.<DoubleSaberData>builder().persistent(DoubleSaberData.CODEC).build());
     public static final RegistryObject<DataComponentType<Boolean>> ACTIVE = register("active",
             builder -> builder.persistent(Codec.BOOL));
 

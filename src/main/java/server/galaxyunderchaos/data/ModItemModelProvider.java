@@ -36,6 +36,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(galaxyunderchaos.VALOR_HILT);
         handheldItem(galaxyunderchaos.WISDOM_HILT);
         handheldItem(galaxyunderchaos.JEDI_HOLOCRON_ITEM);
+        handheldItem(galaxyunderchaos.SITH_HOLOCRON_ITEM);
+
     }
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {

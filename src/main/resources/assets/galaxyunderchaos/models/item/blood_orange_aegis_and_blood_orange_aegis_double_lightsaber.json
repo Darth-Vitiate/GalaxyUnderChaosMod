@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "galaxyunderchaos:item/double_aegis_hilt"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "galaxyunderchaos:active": 1
+      },
+      "model": "galaxyunderchaos:item/blood_orange_aegis_and_blood_orange_aegis_double_lightsaber_active"
+    }
+  ]
+}

@@ -26,6 +26,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import server.galaxyunderchaos.item.HiltItem;
+import server.galaxyunderchaos.item.LightsaberItem;
 import server.galaxyunderchaos.lightsaber.LightsaberCrafting;
 
 import java.util.Arrays;
@@ -61,54 +62,64 @@ public class LightsaberCraftingTableBlock extends Block {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        if (entity instanceof ItemEntity hiltEntity) {
-            ItemStack hiltStack = hiltEntity.getItem();
+        if (!(entity instanceof ItemEntity)) return;
 
-            // Check if the item is a hilt
-            if (isHilt(hiltStack)) {
-                // Search for a nearby kyber crystal
-                List<ItemEntity> nearbyItems = level.getEntitiesOfClass(
-                        ItemEntity.class,
-                        new AABB(pos).inflate(1) // 1-block radius
-                );
+        List<ItemEntity> nearbyItems = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(1));
+        List<ItemEntity> sabers = nearbyItems.stream()
+                .filter(e -> e.getItem().getItem() instanceof LightsaberItem)
+                .toList();
 
-                ItemEntity kyberEntity = null;
+        if (sabers.size() >= 2) {
+            ItemEntity saber1 = sabers.get(0);
+            ItemEntity saber2 = sabers.get(1);
 
-                for (ItemEntity nearbyItem : nearbyItems) {
-                    if (isKyberCrystal(nearbyItem.getItem())) {
-                        kyberEntity = nearbyItem;
-                        break;
-                    }
+            ItemStack result = LightsaberCrafting.craftDoubleFromLightsabers(saber1.getItem(), saber2.getItem());
+
+            if (!result.isEmpty()) {
+                // Replace saber1 with the double
+                saber1.setItem(result);
+
+                // Remove the second
+                saber2.getItem().shrink(1);
+                if (saber2.getItem().isEmpty()) {
+                    saber2.discard();
                 }
 
-                if (kyberEntity != null) {
-                    // Get the kyber crystal and craft the lightsaber
-                    ItemStack kyberCrystal = kyberEntity.getItem();
-                    ItemStack lightsaber = LightsaberCrafting.craftLightsaber(hiltStack, kyberCrystal);
+                spawnCraftingParticles(level, pos);
+                level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1f, 1f);
+                return;
+            }
+        }
 
-                    if (!lightsaber.isEmpty()) {
-                        // Spawn the crafted lightsaber
-                        hiltEntity.setItem(lightsaber);
+        // ✅ Check for 1 hilt + 1 kyber to make regular saber
+        List<ItemEntity> hilts = nearbyItems.stream()
+                .filter(e -> isHilt(e.getItem()))
+                .toList();
 
-                        // Remove one hilt and one kyber crystal
-                        hiltStack.shrink(1);
-                        kyberCrystal.shrink(1);
+        List<ItemEntity> kybers = nearbyItems.stream()
+                .filter(e -> isKyberCrystal(e.getItem()))
+                .toList();
 
-                        // If the kyber crystal stack is now empty, discard the entity
-                        if (kyberCrystal.isEmpty()) {
-                            kyberEntity.discard();
-                        }
+        if (hilts.size() >= 1 && kybers.size() >= 1) {
+            ItemEntity hilt = hilts.get(0);
+            ItemEntity kyber = kybers.get(0);
 
-                        // Play effects
-                        spawnCraftingParticles(level, pos);
-                        level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1f, 1f);
-                    }
-                }
+            ItemStack result = LightsaberCrafting.craftLightsaber(hilt.getItem(), kyber.getItem());
+
+            if (!result.isEmpty()) {
+                hilt.setItem(result);
+                kyber.getItem().shrink(1);
+
+                if (kyber.getItem().isEmpty()) kyber.discard();
+
+                spawnCraftingParticles(level, pos);
+                level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1f, 1f);
             }
         }
 
         super.stepOn(level, pos, state, entity);
     }
+
 
     // Helper Method: Check if an item is a hilt
     private boolean isHilt(ItemStack itemStack) {

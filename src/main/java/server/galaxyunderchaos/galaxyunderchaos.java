@@ -259,7 +259,7 @@ import java.util.Map;
     public static final RegistryObject<Item> AEGIS_HILT = ITEMS.register("aegis_hilt",
             () -> new HiltItem("orange", new Item.Properties()));
     public static final RegistryObject<Item> APPRENTICE_HILT = ITEMS.register("apprentice_hilt",
-            () -> new HiltItem("pink", new Item.Properties()));
+            () -> new HiltItem("red", new Item.Properties()));
     public static final RegistryObject<Item> CHOSEN_HILT = ITEMS.register("chosen_hilt",
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> EMPEROR_HILT = ITEMS.register("emperor_hilt",
@@ -319,7 +319,34 @@ import java.util.Map;
             }
         }
     }
-// #ENTITIES
+    public static final Map<String, RegistryObject<Item>> DOUBLE_BLADED_LIGHTSABERS = new HashMap<>();
+    public static void registerDoubleBladedSabers() {
+        String[] bladeColors = {
+                "red", "blue", "green", "yellow", "cyan",
+                "white", "magenta", "purple", "pink",
+                "lime_green", "turquoise", "orange", "blood_orange"
+        };
+
+        String[] hilts = {
+                "apprentice", "chosen", "emperor", "legacy", "padawan",
+                "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony",
+                "skustell", "fallen", "negotiator", "baroshe", "knightfall"
+        };
+
+        for (String color1 : bladeColors) {
+            for (String hilt1 : hilts) {
+                for (String color2 : bladeColors) {
+                    for (String hilt2 : hilts) {
+                        String id = color1 + "_" + hilt1 + "_and_" + color2 + "_" + hilt2 + "_double_lightsaber";
+                        DOUBLE_BLADED_LIGHTSABERS.put(id, ITEMS.register(
+                                id, () -> new RegisteredDoubleBladedLightsaberItem(color1 + "_" + color2, new Item.Properties().stacksTo(1))
+                        ));
+                    }
+                }
+            }
+        }
+    }
+
 public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         ENTITY_TYPES.register("acid_spider", () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
                 .sized(1.5f, 1.5f).build("acid_spider"));
@@ -334,6 +361,7 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         CreativeMenuTabs.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLightsabers();
+        registerDoubleBladedSabers();
         KeyBindings.init();
         ModSounds.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
@@ -352,6 +380,14 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
         event.enqueueWork(() -> {
         });
+        ModItemProperties.addCustomItemProperties();
+        galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
+                ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
+        );
+        galaxyunderchaos.DOUBLE_BLADED_LIGHTSABERS.values().forEach(lightsaber ->
+                ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
+        );
+
     }
 
     @SubscribeEvent
@@ -363,10 +399,7 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            ModItemProperties.addCustomItemProperties();
-            galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
-                    ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
-            );
+
         }
     }
 }
