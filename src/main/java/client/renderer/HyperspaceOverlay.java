@@ -17,7 +17,7 @@ public class HyperspaceOverlay extends Overlay {
 
     // Start warp effect when hyperspace starts
     public static void startWarpEffect() {
-        System.out.println("Hyperspace overlay started!"); // Debugging statement
+        //System.out.println("Hyperspace overlay started!"); // Debugging statement
         isWarping = true;
         startTime = System.currentTimeMillis();
         isOverlayActive = true;
@@ -25,13 +25,13 @@ public class HyperspaceOverlay extends Overlay {
 
     // Start overlay manually (if needed)
     public static void startOverlay() {
-        System.out.println("Hyperspace overlay manually started!"); // Debugging statement
+        //System.out.println("Hyperspace overlay manually started!"); // Debugging statement
         isOverlayActive = true;
     }
 
     // Stop warp effect
     public static void stopWarpEffect() {
-        System.out.println("Hyperspace overlay stopped!"); // Debugging statement
+        //System.out.println("Hyperspace overlay stopped!"); // Debugging statement
         isWarping = false;
         isOverlayActive = false;
     }

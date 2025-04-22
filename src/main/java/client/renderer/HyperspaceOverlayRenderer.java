@@ -13,7 +13,7 @@ public class HyperspaceOverlayRenderer {
 
     @SubscribeEvent
     public static void onRenderGuiOverlay(CustomRenderGuiOverlayEvent event) { // ✅ Our custom event
-        System.out.println("Rendering Hyperspace Overlay..."); // Debugging
+        //System.out.println("Rendering Hyperspace Overlay..."); // Debugging
         hyperspaceOverlay.render(event.getGuiGraphics(), 0, 0, event.getPartialTick());
     }
 }

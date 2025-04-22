@@ -7,7 +7,7 @@ import server.galaxyunderchaos.datagen.ModTags;
 import server.galaxyunderchaos.galaxyunderchaos;
 
 public class ModToolTiers {
-    public static final Tier LIGHTSABER = new ForgeTier(2500, 4, 20f, 20,
+    public static final Tier LIGHTSABER = new ForgeTier(2500, 4, 10f, 20,
             ModTags.Blocks.NEEDS_LIGHTSABER_TOOL, () -> Ingredient.of(galaxyunderchaos.AEGIS_HILT.get()),
             ModTags.Blocks.INCORRECT_FOR_LIGHTSABER_TOOL);
 }

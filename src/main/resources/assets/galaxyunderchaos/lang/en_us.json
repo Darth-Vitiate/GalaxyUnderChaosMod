@@ -446,5 +446,12 @@
   "tooltip.galaxyunderchaos.bleeding_table.tooltip": "Throw Kyber on the table to bleed the crystal!",
   "tooltip.galaxyunderchaos.lightsaber_crafting_table.tooltip": "Throw a hilt and kyber crystal to craft your lightsaber!",
   "key.categories.galaxyunderchaos": "Galaxy Under Chaos",
-  "key.galaxyunderchaos.toggle_lightsaber": "Toggle Lightsaber"
+  "key.galaxyunderchaos.toggle_lightsaber": "Toggle Lightsaber",
+  "item.galaxyunderchaos.shii_cho_holobook": "Shii Cho Holobook",
+  "item.galaxyunderchaos.makashi_holobook": "Makashi Holobook",
+  "item.galaxyunderchaos.soresu_holobook": "Soresu Holobook",
+  "item.galaxyunderchaos.ataru_holobook": "Ataru Holobook",
+  "item.galaxyunderchaos.niman_holobook": "Niman Holobook",
+  "item.galaxyunderchaos.shien_djem_so_holobook": "Shein Djem So Holobook",
+  "item.galaxyunderchaos.juyo_vaapad_holobook": "Juyo Vaapad Holobook"
 }

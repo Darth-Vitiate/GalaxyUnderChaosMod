@@ -36,7 +36,9 @@ import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
 import server.galaxyunderchaos.entity.AcidSpiderEntity;
+import server.galaxyunderchaos.event.LightsaberFormEventHandler;
 import server.galaxyunderchaos.item.*;
+import server.galaxyunderchaos.lightsaber.LightsaberFormNetworking;
 import server.galaxyunderchaos.loot.ModLootModifiers;
 import server.galaxyunderchaos.sound.ModSounds;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
@@ -85,33 +87,6 @@ import java.util.Map;
     public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("pink_crystal_ore", () -> new BlockItem(PINK_CRYSTAL_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("lime_green_crystal_ore", () -> new BlockItem(LIME_GREEN_CRYSTAL_ORE.get(), new Item.Properties()));
     public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_ORE_ITEM = ITEMS.register("turquoise_crystal_ore", () -> new BlockItem(TURQUOISE_CRYSTAL_ORE.get(), new Item.Properties()));
-//    public static final RegistryObject<Block> RED_CRYSTAL_BLOCK = BLOCKS.register("red_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> BLOOD_ORANGE_CRYSTAL_BLOCK = BLOCKS.register("blood_orange_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> BLUE_CRYSTAL_BLOCK = BLOCKS.register("blue_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> ORANGE_CRYSTAL_BLOCK = BLOCKS.register("orange_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> GREEN_CRYSTAL_BLOCK = BLOCKS.register("green_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> YELLOW_CRYSTAL_BLOCK = BLOCKS.register("yellow_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> CYAN_CRYSTAL_BLOCK = BLOCKS.register("cyan_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> WHITE_CRYSTAL_BLOCK = BLOCKS.register("white_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> MAGENTA_CRYSTAL_BLOCK = BLOCKS.register("magenta_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> PURPLE_CRYSTAL_BLOCK = BLOCKS.register("purple_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> PINK_CRYSTAL_BLOCK = BLOCKS.register("pink_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> LIME_GREEN_CRYSTAL_BLOCK = BLOCKS.register("lime_green_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Block> TURQUOISE_CRYSTAL_BLOCK = BLOCKS.register("turquoise_crystal_block", CrystalBlock::new);
-//    public static final RegistryObject<Item> RED_CRYSTAL_BLOCK_ITEM = ITEMS.register("red_crystal_block", () -> new BlockItem(RED_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> BLOOD_ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blood_orange_crystal_block", () -> new BlockItem(BLOOD_ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> BLUE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("blue_crystal_block", () -> new BlockItem(BLUE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> ORANGE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("orange_crystal_block", () -> new BlockItem(ORANGE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("green_crystal_block", () -> new BlockItem(GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> YELLOW_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("yellow_crystal_block", () -> new BlockItem(YELLOW_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> CYAN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("cyan_crystal_block", () -> new BlockItem(CYAN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> WHITE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("white_crystal_block", () -> new BlockItem(WHITE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> MAGENTA_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("magenta_crystal_block", () -> new BlockItem(MAGENTA_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> PURPLE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("purple_crystal_block", () -> new BlockItem(PURPLE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> PINK_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("pink_crystal_block", () -> new BlockItem(PINK_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> LIME_GREEN_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("lime_green_crystal_block", () -> new BlockItem(LIME_GREEN_CRYSTAL_BLOCK.get(), new Item.Properties()));
-//    public static final RegistryObject<Item> TURQUOISE_KYBER_CRYSTAL_BLOCK_ITEM = ITEMS.register("turquoise_crystal_block", () -> new BlockItem(TURQUOISE_CRYSTAL_BLOCK.get(), new Item.Properties()));
-
 
     public static final RegistryObject<Block> TEMPLE_STONE = BLOCKS.register("temple_stone", TempleStone::new);
     public static final RegistryObject<Item> TEMPLE_STONE_ITEM = ITEMS.register("temple_stone", () -> new BlockItem(TEMPLE_STONE.get(), new Item.Properties()));
@@ -148,7 +123,26 @@ import java.util.Map;
     public static final RegistryObject<Block> BLEEDING_TABLE = BLOCKS.register("bleeding_table", BleedingTable::new);
     public static final RegistryObject<Item> BLEEDING_TABLE_ITEM = ITEMS.register("bleeding_table", () -> new BlockItem(BLEEDING_TABLE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SHII_CHO_HOLOBOOK = ITEMS.register("shii_cho_holobook",
+            () -> new SaberFormHolobookItem("Shii-Cho", new Item.Properties()));
 
+    public static final RegistryObject<Item> MAKASHI_HOLBOOK = ITEMS.register("makashi_holobook",
+            () -> new SaberFormHolobookItem("Makashi", new Item.Properties()));
+
+    public static final RegistryObject<Item> SORESU_HOLOBOOK = ITEMS.register("soresu_holobook",
+            () -> new SaberFormHolobookItem("Soresu", new Item.Properties()));
+
+    public static final RegistryObject<Item> ATARU_HOLOBOOK = ITEMS.register("ataru_holobook",
+            () -> new SaberFormHolobookItem("Ataru", new Item.Properties()));
+
+    public static final RegistryObject<Item> SHIEN_DJEM_SO_HOLOBOOK = ITEMS.register("shien_djem_so_holobook",
+            () -> new SaberFormHolobookItem("Shien / Djem So", new Item.Properties()));
+
+    public static final RegistryObject<Item> NIMAN_HOLOBOOK = ITEMS.register("niman_holobook",
+            () -> new SaberFormHolobookItem("Niman", new Item.Properties()));
+
+    public static final RegistryObject<Item> JUYO_VAAPAD_HOLOBOOK = ITEMS.register("juyo_vaapad_holobook",
+            () -> new SaberFormHolobookItem("Juyo / Vaapad", new Item.Properties()));
     public static final RegistryObject<Block> JEDI_HOLOCRON = BLOCKS.register("jedi_holocron", Holocron::new);
     public static final RegistryObject<Item> JEDI_HOLOCRON_ITEM = ITEMS.register("jedi_holocron", () -> new BlockItem(JEDI_HOLOCRON.get(), new Item.Properties()));
 
@@ -334,7 +328,6 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         CreativeMenuTabs.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLightsabers();
-        KeyBindings.init();
         ModSounds.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
@@ -342,10 +335,11 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         modEventBus.addListener(this::clientSetup);
         MinecraftForge.EVENT_BUS.register(HyperspaceOverlayRenderer.class);
         ModLootModifiers.register(modEventBus);
+        MinecraftForge.EVENT_BUS.register(LightsaberFormEventHandler.class);
     }
-
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");
+        LightsaberFormNetworking.registerPackets(event);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

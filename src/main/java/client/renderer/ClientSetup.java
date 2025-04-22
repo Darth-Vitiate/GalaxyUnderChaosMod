@@ -14,12 +14,12 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void onRenderGuiOverlay(CustomizeGuiOverlayEvent event) { // ✅ Correct event type
-        System.out.println("Rendering Hyperspace Overlay..."); // Debugging
+        //System.out.println("Rendering Hyperspace Overlay..."); // Debugging
         hyperspaceOverlay.render(event.getGuiGraphics(), 0, 0, event.getPartialTick());
     }
 
     public static void setup() {
-        System.out.println("Registering ClientSetup...");
+        //System.out.println("Registering ClientSetup...");
         MinecraftForge.EVENT_BUS.register(ClientSetup.class);
     }
 }

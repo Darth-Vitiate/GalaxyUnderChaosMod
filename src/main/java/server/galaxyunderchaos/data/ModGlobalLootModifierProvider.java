@@ -44,40 +44,16 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                         ).build()
                 }, galaxyunderchaos.SHUURA.get()));
 
-
-        List<RegistryObject<Item>> hilts = List.of(
-                galaxyunderchaos.LOST_HILT,
-                galaxyunderchaos.AEGIS_HILT,
-                galaxyunderchaos.APPRENTICE_HILT,
-                galaxyunderchaos.CHOSEN_HILT,
-                galaxyunderchaos.EMPEROR_HILT,
-                galaxyunderchaos.FALLEN_HILT,
-                galaxyunderchaos.GRACE_HILT,
-                galaxyunderchaos.GUARD_HILT,
-                galaxyunderchaos.HARMONY_HILT,
-                galaxyunderchaos.LEGACY_HILT,
-                galaxyunderchaos.PADAWAN_HILT,
-                galaxyunderchaos.RESOLVE_HILT,
-                galaxyunderchaos.SKUSTELL_HILT,
-                galaxyunderchaos.TALON_HILT,
-                galaxyunderchaos.VALOR_HILT,
-                galaxyunderchaos.NEGOTIATOR_HILT,
-                galaxyunderchaos.BAROSHE_HILT,
-                galaxyunderchaos.KNIGHTFALL_HILT,
-                galaxyunderchaos.WISDOM_HILT
-        );
-
-        Random rand = new Random();
-        RegistryObject<Item> chosenHilt = hilts.get(rand.nextInt(hilts.size()));
-
-        this.add("hilt_from_jungle_temple",
+        this.add("aegis_hilt_from_jungle_temple",
                 new AddItemModifier(new LootItemCondition[] {
-                        new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/jungle_temple")).build()
-                }, chosenHilt.get()));
-        this.add("hilt_from_desert_pyramid",
+                        new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/jungle_temple"))
+                                .and(LootItemRandomChanceCondition.randomChance(0.10f)).build()
+                }, galaxyunderchaos.AEGIS_HILT.get()));
+        this.add("aegis_hilt_from_desert_pyramid",
                 new AddItemModifier(new LootItemCondition[] {
-                        new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/desert_pyramid")).build()
-                }, chosenHilt.get()));
+                        new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/desert_pyramid"))
+                                .and(LootItemRandomChanceCondition.randomChance(0.10f)).build()
+    }, galaxyunderchaos.AEGIS_HILT.get()));
 
         add("titanium_chromium_from_zombie", new AddItemModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("entities/zombie"))
