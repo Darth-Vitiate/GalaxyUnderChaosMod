@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.food.FoodProperties;
@@ -300,7 +301,7 @@ import java.util.Map;
         String[] hiltNames = {
                 "apprentice", "chosen", "emperor", "legacy", "padawan",
                 "resolve", "talon", "valor", "wisdom", "lost", "aegis", "grace", "guard", "harmony",
-                "skustell", "fallen", "negotiator","baroshe","knightfall"
+                "skustell", "fallen", "negotiator", "baroshe", "knightfall"
         };
 
         for (String color : bladeColors) {
@@ -313,10 +314,11 @@ import java.util.Map;
             }
         }
     }
-// #ENTITIES
-public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
-        ENTITY_TYPES.register("acid_spider", () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
-                .sized(1.5f, 1.5f).build("acid_spider"));
+
+    // #ENTITIES
+    public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
+            ENTITY_TYPES.register("acid_spider", () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
+                    .sized(1.5f, 1.5f).build("acid_spider"));
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -331,21 +333,42 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         ModSounds.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
+//        MinecraftForge.EVENT_BUS.register(ForcePowerOverlay.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         modEventBus.addListener(this::clientSetup);
         MinecraftForge.EVENT_BUS.register(HyperspaceOverlayRenderer.class);
         ModLootModifiers.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(LightsaberFormEventHandler.class);
     }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");
         LightsaberFormNetworking.registerPackets(event);
+//        event.enqueueWork(GalaxyUnderChaosNetworking::registerPackets);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
         event.enqueueWork(() -> {
+            ModItemProperties.addCustomItemProperties();
+            Minecraft mc = Minecraft.getInstance();
+
+            mc.getEntityRenderDispatcher()
+                    .getSkinMap()
+                    .values()
+                    .forEach(renderer -> {
+                        if (renderer instanceof PlayerRenderer pr) {
+                            pr.addLayer(new LightsaberFirstPersonLayer(pr));
+                        }
+                    });
+
+            galaxyunderchaos.LIGHTSABERS.values()
+                    .forEach(reg -> ItemBlockRenderTypes.setRenderLayer(
+                            Block.byItem(reg.get()),
+                            RenderType.translucent()
+                    ));
         });
+        MinecraftForge.EVENT_BUS.addListener(ClientEventSubscriber::onRenderTick);
     }
 
     @SubscribeEvent
@@ -353,14 +376,4 @@ public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
         LOGGER.info("HELLO from server starting");
     }
 
-    @Mod.EventBusSubscriber(modid = galaxyunderchaos.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            ModItemProperties.addCustomItemProperties();
-            galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
-                    ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
-            );
-        }
-    }
 }

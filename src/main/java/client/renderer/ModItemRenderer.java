@@ -28,94 +28,80 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
         ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
         BakedModel model = renderer.getModel(stack, null, null, 0);
 
-        if (stack.getItem() instanceof LightsaberItem saber) {
+        if (stack.getItem() instanceof LightsaberItem) {
             boolean isActive = stack.getOrDefault(ModDataComponentTypes.ACTIVE.get(), false);
 
-            // Render the hilt
+            // Render the hilt (and inactive blade)
             renderer.render(stack, displayContext, false, poseStack, buffer, light, overlay, model);
 
             if (isActive) {
-                int glowColor = getGlowColor(LightsaberItem.getBladeColor(stack));
-                renderColoredGlow(poseStack, buffer, glowColor);
+                // Render the colored glow layer
+                renderColoredGlow(poseStack, buffer);
             }
         } else {
+            // Other items use default rendering
             renderer.render(stack, displayContext, false, poseStack, buffer, light, overlay, model);
         }
     }
 
-    private int getGlowColor(String bladeColor) {
-        return switch (bladeColor) {
-            case "red" -> 0xFFAE2623;
-            case "blue" -> 0xFF2985D0;
-            case "green" -> 0xFF8AED54;
-            case "yellow" -> 0xFFFFF645;
-            case "cyan" -> 0xFF29C8D0;
-            case "white" -> 0xFFFFFFFF;
-            case "magenta" -> 0xFFD029D0;
-            case "purple" -> 0xFFAC2FC0;
-            case "pink" -> 0xFFFF69B4;
-            case "lime_green" -> 0xFFCAD95B;
-            case "turquoise" -> 0xFF4AAA92;
-            case "orange" -> 0xFFE58416;
-            case "blood_orange" -> 0xFFCC2C25;
-            default -> 0xFFFFFFFF;
-        };
-    }
-
-    private void renderColoredGlow(PoseStack poseStack, MultiBufferSource buffer, int color) {
+    /**
+     * Renders a glow quad tinted by ClientEventSubscriber.glowR/G/B
+     */
+    private void renderColoredGlow(PoseStack poseStack, MultiBufferSource buffer) {
         VertexConsumer vertexConsumer = buffer.getBuffer(
-                RenderType.entityTranslucent(ResourceLocation.parse("galaxyunderchaos:textures/misc/glow.png"))
+                RenderType.entityTranslucent(
+                        ResourceLocation.parse("galaxyunderchaos:textures/misc/glow.png")
+                )
         );
 
-        float red = (color >> 16 & 255) / 255.0F;
-        float green = (color >> 8 & 255) / 255.0F;
-        float blue = (color & 255) / 255.0F;
+        // Use dynamic color from client subscriber
+        float red   = ClientEventSubscriber.glowR;
+        float green = ClientEventSubscriber.glowG;
+        float blue  = ClientEventSubscriber.glowB;
         float alpha = 0.7F; // Glow transparency
 
         poseStack.pushPose();
-        poseStack.scale(1.3F, 1.3F, 1.3F); // Slightly larger than saber blade
+        poseStack.scale(1.3F, 1.3F, 1.3F);
 
         PoseStack.Pose pose = poseStack.last();
 
-        int overlay = 15728880; // Full overlay brightness
-        int light = 240;        // Max glow brightness
+        int fullOverlay = 15728880; // Full brightness overlay
+        int fullLight   = 240;      // Max block light
 
-        // Bottom-left vertex
+        // Bottom-left
         vertexConsumer.addVertex(pose, -0.3F, -0.3F, 0.0F);
         vertexConsumer.setColor(red, green, blue, alpha);
         vertexConsumer.setUv(0.0F, 0.0F);
-        vertexConsumer.setOverlay(overlay);
-        vertexConsumer.setLight(light);
+        vertexConsumer.setOverlay(fullOverlay);
+        vertexConsumer.setLight(fullLight);
         vertexConsumer.setNormal(pose, 0.0F, 1.0F, 0.0F);
 
-        // Bottom-right vertex
+        // Bottom-right
         vertexConsumer.addVertex(pose, 0.3F, -0.3F, 0.0F);
         vertexConsumer.setColor(red, green, blue, alpha);
         vertexConsumer.setUv(1.0F, 0.0F);
-        vertexConsumer.setOverlay(overlay);
-        vertexConsumer.setLight(light);
+        vertexConsumer.setOverlay(fullOverlay);
+        vertexConsumer.setLight(fullLight);
         vertexConsumer.setNormal(pose, 0.0F, 1.0F, 0.0F);
 
-        // Top-right vertex
+        // Top-right
         vertexConsumer.addVertex(pose, 0.3F, 0.3F, 0.0F);
         vertexConsumer.setColor(red, green, blue, alpha);
         vertexConsumer.setUv(1.0F, 1.0F);
-        vertexConsumer.setOverlay(overlay);
-        vertexConsumer.setLight(light);
+        vertexConsumer.setOverlay(fullOverlay);
+        vertexConsumer.setLight(fullLight);
         vertexConsumer.setNormal(pose, 0.0F, 1.0F, 0.0F);
 
-        // Top-left vertex
+        // Top-left
         vertexConsumer.addVertex(pose, -0.3F, 0.3F, 0.0F);
         vertexConsumer.setColor(red, green, blue, alpha);
         vertexConsumer.setUv(0.0F, 1.0F);
-        vertexConsumer.setOverlay(overlay);
-        vertexConsumer.setLight(light);
+        vertexConsumer.setOverlay(fullOverlay);
+        vertexConsumer.setLight(fullLight);
         vertexConsumer.setNormal(pose, 0.0F, 1.0F, 0.0F);
 
         poseStack.popPose();
     }
-
-
 
     public static void registerItemRenderer(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

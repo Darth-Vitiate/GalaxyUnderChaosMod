@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.player.AbstractClientPlayer;   // ← keep AbstractClientPlayer
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -12,21 +12,17 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemDisplayContext;
 import server.galaxyunderchaos.item.LightsaberItem;
 import server.galaxyunderchaos.lightsaber.LightsaberFormProvider;
 
 public class LightsaberFirstPersonLayer
-        extends RenderLayer<AbstractClientPlayer,              // ← keep AbstractClientPlayer
-        PlayerModel<AbstractClientPlayer>> {
+        extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
 
-    private final ItemRenderer itemRenderer =
-            Minecraft.getInstance().getItemRenderer();
+    private final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-    public LightsaberFirstPersonLayer(
-            RenderLayerParent<AbstractClientPlayer,
-                    PlayerModel<AbstractClientPlayer>> parent) {
+    public LightsaberFirstPersonLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> parent) {
         super(parent);
     }
 
@@ -43,59 +39,72 @@ public class LightsaberFirstPersonLayer
                        float netHeadYaw,
                        float headPitch) {
 
-        /* --- Only render when the player is holding a lightsaber ----------------------- */
+        // Only render when the player is holding an active lightsaber
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof LightsaberItem)) return;
 
-        /* --- Query the selected form from the capability ------------------------------ */
         String form = player.getCapability(
                         LightsaberFormProvider.LIGHTSABER_FORM_CAPABILITY)
                 .map(cap -> cap.getSelectedForm())
                 .orElse("");
         if (form.isEmpty()) return;
 
-        /* --- Small idle wiggle --------------------------------------------------------- */
+        // Calculate idle sway based on tick
         float time = player.tickCount + partialTicks;
-        float idle = Mth.sin(time * 0.15f);
+        float idle = Mth.sin(time * 0.2f) * 5f;
 
-        /* --- Position the item at the right hand -------------------------------------- */
+        // Position the hilt in first person
         poseStack.pushPose();
         getParentModel().translateToHand(HumanoidArm.RIGHT, poseStack);
-        poseStack.translate(-0.05, 0.50, -0.20);
+        poseStack.translate(-0.1, 0.4, -0.2);
 
+        // Apply form-specific rotations for striking stances
         switch (form) {
-            case "Shii-Cho" -> poseStack.mulPose(Axis.XP.rotationDegrees(-10f + idle * 2f));
-            case "Makashi"  -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(-40f));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(idle * 8f));
+            case "Shii-Cho" -> {
+                // Broad guard: slight up-down sway
+                poseStack.mulPose(Axis.XP.rotationDegrees(-5f + idle));
+                poseStack.mulPose(Axis.YP.rotationDegrees(15f));
             }
-            case "Soresu"   -> {
-                poseStack.translate(0.05, 0.00, -0.15);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-15f + idle * 1.5f));
+            case "Makashi" -> {
+                // Elegant, fencing style
+                poseStack.mulPose(Axis.YP.rotationDegrees(-60f));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(idle * 3f));
             }
-            case "Ataru"    -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(-80f));
-                poseStack.mulPose(Axis.XP.rotationDegrees( 25f + idle * 5f));
+            case "Soresu" -> {
+                // Defensive circle stance
+                poseStack.mulPose(Axis.XP.rotationDegrees(30f + idle * 2f));
+                poseStack.mulPose(Axis.YP.rotationDegrees(10f));
             }
-            case "Shien"    -> {
+            case "Ataru" -> {
+                // Acrobatic leaps
+                poseStack.mulPose(Axis.XP.rotationDegrees(45f + idle * 10f));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(idle * 5f));
+            }
+            case "Shien" -> {
+                // Counter-focused, blade angled up
                 poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
-                poseStack.mulPose(Axis.YP.rotationDegrees(15f + idle * 4f));
+                poseStack.mulPose(Axis.XP.rotationDegrees(10f + idle * 3f));
             }
-            case "Niman"    -> {
-                poseStack.mulPose(Axis.XP.rotationDegrees(-20f + idle * 3f));
-                poseStack.mulPose(Axis.YP.rotationDegrees(-15f));
+            case "Niman" -> {
+                // Balanced stance
+                poseStack.mulPose(Axis.XP.rotationDegrees(-10f + idle * 2f));
+                poseStack.mulPose(Axis.YP.rotationDegrees(-20f));
             }
-            case "Juyo"     -> {
-                poseStack.mulPose(Axis.YP.rotationDegrees(-100f + idle * 10f));
-                poseStack.mulPose(Axis.XN.rotationDegrees(  35f + idle * 6f));
+            case "Juyo / Vaapad" -> {
+                // Aggressive, wide swings
+                poseStack.mulPose(Axis.XP.rotationDegrees(-90f + idle * 15f));
+                poseStack.mulPose(Axis.YP.rotationDegrees(10f));
+            }
+            default -> {
+                // Fallback subtle sway
+                poseStack.mulPose(Axis.XP.rotationDegrees(idle));
             }
         }
 
-        /* --- Render the item ----------------------------------------------------------- */
+        // Render the saber in first person
         itemRenderer.renderStatic(
                 stack,
-                ItemDisplayContext.THIRD_PERSON_RIGHT_HAND,
+                ItemDisplayContext.FIRST_PERSON_RIGHT_HAND,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,
                 poseStack,

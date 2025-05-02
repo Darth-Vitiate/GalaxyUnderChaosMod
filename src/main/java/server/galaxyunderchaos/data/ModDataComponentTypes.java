@@ -15,10 +15,19 @@ public class ModDataComponentTypes {
             DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, galaxyunderchaos.MODID);
 
     public static final RegistryObject<DataComponentType<Boolean>> ACTIVE = register("active",
-            builder -> builder.persistent(Codec.BOOL));
+            builder -> builder.persistent(Codec.BOOL)                        // simple boolean :contentReference[oaicite:0]{index=0}
+    );
 
-    private static <T> RegistryObject<DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-        return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
+//    public static final RegistryObject<DataComponentType<Force>> FORCE = register("force",
+//            builder -> builder
+//                    .persistent(Force.CODEC)                                      // use your RecordCodecBuilder‐based Codec for both disk and network :contentReference[oaicite:1]{index=1}
+//    );
+
+    private static <T> RegistryObject<DataComponentType<T>> register(String name,
+                                                                     UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
+        return DATA_COMPONENT_TYPES.register(name,
+                () -> builderOperator.apply(DataComponentType.builder()).build()
+        );
     }
 
     public static void register(IEventBus eventBus) {
