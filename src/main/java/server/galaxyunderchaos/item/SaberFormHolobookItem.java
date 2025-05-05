@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import server.galaxyunderchaos.galaxyunderchaos;
 import server.galaxyunderchaos.lightsaber.LightsaberFormCapabilityManager;
 
 public class SaberFormHolobookItem extends Item {
@@ -22,9 +23,10 @@ public class SaberFormHolobookItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            LightsaberFormCapabilityManager.unlockForm(serverPlayer, formToUnlock);
-            player.displayClientMessage(Component.nullToEmpty("You have unlocked " + formToUnlock + "!"), true);
-            player.getItemInHand(hand).shrink(1); // Consume the holocron
+            galaxyunderchaos.LOGGER.info("Holobook used to unlock form: {}", formToUnlock);
+            LightsaberFormCapabilityManager.unlockForm(serverPlayer, formToUnlock.toUpperCase());
+            player.displayClientMessage(Component.nullToEmpty("You have unlocked " + formToUnlock.toUpperCase() + "!"), true);
+            player.getItemInHand(hand).shrink(1); // Consume the holobook
             return new InteractionResultHolder<>(InteractionResult.SUCCESS, player.getItemInHand(hand));
         }
         return new InteractionResultHolder<>(InteractionResult.PASS, player.getItemInHand(hand));

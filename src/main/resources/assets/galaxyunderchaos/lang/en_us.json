@@ -440,5 +440,12 @@
   "item.galaxyunderchaos.niman_holobook": "Niman Holobook",
   "item.galaxyunderchaos.shien_djem_so_holobook": "Shein Djem So Holobook",
   "item.galaxyunderchaos.juyo_vaapad_holobook": "Juyo Vaapad Holobook",
-  "item.galaxyunderchaos.sith_holocron": "Sith Holocron"
+  "item.galaxyunderchaos.sith_holocron": "Sith Holocron",
+  "sounds.galaxyunderchaos.lightsaber_on": "Lightsaber ignites",
+  "sounds.galaxyunderchaos.lightsaber_off": "Lightsaber shuts down",
+  "sounds.galaxyunderchaos.lightsaber_swing": "Lightsaber swing",
+  "sounds.galaxyunderchaos.lightsaber_hit": "Lightsaber hits",
+  "sounds.galaxyunderchaos.lightsaber_idle": "Lightsaber idle hum",
+  "sounds.galaxyunderchaos.lightsaber_deflect": "Lightsaber deflect",
+  "sounds.galaxyunderchaos.hyperspace": "Hyperspace jump"
 }

@@ -10,9 +10,19 @@ import server.galaxyunderchaos.galaxyunderchaos;
 public class PlayerLoginHandler {
 
     @SubscribeEvent
-    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             LightsaberFormCapabilityManager.syncCapability(player);
+            galaxyunderchaos.LOGGER.debug("Synced lightsaber capability on login for {}", player.getScoreboardName());
         }
     }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            LightsaberFormCapabilityManager.syncCapability(player);
+            galaxyunderchaos.LOGGER.debug("Synced lightsaber capability on respawn for {}", player.getScoreboardName());
+        }
+    }
+
 }

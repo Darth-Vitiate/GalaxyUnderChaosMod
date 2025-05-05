@@ -22,8 +22,8 @@ public class SyncLightsaberFormPacket implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, SyncLightsaberFormPacket>
             STREAM_CODEC = StreamCodec.of(SyncLightsaberFormPacket::encode, SyncLightsaberFormPacket::decode);
 
-    private final List<String> unlocked;
-    private final String selected;
+    public final List<String> unlocked;
+    public final String selected;
 
     public SyncLightsaberFormPacket(List<String> unlocked, String selected) {
         this.unlocked = List.copyOf(unlocked);
@@ -45,13 +45,21 @@ public class SyncLightsaberFormPacket implements CustomPacketPayload {
     }
 
     public static void handle(SyncLightsaberFormPacket pkt, IPayloadContext ctx) {
+        galaxyunderchaos.LOGGER.info("Handling SyncLightsaberFormPacket: unlocked={} selected={}", pkt.unlocked, pkt.selected);
         ctx.enqueueWork(() -> {
             var player = Minecraft.getInstance().player;
-            if (player == null) return;
+            if (player == null) {
+                galaxyunderchaos.LOGGER.warn("Client player is null in SyncLightsaberFormPacket.handle");
+                return;
+            }
 
-            var cap = player.getCapability(LightsaberFormCapability.CAPABILITY);
-            if (cap == null) return;
+            var capOpt = player.getCapability(LightsaberFormCapability.CAPABILITY);
+            if (capOpt == null) {
+                galaxyunderchaos.LOGGER.warn("LightsaberFormCapability missing on client in SyncLightsaberFormPacket.handle");
+                return;
+            }
 
+            galaxyunderchaos.LOGGER.debug("Building NBT for client capability update");
             CompoundTag tag = new CompoundTag();
             ListTag list = new ListTag();
             for (String form : pkt.unlocked) {
@@ -59,12 +67,13 @@ public class SyncLightsaberFormPacket implements CustomPacketPayload {
             }
             tag.put("UnlockedForms", list);
             tag.putString("SelectedForm", pkt.selected);
+            galaxyunderchaos.LOGGER.debug("Applying NBT Tag: {}", tag);
 
-            HolderLookup.Provider lookup = Minecraft.getInstance().level.registryAccess(); // ← Correct HolderLookup.Provider
-            cap.deserializeNBT(lookup, tag);
+            HolderLookup.Provider lookup = Minecraft.getInstance().level.registryAccess();
+            capOpt.deserializeNBT(lookup, tag);
+            galaxyunderchaos.LOGGER.info("Client capability updated: selected={} unlocked={}", capOpt.getSelectedForm(), capOpt.getUnlockedForms());
         });
     }
-
 
     @Override
     public Type<? extends CustomPacketPayload> type() { return TYPE; }

@@ -47,8 +47,11 @@ public final class LightsaberFormCapabilityHandler {
             var newCap = event.getEntity().getCapability(LightsaberFormCapability.CAPABILITY);
 
             if (oldCap != null && newCap != null) {
-                newCap.deserializeNBT(null, oldCap.serializeNBT(null));
+                var tag = oldCap.serializeNBT(null);
+                galaxyunderchaos.LOGGER.debug("Cloning saber form capability: {}", tag);
+                newCap.deserializeNBT(null, tag);
             }
+
         }
     }
 }

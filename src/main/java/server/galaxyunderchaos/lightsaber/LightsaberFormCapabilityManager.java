@@ -2,6 +2,8 @@ package server.galaxyunderchaos.lightsaber;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import server.galaxyunderchaos.galaxyunderchaos;
+
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,26 +11,19 @@ import java.util.List;
 /** Helper methods for reading / mutating the player’s lightsaber‑form capability. */
 public final class LightsaberFormCapabilityManager {
 
-    private LightsaberFormCapabilityManager() {
-    }
-
-    /* ------------------------------------------------------------------ */
-    /*  Internal helpers                                                  */
-    /* ------------------------------------------------------------------ */
+    private LightsaberFormCapabilityManager() {}
 
     private static @Nullable LightsaberFormCapability get(ServerPlayer player) {
         return player.getCapability(LightsaberFormCapability.CAPABILITY);
     }
 
-    /**
-     * Send the full state to the client and re‑apply attribute effects.
-     */
     private static void sync(ServerPlayer player, LightsaberFormCapability cap) {
-        List<String> unlocked = new ArrayList<>(cap.getUnlockedForms());   // copy → list
+        List<String> unlocked = new ArrayList<>(cap.getUnlockedForms());
         String selected = cap.getSelectedForm() == null ? "" : cap.getSelectedForm();
 
-        LightsaberFormNetworking.sendToPlayer(
-                player, new SyncLightsaberFormPacket(unlocked, selected));
+        galaxyunderchaos.LOGGER.info("Syncing capability to client: selected={}, unlocked={}", selected, unlocked);
+
+        LightsaberFormNetworking.sendToPlayer(player, new SyncLightsaberFormPacket(unlocked, selected));
 
         if (!selected.isEmpty()) {
             LightsaberFormEffects.applyEffects(player, selected);
@@ -37,29 +32,22 @@ public final class LightsaberFormCapabilityManager {
         }
     }
 
-    /* ------------------------------------------------------------------ */
-    /*  Public API                                                        */
-    /* ------------------------------------------------------------------ */
-
-    /**
-     * Push the current capability state to the client.
-     */
     public static void syncCapability(ServerPlayer player) {
         LightsaberFormCapability cap = get(player);
         if (cap != null) sync(player, cap);
     }
 
-    /**
-     * Permanently unlock a form for this player.
-     */
-    // in LightsaberFormCapabilityManager
     public static void unlockForm(ServerPlayer player, String formId) {
         LightsaberForm form = LightsaberForm.fromId(formId);
-        if (form == null) return;
+        if (form == null) {
+            galaxyunderchaos.LOGGER.warn("Attempted to unlock unknown form ID: {}", formId);
+            return;
+        }
 
         LightsaberFormCapability cap = get(player);
         if (cap != null) {
             String disp = form.getDisplayName();
+            galaxyunderchaos.LOGGER.info("Unlocking lightsaber form '{}' for player {}", disp, player.getScoreboardName());
             cap.unlockForm(disp);
             if (cap.getSelectedForm() == null) cap.setSelectedForm(disp);
             sync(player, cap);

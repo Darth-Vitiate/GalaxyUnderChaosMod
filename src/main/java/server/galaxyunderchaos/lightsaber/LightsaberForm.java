@@ -106,8 +106,14 @@ public enum LightsaberForm {
             Stream.of(values()).collect(Collectors.toUnmodifiableMap(Enum::name, f -> f));
 
     public static LightsaberForm fromId(String id) {
-        return BY_ID.getOrDefault(id, SHII_CHO);
+        for (LightsaberForm form : values()) {
+            if (form.name().equalsIgnoreCase(id) || form.getDisplayName().equalsIgnoreCase(id)) {
+                return form;
+            }
+        }
+        return SHII_CHO; // fallback
     }
+
 
     public LightsaberForm next() {
         LightsaberForm[] vals = values();

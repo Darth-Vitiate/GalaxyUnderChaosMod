@@ -29,11 +29,35 @@ public class LightsaberFormCapability implements INBTSerializable<CompoundTag> {
     private final Set<String> unlockedForms = ConcurrentHashMap.newKeySet();
     private @Nullable String selectedForm = null;
 
-    public void unlockForm(String form)      { unlockedForms.add(form); }
-    public boolean hasForm(String form)      { return unlockedForms.contains(form); }
-    public void setSelectedForm(String form) { if (unlockedForms.contains(form)) selectedForm = form; }
-    @Nullable public String getSelectedForm() { return selectedForm; }
-    public Set<String> getUnlockedForms()    { return Collections.unmodifiableSet(unlockedForms); }
+    public void unlockForm(String form) {
+        unlockedForms.add(form);
+        galaxyunderchaos.LOGGER.debug("Unlocked form: {}", form);
+    }
+
+    public boolean hasForm(String form) {
+        boolean result = unlockedForms.contains(form);
+        galaxyunderchaos.LOGGER.debug("Checking if form '{}' is unlocked: {}", form, result);
+        return result;
+    }
+
+    public void setSelectedForm(String form) {
+        if (unlockedForms.contains(form)) {
+            this.selectedForm = form;
+            galaxyunderchaos.LOGGER.debug("Selected form set to: {}", form);
+        } else {
+            galaxyunderchaos.LOGGER.warn("Tried to select form '{}' which is not unlocked", form);
+        }
+    }
+
+    @Nullable
+    public String getSelectedForm() {
+        galaxyunderchaos.LOGGER.debug("Getting selected form: {}", selectedForm);
+        return selectedForm;
+    }
+
+    public Set<String> getUnlockedForms() {
+        return Collections.unmodifiableSet(unlockedForms);
+    }
 
     @Override
     public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider provider) {
@@ -43,20 +67,39 @@ public class LightsaberFormCapability implements INBTSerializable<CompoundTag> {
             list.add(StringTag.valueOf(s));
         }
         tag.put("UnlockedForms", list);
+
         if (selectedForm != null) {
             tag.putString("SelectedForm", selectedForm);
         }
-        return tag;    }
+
+        galaxyunderchaos.LOGGER.debug("Serialized capability: {}", tag);
+        return tag;
+    }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+        galaxyunderchaos.LOGGER.debug("Deserializing LightsaberFormCapability from NBT: {}", nbt);
+
         unlockedForms.clear();
         ListTag list = nbt.getList("UnlockedForms", Tag.TAG_STRING);
         for (int i = 0; i < list.size(); i++) {
-            unlockedForms.add(list.getString(i));
+            String form = list.getString(i);
+            unlockedForms.add(form);
+            galaxyunderchaos.LOGGER.debug("Unlocked form added: {}", form);
         }
-        this.selectedForm = nbt.contains("SelectedForm", Tag.TAG_STRING)
-                ? nbt.getString("SelectedForm")
-                : null;
+
+        if (nbt.contains("SelectedForm", Tag.TAG_STRING)) {
+            selectedForm = nbt.getString("SelectedForm");
+            galaxyunderchaos.LOGGER.debug("Selected form set to: {}", selectedForm);
+        } else {
+            selectedForm = null;
+            galaxyunderchaos.LOGGER.debug("Selected form set to null");
+        }
+
+        galaxyunderchaos.LOGGER.debug("Post-deserialization state: selected={}, unlocked={}", selectedForm, unlockedForms);
     }
+    public boolean isEmpty() {
+        return unlockedForms.isEmpty() && (selectedForm == null || selectedForm.isEmpty());
+    }
+
 }
