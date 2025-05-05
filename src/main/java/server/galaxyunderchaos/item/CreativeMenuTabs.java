@@ -60,19 +60,6 @@ public class CreativeMenuTabs {
                         output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
                         output.accept(JEDI_GUARD_STATUE.get().asItem());
                         output.accept(SITH_GUARD_STATUE_ITEM.get().asItem());
-//                        output.accept(PURPLE_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(MAGENTA_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(PINK_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(RED_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(BLOOD_ORANGE_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(ORANGE_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(YELLOW_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(LIME_GREEN_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(GREEN_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(TURQUOISE_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(CYAN_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(BLUE_CRYSTAL_BLOCK.get().asItem());
-//                        output.accept(WHITE_CRYSTAL_BLOCK.get().asItem());
 
                     }).build());
 
@@ -111,19 +98,22 @@ public class CreativeMenuTabs {
                         output.accept(BLUE_KYBER.get());
                         output.accept(WHITE_KYBER.get());
                         output.accept(JEDI_HOLOBOOK.get());
+                        output.accept(SHII_CHO_HOLOBOOK.get());
+                        output.accept(MAKASHI_HOLBOOK.get());
+                        output.accept(SORESU_HOLOBOOK.get());
+                        output.accept(ATARU_HOLOBOOK.get());
+                        output.accept(NIMAN_HOLOBOOK.get());
                         output.accept(JEDI_HOLOCRON.get());
                         output.accept(ANCIENT_HOLOBOOK.get());
                         output.accept(SITH_HOLOBOOK.get());
-//                        output.accept(SITH_HOLOCRON.get());
-                        output.accept(ACID_SPIDER_SPAWN_EGG.get());
+                        output.accept(SHIEN_DJEM_SO_HOLOBOOK.get());
+                        output.accept(JUYO_VAAPAD_HOLOBOOK.get());
+                        output.accept(SITH_HOLOCRON.get());
                         output.accept(ACIDIC_VENOM_SAC.get());
                         output.accept(SILK_THREAD.get());
                         output.accept(CHITIN_FRAGMENTS.get());
                         output.accept(ACID_FORGED_PLATE.get());
-
                         output.accept(SHUURA.get());
-
-
 
                     }).build());
 

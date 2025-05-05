@@ -1,13 +1,17 @@
 package server.galaxyunderchaos;
 
 import client.renderer.AcidSpiderRenderer;
+import client.renderer.ClientEventSubscriber;
+import client.renderer.LightsaberFirstPersonLayer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -45,6 +49,9 @@ import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
 import server.galaxyunderchaos.entity.AcidSpiderEntity;
 import server.galaxyunderchaos.item.*;
+import server.galaxyunderchaos.lightsaber.LightsaberFormCapabilityHandler;
+import server.galaxyunderchaos.lightsaber.LightsaberFormCommand;
+import server.galaxyunderchaos.lightsaber.LightsaberFormNetworking;
 import server.galaxyunderchaos.loot.ModLootModifiers;
 import server.galaxyunderchaos.sound.ModSounds;
 import server.galaxyunderchaos.worldgen.biome.ModBiomes;
@@ -56,10 +63,9 @@ import java.util.function.Supplier;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(galaxyunderchaos.MODID)
-public class galaxyunderchaos
-{
+public class galaxyunderchaos {
     public static final String MODID = "galaxyunderchaos";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, galaxyunderchaos.MODID);
@@ -82,6 +88,26 @@ public class galaxyunderchaos
     public static final DeferredHolder<Block, CrystalOre> LIME_GREEN_CRYSTAL_ORE = BLOCKS.register("lime_green_crystal_ore", CrystalOre::new);
     public static final DeferredHolder<Block, CrystalOre> TURQUOISE_CRYSTAL_ORE = BLOCKS.register("turquoise_crystal_ore", CrystalOre::new);
 
+    public static final DeferredItem<Item> SHII_CHO_HOLOBOOK = ITEMS.register("shii_cho_holobook",
+            () -> new SaberFormHolobookItem("Shii-Cho", new Item.Properties()));
+
+    public static final DeferredItem<Item> MAKASHI_HOLBOOK = ITEMS.register("makashi_holobook",
+            () -> new SaberFormHolobookItem("Makashi", new Item.Properties()));
+
+    public static final DeferredItem<Item> SORESU_HOLOBOOK = ITEMS.register("soresu_holobook",
+            () -> new SaberFormHolobookItem("Soresu", new Item.Properties()));
+
+    public static final DeferredItem<Item> ATARU_HOLOBOOK = ITEMS.register("ataru_holobook",
+            () -> new SaberFormHolobookItem("Ataru", new Item.Properties()));
+
+    public static final DeferredItem<Item> SHIEN_DJEM_SO_HOLOBOOK = ITEMS.register("shien_djem_so_holobook",
+            () -> new SaberFormHolobookItem("Shien / Djem So", new Item.Properties()));
+
+    public static final DeferredItem<Item> NIMAN_HOLOBOOK = ITEMS.register("niman_holobook",
+            () -> new SaberFormHolobookItem("Niman", new Item.Properties()));
+
+    public static final DeferredItem<Item> JUYO_VAAPAD_HOLOBOOK = ITEMS.register("juyo_vaapad_holobook",
+            () -> new SaberFormHolobookItem("Juyo / Vaapad", new Item.Properties()));
 
     public static final DeferredItem<BlockItem> CHROMIUM_ORE_ITEM = (DeferredItem<BlockItem>) ITEMS.register("chromium_ore",
             () -> new BlockItem(CHROMIUM_ORE.get(), new Item.Properties()));
@@ -425,43 +451,31 @@ public class galaxyunderchaos
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public galaxyunderchaos(IEventBus modEventBus, ModContainer modContainer)
-    {
-        // Register the commonSetup method for modloading
+    public galaxyunderchaos(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
-
-        // Register the Deferred Register to the mod event bus so blocks get registered
+        modEventBus.addListener(this::clientSetup);
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
+        ENTITY_TYPES.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         CreativeMenuTabs.register(modEventBus);
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-        NeoForge.EVENT_BUS.register(this);
-//        ENTITY_TYPES.register(modEventBus);
         ModBiomes.BIOMES.register(modEventBus);
-        registerLightsabers();
-//        KeyBindings.init();
         ModSounds.register(modEventBus);
-        ENTITY_TYPES.register(modEventBus);
         ModDataComponentTypes.register(modEventBus);
-//        NeoForge.EVENT_BUS.register(LightsaberBeltRenderer.class);
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-//        modEventBus.addListener(this::clientsetup);
-//        NeoForge.EVENT_BUS.register(HyperspaceOverlayRenderer.class);
         ModLootModifiers.register(modEventBus);
-        // Register the item to a creative tab
-//        modEventBus.addListener(this::addCreative);
-
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
+        LightsaberFormNetworking.register(modEventBus);
+        NeoForge.EVENT_BUS.register(LightsaberFormCapabilityHandler.RuntimeEvents.class);
+        NeoForge.EVENT_BUS.register(this); // necessary for @SubscribeEvent methods here
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        registerLightsabers();
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        LightsaberFormCommand.register(event.getDispatcher());
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
@@ -469,7 +483,6 @@ public class galaxyunderchaos
             LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
 
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
@@ -479,30 +492,32 @@ public class galaxyunderchaos
 //        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
 //            event.accept(EXAMPLE_BLOCK_ITEM);
 //    }
+    private void clientSetup(final FMLClientSetupEvent event) {
+        EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
+
+        event.enqueueWork(() -> {
+            ModItemProperties.addCustomItemProperties();
+            Minecraft mc = Minecraft.getInstance();
+
+            mc.getEntityRenderDispatcher()
+                    .getSkinMap()
+                    .values()
+                    .forEach(renderer -> {
+                        if (renderer instanceof PlayerRenderer pr) {
+                            pr.addLayer(new LightsaberFirstPersonLayer(pr));
+                        }
+                    });
+        });
+
+        NeoForge.EVENT_BUS.addListener(ClientEventSubscriber::onClientTick);
+    }
+
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
+    public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            ModItemProperties.addCustomItemProperties();
-            EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
-            galaxyunderchaos.LIGHTSABERS.values().forEach(lightsaber ->
-                    ItemBlockRenderTypes.setRenderLayer(Block.byItem(lightsaber.get()), RenderType.translucent())
-            );
-        }
-    }
 }
