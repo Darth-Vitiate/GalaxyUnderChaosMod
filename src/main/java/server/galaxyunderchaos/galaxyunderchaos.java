@@ -464,7 +464,6 @@ public class galaxyunderchaos {
         ModDataComponentTypes.register(modEventBus);
         ModLootModifiers.register(modEventBus);
         LightsaberFormNetworking.register(modEventBus);
-        NeoForge.EVENT_BUS.register(LightsaberFormCapabilityHandler.RuntimeEvents.class);
         NeoForge.EVENT_BUS.register(this); // necessary for @SubscribeEvent methods here
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         registerLightsabers();

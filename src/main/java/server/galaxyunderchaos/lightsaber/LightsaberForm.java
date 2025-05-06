@@ -57,7 +57,7 @@ public enum LightsaberForm {
     ),
 
     SHIEN(
-            "Shien / DjemSo",
+            "Shien / Djem So",
             new AttributeModifier(
                     ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "shien_counter"),
                     1.50, AttributeModifier.Operation.ADD_VALUE

@@ -19,7 +19,7 @@ public class LightsaberTier implements Tier {
 
     @Override
     public float getAttackDamageBonus() {
-        return 20.0F; // Additional attack damage
+        return 12.0F; // Additional attack damage
     }
 
     @Override

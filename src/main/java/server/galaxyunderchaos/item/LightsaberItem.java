@@ -38,7 +38,7 @@ public class LightsaberItem extends SwordItem {
 
     public LightsaberItem(String bladeColor, Item.Properties properties) {
         super(ModToolTiers.LIGHTSABER, new Item.Properties()
-                .attributes(SwordItem.createAttributes(ModToolTiers.LIGHTSABER, 21, -2.4F)));
+                .attributes(SwordItem.createAttributes(ModToolTiers.LIGHTSABER, 9, -2.4F)));
         this.bladeColor = bladeColor;
     }
 
