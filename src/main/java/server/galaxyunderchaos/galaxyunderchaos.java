@@ -232,6 +232,11 @@ public class galaxyunderchaos {
     public static final DeferredItem<BlockItem> SITH_HOLOCRON_ITEM = (DeferredItem<BlockItem>) ITEMS.register("sith_holocron",
             () -> new BlockItem(SITH_HOLOCRON.get(), new Item.Properties()));
 
+
+    public static final DeferredHolder<Block, Holocron> ANCIENT_HOLOCRON = BLOCKS.register("ancient_holocron", Holocron::new);
+    public static final DeferredItem<BlockItem> ANCIENT_HOLOCRON_ITEM = (DeferredItem<BlockItem>) ITEMS.register("ancient_holocron",
+            () -> new BlockItem(ANCIENT_HOLOCRON.get(), new Item.Properties()));
+
     public static final DeferredHolder<Block, JediGuard> JEDI_GUARD_STATUE = BLOCKS.register("jedi_guard_statue", JediGuard::new);
     public static final DeferredItem<BlockItem> JEDI_GUARD_STATUE_ITEM = (DeferredItem<BlockItem>) ITEMS.register("jedi_guard_statue",
             () -> new BlockItem(JEDI_GUARD_STATUE.get(), new Item.Properties()));

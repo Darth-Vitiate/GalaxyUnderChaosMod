@@ -58,8 +58,6 @@ public class CreativeMenuTabs {
                         output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
                         output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
-                        output.accept(JEDI_GUARD_STATUE.get().asItem());
-                        output.accept(SITH_GUARD_STATUE_ITEM.get().asItem());
 
                     }).build());
 
@@ -105,6 +103,7 @@ public class CreativeMenuTabs {
                         output.accept(NIMAN_HOLOBOOK.get());
                         output.accept(JEDI_HOLOCRON.get());
                         output.accept(ANCIENT_HOLOBOOK.get());
+                        output.accept(ANCIENT_HOLOCRON.get());
                         output.accept(SITH_HOLOBOOK.get());
                         output.accept(SHIEN_DJEM_SO_HOLOBOOK.get());
                         output.accept(JUYO_VAAPAD_HOLOBOOK.get());
