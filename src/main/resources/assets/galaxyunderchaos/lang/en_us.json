@@ -447,5 +447,16 @@
   "sounds.galaxyunderchaos.lightsaber_hit": "Lightsaber hits",
   "sounds.galaxyunderchaos.lightsaber_idle": "Lightsaber idle hum",
   "sounds.galaxyunderchaos.lightsaber_deflect": "Lightsaber deflect",
-  "sounds.galaxyunderchaos.hyperspace": "Hyperspace jump"
+  "sounds.galaxyunderchaos.hyperspace": "Hyperspace jump",
+  "block.galaxyunderchaos.tython_jedi_idle_head_statue": "Tython Jedi Idle Statue Head",
+  "block.galaxyunderchaos.tython_jedi_idle_torso_statue": "Tython Jedi Idle Statue Torso",
+  "block.galaxyunderchaos.tython_jedi_idle_leg_1_statue": "Tython Jedi Idle Statue Legs Part One",
+  "block.galaxyunderchaos.tython_jedi_idle_leg_2_statue": "Tython Jedi Idle Statue Legs Part Two",
+  "block.galaxyunderchaos.tython_jedi_crossed_torso_statue": "Tython Jedi Crossed-Arms Statue Torso",
+  "item.galaxyunderchaos.tython_jedi_idle_head_statue": "Tython Jedi Idle Statue Head",
+  "item.galaxyunderchaos.tython_jedi_idle_torso_statue": "Tython Jedi Idle Statue Torso",
+  "item.galaxyunderchaos.tython_jedi_idle_leg_1_statue": "Tython Jedi Idle Statue Legs Part One",
+  "item.galaxyunderchaos.tython_jedi_idle_leg_2_statue": "Tython Jedi Idle Statue Legs Part Two",
+  "item.galaxyunderchaos.tython_jedi_crossed_torso_statue": "Tython Jedi Crossed-Arms Statue Torso",
+  "creativetab.galaxyunderchaos.galaxy_under_chaos_decorations": "Galaxy Under Chaos Decorations"
 }

@@ -155,6 +155,19 @@ public class galaxyunderchaos {
             () -> new BlockItem(TURQUOISE_CRYSTAL_ORE.get(), new Item.Properties()));
 
 
+    public static final DeferredHolder<Block,TythonJediStatueHEAD> TYTHON_JEDI_IDLE_HEAD_STATUE = BLOCKS.register("tython_jedi_idle_head_statue", TythonJediStatueHEAD::new);
+    public static final DeferredItem<Item> TYTHON_JEDI_IDLE_HEAD_STATUE_ITEM = ITEMS.register("tython_jedi_idle_head_statue", () -> new BlockItem(TYTHON_JEDI_IDLE_HEAD_STATUE.get(), new Item.Properties()));
+    public static final DeferredHolder<Block,TythonJediStatueTORSO> TYTHON_JEDI_IDLE_TORSO_STATUE = BLOCKS.register("tython_jedi_idle_torso_statue", TythonJediStatueTORSO::new);
+    public static final DeferredItem<Item> TYTHON_JEDI_IDLE_TORSO_STATUE_ITEM = ITEMS.register("tython_jedi_idle_torso_statue", () -> new BlockItem(TYTHON_JEDI_IDLE_TORSO_STATUE.get(), new Item.Properties()));
+    public static final DeferredHolder<Block,TythonJediStatueLEG> TYTHON_JEDI_IDLE_LEG_1_STATUE = BLOCKS.register("tython_jedi_idle_leg_1_statue", TythonJediStatueLEG::new);
+    public static final DeferredItem<Item> TYTHON_JEDI_IDLE_LEG_1_STATUE_ITEM = ITEMS.register("tython_jedi_idle_leg_1_statue", () -> new BlockItem(TYTHON_JEDI_IDLE_LEG_1_STATUE.get(), new Item.Properties()));
+    public static final DeferredHolder<Block,TythonJediStatueLEG> TYTHON_JEDI_IDLE_LEG_2_STATUE = BLOCKS.register("tython_jedi_idle_leg_2_statue", TythonJediStatueLEG::new);
+    public static final DeferredItem<Item> TYTHON_JEDI_IDLE_LEGS_2_STATUE_ITEM = ITEMS.register("tython_jedi_idle_leg_2_statue", () -> new BlockItem(TYTHON_JEDI_IDLE_LEG_2_STATUE.get(), new Item.Properties()));
+    public static final DeferredHolder<Block,TythonJediStatueCTORSO> TYTHON_JEDI_CROSSED_TORSO_STATUE = BLOCKS.register("tython_jedi_crossed_torso_statue", TythonJediStatueCTORSO::new);
+    public static final DeferredItem<Item> TYTHON_JEDI_CROSSED_TORSO_STATUE_ITEM = ITEMS.register("tython_jedi_crossed_torso_statue", () -> new BlockItem(TYTHON_JEDI_CROSSED_TORSO_STATUE.get(), new Item.Properties()));
+
+
+
     public static final DeferredHolder<Block, TempleStone> TEMPLE_STONE = BLOCKS.register("temple_stone", TempleStone::new);
     public static final DeferredItem<BlockItem> TEMPLE_STONE_ITEM = (DeferredItem<BlockItem>) ITEMS.register("temple_stone",
             () -> new BlockItem(TEMPLE_STONE.get(), new Item.Properties()));
