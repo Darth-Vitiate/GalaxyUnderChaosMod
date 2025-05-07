@@ -102,6 +102,7 @@ public class CreativeMenuTabs {
                         output.accept(NIMAN_HOLOBOOK.get());
                         output.accept(JEDI_HOLOCRON.get());
                         output.accept(ANCIENT_HOLOBOOK.get());
+                        output.accept(ANCIENT_HOLOCRON.get());
                         output.accept(SITH_HOLOBOOK.get());
                         output.accept(SHIEN_DJEM_SO_HOLOBOOK.get());
                         output.accept(JUYO_VAAPAD_HOLOBOOK.get());

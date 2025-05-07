@@ -146,6 +146,8 @@ import java.util.Map;
             () -> new SaberFormHolobookItem("Juyo / Vaapad", new Item.Properties()));
     public static final RegistryObject<Block> JEDI_HOLOCRON = BLOCKS.register("jedi_holocron", Holocron::new);
     public static final RegistryObject<Item> JEDI_HOLOCRON_ITEM = ITEMS.register("jedi_holocron", () -> new BlockItem(JEDI_HOLOCRON.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ANCIENT_HOLOCRON = BLOCKS.register("ancient_holocron", Holocron::new);
+    public static final RegistryObject<Item> ANCIENT_HOLOCRON_ITEM = ITEMS.register("ancient_holocron", () -> new BlockItem(ANCIENT_HOLOCRON.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> SITH_HOLOCRON = BLOCKS.register("sith_holocron", Holocron::new);
     public static final RegistryObject<Item> SITH_HOLOCRON_ITEM = ITEMS.register("sith_holocron", () -> new BlockItem(SITH_HOLOCRON.get(), new Item.Properties()));
