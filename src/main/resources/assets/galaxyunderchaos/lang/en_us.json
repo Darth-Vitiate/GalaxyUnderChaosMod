@@ -453,5 +453,17 @@
   "item.galaxyunderchaos.ataru_holobook": "Ataru Holobook",
   "item.galaxyunderchaos.niman_holobook": "Niman Holobook",
   "item.galaxyunderchaos.shien_djem_so_holobook": "Shein Djem So Holobook",
-  "item.galaxyunderchaos.juyo_vaapad_holobook": "Juyo Vaapad Holobook"
+  "item.galaxyunderchaos.juyo_vaapad_holobook": "Juyo Vaapad Holobook",
+  "block.galaxyunderchaos.tython_jedi_idle_head_statue": "Tython Jedi Idle Statue Head",
+  "block.galaxyunderchaos.tython_jedi_idle_torso_statue": "Tython Jedi Idle Statue Torso",
+  "block.galaxyunderchaos.tython_jedi_idle_leg_1_statue": "Tython Jedi Idle Statue Legs Part One",
+  "block.galaxyunderchaos.tython_jedi_idle_leg_2_statue": "Tython Jedi Idle Statue Legs Part Two",
+  "block.galaxyunderchaos.tython_jedi_crossed_torso_statue": "Tython Jedi Crossed-Arms Statue Torso",
+  "item.galaxyunderchaos.tython_jedi_idle_head_statue": "Tython Jedi Idle Statue Head",
+  "item.galaxyunderchaos.tython_jedi_idle_torso_statue": "Tython Jedi Idle Statue Torso",
+  "item.galaxyunderchaos.tython_jedi_idle_leg_1_statue": "Tython Jedi Idle Statue Legs Part One",
+  "item.galaxyunderchaos.tython_jedi_idle_leg_2_statue": "Tython Jedi Idle Statue Legs Part Two",
+  "item.galaxyunderchaos.tython_jedi_crossed_torso_statue": "Tython Jedi Crossed-Arms Statue Torso",
+  "creativetab.galaxyunderchaos.galaxy_under_chaos_decorations": "Galaxy Under Chaos Decorations"
+
 }

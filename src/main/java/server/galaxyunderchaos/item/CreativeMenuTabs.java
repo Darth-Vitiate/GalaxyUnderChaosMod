@@ -58,9 +58,6 @@ public class CreativeMenuTabs {
                         output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
                         output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
-                        output.accept(JEDI_GUARD_STATUE.get().asItem());
-                        output.accept(SITH_GUARD_STATUE_ITEM.get().asItem());
-
                     }).build());
 
     public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_ITEMS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_items",
@@ -126,6 +123,23 @@ public class CreativeMenuTabs {
                     .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_entities"))
                     .displayItems((parameters, output) -> {
                         output.accept(ACID_SPIDER_SPAWN_EGG.get());
+
+
+
+                    }).build());
+    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_DECORATIONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_decorations",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(JEDI_GUARD_STATUE_ITEM.get()))
+                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_decorations"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(JEDI_GUARD_STATUE_ITEM.get());
+                        output.accept(TYTHON_JEDI_IDLE_HEAD_STATUE.get());
+                        output.accept(TYTHON_JEDI_CROSSED_TORSO_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_TORSO_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_LEG_1_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_LEG_2_STATUE.get());
+                        output.accept(SITH_GUARD_STATUE_ITEM.get());
+
 
 
 

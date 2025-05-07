@@ -40,7 +40,11 @@
         "galaxyunderchaos:pink_crystal_ore",
         "galaxyunderchaos:lime_green_crystal_ore",
         "galaxyunderchaos:turquoise_crystal_ore" ,
-        "galaxyunderchaos:lightsaber_crafting_table"
-
+        "galaxyunderchaos:lightsaber_crafting_table",
+    "galaxyunderchaos:tython_jedi_crossed_torso_statue",
+    "galaxyunderchaos:tython_jedi_idle_head_statue",
+    "galaxyunderchaos:tython_jedi_idle_leg_1_statue",
+    "galaxyunderchaos:tython_jedi_idle_leg_2_statue",
+    "galaxyunderchaos:tython_jedi_idle_torso_statue"
   ]
 }
