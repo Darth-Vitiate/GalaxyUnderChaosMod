@@ -111,6 +111,7 @@ public class CreativeMenuTabs {
                         output.accept(SILK_THREAD.get());
                         output.accept(CHITIN_FRAGMENTS.get());
                         output.accept(ACID_FORGED_PLATE.get());
+                        output.accept(TEMPLE_GUARD_FABRIC.get());
 
                         output.accept(SHUURA.get());
 
@@ -157,6 +158,10 @@ public class CreativeMenuTabs {
 //                                output.accept(galaxyunderchaos.LIGHTSABERS.get(color + "_" + hilt + "_lightsaber").get());
 //                            }
 //                        }
+                        output.accept(TEMPLE_GUARD_HELMET.get());
+                        output.accept(TEMPLE_GUARD_CHESTPLATE.get());
+                        output.accept(TEMPLE_GUARD_LEGGINGS.get());
+                        output.accept(TEMPLE_GUARD_BOOTS.get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("green_lost_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("orange_aegis_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("pink_apprentice_lightsaber").get());
@@ -196,6 +201,7 @@ public class CreativeMenuTabs {
                         output.accept(KNIGHTFALL_HILT.get());
                         output.accept(NEGOTIATOR_HILT.get());
                         output.accept(BAROSHE_HILT.get());
+
 
                     }).build());
 

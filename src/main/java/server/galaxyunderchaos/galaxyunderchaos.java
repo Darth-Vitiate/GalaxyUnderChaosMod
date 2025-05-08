@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -262,6 +263,20 @@ import java.util.Map;
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SILK_THREAD = ITEMS.register("silk_thread",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TEMPLE_GUARD_FABRIC = ITEMS.register("temple_guard_fabric",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TEMPLE_GUARD_HELMET = ITEMS.register("temple_guard_helmet",
+            () -> new ArmorItem(CustomArmor.TEMPLE_GUARD_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
+    public static final RegistryObject<Item> TEMPLE_GUARD_CHESTPLATE = ITEMS.register("temple_guard_chestplate",
+            () -> new ArmorItem(CustomArmor.TEMPLE_GUARD_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
+    public static final RegistryObject<Item> TEMPLE_GUARD_LEGGINGS = ITEMS.register("temple_guard_leggings",
+            () -> new ArmorItem(CustomArmor.TEMPLE_GUARD_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
+    public static final RegistryObject<Item> TEMPLE_GUARD_BOOTS = ITEMS.register("temple_guard_boots",
+            () -> new ArmorItem(CustomArmor.TEMPLE_GUARD_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
     public static final RegistryObject<Item> CHITIN_FRAGMENTS = ITEMS.register("chitin_fragments",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LOST_HILT = ITEMS.register("lost_hilt",
