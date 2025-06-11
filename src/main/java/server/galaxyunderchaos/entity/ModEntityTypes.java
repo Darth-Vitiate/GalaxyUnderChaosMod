@@ -40,18 +40,5 @@ public final class ModEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .build("heart_berry_chest_boat"));
 
-    /* ───── Acid-Spider & Wingmaw (example mobs) ─────────── */
-    public static final DeferredHolder<EntityType<?>, EntityType<AcidSpiderEntity>> ACID_SPIDER =
-            ENTITY_TYPES.register("acid_spider",
-                    () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
-                            .sized(1.5F, 1.5F)
-                            .build("acid_spider"));
-
-    public static final DeferredHolder<EntityType<?>, EntityType<WingmawEntity>> WINGMAW =
-            ENTITY_TYPES.register("wingmaw",
-                    () -> EntityType.Builder.of(WingmawEntity::new, MobCategory.MONSTER)
-                            .sized(1.0F, 1.0F)
-                            .build("wingmaw"));
-
     private ModEntityTypes() {} // no instantiation
 }

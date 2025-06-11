@@ -27,9 +27,9 @@ public final class ClientLayerInt {
         /* Iterate registered player skin models (DEFAULT, SLIM, etc.) */
         for (PlayerSkin.Model model : event.getSkins()) {
             PlayerRenderer renderer = event.getSkin(model);
-            if (renderer != null) {
-                renderer.addLayer(new LightsaberFirstPersonLayer(renderer));
-            }
+//            if (renderer != null) {
+//                renderer.addLayer(new LightsaberFirstPersonLayer(renderer));
+//            }
         }
     }
 }

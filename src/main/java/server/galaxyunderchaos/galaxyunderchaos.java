@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -916,7 +917,7 @@ public class galaxyunderchaos {
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
-
+        event.enqueueWork(DefaultAttributes::validate);
         if (Config.logDirtBlock)
             LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
 
@@ -942,9 +943,9 @@ public class galaxyunderchaos {
                     .getSkinMap()
                     .values()
                     .forEach(renderer -> {
-                        if (renderer instanceof PlayerRenderer pr) {
-                            pr.addLayer(new LightsaberFirstPersonLayer(pr));
-                        }
+//                        if (renderer instanceof PlayerRenderer pr) {
+//                            pr.addLayer(new LightsaberFirstPersonLayer(pr));
+//                        }
                     });
         });
 
@@ -958,6 +959,8 @@ public class galaxyunderchaos {
     public class ModClient {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
+            EntityRenderers.register(galaxyunderchaos.WINGMAW.get(), WingmawRenderer::new);
             event.enqueueWork(() -> {
                 EntityRenderers.register(ModEntityTypes.AK_BOAT.get(), pContext -> new AkBoatRenderer(pContext, false));
                 EntityRenderers.register(ModEntityTypes.AK_CHEST_BOAT.get(), pContext -> new AkBoatRenderer(pContext, true));
