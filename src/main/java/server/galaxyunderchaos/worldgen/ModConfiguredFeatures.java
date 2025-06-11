@@ -26,6 +26,9 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TITANIUM_ORE_KEY = registerKey("titanium_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_CHROMIUM_ORE_KEY = registerKey("chromium_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLBA_KEY = registerKey("blba");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AK_TREE_KEY = registerKey("ak_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HEART_BERRY_KEY = registerKey("heart_berry_tree");
+
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -47,6 +50,19 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.OAK_LEAVES),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, HEART_BERRY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(galaxyunderchaos.HEART_BERRY_LOG.get()),
+                new ForkingTrunkPlacer(4, 4, 3),
+                BlockStateProvider.simple(galaxyunderchaos.HEART_BERRY_LEAVES.get()),
+                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(3), 3),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+        register(context, AK_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(galaxyunderchaos.AK_LOG.get()),
+                new ForkingTrunkPlacer(4, 4, 3),
+                BlockStateProvider.simple(galaxyunderchaos.AK_LEAVES.get()),
+                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(3), 3),
+                new TwoLayersFeatureSize(1, 0, 2)).build());
+
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

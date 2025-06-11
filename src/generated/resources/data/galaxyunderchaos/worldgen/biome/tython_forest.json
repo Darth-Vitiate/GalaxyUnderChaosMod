@@ -3,10 +3,11 @@
   "downfall": 0.8,
   "has_precipitation": true,
   "effects": {
-    "sky_color": 7842047,
+    "sky_color": 46578,
     "fog_color": 12638463,
-    "water_color": 4159204,
+    "water_color": 2069949,
     "water_fog_color": 329011,
+    "grass_color": 7505193,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
@@ -96,9 +97,10 @@
       "minecraft:spring_lava"
     ],
     [
+      "galaxyunderchaos:ak_pine_placed",
+      "galaxyunderchaos:heart_berry_placed",
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
-      "minecraft:trees_old_growth_pine_taiga",
       "minecraft:flower_default",
       "minecraft:patch_grass_taiga_2",
       "minecraft:patch_dead_bush",

@@ -58,6 +58,46 @@ public class CreativeMenuTabs {
                         output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
                         output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
+                        output.accept(AK_LOG_ITEM.get());               // 1  log
+                        output.accept(STRIPPED_AK_LOG_ITEM.get());      // 2  stripped log
+                        output.accept(AK_WOOD_ITEM.get());              // 3  wood
+                        output.accept(STRIPPED_AK_WOOD_ITEM.get());     // 4  stripped wood
+                        output.accept(AK_PLANKS_ITEM.get());            // 5  planks
+                        output.accept(AK_STAIRS_ITEM.get());            // 6  stairs
+                        output.accept(AK_SLAB_ITEM.get());              // 7  slab
+                        output.accept(AK_FENCE_ITEM.get());             // 8  fence
+                        output.accept(AK_FENCE_GATE_ITEM.get());        // 9  fence gate
+                        output.accept(AK_DOOR_ITEM.get());              // 10 door
+                        output.accept(AK_TRAPDOOR_ITEM.get());          // 11 trapdoor
+                        output.accept(AK_PRESSURE_PLATE_ITEM.get());    // 12 pressure plate
+                        output.accept(AK_BUTTON_ITEM.get());            // 13 button
+                        output.accept(AK_LEAVES_ITEM.get());            // 14 leaves   (moves down)
+                        output.accept(AK_SAPLING_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_HANGING_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_BOAT.get());
+                        output.accept(AK_CHEST_BOAT.get());
+                        output.accept(HEART_BERRY_LOG_ITEM.get());               // 1  log
+                        output.accept(STRIPPED_HEART_BERRY_LOG_ITEM.get());      // 2  stripped log
+                        output.accept(HEART_BERRY_WOOD_ITEM.get());              // 3  wood
+                        output.accept(STRIPPED_HEART_BERRY_WOOD_ITEM.get());     // 4  stripped wood
+                        output.accept(HEART_BERRY_PLANKS_ITEM.get());            // 5  planks
+                        output.accept(HEART_BERRY_STAIRS_ITEM.get());            // 6  stairs
+                        output.accept(HEART_BERRY_SLAB_ITEM.get());              // 7  slab
+                        output.accept(HEART_BERRY_FENCE_ITEM.get());             // 8  fence
+                        output.accept(HEART_BERRY_FENCE_GATE_ITEM.get());        // 9  fence gate
+                        output.accept(HEART_BERRY_DOOR_ITEM.get());              // 10 door
+                        output.accept(HEART_BERRY_TRAPDOOR_ITEM.get());          // 11 trapdoor
+                        output.accept(HEART_BERRY_PRESSURE_PLATE_ITEM.get());    // 12 pressure plate
+                        output.accept(HEART_BERRY_BUTTON_ITEM.get());            // 13 button
+                        output.accept(HEART_BERRY_LEAVES_ITEM.get());               // 14 Leaves
+                        output.accept(HEART_BERRY_FRUIT_LEAVES_ITEM.get());            // 15 Fruit Leaves
+                        output.accept(HEART_BERRY_SAPLING_ITEM.get());           // 16 sapling  (moves down)
+                        output.accept(HEART_BERRY_SIGN_ITEM.get());           // 17 sapling  (moves down)
+                        output.accept(HEART_BERRY_HANGING_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(HEART_BERRY_BOAT.get());
+                        output.accept(HEART_BERRY_CHEST_BOAT.get());
+
                     }).build());
 
     public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_ITEMS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_items",
@@ -112,8 +152,8 @@ public class CreativeMenuTabs {
                         output.accept(CHITIN_FRAGMENTS.get());
                         output.accept(ACID_FORGED_PLATE.get());
                         output.accept(TEMPLE_GUARD_FABRIC.get());
-
                         output.accept(SHUURA.get());
+                        output.accept(HEART_BERRY.get());
 
 
 
@@ -125,6 +165,7 @@ public class CreativeMenuTabs {
                     .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_entities"))
                     .displayItems((parameters, output) -> {
                         output.accept(ACID_SPIDER_SPAWN_EGG.get());
+                        output.accept(WINGMAW_SPAWN_EGG.get());
 
 
 

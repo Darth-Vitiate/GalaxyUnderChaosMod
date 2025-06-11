@@ -5,20 +5,31 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.HangingSignBlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -37,7 +48,7 @@ import org.slf4j.Logger;
 import server.galaxyunderchaos.block.*;
 import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.data.ModDataComponentTypes;
-import server.galaxyunderchaos.entity.AcidSpiderEntity;
+import server.galaxyunderchaos.entity.*;
 import server.galaxyunderchaos.event.LightsaberFormEventHandler;
 import server.galaxyunderchaos.item.*;
 import server.galaxyunderchaos.lightsaber.LightsaberFormNetworking;
@@ -48,6 +59,7 @@ import server.galaxyunderchaos.worldgen.tree.ModTreeGrowers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
     public static final String MODID = "galaxyunderchaos";
@@ -204,7 +216,9 @@ import java.util.Map;
     // #ITEMS
 
     public static final RegistryObject<Item> SHUURA = ITEMS.register("shuura", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(6).saturationModifier(2f).build())));
+            .alwaysEdible().nutrition(4).saturationModifier(2f).build())));
+    public static final RegistryObject<Item> HEART_BERRY = ITEMS.register("heart_berry", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+            .alwaysEdible().nutrition(8).saturationModifier(2f).build())));
     public static final RegistryObject<Item> JEDI_HOLOBOOK = ITEMS.register("jedi_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANCIENT_HOLOBOOK = ITEMS.register("ancient_holobook", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SITH_HOLOBOOK = ITEMS.register("sith_holobook", () -> new Item(new Item.Properties()));
@@ -319,6 +333,9 @@ import java.util.Map;
             () -> new HiltItem("blue", new Item.Properties()));
     public static final RegistryObject<Item> ACID_SPIDER_SPAWN_EGG = ITEMS.register("acid_spider_spawn_egg",
             () -> new ForgeSpawnEggItem(galaxyunderchaos.ACID_SPIDER, 0x53524b, 0xdac741, new Item.Properties()));
+    public static final RegistryObject<Item> WINGMAW_SPAWN_EGG = ITEMS.register("wingmaw_spawn_egg",
+            () -> new ForgeSpawnEggItem(galaxyunderchaos.WINGMAW, 0x53524b, 0xdac741, new Item.Properties()));
+
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
     public static void registerLightsabers() {
@@ -344,15 +361,290 @@ import java.util.Map;
             }
         }
     }
+    public static final RegistryObject<RotatedPillarBlock> HEART_BERRY_LOG = BLOCKS.register("heart_berry_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final RegistryObject<RotatedPillarBlock> HEART_BERRY_WOOD = BLOCKS.register("heart_berry_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_HEART_BERRY_LOG = BLOCKS.register("stripped_heart_berry_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_HEART_BERRY_WOOD = BLOCKS.register("stripped_heart_berry_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<RotatedPillarBlock> AK_LOG = BLOCKS.register("ak_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final RegistryObject<RotatedPillarBlock> AK_WOOD = BLOCKS.register("ak_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_AK_LOG = BLOCKS.register("stripped_ak_log",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<RotatedPillarBlock> STRIPPED_AK_WOOD = BLOCKS.register("stripped_ak_wood",
+            () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<Item> AK_LOG_ITEM               = ITEMS.register("ak_log",
+            () -> new BlockItem(AK_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> AK_WOOD_ITEM              = ITEMS.register("ak_wood",
+            () -> new BlockItem(AK_WOOD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_AK_LOG_ITEM      = ITEMS.register("stripped_ak_log",
+            () -> new BlockItem(STRIPPED_AK_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_AK_WOOD_ITEM     = ITEMS.register("stripped_ak_wood",
+            () -> new BlockItem(STRIPPED_AK_WOOD.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HEART_BERRY_LOG_ITEM           = ITEMS.register("heart_berry_log",
+            () -> new BlockItem(HEART_BERRY_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEART_BERRY_WOOD_ITEM          = ITEMS.register("heart_berry_wood",
+            () -> new BlockItem(HEART_BERRY_WOOD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_HEART_BERRY_LOG_ITEM  = ITEMS.register("stripped_heart_berry_log",
+            () -> new BlockItem(STRIPPED_HEART_BERRY_LOG.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STRIPPED_HEART_BERRY_WOOD_ITEM = ITEMS.register("stripped_heart_berry_wood",
+            () -> new BlockItem(STRIPPED_HEART_BERRY_WOOD.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_PLANKS = BLOCKS.register("ak_planks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+    public static final RegistryObject<Block> HEART_BERRY_PLANKS = BLOCKS.register("heart_berry_planks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+
+    public static final RegistryObject<Block> HEART_BERRY_LEAVES = BLOCKS.register("heart_berry_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+    public static final RegistryObject<Block> HEART_BERRY_FRUIT_LEAVES = BLOCKS.register("heart_berry_fruit_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+    public static final RegistryObject<Block> AK_LEAVES = BLOCKS.register("ak_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+
+    public static final BlockSetType AK_BLOCK_SET =
+            BlockSetType.register(new BlockSetType("ak"));
+    public static final WoodType AK_WOOD_TYPE =
+            WoodType.register(new WoodType("ak", AK_BLOCK_SET));
+    public static final BlockSetType HEART_BERRY_BLOCK_SET =
+            BlockSetType.register(new BlockSetType("heart_berry"));
+    public static final WoodType HEART_BERRY_WOOD_TYPE =
+            WoodType.register(new WoodType("heart_berry", HEART_BERRY_BLOCK_SET));
+
+
+    public static final RegistryObject<Block> HEART_BERRY_SAPLING = BLOCKS.register("heart_berry_sapling",
+            () -> new SaplingBlock(ModTreeGrowers.HEART_BERRY_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> AK_SAPLING = BLOCKS.register("ak_sapling",
+            () -> new SaplingBlock(ModTreeGrowers.AK_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Item> HEART_BERRY_PLANKS_ITEM        = ITEMS.register("heart_berry_planks",
+            () -> new BlockItem(HEART_BERRY_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEART_BERRY_LEAVES_ITEM        = ITEMS.register("heart_berry_leaves",
+            () -> new BlockItem(HEART_BERRY_LEAVES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEART_BERRY_FRUIT_LEAVES_ITEM  = ITEMS.register("heart_berry_fruit_leaves",
+            () -> new BlockItem(HEART_BERRY_FRUIT_LEAVES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HEART_BERRY_SAPLING_ITEM       = ITEMS.register("heart_berry_sapling",
+            () -> new BlockItem(HEART_BERRY_SAPLING.get(), new Item.Properties()));
+    public static final RegistryObject<Item> AK_PLANKS_ITEM            = ITEMS.register("ak_planks",
+            () -> new BlockItem(AK_PLANKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> AK_LEAVES_ITEM            = ITEMS.register("ak_leaves",
+            () -> new BlockItem(AK_LEAVES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> AK_SAPLING_ITEM           = ITEMS.register("ak_sapling",
+            () -> new BlockItem(AK_SAPLING.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_DOOR_BLOCK = BLOCKS.register(
+            "ak_door", () -> new TreeDoor(AK_BLOCK_SET));
+    public static final RegistryObject<Item> AK_DOOR_ITEM = ITEMS.register(
+            "ak_door", () -> new BlockItem(AK_DOOR_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_TRAPDOOR_BLOCK = BLOCKS.register(
+            "ak_trapdoor", () -> new TreeTrapdoor(AK_BLOCK_SET));
+    public static final RegistryObject<Item> AK_TRAPDOOR_ITEM = ITEMS.register(
+            "ak_trapdoor", () -> new BlockItem(AK_TRAPDOOR_BLOCK.get(), new Item.Properties()));
+
+    // correct registration
+    public static final RegistryObject<FenceGateBlock> AK_FENCE_GATE = BLOCKS.register(
+            "ak_fence_gate",
+            () -> new FenceGateBlock(
+                    WoodType.ACACIA,
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)
+            ));
+
+    public static final RegistryObject<Item> AK_FENCE_GATE_ITEM = ITEMS.register(
+            "ak_fence_gate",
+            () -> new BlockItem(AK_FENCE_GATE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_FENCE_BLOCK = BLOCKS.register(
+            "ak_fence", TreeFence::new);
+    public static final RegistryObject<Item> AK_FENCE_ITEM = ITEMS.register(
+            "ak_fence", () -> new BlockItem(AK_FENCE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> AK_STAIRS = BLOCKS.register("ak_stairs", () -> new TreeStairs(AK_PLANKS.get().defaultBlockState()));
+    public static final RegistryObject<Item> AK_STAIRS_ITEM = ITEMS.register("ak_stairs", () -> new BlockItem(AK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> AK_SLAB = BLOCKS.register("ak_slab", TreeSlab::new);
+    public static final RegistryObject<Item> AK_SLAB_ITEM = ITEMS.register("ak_slab", () -> new BlockItem(AK_SLAB.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_PRESSURE_PLATE = BLOCKS.register(
+            "ak_pressure_plate", () -> new TreePressurePlate(AK_BLOCK_SET));
+    public static final RegistryObject<Item>  AK_PRESSURE_PLATE_ITEM = ITEMS.register(
+            "ak_pressure_plate", () -> new BlockItem(AK_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> AK_BUTTON = BLOCKS.register(
+            "ak_button", () -> new TreeButton(AK_BLOCK_SET));
+    public static final RegistryObject<Item>  AK_BUTTON_ITEM = ITEMS.register(
+            "ak_button", () -> new BlockItem(AK_BUTTON.get(), new Item.Properties()));
+    public static final RegistryObject<Block> AK_SIGN = BLOCKS.register(
+            "ak_sign", () -> new TreeStandingSign(AK_WOOD_TYPE));
+    public static final RegistryObject<Block> AK_WALL_SIGN = BLOCKS.register(
+            "ak_wall_sign", () -> new TreeWallSign(AK_WOOD_TYPE));
+    public static final RegistryObject<Item> AK_SIGN_ITEM = ITEMS.register(
+            "ak_sign", () -> new SignItem(new Item.Properties(), AK_SIGN.get(), AK_WALL_SIGN.get()));
+
+    // hanging signs
+    public static final RegistryObject<Block> AK_HANGING_SIGN = BLOCKS.register(
+            "ak_hanging_sign", () -> new TreeHangingSign(AK_WOOD_TYPE));
+    public static final RegistryObject<Block> AK_WALL_HANGING_SIGN = BLOCKS.register(
+            "ak_wall_hanging_sign", () -> new TreeWallHangingSign(AK_WOOD_TYPE));
+    public static final RegistryObject<Item> AK_HANGING_SIGN_ITEM = ITEMS.register(
+            "ak_hanging_sign", () -> new HangingSignItem(AK_HANGING_SIGN.get(), AK_WALL_HANGING_SIGN.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> AK_BOAT = ITEMS.register("ak_boat",
+            () -> new ModBoatItem(false, ModEntityTypes.AK_BOAT::get, new Item.Properties()));
+    public static final RegistryObject<Item> AK_CHEST_BOAT = ITEMS.register("ak_chest_boat",
+            () -> new ModBoatItem(false, ModEntityTypes.AK_CHEST_BOAT::get, new Item.Properties()));
+
+
+    public static final RegistryObject<Block> HEART_BERRY_DOOR_BLOCK = BLOCKS.register(
+            "heart_berry_door", () -> new TreeDoor(HEART_BERRY_BLOCK_SET));
+    public static final RegistryObject<Item> HEART_BERRY_DOOR_ITEM = ITEMS.register(
+            "heart_berry_door", () -> new BlockItem(HEART_BERRY_DOOR_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> HEART_BERRY_TRAPDOOR_BLOCK = BLOCKS.register(
+            "heart_berry_trapdoor", () -> new TreeTrapdoor(HEART_BERRY_BLOCK_SET));
+    public static final RegistryObject<Item> HEART_BERRY_TRAPDOOR_ITEM = ITEMS.register(
+            "heart_berry_trapdoor", () -> new BlockItem(HEART_BERRY_TRAPDOOR_BLOCK.get(), new Item.Properties()));
+
+    // correct registration
+    public static final RegistryObject<FenceGateBlock> HEART_BERRY_FENCE_GATE = BLOCKS.register(
+            "heart_berry_fence_gate",
+            () -> new FenceGateBlock(
+                    WoodType.ACACIA,
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)
+            ));
+
+    public static final RegistryObject<Item> HEART_BERRY_FENCE_GATE_ITEM = ITEMS.register(
+            "heart_berry_fence_gate",
+            () -> new BlockItem(HEART_BERRY_FENCE_GATE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> HEART_BERRY_FENCE_BLOCK = BLOCKS.register(
+            "heart_berry_fence", TreeFence::new);
+    public static final RegistryObject<Item> HEART_BERRY_FENCE_ITEM = ITEMS.register(
+            "heart_berry_fence", () -> new BlockItem(HEART_BERRY_FENCE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> HEART_BERRY_STAIRS = BLOCKS.register("heart_berry_stairs", () -> new TreeStairs(HEART_BERRY_PLANKS.get().defaultBlockState()));
+    public static final RegistryObject<Item> HEART_BERRY_STAIRS_ITEM = ITEMS.register("heart_berry_stairs", () -> new BlockItem(HEART_BERRY_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> HEART_BERRY_SLAB = BLOCKS.register("heart_berry_slab", TreeSlab::new);
+    public static final RegistryObject<Item> HEART_BERRY_SLAB_ITEM = ITEMS.register("heart_berry_slab", () -> new BlockItem(HEART_BERRY_SLAB.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> HEART_BERRY_PRESSURE_PLATE = BLOCKS.register(
+            "heart_berry_pressure_plate", () -> new TreePressurePlate(HEART_BERRY_BLOCK_SET));
+    public static final RegistryObject<Item>  HEART_BERRY_PRESSURE_PLATE_ITEM = ITEMS.register(
+            "heart_berry_pressure_plate", () -> new BlockItem(HEART_BERRY_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> HEART_BERRY_BUTTON = BLOCKS.register(
+            "heart_berry_button", () -> new TreeButton(HEART_BERRY_BLOCK_SET));
+    public static final RegistryObject<Item>  HEART_BERRY_BUTTON_ITEM = ITEMS.register(
+            "heart_berry_button", () -> new BlockItem(HEART_BERRY_BUTTON.get(), new Item.Properties()));
+    public static final RegistryObject<Block> HEART_BERRY_SIGN = BLOCKS.register(
+            "heart_berry_sign", () -> new TreeStandingSignHB(HEART_BERRY_WOOD_TYPE));
+    public static final RegistryObject<Block> HEART_BERRY_WALL_SIGN = BLOCKS.register(
+            "heart_berry_wall_sign", () -> new TreeWallSignHB(HEART_BERRY_WOOD_TYPE));
+    public static final RegistryObject<Item> HEART_BERRY_SIGN_ITEM = ITEMS.register(
+            "heart_berry_sign", () -> new SignItem(new Item.Properties(), HEART_BERRY_SIGN.get(), HEART_BERRY_WALL_SIGN.get()));
+
+    public static final RegistryObject<Block> HEART_BERRY_HANGING_SIGN = BLOCKS.register(
+            "heart_berry_hanging_sign", () -> new TreeHangingSignHB(HEART_BERRY_WOOD_TYPE));
+    public static final RegistryObject<Block> HEART_BERRY_WALL_HANGING_SIGN = BLOCKS.register(
+            "heart_berry_wall_hanging_sign", () -> new TreeWallHangingSignHB(HEART_BERRY_WOOD_TYPE));
+    public static final RegistryObject<Item> HEART_BERRY_HANGING_SIGN_ITEM = ITEMS.register(
+            "heart_berry_hanging_sign", () -> new HangingSignItem(HEART_BERRY_HANGING_SIGN.get(), HEART_BERRY_WALL_HANGING_SIGN.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HEART_BERRY_BOAT = ITEMS.register("heart_berry_boat",
+            () -> new ModBoatItem(false, ModEntityTypes.HEART_BERRY_BOAT::get, new Item.Properties()));
+    public static final RegistryObject<Item> HEART_BERRY_CHEST_BOAT = ITEMS.register("heart_berry_chest_boat",
+            () -> new ModBoatItem(false, ModEntityTypes.HEART_BERRY_CHEST_BOAT::get, new Item.Properties()));
 
     // #ENTITIES
     public static final RegistryObject<EntityType<AcidSpiderEntity>> ACID_SPIDER =
             ENTITY_TYPES.register("acid_spider", () -> EntityType.Builder.of(AcidSpiderEntity::new, MobCategory.MONSTER)
                     .sized(1.5f, 1.5f).build("acid_spider"));
+    public static final RegistryObject<EntityType<WingmawEntity>> WINGMAW =
+            ENTITY_TYPES.register("wingmaw", () -> EntityType.Builder.of(WingmawEntity::new, MobCategory.MONSTER)
+                    .sized(1.0f, 1.0f).build("wingmaw"));
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModEntityTypes.ENTITY_TYPES.register(modEventBus);
         ENTITY_TYPES.register(modEventBus);
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
@@ -374,12 +666,36 @@ import java.util.Map;
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");
         LightsaberFormNetworking.registerPackets(event);
-//        event.enqueueWork(GalaxyUnderChaosNetworking::registerPackets);
+    }
+    @Mod.EventBusSubscriber(modid = galaxyunderchaos.MODID,
+            bus = Mod.EventBusSubscriber.Bus.MOD,
+            value = Dist.CLIENT)
+    public class ModClient {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                EntityRenderers.register(ModEntityTypes.AK_BOAT.get(), pContext -> new AkBoatRenderer(pContext, false));
+                EntityRenderers.register(ModEntityTypes.AK_CHEST_BOAT.get(), pContext -> new AkBoatRenderer(pContext, true));
+                EntityRenderers.register(ModEntityTypes.HEART_BERRY_BOAT.get(), pContext -> new HBBoatRenderer(pContext, false));
+                EntityRenderers.register(ModEntityTypes.HEART_BERRY_CHEST_BOAT.get(), pContext -> new HBBoatRenderer(pContext, true));
+                Sheets.addWoodType(galaxyunderchaos.AK_WOOD_TYPE);
+                Sheets.addWoodType(galaxyunderchaos.HEART_BERRY_WOOD_TYPE);
+
+                BlockEntityRenderers.register(ModBlockEntities.AK_SIGN_BE.get(),    SignRenderer::new);
+                BlockEntityRenderers.register(ModBlockEntities.AK_HANGING_SIGN_BE.get(), HangingSignRenderer::new);
+                BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_SIGN_BE.get(),    SignRenderer::new);
+                BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_HANGING_SIGN_BE.get(), HangingSignRenderer::new);
+
+
+            });
+        }
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
+        EntityRenderers.register(galaxyunderchaos.WINGMAW.get(), WingmawRenderer::new);
         event.enqueueWork(() -> {
+
             ModItemProperties.addCustomItemProperties();
             Minecraft mc = Minecraft.getInstance();
 
