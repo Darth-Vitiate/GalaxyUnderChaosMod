@@ -111,17 +111,57 @@ import java.util.function.Supplier;
     public static final RegistryObject<Block> TEMPLE_STONE_HOLOBOOK = BLOCKS.register("temple_stone_holobook", TempleStoneHolobook::new);
     public static final RegistryObject<Item> TEMPLE_STONE_HOLOBOOK_ITEM = ITEMS.register("temple_stone_holobook", () -> new BlockItem(TEMPLE_STONE_HOLOBOOK.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> TEMPLE_STONE_LIGHTS = BLOCKS.register("temple_stone_lights", TempleStoneHolobook::new);
+    public static final RegistryObject<Item> TEMPLE_STONE_LIGHTS_ITEM = ITEMS.register("temple_stone_lights", () -> new BlockItem(TEMPLE_STONE_LIGHTS.get(), new Item.Properties()));
+
+
     public static final RegistryObject<Block> TEMPLE_STONE_STAIRS = BLOCKS.register("temple_stone_stairs", () -> new TempleStoneStairs(TEMPLE_STONE.get().defaultBlockState()));
     public static final RegistryObject<Item> TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("temple_stone_stairs", () -> new BlockItem(TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> TEMPLE_STONE_SLAB = BLOCKS.register("temple_stone_slab", TempleStoneSlab::new);
     public static final RegistryObject<Item> TEMPLE_STONE_SLAB_ITEM = ITEMS.register("temple_stone_slab", () -> new BlockItem(TEMPLE_STONE_SLAB.get(), new Item.Properties()));
+   
+    public static final RegistryObject<Block> ASHLA_TEMPLE_STONE = BLOCKS.register("ashla_temple_stone", TempleStone::new);
+    public static final RegistryObject<Item> ASHLA_TEMPLE_STONE_ITEM = ITEMS.register("ashla_temple_stone", () -> new BlockItem(ASHLA_TEMPLE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ASHLA_TEMPLE_STONE_PILLAR = BLOCKS.register("ashla_temple_stone_pillar", TempleStonePillar::new);
+    public static final RegistryObject<Item> ASHLA_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("ashla_temple_stone_pillar", () -> new BlockItem(ASHLA_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ASHLA_TEMPLE_STONE_STAIRS = BLOCKS.register("ashla_temple_stone_stairs", () -> new TempleStoneStairs(ASHLA_TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> ASHLA_TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("ashla_temple_stone_stairs", () -> new BlockItem(ASHLA_TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ASHLA_TEMPLE_STONE_SLAB = BLOCKS.register("ashla_temple_stone_slab", TempleStoneSlab::new);
+    public static final RegistryObject<Item> ASHLA_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("ashla_temple_stone_slab", () -> new BlockItem(ASHLA_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> ASHLA_TEMPLE_STONE_WALL = BLOCKS.register("ashla_temple_stone_wall", TempleStoneWall::new);
+    public static final RegistryObject<Item> ASHLA_TEMPLE_STONE_WALL_ITEM = ITEMS.register("ashla_temple_stone_wall", () -> new BlockItem(ASHLA_TEMPLE_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Block> BOGAN_TEMPLE_STONE = BLOCKS.register("bogan_temple_stone", TempleStone::new);
+    public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_ITEM = ITEMS.register("bogan_temple_stone", () -> new BlockItem(BOGAN_TEMPLE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> BOGAN_TEMPLE_STONE_PILLAR = BLOCKS.register("bogan_temple_stone_pillar", TempleStonePillar::new);
+    public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("bogan_temple_stone_pillar", () -> new BlockItem(BOGAN_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> BOGAN_TEMPLE_STONE_STAIRS = BLOCKS.register("bogan_temple_stone_stairs", () -> new TempleStoneStairs(BOGAN_TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("bogan_temple_stone_stairs", () -> new BlockItem(BOGAN_TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> BOGAN_TEMPLE_STONE_SLAB = BLOCKS.register("bogan_temple_stone_slab", TempleStoneSlab::new);
+    public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("bogan_temple_stone_slab", () -> new BlockItem(BOGAN_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> BOGAN_TEMPLE_STONE_WALL = BLOCKS.register("bogan_temple_stone_wall", TempleStoneWall::new);
+    public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_WALL_ITEM = ITEMS.register("bogan_temple_stone_wall", () -> new BlockItem(BOGAN_TEMPLE_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_STONE = BLOCKS.register("tython_temple_stone", TempleStone::new);
+    public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_ITEM = ITEMS.register("tython_temple_stone", () -> new BlockItem(TYTHON_TEMPLE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> CHISELED_TYTHON_TEMPLE_STONE = BLOCKS.register("chiseled_tython_temple_stone", TempleStone::new);
+    public static final RegistryObject<Item> CHISELED_TYTHON_TEMPLE_STONE_ITEM = ITEMS.register("chiseled_tython_temple_stone", () -> new BlockItem(CHISELED_TYTHON_TEMPLE_STONE.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_STONE_PILLAR = BLOCKS.register("tython_temple_stone_pillar", TempleStonePillar::new);
+    public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("tython_temple_stone_pillar", () -> new BlockItem(TYTHON_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_STONE_LIGHTS = BLOCKS.register("tython_temple_stone_lights", TempleStoneHolobook::new);
+    public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_LIGHTS_ITEM = ITEMS.register("tython_temple_stone_lights", () -> new BlockItem(TYTHON_TEMPLE_STONE_LIGHTS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_STONE_STAIRS = BLOCKS.register("tython_temple_stone_stairs", () -> new TempleStoneStairs(TYTHON_TEMPLE_STONE.get().defaultBlockState()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_STAIRS_ITEM = ITEMS.register("tython_temple_stone_stairs", () -> new BlockItem(TYTHON_TEMPLE_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_STONE_SLAB = BLOCKS.register("tython_temple_stone_slab", TempleStoneSlab::new);
+    public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_SLAB_ITEM = ITEMS.register("tython_temple_stone_slab", () -> new BlockItem(TYTHON_TEMPLE_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<WallBlock> TYTHON_TEMPLE_STONE_WALL = BLOCKS.register("tython_temple_stone_wall", TempleStoneWall::new);
+    public static final RegistryObject<Item> TYTHONN_TEMPLE_STONE_WALL_ITEM = ITEMS.register("tython_temple_stone_wall", () -> new BlockItem(TYTHON_TEMPLE_STONE_WALL.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> DARK_TEMPLE_STONE = BLOCKS.register("dark_temple_stone", DarkTempleStone::new);
     public static final RegistryObject<Item> DARK_TEMPLE_STONE_ITEM = ITEMS.register("dark_temple_stone", () -> new BlockItem(DARK_TEMPLE_STONE.get(), new Item.Properties()));
-
     public static final RegistryObject<Block> MALACHITE_OBSIDIAN = BLOCKS.register("malachite_obsidian", DarkTempleStone::new);
     public static final RegistryObject<Item> MALACHITE_OBSIDIAN_ITEM = ITEMS.register("malachite_obsidian", () -> new BlockItem(MALACHITE_OBSIDIAN.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DARK_TEMPLE_STONE_LIGHTS = BLOCKS.register("dark_temple_stone_lights", TempleStoneHolobook::new);
+    public static final RegistryObject<Item> DARK_TEMPLE_STONE_LIGHTS_ITEM = ITEMS.register("dark_temple_stone_lights", () -> new BlockItem(DARK_TEMPLE_STONE_LIGHTS.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> DARK_TEMPLE_STONE_PILLAR = BLOCKS.register("dark_temple_stone_pillar", DarkTempleStonePillar::new);
     public static final RegistryObject<Item> DARK_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("dark_temple_stone_pillar", () -> new BlockItem(DARK_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
