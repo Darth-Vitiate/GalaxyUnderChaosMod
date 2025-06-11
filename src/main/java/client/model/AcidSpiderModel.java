@@ -291,20 +291,50 @@ public class AcidSpiderModel<T extends AcidSpiderEntity> extends HierarchicalMod
 
 	@Override
 	public void setupAnim(AcidSpiderEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-//		this.applyHeadRotation(netHeadYaw, headPitch);
+		this.root().getAllParts().forEach(ModelPart::resetPose); // Reset any previous transformations.
 
-//		this.animateWalk(AcidSpiderAnimations.ANIM_ACID_SPIDER_WALKING, limbSwing, limbSwingAmount, 2f, 2.5f);
-//		this.animate(entity.idleAnimationState, AcidSpiderAnimations.ANIM_ACID_SPIDER_IDLE, ageInTicks, 1f);
+		// Walking animation based on leg movement
+		float swingSpeed = 1.0f; // The speed of the swing (how fast the legs move).
+		float swingAmount = 0.5f; // The amount of leg swing (how far they move).
+
+		// Animate each leg separately for walking
+		animateLegs(limbSwing, limbSwingAmount, swingSpeed, swingAmount);
+
+		// Optional: Head or body movement logic (if needed).
 	}
 
-//	private void applyHeadRotation(float pNetHeadYaw, float pHeadPitch) {
-//		pNetHeadYaw = Mth.clamp(pNetHeadYaw, -30.0F, 30.0F);
-//		pHeadPitch = Mth.clamp(pHeadPitch, -25.0F, 45.0F);
-//
-//		this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
-//		this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
-//	}
+	private void animateLegs(float limbSwing, float limbSwingAmount, float swingSpeed, float swingAmount) {
+		// Sinusoidal motion to simulate walking. Adjust the offsets as needed.
+
+		// Leg ONE (front-left)
+		this.LegONE.xRot = Mth.cos(limbSwing * swingSpeed + 0.0f) * swingAmount * limbSwingAmount;
+
+		// Leg TWO (front-right)
+		this.LegTWO.xRot = Mth.cos(limbSwing * swingSpeed + 3.14159f) * swingAmount * limbSwingAmount; // Offset for opposite leg
+
+		// Leg THREE (middle-left)
+		this.LegTHREE.xRot = Mth.cos(limbSwing * swingSpeed + 1.5708f) * swingAmount * limbSwingAmount; // Offset for middle leg
+
+		// Leg FOUR (middle-right)
+		this.LegFOUR.xRot = Mth.cos(limbSwing * swingSpeed + 4.71239f) * swingAmount * limbSwingAmount; // Opposite middle leg
+
+		// Leg FIVE (back-left)
+		this.LegFIVE.xRot = Mth.cos(limbSwing * swingSpeed + 2.0f) * swingAmount * limbSwingAmount; // Offset for back leg
+
+		// Leg SIX (back-right)
+		this.LEGSIX.xRot = Mth.cos(limbSwing * swingSpeed + 5.0f) * swingAmount * limbSwingAmount; // Opposite back leg
+
+		// Leg SEVEN (secondary back-left, for additional symmetry)
+		this.LEGSEVEN2.xRot = Mth.cos(limbSwing * swingSpeed + 0.5f) * swingAmount * limbSwingAmount;
+
+		// Leg EIGHT (secondary back-right, opposite of secondary back-left)
+		this.LEGEIGHT.xRot = Mth.cos(limbSwing * swingSpeed + 3.5f) * swingAmount * limbSwingAmount;
+
+		// Optional: Control the head or fang movements (if needed)
+		// this.FANG1.xRot = someHeadMovementLogic;
+	}
+
+
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {

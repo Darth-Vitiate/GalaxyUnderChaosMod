@@ -23,12 +23,31 @@ public class CreativeMenuTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(TEMPLE_STONE.get().asItem());
                         output.accept(TEMPLE_STONE_HOLOBOOK.get().asItem());
+                        output.accept(TEMPLE_STONE_LIGHTS.get().asItem());
                         output.accept(TEMPLE_STONE_PILLAR.get().asItem());
                         output.accept(TEMPLE_STONE_STAIRS.get().asItem());
                         output.accept(TEMPLE_STONE_SLAB.get().asItem());
                         output.accept(TEMPLE_STONE_WALL.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE.get().asItem());
+                        output.accept(CHISELED_TYTHON_TEMPLE_STONE.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE_LIGHTS.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(TYTHON_TEMPLE_STONE_WALL.get().asItem());
+                        output.accept(ASHLA_TEMPLE_STONE.get().asItem());
+                        output.accept(ASHLA_TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(ASHLA_TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(ASHLA_TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(ASHLA_TEMPLE_STONE_WALL.get().asItem());
+                        output.accept(BOGAN_TEMPLE_STONE.get().asItem());
+                        output.accept(BOGAN_TEMPLE_STONE_PILLAR.get().asItem());
+                        output.accept(BOGAN_TEMPLE_STONE_STAIRS.get().asItem());
+                        output.accept(BOGAN_TEMPLE_STONE_SLAB.get().asItem());
+                        output.accept(BOGAN_TEMPLE_STONE_WALL.get().asItem());
                         output.accept(DARK_TEMPLE_STONE.get().asItem());
                         output.accept(DARK_TEMPLE_STONE_HOLOBOOK.get().asItem());
+                        output.accept(DARK_TEMPLE_STONE_LIGHTS.get().asItem());
                         output.accept(DARK_TEMPLE_STONE_PILLAR.get().asItem());
                         output.accept(DARK_TEMPLE_STONE_STAIRS.get().asItem());
                         output.accept(DARK_TEMPLE_STONE_SLAB.get().asItem());
@@ -58,6 +77,45 @@ public class CreativeMenuTabs {
                         output.accept(TITANIUM_DEEPSLATE_ORE.get().asItem());
                         output.accept(BLEEDING_TABLE.get().asItem());
                         output.accept(LIGHTSABER_CRAFTING_TABLE.get().asItem());
+                        output.accept(AK_LOG_ITEM.get());               // 1  log
+                        output.accept(STRIPPED_AK_LOG_ITEM.get());      // 2  stripped log
+                        output.accept(AK_WOOD_ITEM.get());              // 3  wood
+                        output.accept(STRIPPED_AK_WOOD_ITEM.get());     // 4  stripped wood
+                        output.accept(AK_PLANKS_ITEM.get());            // 5  planks
+                        output.accept(AK_STAIRS_ITEM.get());            // 6  stairs
+                        output.accept(AK_SLAB_ITEM.get());              // 7  slab
+                        output.accept(AK_FENCE_ITEM.get());             // 8  fence
+                        output.accept(AK_FENCE_GATE_ITEM.get());        // 9  fence gate
+                        output.accept(AK_DOOR_ITEM.get());              // 10 door
+                        output.accept(AK_TRAPDOOR_ITEM.get());          // 11 trapdoor
+                        output.accept(AK_PRESSURE_PLATE_ITEM.get());    // 12 pressure plate
+                        output.accept(AK_BUTTON_ITEM.get());            // 13 button
+                        output.accept(AK_LEAVES_ITEM.get());            // 14 leaves   (moves down)
+                        output.accept(AK_SAPLING_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_HANGING_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(AK_BOAT.get());
+                        output.accept(AK_CHEST_BOAT.get());
+                        output.accept(HEART_BERRY_LOG_ITEM.get());               // 1  log
+                        output.accept(STRIPPED_HEART_BERRY_LOG_ITEM.get());      // 2  stripped log
+                        output.accept(HEART_BERRY_WOOD_ITEM.get());              // 3  wood
+                        output.accept(STRIPPED_HEART_BERRY_WOOD_ITEM.get());     // 4  stripped wood
+                        output.accept(HEART_BERRY_PLANKS_ITEM.get());            // 5  planks
+                        output.accept(HEART_BERRY_STAIRS_ITEM.get());            // 6  stairs
+                        output.accept(HEART_BERRY_SLAB_ITEM.get());              // 7  slab
+                        output.accept(HEART_BERRY_FENCE_ITEM.get());             // 8  fence
+                        output.accept(HEART_BERRY_FENCE_GATE_ITEM.get());        // 9  fence gate
+                        output.accept(HEART_BERRY_DOOR_ITEM.get());              // 10 door
+                        output.accept(HEART_BERRY_TRAPDOOR_ITEM.get());          // 11 trapdoor
+                        output.accept(HEART_BERRY_PRESSURE_PLATE_ITEM.get());    // 12 pressure plate
+                        output.accept(HEART_BERRY_BUTTON_ITEM.get());            // 13 button
+                        output.accept(HEART_BERRY_LEAVES_ITEM.get());               // 14 Leaves
+                        output.accept(HEART_BERRY_FRUIT_LEAVES_ITEM.get());            // 15 Fruit Leaves
+                        output.accept(HEART_BERRY_SAPLING_ITEM.get());           // 16 sapling  (moves down)
+                        output.accept(HEART_BERRY_SIGN_ITEM.get());           // 17 sapling  (moves down)
+                        output.accept(HEART_BERRY_HANGING_SIGN_ITEM.get());           // 15 sapling  (moves down)
+                        output.accept(HEART_BERRY_BOAT.get());
+                        output.accept(HEART_BERRY_CHEST_BOAT.get());
 
                     }).build());
 
@@ -112,9 +170,43 @@ public class CreativeMenuTabs {
                         output.accept(SILK_THREAD.get());
                         output.accept(CHITIN_FRAGMENTS.get());
                         output.accept(ACID_FORGED_PLATE.get());
+                        output.accept(TEMPLE_GUARD_FABRIC.get());
                         output.accept(SHUURA.get());
+                        output.accept(HEART_BERRY.get());
+
+
 
                     }).build());
+
+    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_ENTITIES_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_entities",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ACID_SPIDER_SPAWN_EGG.get()))
+                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_entities"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ACID_SPIDER_SPAWN_EGG.get());
+                        output.accept(WINGMAW_SPAWN_EGG.get());
+
+
+
+                    }).build());
+    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_DECORATIONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_decorations",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(JEDI_GUARD_STATUE_ITEM.get()))
+                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_decorations"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(JEDI_GUARD_STATUE_ITEM.get());
+                        output.accept(TYTHON_JEDI_IDLE_HEAD_STATUE.get());
+                        output.accept(TYTHON_JEDI_CROSSED_TORSO_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_TORSO_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_LEG_1_STATUE.get());
+                        output.accept(TYTHON_JEDI_IDLE_LEG_2_STATUE.get());
+                        output.accept(SITH_GUARD_STATUE_ITEM.get());
+
+
+
+
+                    }).build());
+
 
     public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_WEAPONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_weapons",
             () -> CreativeModeTab.builder()
@@ -126,6 +218,10 @@ public class CreativeMenuTabs {
 //                                output.accept(galaxyunderchaos.LIGHTSABERS.get(color + "_" + hilt + "_lightsaber").get());
 //                            }
 //                        }
+                        output.accept(TEMPLE_GUARD_HELMET.get());
+                        output.accept(TEMPLE_GUARD_CHESTPLATE.get());
+                        output.accept(TEMPLE_GUARD_LEGGINGS.get());
+                        output.accept(TEMPLE_GUARD_BOOTS.get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("green_lost_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("orange_aegis_lightsaber").get());
                         output.accept(galaxyunderchaos.LIGHTSABERS.get("pink_apprentice_lightsaber").get());
@@ -165,22 +261,6 @@ public class CreativeMenuTabs {
                         output.accept(KNIGHTFALL_HILT.get());
                         output.accept(NEGOTIATOR_HILT.get());
                         output.accept(BAROSHE_HILT.get());
-
-                    }).build());
-    public static final Supplier<CreativeModeTab> GALAXY_UNDER_CHAOS_DECORATIONS_TAB = CREATIVE_MODE_TABS.register("galaxy_under_chaos_decorations",
-            () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(JEDI_GUARD_STATUE_ITEM.get()))
-                    .title(Component.translatable("creativetab.galaxyunderchaos.galaxy_under_chaos_decorations"))
-                    .displayItems((parameters, output) -> {
-                        output.accept(JEDI_GUARD_STATUE_ITEM.get());
-                        output.accept(TYTHON_JEDI_IDLE_HEAD_STATUE_ITEM.get());
-                        output.accept(TYTHON_JEDI_CROSSED_TORSO_STATUE_ITEM.get());
-                        output.accept(TYTHON_JEDI_IDLE_TORSO_STATUE_ITEM.get());
-                        output.accept(TYTHON_JEDI_IDLE_LEG_1_STATUE_ITEM.get());
-                        output.accept(TYTHON_JEDI_IDLE_LEGS_2_STATUE_ITEM.get());
-                        output.accept(SITH_GUARD_STATUE_ITEM.get());
-
-
 
 
                     }).build());
