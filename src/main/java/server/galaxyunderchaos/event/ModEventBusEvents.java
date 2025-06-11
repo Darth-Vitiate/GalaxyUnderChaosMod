@@ -29,6 +29,6 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderEntity.createAttributes().build());
-        event.put(galaxyunderchaos.WINGMAW.get(), AcidSpiderEntity.createAttributes().build());
+        event.put(galaxyunderchaos.WINGMAW.get(), WingmawEntity.createAttributes().build());
     }
 }
