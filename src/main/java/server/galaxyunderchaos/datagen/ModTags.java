@@ -13,6 +13,8 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> NEEDS_LIGHTSABER_TOOL = createTag("needs_lightsaber_tool");
         public static final TagKey<Block> INCORRECT_FOR_LIGHTSABER_TOOL = createTag("incorrect_for_lightsaber_tool");
+        public static final TagKey<Block> NEEDS_DAGGER_TOOL = createTag("needs_dagger_tool");
+        public static final TagKey<Block> INCORRECT_FOR_DAGGER_TOOL = createTag("incorrect_for_dagger_tool");
         private static TagKey<Block> createTag(String name) {
 
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, name));

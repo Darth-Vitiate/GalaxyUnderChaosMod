@@ -143,7 +143,7 @@ import java.util.function.Supplier;
     public static final RegistryObject<Item> BOGANN_TEMPLE_STONE_WALL_ITEM = ITEMS.register("bogan_temple_stone_wall", () -> new BlockItem(BOGAN_TEMPLE_STONE_WALL.get(), new Item.Properties()));
     public static final RegistryObject<Block> TYTHON_TEMPLE_STONE = BLOCKS.register("tython_temple_stone", TempleStone::new);
     public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_ITEM = ITEMS.register("tython_temple_stone", () -> new BlockItem(TYTHON_TEMPLE_STONE.get(), new Item.Properties()));
-    public static final RegistryObject<Block> CHISELED_TYTHON_TEMPLE_STONE = BLOCKS.register("chiseled_tython_temple_stone", TempleStone::new);
+    public static final RegistryObject<Block> CHISELED_TYTHON_TEMPLE_STONE = BLOCKS.register("chiseled_tython_temple_stone", ChiseledTempleStoneBlock::new);
     public static final RegistryObject<Item> CHISELED_TYTHON_TEMPLE_STONE_ITEM = ITEMS.register("chiseled_tython_temple_stone", () -> new BlockItem(CHISELED_TYTHON_TEMPLE_STONE.get(), new Item.Properties()));
     public static final RegistryObject<Block> TYTHON_TEMPLE_STONE_PILLAR = BLOCKS.register("tython_temple_stone_pillar", TempleStonePillar::new);
     public static final RegistryObject<Item> TYTHON_TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("tython_temple_stone_pillar", () -> new BlockItem(TYTHON_TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
@@ -434,6 +434,32 @@ import java.util.function.Supplier;
             () -> new BlockItem(STRIPPED_HEART_BERRY_LOG.get(), new Item.Properties()));
     public static final RegistryObject<Item> STRIPPED_HEART_BERRY_WOOD_ITEM = ITEMS.register("stripped_heart_berry_wood",
             () -> new BlockItem(STRIPPED_HEART_BERRY_WOOD.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> RAW_WINGMAW_MEAT = ITEMS.register("raw_wingmaw_meat",
+            () -> new Item(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(6)
+                            .saturationModifier(0.6F)
+                            .build())));
+
+    public static final RegistryObject<Item> COOKED_WINGMAW_MEAT = ITEMS.register("cooked_wingmaw_meat",
+            () -> new Item(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(10)
+                            .saturationModifier(0.8F)
+                            .build())));
+    public static final RegistryObject<Item> WINGMAW_HIDE = ITEMS.register("wingmaw_hide",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WINGMAW_FANG = ITEMS.register("wingmaw_fang",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WINGMAW_BLADE = ITEMS.register("wingmaw_blade",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<DaggerItem> WINGMAW_DAGGER = (RegistryObject<DaggerItem>) ITEMS.register("wingmaw_dagger",
+            () -> new DaggerItem(new Item.Properties()));
+    public static final RegistryObject<Item> WINGMAW_FEATHER = ITEMS.register("wingmaw_feather",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<HiltItem> WINGMAW_HILT = (RegistryObject<HiltItem>) ITEMS.register("wingmaw_hilt",
+            () -> new HiltItem("green", new Item.Properties()));
 
     public static final RegistryObject<Block> AK_PLANKS = BLOCKS.register("ak_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)) {
