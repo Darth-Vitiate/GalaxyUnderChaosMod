@@ -9,4 +9,6 @@ import server.galaxyunderchaos.galaxyunderchaos;
 public class ModToolTiers {
     public static final Tier LIGHTSABER = new SimpleTier(ModTags.Blocks.INCORRECT_FOR_LIGHTSABER_TOOL,
             1400, 4f, 3f, 28, () -> Ingredient.of(galaxyunderchaos.AEGIS_HILT));
+    public static final Tier DAGGER = new SimpleTier(ModTags.Blocks.INCORRECT_FOR_LIGHTSABER_TOOL,
+            300, 2f, 1.2f, 28, () -> Ingredient.of(galaxyunderchaos.WINGMAW_DAGGER));
 }

@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "galaxyunderchaos:aegis_hilt",
+    "galaxyunderchaos:lost_hilt",
+    "galaxyunderchaos:aegis_hilt",
+    "galaxyunderchaos:apprentice_hilt",
+    "galaxyunderchaos:chosen_hilt",
+    "galaxyunderchaos:emperor_hilt",
+    "galaxyunderchaos:fallen_hilt",
+    "galaxyunderchaos:grace_hilt",
+    "galaxyunderchaos:guard_hilt",
+    "galaxyunderchaos:harmony_hilt",
+    "galaxyunderchaos:legacy_hilt",
+    "galaxyunderchaos:padawan_hilt",
+    "galaxyunderchaos:resolve_hilt",
+    "galaxyunderchaos:skustell_hilt",
+    "galaxyunderchaos:negotiator_hilt",
+    "galaxyunderchaos:baroshe_hilt",
+    "galaxyunderchaos:knightfall_hilt",
+    "galaxyunderchaos:talon_hilt",
+    "galaxyunderchaos:valor_hilt",
+    "galaxyunderchaos:wisdom_hilt"
+  ]
+}

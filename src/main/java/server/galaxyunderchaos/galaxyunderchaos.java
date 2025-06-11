@@ -885,7 +885,32 @@ public class galaxyunderchaos {
                             .sized(1.0f, 1.0f).build("wingmaw"));
     public static final DeferredItem<DeferredSpawnEggItem> WINGMAW_SPAWN_EGG =
             ITEMS.register("wingmaw_spawn_egg",
-                    () -> new DeferredSpawnEggItem(WINGMAW, 0x53524b, 0xdac741, new Item.Properties()));
+                    () -> new DeferredSpawnEggItem(WINGMAW,      0x909055FF, 0xF2E53AFF, new Item.Properties()));
+    public static final DeferredItem<Item> RAW_WINGMAW_MEAT = ITEMS.register("raw_wingmaw_meat",
+            () -> new Item(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(6)
+                            .saturationModifier(0.6F)
+                            .build())));
+
+    public static final DeferredItem<Item> COOKED_WINGMAW_MEAT = ITEMS.register("cooked_wingmaw_meat",
+            () -> new Item(new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(10)
+                            .saturationModifier(0.8F)
+                            .build())));
+    public static final DeferredItem<Item> WINGMAW_HIDE = ITEMS.register("wingmaw_hide",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WINGMAW_FANG = ITEMS.register("wingmaw_fang",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WINGMAW_BLADE = ITEMS.register("wingmaw_blade",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<DaggerItem> WINGMAW_DAGGER = (DeferredItem<DaggerItem>) ITEMS.register("wingmaw_dagger",
+            () -> new DaggerItem(new Item.Properties()));
+    public static final DeferredItem<Item> WINGMAW_FEATHER = ITEMS.register("wingmaw_feather",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<HiltItem> WINGMAW_HILT = (DeferredItem<HiltItem>) ITEMS.register("wingmaw_hilt",
+            () -> new HiltItem("green", new Item.Properties()));
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.

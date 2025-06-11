@@ -531,6 +531,16 @@
   "block.galaxyunderchaos.bogan_temple_stone_wall": "Bogan Temple Stone Wall",
   "block.galaxyunderchaos.bogan_temple_stone_stairs": "Bogan Temple Stone Stairs",
   "block.galaxyunderchaos.bogan_temple_stone_pillar": "Bogan Temple Stone Pillar",
-  "block.galaxyunderchaos.bogan_temple_stone_slab": "Bogan Temple Stone Slab"
+  "block.galaxyunderchaos.bogan_temple_stone_slab": "Bogan Temple Stone Slab",
+  "item.galaxyunderchaos.wingmaw_spawn_egg": "Wingmaw Spawn Egg",
+  "item.galaxyunderchaos.raw_wingmaw_meat": "Raw Wingmaw Meat",
+  "item.galaxyunderchaos.cooked_wingmaw_meat": "Cooked Wingmaw Meat",
+  "item.galaxyunderchaos.wingmaw_hide": "Wingmaw Hide",
+  "item.galaxyunderchaos.wingmaw_fang": "Wingmaw Fang",
+  "item.galaxyunderchaos.wingmaw_blade": "Wingmaw Blade",
+  "item.galaxyunderchaos.wingmaw_hilt": "Wingmaw Hilt",
+  "item.galaxyunderchaos.wingmaw_dagger": "Wingmaw Dagger",
+  "item.galaxyunderchaos.wingmaw_feather": "Wingmaw Feather",
+  "item.galaxyunderchaos.wingmaw_egg": "Wingmaw Egg"
 
 }

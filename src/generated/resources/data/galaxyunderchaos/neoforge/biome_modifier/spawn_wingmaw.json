@@ -1,0 +1,13 @@
+{
+"type": "neoforge:add_spawns",
+"biomes": [
+"galaxyunderchaos:tython_forest",
+  "galaxyunderchaos:tython_mountains"
+],
+"spawners": {
+"type": "galaxyunderchaos:wingmaw",
+"maxCount": 2,
+"minCount": 1,
+"weight": 10
+}
+}

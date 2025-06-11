@@ -166,6 +166,12 @@ public class CreativeMenuTabs {
                         output.accept(SHIEN_DJEM_SO_HOLOBOOK.get());
                         output.accept(JUYO_VAAPAD_HOLOBOOK.get());
                         output.accept(SITH_HOLOCRON.get());
+                        output.accept(RAW_WINGMAW_MEAT.get());
+                        output.accept(COOKED_WINGMAW_MEAT.get());
+                        output.accept(WINGMAW_FANG.get());
+                        output.accept(WINGMAW_BLADE.get());
+                        output.accept(WINGMAW_FEATHER.get());
+                        output.accept(WINGMAW_HIDE.get());
                         output.accept(ACIDIC_VENOM_SAC.get());
                         output.accept(SILK_THREAD.get());
                         output.accept(CHITIN_FRAGMENTS.get());
@@ -261,6 +267,9 @@ public class CreativeMenuTabs {
                         output.accept(KNIGHTFALL_HILT.get());
                         output.accept(NEGOTIATOR_HILT.get());
                         output.accept(BAROSHE_HILT.get());
+                        output.accept(WINGMAW_HILT.get());
+                        output.accept(WINGMAW_DAGGER.get());
+
 
 
                     }).build());

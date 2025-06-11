@@ -42,12 +42,11 @@ public class WingmawEntity extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0D) // Higher health for toughness
-                .add(Attributes.MOVEMENT_SPEED, 0.15D) // Fast spider movement (adjust if necessary)
-                .add(Attributes.ATTACK_DAMAGE, 6.0D) // Deals 6 damage per hit
+                .add(Attributes.MAX_HEALTH, 20.0D) // Medium health for toughness
+                .add(Attributes.MOVEMENT_SPEED, 0.35D) // Fast spider movement
+                .add(Attributes.ATTACK_DAMAGE, 2.0D) // Deals 2 damage per hit
                 .add(Attributes.ARMOR, 2.0D) // Slight armor to resist hits
-                .add(Attributes.FOLLOW_RANGE, 24.0D) // Aggressive range
-                .add(Attributes.FLYING_SPEED, 0.5D);  // Adjust flying speed if necessary
+                .add(Attributes.FOLLOW_RANGE, 14.0D); // Slightly Aggressive range
     }
 
     @Override
