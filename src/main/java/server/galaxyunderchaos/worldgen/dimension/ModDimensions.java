@@ -92,6 +92,27 @@ public class ModDimensions {
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine"));
     public static final ResourceKey<DimensionType> DANTOOINE_DIM_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_type"));
+    public static final ResourceKey<NoiseGeneratorSettings> TYTHON_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "tython_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> NABOO_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "naboo_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> ILUM_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ilum_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> MUSTAFAR_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "mustafar_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> OSSUS_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ossus_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> ASHLA_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "ashla_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> BOGAN_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "bogan_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> MALACHOR_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "malachor_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> KORRIBAN_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "korriban_noise_settings"));
+    public static final ResourceKey<NoiseGeneratorSettings> DANTOOINE_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
+            ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_noise_settings"));
+
 
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
@@ -194,7 +215,8 @@ public class ModDimensions {
                                         biomeRegistry.getOrThrow(ModBiomes.TYTHON_MOUNTAINS))
                         ))
                 ),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+
+                noiseGenSettings.getOrThrow(TYTHON_NOISE)
         );
 
         LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(TYTHON_DIM_TYPE), tythonChunkGenerator);
@@ -213,7 +235,7 @@ public class ModDimensions {
                                         biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_HILLS))
                         ))
                 ),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+                noiseGenSettings.getOrThrow(DANTOOINE_NOISE)
         );
         LevelStem dantooineStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.DANTOOINE_DIM_TYPE), dantooineChunkGenerator);
         context.register(DANTOOINE_KEY, dantooineStem);
@@ -234,7 +256,7 @@ public class ModDimensions {
                                         Climate.parameters(0.3F, 0.7F, 0.6F, 0.2F, -0.2F, 0.0F, 0.0F),
                                         biomeRegistry.getOrThrow(ModBiomes.NABOO_OCEAN))
                         ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+                noiseGenSettings.getOrThrow(NABOO_NOISE)
         );
 
         LevelStem nabooStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
@@ -251,7 +273,7 @@ public class ModDimensions {
                                         biomeRegistry.getOrThrow(ModBiomes.KORRIBAN_SITH_TOMB))
                         ))
                 ),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.NETHER) // Adjust settings if needed
+                noiseGenSettings.getOrThrow(KORRIBAN_NOISE) // Adjust settings if needed
         );
 
         LevelStem korribanStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.KORRIBAN_DIM_TYPE),
@@ -287,7 +309,7 @@ public class ModDimensions {
                                         Climate.parameters(0.2F, 0.7F, 0.3F, 0.1F, 0.2F, 0.1F, 0.0F),
                                         biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_MAGMA_LAKE))
                         ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+                noiseGenSettings.getOrThrow(MUSTAFAR_NOISE));
 
         LevelStem mustafarStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.MUSTAFAR_DIM_TYPE), mustafarChunkGenerator);
         context.register(MUSTAFAR_KEY, mustafarStem);
@@ -312,7 +334,7 @@ public class ModDimensions {
                                         biomeRegistry.getOrThrow(ModBiomes.OSSUS_DEEP_OCEAN))
                         ))
                 ),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+                noiseGenSettings.getOrThrow(OSSUS_NOISE)
         );
         LevelStem ossusStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.OSSUS_DIM_TYPE), ossusChunkGenerator);
         context.register(OSSUS_KEY, ossusStem);
@@ -331,7 +353,7 @@ public class ModDimensions {
         );
 
         NoiseBasedChunkGenerator malachorChunkGenerator = new NoiseBasedChunkGenerator(biomeSource,
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.NETHER)
+                noiseGenSettings.getOrThrow(MALACHOR_NOISE)
         );
 
         LevelStem malachorStem = new LevelStem(dimTypes.getOrThrow(MALACHOR_DIM_TYPE),
@@ -344,7 +366,7 @@ public class ModDimensions {
                                             biomeRegistry.getOrThrow(ModBiomes.ASHLA_BIOME))
                             ))
                     ),
-                    noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+                    noiseGenSettings.getOrThrow(ASHLA_NOISE)
             );
 
             LevelStem ashlaStem = new LevelStem(dimTypes.getOrThrow(ASHLA_DIM_TYPE), ashlaChunkGenerator);
@@ -357,7 +379,7 @@ public class ModDimensions {
                                             biomeRegistry.getOrThrow(ModBiomes.BOGAN_BIOME))
                             ))
                     ),
-                    noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
+                    noiseGenSettings.getOrThrow(BOGAN_NOISE)
             );
 
             LevelStem boganStem = new LevelStem(dimTypes.getOrThrow(BOGAN_DIM_TYPE), boganChunkGenerator);
