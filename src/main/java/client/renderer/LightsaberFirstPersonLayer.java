@@ -80,7 +80,7 @@ public class LightsaberFirstPersonLayer
                 poseStack.mulPose(Axis.XP.rotationDegrees(45f + idle * 10f));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(idle * 5f));
             }
-            case "Shien" -> {
+            case "Shien / Djem So" -> {
                 // Counter-focused, blade angled up
                 poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
                 poseStack.mulPose(Axis.XP.rotationDegrees(10f + idle * 3f));

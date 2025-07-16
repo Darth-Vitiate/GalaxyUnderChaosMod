@@ -25,7 +25,7 @@ public class ClientEventSubscriber {
     /**
      * Map blade-color IDs to ARGB tints for the emissive render layer.
      */
-    private static int getGlowColor(String bladeColor) {
+    public static int getGlowColor(String bladeColor) {
         return switch (bladeColor) {
             case "red"          -> 0xFFAE2623;
             case "blue"         -> 0xFF2985D0;

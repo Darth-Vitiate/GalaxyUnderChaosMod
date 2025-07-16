@@ -36,7 +36,7 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
 
             if (isActive) {
                 // Render the colored glow layer
-                renderColoredGlow(poseStack, buffer);
+                renderColoredGlow(stack, poseStack, buffer);
             }
         } else {
             // Other items use default rendering
@@ -47,17 +47,17 @@ public class ModItemRenderer extends BlockEntityWithoutLevelRenderer {
     /**
      * Renders a glow quad tinted by ClientEventSubscriber.glowR/G/B
      */
-    private void renderColoredGlow(PoseStack poseStack, MultiBufferSource buffer) {
+    private void renderColoredGlow(ItemStack stack, PoseStack poseStack, MultiBufferSource buffer) {
         VertexConsumer vertexConsumer = buffer.getBuffer(
                 RenderType.entityTranslucent(
                         ResourceLocation.parse("galaxyunderchaos:textures/misc/glow.png")
                 )
         );
 
-        // Use dynamic color from client subscriber
-        float red   = ClientEventSubscriber.glowR;
-        float green = ClientEventSubscriber.glowG;
-        float blue  = ClientEventSubscriber.glowB;
+        int argb = ClientEventSubscriber.getGlowColor(LightsaberItem.getBladeColor(stack));
+        float red   = ((argb >> 16) & 0xFF) / 255f;
+        float green = ((argb >> 8)  & 0xFF) / 255f;
+        float blue  = ( argb        & 0xFF) / 255f;
         float alpha = 0.7F; // Glow transparency
 
         poseStack.pushPose();

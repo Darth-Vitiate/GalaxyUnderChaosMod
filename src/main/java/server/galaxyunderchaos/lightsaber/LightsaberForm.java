@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 public enum LightsaberForm {
 
     SHII_CHO(
-            "Shii‑Cho",
+            "Shii-Cho",
             new AttributeModifier(
                     ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "shii_cho_speed"),
                     0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
@@ -57,7 +57,7 @@ public enum LightsaberForm {
     ),
 
     SHIEN(
-            "Shien / Djem So",
+            "Shien / DjemSo",
             new AttributeModifier(
                     ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "shien_counter"),
                     1.50, AttributeModifier.Operation.ADD_VALUE

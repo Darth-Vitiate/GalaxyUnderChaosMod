@@ -51,7 +51,7 @@ public class LightsaberFormEffects {
                         AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
         ));
-        FORM_EFFECTS.put("Shien", new FormEffect(
+        FORM_EFFECTS.put("Shien / Djem So", new FormEffect(
                 Attributes.KNOCKBACK_RESISTANCE,
                 new AttributeModifier(
                         ResourceLocation.fromNamespaceAndPath("galaxyunderchaos", "shien_counter"),
