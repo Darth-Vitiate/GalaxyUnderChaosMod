@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import server.galaxyunderchaos.data.KeyBindings;
 import server.galaxyunderchaos.lightsaber.LightsaberFormNetworking;
 import server.galaxyunderchaos.lightsaber.SwitchLightsaberFormPacket;
+import server.galaxyunderchaos.lightsaber.ToggleLightsaberPacket;
 
 @Mod.EventBusSubscriber(modid = "galaxyunderchaos", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class KeyInputHandler {
@@ -16,6 +17,9 @@ public class KeyInputHandler {
         if (KeyBindings.SWITCH_FORM_KEY.consumeClick()) {
             LightsaberFormNetworking.sendToServer(new SwitchLightsaberFormPacket());
         }
+//        if (KeyBindings.TOGGLE_LIGHTSABER.consumeClick()) {
+//            LightsaberFormNetworking.sendToServer(new ToggleLightsaberPacket());
+//        }
 //        if (KeyBindings.CYCLE_FORCE_POWER.consumeClick()) {
 //            System.out.println("Cycle force power key pressed!");
 //            GalaxyUnderChaosNetworking.sendToServer(new CycleForcePowerPacket());

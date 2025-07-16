@@ -64,12 +64,26 @@ public class LightsaberItem extends SwordItem {
         ItemStack stack = player.getItemInHand(hand);
         setActive(stack, !isActive(stack), level, player);
         return InteractionResultHolder.success(stack);
+        //        player.startUsingItem(hand);
+//        return InteractionResultHolder.consume(stack);
     }
 
     @Override
     public boolean isFoil(ItemStack stack) {
         return isActive(stack);
     }
+//    @Override
+//    public UseAnim getUseAnimation(ItemStack stack) {
+//        return UseAnim.BLOCK;
+//    }
+//
+//    public int getUseDuration(ItemStack stack) {
+//        return 72000;
+//    }
+//
+//    public boolean isShield(ItemStack stack, LivingEntity entity) {
+//        return true;
+//    }
 
     public String getTextureLocation(ItemStack stack) {
         return isActive(stack) ?
@@ -125,7 +139,6 @@ public class LightsaberItem extends SwordItem {
                     SoundSource.PLAYERS, 0.3F, 0.5F);
         }
     }
-
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!isActive(stack)) {

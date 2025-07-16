@@ -35,6 +35,11 @@ public class LightsaberFormNetworking {
                 .decoder(SwitchLightsaberFormPacket::decode)
                 .consumerMainThread(SwitchLightsaberFormPacket::handle)
                 .add();
+//        NETWORK.messageBuilder(ToggleLightsaberPacket.class, 2)
+//                .encoder(ToggleLightsaberPacket::encode)
+//                .decoder(ToggleLightsaberPacket::decode)
+//                .consumerMainThread(ToggleLightsaberPacket::handle)
+//                .add();
         NETWORK.build();
     }
     public static void sendToServer(Object message) {

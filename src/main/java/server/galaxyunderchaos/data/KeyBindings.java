@@ -20,7 +20,10 @@ public final class KeyBindings {
             "key.galaxyunderchaos.cycle_force_power",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.galaxyunderchaos"
     );
-
+//    public static final KeyMapping TOGGLE_LIGHTSABER = new KeyMapping(
+//            "key.galaxyunderchaos.toggle_lightsaber",
+//            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_UP, "key.categories.galaxyunderchaos"
+//    );
     public static final KeyMapping USE_FORCE_POWER = new KeyMapping(
             "key.galaxyunderchaos.use_force_power",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.galaxyunderchaos"
@@ -32,6 +35,8 @@ public final class KeyBindings {
         event.register(SWITCH_FORM_KEY);
         event.register(CYCLE_FORCE_POWER);
         event.register(USE_FORCE_POWER);
+//        event.register(TOGGLE_LIGHTSABER);
+
     }
 
     private KeyBindings() {} // Utility class - prevent instantiation
