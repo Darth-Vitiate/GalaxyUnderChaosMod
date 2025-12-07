@@ -1,28 +1,25 @@
 package server.galaxyunderchaos.worldgen.dimension;
 
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.HolderGetter;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import server.galaxyunderchaos.galaxyunderchaos;
-import server.galaxyunderchaos.worldgen.biome.ModBiomes;
 
-import java.util.List;
-import java.util.OptionalLong;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Map;
+import java.util.Objects;
 
 public class ModDimensions {
     public static final ResourceKey<LevelStem> TYTHON_KEY = ResourceKey.create(Registries.LEVEL_STEM,
@@ -113,276 +110,68 @@ public class ModDimensions {
     public static final ResourceKey<NoiseGeneratorSettings> DANTOOINE_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS,
             ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID, "dantooine_noise_settings"));
 
+    private static final Map<ResourceKey<DimensionType>, String> DIMENSION_TYPE_FILES = Map.ofEntries(
+            Map.entry(TYTHON_DIM_TYPE, "tython_type"),
+            Map.entry(DANTOOINE_DIM_TYPE, "dantooine_type"),
+            Map.entry(NABOO_DIM_TYPE, "naboo_type"),
+            Map.entry(MUSTAFAR_DIM_TYPE, "mustafar_type"),
+            Map.entry(OSSUS_DIM_TYPE, "ossus_type"),
+            Map.entry(MALACHOR_DIM_TYPE, "malachor_type"),
+            Map.entry(ILUM_DIM_TYPE, "ilum_type"),
+            Map.entry(KORRIBAN_DIM_TYPE, "korriban_type"),
+            Map.entry(ASHLA_DIM_TYPE, "ashla_type"),
+            Map.entry(BOGAN_DIM_TYPE, "bogan_type")
+    );
 
+    private static final Map<ResourceKey<LevelStem>, String> LEVEL_STEM_FILES = Map.ofEntries(
+            Map.entry(TYTHON_KEY, "tython"),
+            Map.entry(DANTOOINE_KEY, "dantooine"),
+            Map.entry(NABOO_KEY, "naboo"),
+            Map.entry(KORRIBAN_KEY, "korriban"),
+            Map.entry(ILUM_KEY, "ilum"),
+            Map.entry(MUSTAFAR_KEY, "mustafar"),
+            Map.entry(OSSUS_KEY, "ossus"),
+            Map.entry(MALACHOR_KEY, "malachor"),
+            Map.entry(ASHLA_KEY, "ashla"),
+            Map.entry(BOGAN_KEY, "bogan")
+    );
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
-        context.register(TYTHON_DIM_TYPE, new DimensionType(
-                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 320, 256,
-                BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.8f, new DimensionType.MonsterSettings(false, true, ConstantInt.of(7), 0) // Monster spawn rules
-        ));
-            context.register(DANTOOINE_DIM_TYPE, new DimensionType(
-                    OptionalLong.empty(),
-                    true, false, false, true, 1.0, true, true,
-                    -64, 384, 384,
-                    BlockTags.INFINIBURN_OVERWORLD,
-                    BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0) // Monster spawning rules
-            ));
-        context.register(NABOO_DIM_TYPE, new DimensionType(
-                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384,
-                BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
-        context.register(MUSTAFAR_DIM_TYPE, new DimensionType(
-                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384,
-                BlockTags.INFINIBURN_NETHER,
-                BuiltinDimensionTypes.NETHER_EFFECTS, 1.0f,
-                new DimensionType.MonsterSettings(true, false, ConstantInt.of(10), 8)));
-        context.register(OSSUS_DIM_TYPE, new DimensionType(
-                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384,
-                BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, 1.0f,
-                new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
-        ));
-        context.register(MALACHOR_DIM_TYPE, new DimensionType(
-                OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
-                -64, 384, 256,
-                BlockTags.INFINIBURN_NETHER,
-                BuiltinDimensionTypes.NETHER_EFFECTS, 0.05f,
-                new DimensionType.MonsterSettings(true, false, ConstantInt.of(7), 0)
-        ));
-        context.register(ILUM_DIM_TYPE, new DimensionType(
-                OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                -64, 384, 384, // Adjust height and Y min as needed
-                BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // Change this to create a different environment feel
-                1.0f, new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
-        ));
-        context.register(KORRIBAN_DIM_TYPE, new DimensionType(
-                OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
-                -64, 384, 256,
-                BlockTags.INFINIBURN_NETHER, // Use NETHER infiniburn for Sith-like ambiance
-                BuiltinDimensionTypes.NETHER_EFFECTS, // Sith ambiance effects
-                0.1f, // Ambient light for a dark and foreboding atmosphere
-                new DimensionType.MonsterSettings(true, false, ConstantInt.of(7), 0)
-        ));
-            context.register(ASHLA_DIM_TYPE, new DimensionType(
-                    OptionalLong.empty(), true, false, false, true, 1.0, true, true,
-                    -64, 384, 384, // Adjust height and Y min as needed
-                    BlockTags.INFINIBURN_OVERWORLD,
-                    BuiltinDimensionTypes.OVERWORLD_EFFECTS,
-                    1.0f,
-                    new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
-            ));
-
-            context.register(BOGAN_DIM_TYPE, new DimensionType(
-                    OptionalLong.of(18000), false, false, false, true, 1.0, true, true,
-                    -64, 384, 256,
-                    BlockTags.INFINIBURN_NETHER, // Use Nether infiniburn for dark ambiance
-                    BuiltinDimensionTypes.NETHER_EFFECTS,
-                    0.05f, // Low ambient light for darkness
-                    new DimensionType.MonsterSettings(true, false, ConstantInt.of(10), 0)
-            ));
-        }
+        DIMENSION_TYPE_FILES.forEach((key, file) -> context.register(key, loadDimensionType(context, file)));
+    }
 
     public static void bootstrapStem(BootstrapContext<LevelStem> context) {
-        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
-        HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
-        HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
-        long nabooSeed = 123456789L;
-        long ilumSeed = 987654321L;
-        long korribanSeed = 456789123L;
-        long malachorSeed = 789123456L;
-        long mustafarSeed = 654321987L;
-        long dantooineSeed = 321987654L;
-        long ossusSeed = 159753258L;
-        long tythonSeed = 753951852L;
+        LEVEL_STEM_FILES.forEach((key, file) -> context.register(key, loadLevelStem(context, file)));
+    }
 
-        NoiseBasedChunkGenerator tythonChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(0.7F, 0.8F, 0.3F, 0.4F, 0.1F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_FOREST)),
-                                Pair.of(
-                                        Climate.parameters(0.8F, 0.6F, 0.5F, 0.3F, 0.0F, 0.0F, 0.1F),
-                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.5F, 0.3F, 0.7F, 0.2F, 0.0F, 0.1F, 0.1F),
-                                        biomeRegistry.getOrThrow(ModBiomes.TYTHON_MOUNTAINS))
-                        ))
-                ),
+    private static DimensionType loadDimensionType(BootstrapContext<DimensionType> context, String fileName) {
+        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,
+                "dimension_type/" + fileName + ".json");
+        JsonElement json = readJson(resource);
+        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, context.lookupProvider());
+        DataResult<DimensionType> parsed = DimensionType.DIRECT_CODEC.parse(ops, json);
+        return parsed.getOrThrow(false, (message) ->
+                galaxyunderchaos.LOGGER.error("Failed to parse dimension type {}: {}", resource, message));
+    }
 
-                noiseGenSettings.getOrThrow(TYTHON_NOISE)
-        );
+    private static LevelStem loadLevelStem(BootstrapContext<LevelStem> context, String fileName) {
+        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,
+                "dimension/" + fileName + ".json");
+        JsonElement json = readJson(resource);
+        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, context.lookupProvider());
+        DataResult<LevelStem> parsed = LevelStem.CODEC.parse(ops, json);
+        return parsed.getOrThrow(false, (message) ->
+                galaxyunderchaos.LOGGER.error("Failed to parse level stem {}: {}", resource, message));
+    }
 
-        LevelStem tythonStem = new LevelStem(dimTypes.getOrThrow(TYTHON_DIM_TYPE), tythonChunkGenerator);
-        context.register(TYTHON_KEY, tythonStem);
-        NoiseBasedChunkGenerator dantooineChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(0.8F, 0.7F, 0.3F, 0.4F, 0.1F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.6F, 0.6F, 0.5F, 0.3F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_FOREST)),
-                                Pair.of(
-                                        Climate.parameters(0.4F, 0.5F, 0.7F, 0.2F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.DANTOOINE_HILLS))
-                        ))
-                ),
-                noiseGenSettings.getOrThrow(DANTOOINE_NOISE)
-        );
-        LevelStem dantooineStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.DANTOOINE_DIM_TYPE), dantooineChunkGenerator);
-        context.register(DANTOOINE_KEY, dantooineStem);
-
-        NoiseBasedChunkGenerator nabooChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(0.9F, 0.9F, 0.2F, 0.4F, 0.05F, 0.2F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_SWAMP)),
-                                Pair.of(
-                                        Climate.parameters(0.8F, 0.4F, 0.6F, 0.3F, 0.1F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.7F, 0.7F, 0.3F, 0.2F, 0.125F, 0.3F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_BIOME)),
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.7F, 0.6F, 0.2F, -0.2F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.NABOO_OCEAN))
-                        ))),
-                noiseGenSettings.getOrThrow(NABOO_NOISE)
-        );
-
-        LevelStem nabooStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.NABOO_DIM_TYPE), nabooChunkGenerator);
-        context.register(NABOO_KEY, nabooStem);
-
-        NoiseBasedChunkGenerator korribanChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(1.2F, 0.0F, 0.5F, 0.5F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.KORRIBAN_DRY_CANYON)),
-                                Pair.of(
-                                        Climate.parameters(1.0F, -0.2F, 0.7F, 0.4F, 0.1F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.KORRIBAN_SITH_TOMB))
-                        ))
-                ),
-                noiseGenSettings.getOrThrow(KORRIBAN_NOISE) // Adjust settings if needed
-        );
-
-        LevelStem korribanStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.KORRIBAN_DIM_TYPE),
-                korribanChunkGenerator);
-        context.register(KORRIBAN_KEY, korribanStem);
-
-
-        NoiseBasedChunkGenerator ilumChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(-1.0F, 0.9F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME)),
-                                Pair.of(
-                                        Climate.parameters(-0.8F, 1.0F, 0.2F, 0.1F, 0.2F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.ILUM_BIOME_FOREST))
-                        ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.LARGE_BIOMES));
-
-        LevelStem ilumStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.ILUM_DIM_TYPE), ilumChunkGenerator);
-        context.register(ILUM_KEY, ilumStem);
-
-        NoiseBasedChunkGenerator mustafarChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(-0.5F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_LAVA_FIELD)),
-                                Pair.of(
-                                        Climate.parameters(0.0F, 0.8F, 0.2F, 0.0F, 0.1F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_VOLCANIC_PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.2F, 0.7F, 0.3F, 0.1F, 0.2F, 0.1F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.MUSTAFAR_MAGMA_LAKE))
-                        ))),
-                noiseGenSettings.getOrThrow(MUSTAFAR_NOISE));
-
-        LevelStem mustafarStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.MUSTAFAR_DIM_TYPE), mustafarChunkGenerator);
-        context.register(MUSTAFAR_KEY, mustafarStem);
-
-        NoiseBasedChunkGenerator ossusChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(0.3F, 0.5F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_FOREST)),
-                                Pair.of(
-                                        Climate.parameters(0.2F, 0.4F, 0.1F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_PLAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.1F, 0.3F, 0.1F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_MOUNTAINS)),
-                                Pair.of(
-                                        Climate.parameters(0.5F, 0.6F, -0.2F, 0.2F, -0.3F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(0.5F, 0.7F, -0.3F, 0.1F, -0.5F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.OSSUS_DEEP_OCEAN))
-                        ))
-                ),
-                noiseGenSettings.getOrThrow(OSSUS_NOISE)
-        );
-        LevelStem ossusStem = new LevelStem(dimTypes.getOrThrow(ModDimensions.OSSUS_DIM_TYPE), ossusChunkGenerator);
-        context.register(OSSUS_KEY, ossusStem);
-
-        MultiNoiseBiomeSource biomeSource = MultiNoiseBiomeSource.createFromList(
-                new Climate.ParameterList<>(List.of(
-                        Pair.of(
-                                Climate.parameters(-0.8F, 0.4F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(ModBiomes.MALACHOR_UPPER_LAYER)
-                        ),
-                        Pair.of(
-                                Climate.parameters(0.0F, 0.2F, 0.3F, 0.1F, 0.0F, 0.0F, 0.0F),
-                                biomeRegistry.getOrThrow(ModBiomes.MALACHOR_LOWER_SURFACE)
-                        )
-                ))
-        );
-
-        NoiseBasedChunkGenerator malachorChunkGenerator = new NoiseBasedChunkGenerator(biomeSource,
-                noiseGenSettings.getOrThrow(MALACHOR_NOISE)
-        );
-
-        LevelStem malachorStem = new LevelStem(dimTypes.getOrThrow(MALACHOR_DIM_TYPE),
-                malachorChunkGenerator);
-        context.register(MALACHOR_KEY, malachorStem);
-            NoiseBasedChunkGenerator ashlaChunkGenerator = new NoiseBasedChunkGenerator(
-                    MultiNoiseBiomeSource.createFromList(
-                            new Climate.ParameterList<>(List.of(
-                                    Pair.of(Climate.parameters(1.0F, 0.5F, 0.2F, 0.3F, 0.1F, 0.0F, 0.0F),
-                                            biomeRegistry.getOrThrow(ModBiomes.ASHLA_BIOME))
-                            ))
-                    ),
-                    noiseGenSettings.getOrThrow(ASHLA_NOISE)
-            );
-
-            LevelStem ashlaStem = new LevelStem(dimTypes.getOrThrow(ASHLA_DIM_TYPE), ashlaChunkGenerator);
-            context.register(ASHLA_KEY, ashlaStem);
-
-            NoiseBasedChunkGenerator boganChunkGenerator = new NoiseBasedChunkGenerator(
-                    MultiNoiseBiomeSource.createFromList(
-                            new Climate.ParameterList<>(List.of(
-                                    Pair.of(Climate.parameters(0.0F, -0.5F, 0.4F, 0.7F, 0.3F, 0.2F, 0.1F),
-                                            biomeRegistry.getOrThrow(ModBiomes.BOGAN_BIOME))
-                            ))
-                    ),
-                    noiseGenSettings.getOrThrow(BOGAN_NOISE)
-            );
-
-            LevelStem boganStem = new LevelStem(dimTypes.getOrThrow(BOGAN_DIM_TYPE), boganChunkGenerator);
-            context.register(BOGAN_KEY, boganStem);
+    private static JsonElement readJson(ResourceLocation resource) {
+        String resourcePath = "/data/" + resource.getNamespace() + "/" + resource.getPath();
+        try (InputStream stream = Objects.requireNonNull(ModDimensions.class.getResourceAsStream(resourcePath),
+                "Missing dimension resource: " + resourcePath);
+             Reader reader = new InputStreamReader(stream)) {
+            return JsonParser.parseReader(reader);
+        } catch (Exception exception) {
+            throw new IllegalStateException("Unable to load dimension data from " + resourcePath, exception);
         }
+    }
 }
