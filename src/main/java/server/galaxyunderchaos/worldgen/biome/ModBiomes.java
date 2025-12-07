@@ -105,6 +105,7 @@ public class ModBiomes {
                         .fogColor(0xE6F7FF) // Light blue fog
                         .skyColor(0xAAD4FF) // Soft blue sky
                         .waterColor(0x88E1FF) // Glowing cyan water
+                        .waterFogColor(0x66C8FF) // Gentle cyan water fog
                         .grassColorOverride(0x77FFAA) // Bright green grass
                         .build())
                 .build();
@@ -119,6 +120,7 @@ public class ModBiomes {
                         .fogColor(0x220011) // Dark red fog
                         .skyColor(0x550000) // Blood-red sky
                         .waterColor(0x330022) // Dark purple water
+                        .waterFogColor(0x220011) // Deep, shadowed water fog
                         .grassColorOverride(0x8B4513)
                         .foliageColorOverride(0x8B4513)
                         .build())
