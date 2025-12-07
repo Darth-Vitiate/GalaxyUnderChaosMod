@@ -105,6 +105,15 @@ import java.util.function.Supplier;
     public static final RegistryObject<Block> TEMPLE_STONE = BLOCKS.register("temple_stone", TempleStone::new);
     public static final RegistryObject<Item> TEMPLE_STONE_ITEM = ITEMS.register("temple_stone", () -> new BlockItem(TEMPLE_STONE.get(), new Item.Properties()));
 
+    // MUSHROOM STEM
+    public static final RegistryObject<Block> MUSHROOM_STEM = BLOCKS.register("mushroom_stem", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUSHROOM_STEM)));
+    public static final RegistryObject<Item> MUSHROOM_STEM_ITEM = ITEMS.register("mushroom_stem", () -> new BlockItem(MUSHROOM_STEM.get(), new Item.Properties()));
+    public static final RegistryObject<Block> PINK_MUSHROOM_BLOCK = BLOCKS.register("pink_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RED_MUSHROOM_BLOCK)));
+    public static final RegistryObject<Item> PINK_MUSHROOM_BLOCK_ITEM = ITEMS.register("pink_mushroom_block", () -> new BlockItem(PINK_MUSHROOM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = BLOCKS.register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
+    public static final RegistryObject<Item> WHITE_MUSHROOM_BLOCK_ITEM = ITEMS.register("white_mushroom_block", () -> new BlockItem(WHITE_MUSHROOM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> MUSHROOM_BLOCK_INSIDE = BLOCKS.register("mushroom_block_inside", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
+    public static final RegistryObject<Item> MUSHROOM_BLOCK_INSIDE_ITEM = ITEMS.register("mushroom_block_inside", () -> new BlockItem(MUSHROOM_BLOCK_INSIDE.get(), new Item.Properties()));
     public static final RegistryObject<Block> TEMPLE_STONE_PILLAR = BLOCKS.register("temple_stone_pillar", TempleStonePillar::new);
     public static final RegistryObject<Item> TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("temple_stone_pillar", () -> new BlockItem(TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
 

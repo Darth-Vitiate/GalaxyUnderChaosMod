@@ -116,6 +116,10 @@ public class CreativeMenuTabs {
                         output.accept(HEART_BERRY_HANGING_SIGN_ITEM.get());           // 15 sapling  (moves down)
                         output.accept(HEART_BERRY_BOAT.get());
                         output.accept(HEART_BERRY_CHEST_BOAT.get());
+                        output.accept(MUSHROOM_STEM_ITEM.get());
+                        output.accept(PINK_MUSHROOM_BLOCK_ITEM.get());
+                        output.accept(WHITE_MUSHROOM_BLOCK_ITEM.get());
+
 
                     }).build());
 
