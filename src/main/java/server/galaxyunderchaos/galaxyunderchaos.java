@@ -813,6 +813,7 @@ import java.util.function.Supplier;
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(galaxyunderchaos.ACID_SPIDER.get(), AcidSpiderRenderer::new);
         EntityRenderers.register(galaxyunderchaos.WINGMAW.get(), WingmawRenderer::new);
+        EntityRenderers.register(galaxyunderchaos.SEAT.get(), SeatRenderer::new);
         event.enqueueWork(() -> {
 
             ModItemProperties.addCustomItemProperties();

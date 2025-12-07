@@ -52,19 +52,33 @@ public class RotatableSittableChairBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos,
-                                 Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state,
+                                               Level level,
+                                               BlockPos pos,
+                                               Player player,
+                                               BlockHitResult hit) {
 
-        if (level.isClientSide()) return InteractionResult.SUCCESS;
-        if (player.isPassenger()) return InteractionResult.FAIL;
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
 
-        // Position seat slightly above block
-        double yOffset = 0.4D;
+        if (player.isPassenger()) {
+            return InteractionResult.FAIL;
+        }
 
-        SeatEntity seat = new SeatEntity(level, pos.getX() + 0.5D, pos.getY() + yOffset, pos.getZ() + 0.5D);
+        double yOffset = 0.45D;
+
+        SeatEntity seat = new SeatEntity(
+                level,
+                pos.getX() + 0.5D,
+                pos.getY() + yOffset,
+                pos.getZ() + 0.5D
+        );
+
         level.addFreshEntity(seat);
         player.startRiding(seat);
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        // Server: consume the action so it doesn't pass through
+        return InteractionResult.CONSUME;
     }
 }
