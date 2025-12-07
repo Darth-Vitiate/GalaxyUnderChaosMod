@@ -28,7 +28,6 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModDatapackEntries(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModGlobalLootModifierProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModHardcodedRecipeProvider(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), new ModRecipeHandler(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(packOutput, lookupProvider));
     }
 }

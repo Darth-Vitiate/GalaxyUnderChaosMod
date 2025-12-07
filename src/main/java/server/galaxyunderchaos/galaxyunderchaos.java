@@ -63,7 +63,7 @@ import java.util.function.Supplier;
 
 @Mod(galaxyunderchaos.MODID)public class galaxyunderchaos {
     public static final String MODID = "galaxyunderchaos";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);

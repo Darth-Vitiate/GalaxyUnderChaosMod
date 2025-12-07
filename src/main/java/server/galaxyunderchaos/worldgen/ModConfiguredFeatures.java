@@ -31,6 +31,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import server.galaxyunderchaos.galaxyunderchaos;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TITANIUM_ORE_KEY = registerKey("titanium_ore");
@@ -94,9 +95,7 @@ public class ModConfiguredFeatures {
                 new DarkOakTrunkPlacer(12, 2, 1),
                 BlockStateProvider.simple(Blocks.OAK_LEAVES),
                 new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
-                new ThreeLayersFeatureSize(1, 0, 1, 2, 1))
-                .ignoreVines()
-                .build());
+                new ThreeLayersFeatureSize(1, 0, 1, 2, 1, OptionalInt.empty())).build());
 
         register(context, HEART_BERRY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(galaxyunderchaos.HEART_BERRY_LOG.get()),

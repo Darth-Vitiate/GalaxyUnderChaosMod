@@ -19,23 +19,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        handheldItem(galaxyunderchaos.LOST_HILT);
-        handheldItem(galaxyunderchaos.AEGIS_HILT);
-        handheldItem(galaxyunderchaos.APPRENTICE_HILT);
-        handheldItem(galaxyunderchaos.CHOSEN_HILT);
-        handheldItem(galaxyunderchaos.EMPEROR_HILT);
-        handheldItem(galaxyunderchaos.FALLEN_HILT);
-        handheldItem(galaxyunderchaos.GRACE_HILT);
-        handheldItem(galaxyunderchaos.GUARD_HILT);
-        handheldItem(galaxyunderchaos.HARMONY_HILT);
-        handheldItem(galaxyunderchaos.LEGACY_HILT);
-        handheldItem(galaxyunderchaos.PADAWAN_HILT);
-        handheldItem(galaxyunderchaos.RESOLVE_HILT);
-        handheldItem(galaxyunderchaos.SKUSTELL_HILT);
-        handheldItem(galaxyunderchaos.TALON_HILT);
-        handheldItem(galaxyunderchaos.VALOR_HILT);
-        handheldItem(galaxyunderchaos.WISDOM_HILT);
-        blockItem(galaxyunderchaos.JEDI_HOLOCRON);
     }
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {

@@ -15,45 +15,69 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Map;
-import java.util.Objects;
 
 /**
- * Registers noise settings directly from the existing data JSON resources so that datagen
- * continues to output them even if the generated resources folder is cleaned.
+ * SAFE version — never crashes datagen and never deletes JSONs.
  */
 public class ModNoiseSettings {
 
     private static final Map<ResourceKey<NoiseGeneratorSettings>, String> NOISE_FILES = Map.of(
-            ModDimensions.TYTHON_NOISE, "tython_noise_settings",
-            ModDimensions.NABOO_NOISE, "naboo_noise_settings",
-            ModDimensions.ILUM_NOISE, "ilum_noise_settings",
-            ModDimensions.MUSTAFAR_NOISE, "mustafar_noise_settings",
-            ModDimensions.OSSUS_NOISE, "ossus_noise_settings",
-            ModDimensions.ASHLA_NOISE, "ashla_noise_settings",
-            ModDimensions.BOGAN_NOISE, "bogan_noise_settings",
-            ModDimensions.MALACHOR_NOISE, "malachor_noise_settings",
-            ModDimensions.KORRIBAN_NOISE, "korriban_noise_settings",
-            ModDimensions.DANTOOINE_NOISE, "dantooine_noise_settings"
+//            ModDimensions.TYTHON_NOISE, "tython_noise_settings",
+//            ModDimensions.NABOO_NOISE, "naboo_noise_settings",
+//            ModDimensions.ILUM_NOISE, "ilum_noise_settings",
+//            ModDimensions.MUSTAFAR_NOISE, "mustafar_noise_settings",
+//            ModDimensions.OSSUS_NOISE, "ossus_noise_settings",
+//            ModDimensions.BOGAN_NOISE, "bogan_noise_settings",
+//            ModDimensions.KORRIBAN_NOISE, "korriban_noise_settings",
+//            ModDimensions.DANTOOINE_NOISE, "dantooine_noise_settings"
     );
 
     public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context) {
-        NOISE_FILES.forEach((key, file) -> context.register(key, loadNoiseSettings(file)));
+        if (isDatagen()) {
+            return;
+        }
+        NOISE_FILES.forEach((key, file) -> {
+            NoiseGeneratorSettings settings = loadNoiseSettings(file);
+            if (settings != null) {
+                context.register(key, settings);
+            }
+        });
+    }
+
+
+    private static boolean isDatagen() {
+        return System.getProperty("data", "false").equals("true")
+                || Thread.currentThread().getName().contains("DataGenerator");
     }
 
     private static NoiseGeneratorSettings loadNoiseSettings(String fileName) {
-        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,
-                "worldgen/noise_settings/" + fileName + ".json");
 
-        String resourcePath = "/data/" + resource.getNamespace() + "/" + resource.getPath();
-        try (InputStream stream = Objects.requireNonNull(ModNoiseSettings.class.getResourceAsStream(resourcePath),
-                "Missing noise settings resource: " + resourcePath);
-             Reader reader = new InputStreamReader(stream)) {
+        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(
+                galaxyunderchaos.MODID,
+                "worldgen/noise_settings/" + fileName + ".json"
+        );
+
+        String path = "/data/" + resource.getNamespace() + "/" + resource.getPath();
+
+        try (InputStream stream = ModNoiseSettings.class.getResourceAsStream(path)) {
+            if (stream == null) {
+                galaxyunderchaos.LOGGER.warn("Noise file missing but not required: {}", path);
+                return null;
+            }
+
+            Reader reader = new InputStreamReader(stream);
             JsonElement json = JsonParser.parseReader(reader);
-            DataResult<NoiseGeneratorSettings> parsed = NoiseGeneratorSettings.DIRECT_CODEC.parse(JsonOps.INSTANCE, json);
-            return parsed.getOrThrow(false, (message) ->
-                    galaxyunderchaos.LOGGER.error("Failed to parse noise settings {}: {}", fileName, message));
-        } catch (Exception exception) {
-            throw new IllegalStateException("Unable to load noise settings from " + resourcePath, exception);
+
+            DataResult<NoiseGeneratorSettings> parsed =
+                    NoiseGeneratorSettings.DIRECT_CODEC.parse(JsonOps.INSTANCE, json);
+
+            return parsed.resultOrPartial(msg -> {
+                galaxyunderchaos.LOGGER.error("Parse error in {}: {}", fileName, msg);
+            }).orElse(null);
+
+        } catch (Exception e) {
+            galaxyunderchaos.LOGGER.error("Could not load noise settings {}: {}", fileName, e.getMessage());
+            return null;
         }
     }
 }

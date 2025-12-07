@@ -1,15 +1,21 @@
 package server.galaxyunderchaos.worldgen.dimension;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
@@ -145,23 +151,48 @@ public class ModDimensions {
     }
 
     private static DimensionType loadDimensionType(BootstrapContext<DimensionType> context, String fileName) {
-        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,
-                "dimension_type/" + fileName + ".json");
+        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(
+                galaxyunderchaos.MODID, "dimension_type/" + fileName + ".json"
+        );
+
         JsonElement json = readJson(resource);
-        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, context.lookupProvider());
-        DataResult<DimensionType> parsed = DimensionType.DIRECT_CODEC.parse(ops, json);
-        return parsed.getOrThrow(false, (message) ->
-                galaxyunderchaos.LOGGER.error("Failed to parse dimension type {}: {}", resource, message));
+        RegistryOps<JsonElement> ops =
+                RegistryOps.create(JsonOps.INSTANCE, new BootstrapContextLookup(context));
+
+        return DimensionType.DIRECT_CODEC
+                .parse(ops, json)
+                .getOrThrow(msg -> new IllegalStateException("Failed to parse dimension type: " + msg));
     }
 
+
+
+
     private static LevelStem loadLevelStem(BootstrapContext<LevelStem> context, String fileName) {
-        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,
-                "dimension/" + fileName + ".json");
-        JsonElement json = readJson(resource);
-        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, context.lookupProvider());
-        DataResult<LevelStem> parsed = LevelStem.CODEC.parse(ops, json);
-        return parsed.getOrThrow(false, (message) ->
-                galaxyunderchaos.LOGGER.error("Failed to parse level stem {}: {}", resource, message));
+        ResourceLocation resource = ResourceLocation.fromNamespaceAndPath(
+                galaxyunderchaos.MODID, "dimension/" + fileName + ".json"
+        );
+
+        JsonObject json = readJson(resource).getAsJsonObject();
+
+        String typeId = json.getAsJsonPrimitive("type").getAsString();
+        ResourceLocation typeLoc = ResourceLocation.parse(typeId);
+
+        ResourceKey<DimensionType> typeKey =
+                ResourceKey.create(Registries.DIMENSION_TYPE, typeLoc);
+
+        HolderGetter<DimensionType> typeLookup = context.lookup(Registries.DIMENSION_TYPE);
+        Holder<DimensionType> typeHolder = typeLookup.getOrThrow(typeKey);
+
+        JsonObject generatorJson = json.getAsJsonObject("generator");
+
+        RegistryOps<JsonElement> ops =
+                RegistryOps.create(JsonOps.INSTANCE, new BootstrapContextLookup(context));
+
+        ChunkGenerator generator =
+                ChunkGenerator.CODEC.parse(ops, generatorJson)
+                        .getOrThrow(msg -> new IllegalStateException("Failed to parse chunk generator: " + msg));
+
+        return new LevelStem(typeHolder, generator);
     }
 
     private static JsonElement readJson(ResourceLocation resource) {

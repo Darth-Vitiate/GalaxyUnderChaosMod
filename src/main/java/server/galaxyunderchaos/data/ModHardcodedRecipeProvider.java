@@ -29,17 +29,13 @@ public class ModHardcodedRecipeProvider extends RecipeProvider implements ICondi
         super(packOutput, lookupProvider);
     }
 
-    @Override
-    public String getName() {
-        return "GalaxyUnderChaos Hardcoded Recipes";
-    }
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         addSmeltingAndBlasting(recipeOutput, galaxyunderchaos.CHITIN_FRAGMENTS.get(), galaxyunderchaos.ACID_FORGED_PLATE.get(), "chitin_fragments", 0.25f, 200, 100);
 
-        addWoodSet(recipeOutput, "ak", galaxyunderchaos.AK_PLANKS.get(), AK_LOGS, galaxyunderchaos.AK_BOAT.get(), galaxyunderchaos.AK_CHEST_BOAT.get(), galaxyunderchaos.AK_BUTTON.get(), galaxyunderchaos.AK_DOOR.get(), galaxyunderchaos.AK_FENCE.get(), galaxyunderchaos.AK_FENCE_GATE.get(), galaxyunderchaos.AK_HANGING_SIGN.get(), galaxyunderchaos.AK_PRESSURE_PLATE.get(), galaxyunderchaos.AK_SIGN.get(), galaxyunderchaos.AK_SLAB.get(), galaxyunderchaos.AK_STAIRS.get(), galaxyunderchaos.AK_TRAPDOOR.get(), galaxyunderchaos.STRIPPED_AK_LOG.get());
-        addWoodSet(recipeOutput, "heart_berry", galaxyunderchaos.HEART_BERRY_PLANKS.get(), HEART_BERRY_LOGS, galaxyunderchaos.HEART_BERRY_BOAT.get(), galaxyunderchaos.HEART_BERRY_CHEST_BOAT.get(), galaxyunderchaos.HEART_BERRY_BUTTON.get(), galaxyunderchaos.HEART_BERRY_DOOR.get(), galaxyunderchaos.HEART_BERRY_FENCE.get(), galaxyunderchaos.HEART_BERRY_FENCE_GATE.get(), galaxyunderchaos.HEART_BERRY_HANGING_SIGN.get(), galaxyunderchaos.HEART_BERRY_PRESSURE_PLATE.get(), galaxyunderchaos.HEART_BERRY_SIGN.get(), galaxyunderchaos.HEART_BERRY_SLAB.get(), galaxyunderchaos.HEART_BERRY_STAIRS.get(), galaxyunderchaos.HEART_BERRY_TRAPDOOR.get(), galaxyunderchaos.STRIPPED_HEART_BERRY_LOG.get());
+        addWoodSet(recipeOutput, "ak", galaxyunderchaos.AK_PLANKS.get(), AK_LOGS, galaxyunderchaos.AK_BOAT.get(), galaxyunderchaos.AK_CHEST_BOAT.get(), galaxyunderchaos.AK_BUTTON.get(), galaxyunderchaos.AK_DOOR_BLOCK.get(), galaxyunderchaos.AK_FENCE_BLOCK.get(), galaxyunderchaos.AK_FENCE_GATE.get(), galaxyunderchaos.AK_HANGING_SIGN.get(), galaxyunderchaos.AK_PRESSURE_PLATE.get(), galaxyunderchaos.AK_SIGN.get(), galaxyunderchaos.AK_SLAB.get(), galaxyunderchaos.AK_STAIRS.get(), galaxyunderchaos.AK_TRAPDOOR_BLOCK.get(), galaxyunderchaos.STRIPPED_AK_LOG.get());
+        addWoodSet(recipeOutput, "heart_berry", galaxyunderchaos.HEART_BERRY_PLANKS.get(), HEART_BERRY_LOGS, galaxyunderchaos.HEART_BERRY_BOAT.get(), galaxyunderchaos.HEART_BERRY_CHEST_BOAT.get(), galaxyunderchaos.HEART_BERRY_BUTTON.get(), galaxyunderchaos.HEART_BERRY_DOOR_BLOCK.get(), galaxyunderchaos.HEART_BERRY_FENCE_BLOCK.get(), galaxyunderchaos.HEART_BERRY_FENCE_GATE.get(), galaxyunderchaos.HEART_BERRY_HANGING_SIGN.get(), galaxyunderchaos.HEART_BERRY_PRESSURE_PLATE.get(), galaxyunderchaos.HEART_BERRY_SIGN.get(), galaxyunderchaos.HEART_BERRY_SLAB.get(), galaxyunderchaos.HEART_BERRY_STAIRS.get(), galaxyunderchaos.HEART_BERRY_DOOR_BLOCK.get(), galaxyunderchaos.STRIPPED_HEART_BERRY_LOG.get());
 
         addStoneBuildingRecipes(recipeOutput, "ancient_temple_stone", galaxyunderchaos.ANCIENT_TEMPLE_STONE.get(), galaxyunderchaos.ANCIENT_TEMPLE_STONE_PILLAR.get(), galaxyunderchaos.ANCIENT_TEMPLE_STONE_STAIRS.get(), galaxyunderchaos.ANCIENT_TEMPLE_STONE_SLAB.get(), galaxyunderchaos.ANCIENT_TEMPLE_STONE_WALL.get());
         addStoneBuildingRecipes(recipeOutput, "ashla_temple_stone", galaxyunderchaos.ASHLA_TEMPLE_STONE.get(), galaxyunderchaos.ASHLA_TEMPLE_STONE_PILLAR.get(), galaxyunderchaos.ASHLA_TEMPLE_STONE_STAIRS.get(), galaxyunderchaos.ASHLA_TEMPLE_STONE_SLAB.get(), galaxyunderchaos.ASHLA_TEMPLE_STONE_WALL.get());
@@ -164,7 +160,7 @@ public class ModHardcodedRecipeProvider extends RecipeProvider implements ICondi
         addSmeltingAndBlasting(recipeOutput, galaxyunderchaos.TITANIUM_ORE.get(), galaxyunderchaos.TITANIUM_INGOT.get(), "titanium", 0.25f, 200, 100);
         addSmeltingAndBlasting(recipeOutput, galaxyunderchaos.RAW_WINGMAW_MEAT.get(), galaxyunderchaos.COOKED_WINGMAW_MEAT.get(), "raw_wingmaw_meat", 0.25f, 200, 100);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.EQUIPMENT, galaxyunderchaos.TITANIUM_CHROMIUM_INGOT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, galaxyunderchaos.TITANIUM_CHROMIUM_INGOT.get())
                 .pattern("X")
                 .pattern("#")
                 .define('#', galaxyunderchaos.CHROMIUM_INGOT.get())
@@ -353,7 +349,7 @@ public class ModHardcodedRecipeProvider extends RecipeProvider implements ICondi
     }
 
     private void addPortal(RecipeOutput recipeOutput, String name, ItemLike result, ItemLike frameItem) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.EQUIPMENT, result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, result)
                 .pattern("###")
                 .pattern("#X#")
                 .pattern("###")
