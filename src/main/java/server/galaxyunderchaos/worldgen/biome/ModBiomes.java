@@ -281,10 +281,15 @@ public class ModBiomes {
     }
 
     private static Biome createNabooBiome(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .temperature(0.8f)
                 .downfall(0.9f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(14083839)
                         .grassColorOverride(5676610)
@@ -298,10 +303,15 @@ public class ModBiomes {
     }
 
     private static Biome createNabooPlains(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .temperature(0.8f)
                 .downfall(0.4f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(14083839)
                         .grassColorOverride(5676610)
@@ -314,10 +324,15 @@ public class ModBiomes {
                 .build();
     }
     private static Biome createNabooOcean(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .temperature(0.3f)
                 .downfall(0.4f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(14083839)
                         .grassColorOverride(5676610)
@@ -332,10 +347,15 @@ public class ModBiomes {
 
 
     private static Biome createNabooSwamp(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .temperature(0.8f)
                 .downfall(0.9f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(12898531)
                         .grassColorOverride(876050)
