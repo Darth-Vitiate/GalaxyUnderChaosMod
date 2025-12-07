@@ -1,22 +1,22 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "category": "misc",
-    "group": "wooden_sign",
-    "key": {
-        "#": {
-            "item": "galaxyunderchaos:ak_planks"
-        },
-        "X": {
-            "item": "minecraft:stick"
-        }
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_sign",
+  "key": {
+    "#": {
+      "item": "galaxyunderchaos:ak_planks"
     },
-    "pattern": [
-        "###",
-        "###",
-        " X "
-    ],
-    "result": {
-        "count": 3,
-        "id": "galaxyunderchaos:ak_sign"
+    "X": {
+      "item": "minecraft:stick"
     }
+  },
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
+  "result": {
+    "count": 3,
+    "id": "galaxyunderchaos:ak_sign"
+  }
 }

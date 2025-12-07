@@ -2,7 +2,7 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -11,16 +11,16 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2,
-                "min": 0
+                "max": 2.0,
+                "min": 0.0
               },
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0
+                "max": 1.0,
+                "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
@@ -29,10 +29,10 @@
           "name": "galaxyunderchaos:silk_thread"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     },
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:killed_by_player"
@@ -46,16 +46,16 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": -1
+                "max": 1.0,
+                "min": -1.0
               },
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0
+                "max": 1.0,
+                "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
@@ -64,10 +64,10 @@
           "name": "galaxyunderchaos:acidic_venom_sac"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     },
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:killed_by_player"
@@ -81,16 +81,16 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": -1
+                "max": 1.0,
+                "min": -1.0
               },
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0
+                "max": 1.0,
+                "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
@@ -99,8 +99,8 @@
           "name": "galaxyunderchaos:chitin_fragments"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
-  "random_sequence": "galaxyunderchaos:entities/acidspider"
+  "random_sequence": "galaxyunderchaos:entities/acid_spider"
 }

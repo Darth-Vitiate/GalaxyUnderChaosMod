@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "TTT",
-    "#X#",
-    "#R#"
-  ],
+  "category": "misc",
   "key": {
     "#": {
       "item": "galaxyunderchaos:titanium_chromium_ingot"
@@ -19,8 +15,13 @@
       "item": "galaxyunderchaos:navigation_computer"
     }
   },
+  "pattern": [
+    "TTT",
+    "#X#",
+    "#R#"
+  ],
   "result": {
-    "id": "galaxyunderchaos:portal_item",
-    "count": 1
+    "count": 1,
+    "id": "galaxyunderchaos:portal_item"
   }
 }

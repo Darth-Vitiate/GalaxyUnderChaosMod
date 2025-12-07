@@ -1,11 +1,11 @@
 {
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "galaxyunderchaos:tython_temple_stone"
-    },
-    "result": {
-        "id": "galaxyunderchaos:tython_temple_stone_slab",
-        "count": 2
-    },
-    "group": "misc"
+  "type": "minecraft:stonecutting",
+  "group": "misc",
+  "ingredient": {
+    "item": "galaxyunderchaos:tython_temple_stone"
+  },
+  "result": {
+    "count": 2,
+    "id": "galaxyunderchaos:tython_temple_stone_slab"
+  }
 }

@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "hyperdrive",
-  "category": "equipment",
   "key": {
     "#": {
       "item": "minecraft:redstone"
     },
-    "R": {
-      "item": "minecraft:glass"
-    },
     "C": {
       "item": "galaxyunderchaos:titanium_ingot"
+    },
+    "R": {
+      "item": "minecraft:glass"
     },
     "X": {
       "item": "minecraft:compass"

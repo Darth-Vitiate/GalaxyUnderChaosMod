@@ -1,20 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "###",
-        "GGG",
-        "###"
-    ],
-    "key": {
-        "#": {
-            "item": "galaxyunderchaos:ancient_temple_stone"
-        },
-        "G": {
-            "item": "galaxyunderchaos:ancient_holobook"
-        }
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "galaxyunderchaos:ancient_temple_stone"
     },
-    "result": {
-        "id": "galaxyunderchaos:ancient_temple_stone_holobook",
-        "count": 1
+    "G": {
+      "item": "galaxyunderchaos:ancient_holobook"
     }
+  },
+  "pattern": [
+    "###",
+    "GGG",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "galaxyunderchaos:ancient_temple_stone_holobook"
+  }
 }

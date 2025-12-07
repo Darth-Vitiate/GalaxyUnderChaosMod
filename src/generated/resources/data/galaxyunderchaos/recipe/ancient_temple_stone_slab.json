@@ -1,16 +1,17 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "###"
-    ],
-    "key": {
-        "#": {
-            "item": "galaxyunderchaos:ancient_temple_stone"
-        }
-    },
-    "result": {
-        "id": "galaxyunderchaos:ancient_temple_stone_slab",
-        "count": 6
-    },
-    "group": "misc"
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "misc",
+  "key": {
+    "#": {
+      "item": "galaxyunderchaos:ancient_temple_stone"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "galaxyunderchaos:ancient_temple_stone_slab"
+  }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -11,16 +11,16 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2,
-                "min": 0
+                "max": 2.0,
+                "min": 0.0
               },
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0
+                "max": 1.0,
+                "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
@@ -29,10 +29,10 @@
           "name": "galaxyunderchaos:raw_wingmaw_meat"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     },
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:killed_by_player"
@@ -41,32 +41,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "galaxyunderchaos:wingmaw_fang",
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": true,
               "count": {
                 "type": "minecraft:uniform",
-                "min": -1,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "galaxyunderchaos:wingmaw_hide",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": -1,
-                "max": 1
+                "max": 1.0,
+                "min": -1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             }
-          ]
+          ],
+          "name": "galaxyunderchaos:wingmaw_fang"
         },
         {
           "type": "minecraft:item",
@@ -75,16 +61,31 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": -1
+                "max": 1.0,
+                "min": -1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "galaxyunderchaos:wingmaw_hide"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": -1.0
               },
               "function": "minecraft:set_count"
             },
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1,
-                "min": 0
+                "max": 1.0,
+                "min": 0.0
               },
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
@@ -93,7 +94,7 @@
           "name": "galaxyunderchaos:wingmaw_feather"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
   "random_sequence": "galaxyunderchaos:entities/wingmaw"

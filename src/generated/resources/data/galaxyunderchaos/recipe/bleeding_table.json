@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "group": "lightsaber",
   "key": {
     "#": {
       "item": "minecraft:gray_concrete"
     },
-    "X": {
-      "item": "galaxyunderchaos:sith_holobook"
-    },
     "C": {
       "item": "minecraft:black_concrete"
+    },
+    "X": {
+      "item": "galaxyunderchaos:sith_holobook"
     }
   },
   "pattern": [

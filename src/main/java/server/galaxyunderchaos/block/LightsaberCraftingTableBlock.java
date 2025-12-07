@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LightsaberCraftingTableBlock extends Block {
-    public static final DirectionProperty FACING = DirectionProperty.create("facing");
+    public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
     private static final VoxelShape NORTH_SHAPE = Block.box(-8, 0.1, 0.1, 24, 16, 17);
     private static final VoxelShape WEST_SHAPE = Block.box(0.1, 0.1, -8, 17, 16, 24);
     private static final VoxelShape SOUTH_SHAPE = Block.box(-8, 0.1, -1, 24, 16, 16);

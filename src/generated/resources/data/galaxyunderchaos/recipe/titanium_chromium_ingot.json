@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
   "group": "hyperdrive",
-  "category": "equipment",
   "key": {
     "#": {
       "item": "galaxyunderchaos:chromium_ingot"

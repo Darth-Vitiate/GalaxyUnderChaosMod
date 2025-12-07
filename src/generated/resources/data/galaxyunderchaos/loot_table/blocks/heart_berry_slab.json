@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -18,7 +18,7 @@
                   }
                 }
               ],
-              "count": 2,
+              "count": 2.0,
               "function": "minecraft:set_count"
             },
             {
@@ -28,8 +28,8 @@
           "name": "galaxyunderchaos:heart_berry_slab"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
-  "random_sequence": "galaxyunderchaos:block/heart_berry_planks"
+  "random_sequence": "galaxyunderchaos:blocks/heart_berry_slab"
 }

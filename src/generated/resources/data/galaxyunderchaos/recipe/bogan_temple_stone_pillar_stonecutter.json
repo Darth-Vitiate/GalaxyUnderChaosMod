@@ -1,11 +1,11 @@
 {
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "galaxyunderchaos:bogan_temple_stone"
-    },
-    "result": {
-        "id": "galaxyunderchaos:bogan_temple_stone_pillar",
-        "count": 1
-    },
-    "group": "misc"
+  "type": "minecraft:stonecutting",
+  "group": "misc",
+  "ingredient": {
+    "item": "galaxyunderchaos:bogan_temple_stone"
+  },
+  "result": {
+    "count": 1,
+    "id": "galaxyunderchaos:bogan_temple_stone_pillar"
+  }
 }

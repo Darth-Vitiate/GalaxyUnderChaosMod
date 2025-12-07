@@ -1,25 +1,25 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "category": "misc",
-    "group": "sticks",
-    "key": {
-        "#": {
-            "item": "galaxyunderchaos:wingmaw_feather"
-        },
-        "x": {
-            "item": "galaxyunderchaos:wingmaw_hide"
-        },
-        "a": {
-            "item": "minecraft:stick"
-        }
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sticks",
+  "key": {
+    "#": {
+      "item": "galaxyunderchaos:wingmaw_feather"
     },
-    "pattern": [
-        " ax",
-        "a#a",
-        "xa "
-    ],
-    "result": {
-        "count": 1,
-        "id": "galaxyunderchaos:wingmaw_hilt"
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "galaxyunderchaos:wingmaw_hide"
     }
+  },
+  "pattern": [
+    " ax",
+    "a#a",
+    "xa "
+  ],
+  "result": {
+    "count": 1,
+    "id": "galaxyunderchaos:wingmaw_hilt"
+  }
 }
