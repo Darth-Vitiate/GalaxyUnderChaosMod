@@ -214,6 +214,11 @@ import java.util.function.Supplier;
     public static final RegistryObject<Block> SITH_HOLOCRON = BLOCKS.register("sith_holocron", Holocron::new);
     public static final RegistryObject<Item> SITH_HOLOCRON_ITEM = ITEMS.register("sith_holocron", () -> new BlockItem(SITH_HOLOCRON.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> JEDI_COFFIN = BLOCKS.register("jedi_coffin", () -> new JediCoffinBlock(BlockBehaviour.Properties.of().strength(2.5f)));
+    public static final RegistryObject<Item> JEDI_COFFIN_ITEM = ITEMS.register("jedi_coffin", () -> new BlockItem(JEDI_COFFIN.get(), new Item.Properties()));
+    public static final RegistryObject<Block> SITH_COFFIN = BLOCKS.register("sith_coffin", () -> new SithCoffinBlock(BlockBehaviour.Properties.of().strength(3.0f)));
+    public static final RegistryObject<Item> SITH_COFFIN_ITEM = ITEMS.register("sith_coffin", () -> new BlockItem(SITH_COFFIN.get(), new Item.Properties()));
+
     public static final RegistryObject<Block> JEDI_GUARD_STATUE = BLOCKS.register("jedi_guard_statue", JediGuard::new);
     public static final RegistryObject<Item> JEDI_GUARD_STATUE_ITEM = ITEMS.register("jedi_guard_statue", () -> new BlockItem(JEDI_GUARD_STATUE.get(), new Item.Properties()));
 

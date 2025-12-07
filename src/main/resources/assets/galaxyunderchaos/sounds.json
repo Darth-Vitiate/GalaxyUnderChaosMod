@@ -49,5 +49,47 @@
     "sounds": [
       "galaxyunderchaos:lightsaber_deflect"
     ]
+  },
+  "tomb_sound": {
+    "subtitle": "sounds.galaxyunderchaos.tomb_sound",
+    "sounds": [
+      "galaxyunderchaos:tomb_sound"
+    ]
+  },
+  "wingmaw_living": {
+    "subtitle": "sounds.galaxyunderchaos.wingmaw_living",
+    "sounds": [
+      "galaxyunderchaos:wingmaw_living"
+    ]
+  },
+  "wingmaw_hurt": {
+    "subtitle": "sounds.galaxyunderchaos.wingmaw_hurt",
+    "sounds": [
+      "galaxyunderchaos:wingmaw_hurt"
+    ]
+  },
+  "wingmaw_attack": {
+    "subtitle": "sounds.galaxyunderchaos.wingmaw_attack",
+    "sounds": [
+      "galaxyunderchaos:wingmaw_attack"
+    ]
+  },
+  "acid_spider_living": {
+    "subtitle": "sounds.galaxyunderchaos.acid_spider_living",
+    "sounds": [
+      "galaxyunderchaos:acid_spider_living"
+    ]
+  },
+  "acid_spider_hurt": {
+    "subtitle": "sounds.galaxyunderchaos.acid_spider_hurt",
+    "sounds": [
+      "galaxyunderchaos:acid_spider_hurt"
+    ]
+  },
+  "acid_spider_attack": {
+    "subtitle": "sounds.galaxyunderchaos.acid_spider_attack",
+    "sounds": [
+      "galaxyunderchaos:acid_spider_attack"
+    ]
   }
 }

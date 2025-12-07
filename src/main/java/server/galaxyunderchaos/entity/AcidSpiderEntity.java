@@ -15,6 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import server.galaxyunderchaos.galaxyunderchaos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import server.galaxyunderchaos.sound.ModSounds;
 
 public class AcidSpiderEntity extends Monster {
     public final AnimationState idleAnimationState = new AnimationState();
@@ -51,6 +54,7 @@ public class AcidSpiderEntity extends Monster {
         boolean flag = super.doHurtTarget(target);
         if (flag && target instanceof LivingEntity livingTarget) {
             livingTarget.hurt(this.damageSources().mobAttack(this), 3.0F); // Corrected method
+            this.playSound(ModSounds.ACID_SPIDER_ATTACK.get(), 1.0F, this.getVoicePitch());
         }
         return flag;
     }
@@ -72,6 +76,21 @@ public class AcidSpiderEntity extends Monster {
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.ACID_SPIDER_LIVING.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return ModSounds.ACID_SPIDER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.ACID_SPIDER_HURT.get();
     }
 
 }

@@ -47,5 +47,12 @@ public final class ModBlockEntities {
                                     galaxyunderchaos.HEART_BERRY_WALL_HANGING_SIGN.get())
                             .build(null));
 
+    public static final RegistryObject<BlockEntityType<CoffinBlockEntity>> COFFIN_BE =
+            BLOCK_ENTITIES.register("coffin",
+                    () -> BlockEntityType.Builder.of(CoffinBlockEntity::new,
+                                    galaxyunderchaos.JEDI_COFFIN.get(),
+                                    galaxyunderchaos.SITH_COFFIN.get())
+                            .build(null));
+
     private ModBlockEntities() {}   // no instantiation
 }
