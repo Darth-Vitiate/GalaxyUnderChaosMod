@@ -35,7 +35,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(galaxyunderchaos.TALON_HILT);
         handheldItem(galaxyunderchaos.VALOR_HILT);
         handheldItem(galaxyunderchaos.WISDOM_HILT);
-        handheldItem(galaxyunderchaos.JEDI_HOLOCRON_ITEM);
+        blockItem(galaxyunderchaos.JEDI_HOLOCRON);
     }
 
     private ItemModelBuilder handheldItem(RegistryObject<Item> item) {
@@ -66,5 +66,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 ResourceLocation.parse("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(galaxyunderchaos.MODID,"item/" + item.getId().getPath()));
+    }
+
+    private void blockItem(RegistryObject<Block> block) {
+        withExistingParent(block.getId().getPath(), modLoc("block/" + block.getId().getPath()));
     }
 }
