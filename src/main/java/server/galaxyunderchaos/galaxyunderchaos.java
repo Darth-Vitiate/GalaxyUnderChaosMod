@@ -384,6 +384,45 @@ import java.util.function.Supplier;
             () -> new ForgeSpawnEggItem(galaxyunderchaos.ACID_SPIDER, 0x53524b, 0xdac741, new Item.Properties()));
     public static final RegistryObject<Item> WINGMAW_SPAWN_EGG = ITEMS.register("wingmaw_spawn_egg",
             () -> new ForgeSpawnEggItem(galaxyunderchaos.WINGMAW, 0x53524b, 0xdac741, new Item.Properties()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_1 =
+            BLOCKS.register("council_chair_1",
+                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
+                            .strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_2 =
+            BLOCKS.register("council_chair_2",
+                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
+                            .strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_3 =
+            BLOCKS.register("council_chair_3",
+                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
+                            .strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_4 =
+            BLOCKS.register("council_chair_4",
+                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
+                            .strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_5 =
+            BLOCKS.register("council_chair_5",
+                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
+                            .strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_1_ITEM =
+            ITEMS.register("council_chair_1",
+                    () -> new BlockItem(COUNCIL_CHAIR_1.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> COUNCIL_CHAIR_2_ITEM =
+            ITEMS.register("council_chair_2",
+                    () -> new BlockItem(COUNCIL_CHAIR_2.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> COUNCIL_CHAIR_3_ITEM =
+            ITEMS.register("council_chair_3",
+                    () -> new BlockItem(COUNCIL_CHAIR_3.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> COUNCIL_CHAIR_4_ITEM =
+            ITEMS.register("council_chair_4",
+                    () -> new BlockItem(COUNCIL_CHAIR_4.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> COUNCIL_CHAIR_5_ITEM =
+            ITEMS.register("council_chair_5",
+                    () -> new BlockItem(COUNCIL_CHAIR_5.get(), new Item.Properties()));
 
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
@@ -714,6 +753,11 @@ import java.util.function.Supplier;
     public static final RegistryObject<EntityType<WingmawEntity>> WINGMAW =
             ENTITY_TYPES.register("wingmaw", () -> EntityType.Builder.of(WingmawEntity::new, MobCategory.MONSTER)
                     .sized(1.0f, 1.0f).build("wingmaw"));
+    public static final RegistryObject<EntityType<SeatEntity>> SEAT =
+            ENTITY_TYPES.register("seat",
+                    () -> EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC)
+                            .sized(0.0001F, 0.0001F)
+                            .build("seat"));
 
     public galaxyunderchaos() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

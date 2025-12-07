@@ -1,1 +1,6 @@
-{ "parent": "galaxyunderchaos:block/pink_mushroom_block" }
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "galaxyunderchaos:block/pink_mushroom_block"
+  }
+}

@@ -211,7 +211,11 @@ public class CreativeMenuTabs {
                         output.accept(TYTHON_JEDI_IDLE_LEG_1_STATUE.get());
                         output.accept(TYTHON_JEDI_IDLE_LEG_2_STATUE.get());
                         output.accept(SITH_GUARD_STATUE_ITEM.get());
-
+                        output.accept(COUNCIL_CHAIR_1_ITEM.get());
+                        output.accept(COUNCIL_CHAIR_2_ITEM.get());
+                        output.accept(COUNCIL_CHAIR_3_ITEM.get());
+                        output.accept(COUNCIL_CHAIR_4_ITEM.get());
+                        output.accept(COUNCIL_CHAIR_5_ITEM.get());
 
 
 

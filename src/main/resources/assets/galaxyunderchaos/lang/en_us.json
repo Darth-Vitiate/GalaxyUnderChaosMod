@@ -549,6 +549,11 @@
   "item.galaxyunderchaos.wingmaw_hilt": "Wingmaw Hilt",
   "item.galaxyunderchaos.wingmaw_dagger": "Wingmaw Dagger",
   "item.galaxyunderchaos.wingmaw_feather": "Wingmaw Feather",
+  "block.galaxyunderchaos.council_chair_1": "Council Chair I",
+  "block.galaxyunderchaos.council_chair_2": "Council Chair II",
+  "block.galaxyunderchaos.council_chair_3": "Council Chair III",
+  "block.galaxyunderchaos.council_chair_4": "Council Chair IV",
+  "block.galaxyunderchaos.council_chair_5": "Council Chair V",
   "item.galaxyunderchaos.wingmaw_egg": "Wingmaw Egg"
 
 }
