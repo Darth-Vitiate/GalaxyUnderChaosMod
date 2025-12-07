@@ -14,6 +14,11 @@ public class ModRecipeHandler extends RecipeProvider implements IConditionBuilde
     public ModRecipeHandler(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pRegistries) {
         super(pOutput, pRegistries);
     }
+
+    @Override
+    public String getName() {
+        return "GalaxyUnderChaos Smelting Recipes";
+    }
     @Override
     protected void buildRecipes(RecipeOutput pRecipeOutput) {
         List<ItemLike> TITANIUM_SMELTABLES = List.of(galaxyunderchaos.TITANIUM_INGOT.get(),

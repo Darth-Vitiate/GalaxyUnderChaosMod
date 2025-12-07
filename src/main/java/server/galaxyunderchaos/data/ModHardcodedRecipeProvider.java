@@ -30,6 +30,11 @@ public class ModHardcodedRecipeProvider extends RecipeProvider implements ICondi
     }
 
     @Override
+    public String getName() {
+        return "GalaxyUnderChaos Hardcoded Recipes";
+    }
+
+    @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         addSmeltingAndBlasting(recipeOutput, galaxyunderchaos.CHITIN_FRAGMENTS.get(), galaxyunderchaos.ACID_FORGED_PLATE.get(), "chitin_fragments", 0.25f, 200, 100);
 
