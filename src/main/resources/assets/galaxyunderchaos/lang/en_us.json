@@ -125,6 +125,8 @@
   "block.galaxyunderchaos.bleeding_table": "Crystal Bleeding Table",
   "block.galaxyunderchaos.jedi_guard_statue": "Jedi Guard Statue",
   "block.galaxyunderchaos.sith_guard_statue": "Sith Guard Statue",
+  "block.galaxyunderchaos.jedi_coffin": "Jedi Coffin",
+  "block.galaxyunderchaos.sith_coffin": "Sith Coffin",
   "block.galaxyunderchaos.mushroom_stem": "Mushroom Stem",
   "item.galaxyunderchaos.mushroom_stem": "Mushroom Stem",
   "block.galaxyunderchaos.pink_mushroom_block": "Pink Mushroom Block",
@@ -554,6 +556,14 @@
   "block.galaxyunderchaos.council_chair_3": "Council Chair III",
   "block.galaxyunderchaos.council_chair_4": "Council Chair IV",
   "block.galaxyunderchaos.council_chair_5": "Council Chair V",
-  "item.galaxyunderchaos.wingmaw_egg": "Wingmaw Egg"
+  "item.galaxyunderchaos.wingmaw_egg": "Wingmaw Egg",
+  "container.galaxyunderchaos.coffin": "Coffin",
+  "sounds.galaxyunderchaos.tomb_sound": "Coffin opens",
+  "sounds.galaxyunderchaos.wingmaw_living": "Wingmaw chitters",
+  "sounds.galaxyunderchaos.wingmaw_hurt": "Wingmaw screeches",
+  "sounds.galaxyunderchaos.wingmaw_attack": "Wingmaw dives",
+  "sounds.galaxyunderchaos.acid_spider_living": "Acid spider hisses",
+  "sounds.galaxyunderchaos.acid_spider_hurt": "Acid spider screeches",
+  "sounds.galaxyunderchaos.acid_spider_attack": "Acid spider strikes"
 
 }

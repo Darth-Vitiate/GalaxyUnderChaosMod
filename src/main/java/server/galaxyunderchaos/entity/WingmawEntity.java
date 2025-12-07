@@ -17,6 +17,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import server.galaxyunderchaos.sound.ModSounds;
 
 public class WingmawEntity extends Monster {
 
@@ -55,8 +58,24 @@ public class WingmawEntity extends Monster {
         boolean flag = super.doHurtTarget(target);
         if (flag && target instanceof LivingEntity livingTarget) {
             livingTarget.hurt(this.damageSources().mobAttack(this), 3.0F); // Corrected method
+            this.playSound(ModSounds.WINGMAW_ATTACK.get(), 1.0F, this.getVoicePitch());
         }
         return flag;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.WINGMAW_LIVING.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return ModSounds.WINGMAW_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.WINGMAW_HURT.get();
     }
 
     private void setupAnimationStates() {
