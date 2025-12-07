@@ -8,6 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import server.galaxyunderchaos.data.ModGlobalLootModifierProvider;
+import server.galaxyunderchaos.data.ModHardcodedRecipeProvider;
 import server.galaxyunderchaos.data.ModItemModelProvider;
 import server.galaxyunderchaos.data.ModRecipeHandler;
 import server.galaxyunderchaos.galaxyunderchaos;
@@ -26,6 +27,7 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModDatapackEntries(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModGlobalLootModifierProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ModHardcodedRecipeProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModRecipeHandler(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(packOutput, lookupProvider));
     }
