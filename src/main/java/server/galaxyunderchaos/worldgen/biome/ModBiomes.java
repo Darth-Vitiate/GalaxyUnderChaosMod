@@ -380,6 +380,8 @@ public class ModBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(0x1A1A1A)
                         .skyColor(0x2C2F33)
+                        .waterColor(0x2A2D30)
+                        .waterFogColor(0x151719)
                         .build())
                 .build();
     }
@@ -397,6 +399,8 @@ public class ModBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(0x3D3D3D)
                         .skyColor(0x1C1C1C)
+                        .waterColor(0x282828)
+                        .waterFogColor(0x121212)
                         .build())
                 .build();
     }
