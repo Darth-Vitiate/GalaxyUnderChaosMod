@@ -97,10 +97,15 @@ public class ModBiomes {
                 .build();
     }
     private static Biome createAshlaBiome(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
                 .temperature(0.9f)
                 .downfall(0.0f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(0xE6F7FF) // Light blue fog
                         .skyColor(0xAAD4FF) // Soft blue sky
@@ -112,10 +117,15 @@ public class ModBiomes {
     }
 
     private static Biome createBoganBiome(BootstrapContext<Biome> context) {
+        HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
                 .temperature(0.5f)
                 .downfall(0.9f)
+                .generationSettings(new BiomeGenerationSettings.Builder(placedFeatureHolder, carverHolder).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(0x220011) // Dark red fog
                         .skyColor(0x550000) // Blood-red sky
