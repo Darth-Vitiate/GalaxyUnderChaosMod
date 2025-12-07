@@ -6,15 +6,20 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import server.galaxyunderchaos.entity.SeatEntity;
 
 public class RotatableSittableChairBlock extends HorizontalDirectionalBlock {
+
+    public static final MapCodec<RotatableSittableChairBlock> CODEC = simpleCodec(RotatableSittableChairBlock::new);
 
     public RotatableSittableChairBlock(Properties props) {
         super(props);
@@ -23,7 +28,7 @@ public class RotatableSittableChairBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return null;
+        return CODEC;
     }
 
     @Override
@@ -31,6 +36,22 @@ public class RotatableSittableChairBlock extends HorizontalDirectionalBlock {
         builder.add(FACING);
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos,
                                  Player player, InteractionHand hand, BlockHitResult hit) {
 
@@ -44,6 +65,6 @@ public class RotatableSittableChairBlock extends HorizontalDirectionalBlock {
         level.addFreshEntity(seat);
         player.startRiding(seat);
 
-        return InteractionResult.CONSUME;
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 }
