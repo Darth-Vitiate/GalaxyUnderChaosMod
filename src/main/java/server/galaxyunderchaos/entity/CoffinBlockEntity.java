@@ -60,12 +60,11 @@ public class CoffinBlockEntity extends RandomizableContainerBlockEntity {
             ContainerHelper.saveAllItems(tag, this.items, provider);
         }
     }
+
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadCustomOnly(tag, provider);
-
-        this.items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-
+        super.loadAdditional(tag, provider);
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         if (!this.tryLoadLootTable(tag)) {
             ContainerHelper.loadAllItems(tag, this.items, provider);
         }

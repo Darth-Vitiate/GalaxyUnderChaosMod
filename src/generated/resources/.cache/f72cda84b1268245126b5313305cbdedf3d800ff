@@ -1,5 +1,5 @@
-// 1.21.1	2025-12-07T19:35:33.9394072	Tags for minecraft:block mod id galaxyunderchaos
+// 1.21.1	2025-12-08T14:54:13.4000641	Tags for minecraft:block mod id galaxyunderchaos
 bfd6c877570b1bca26bf0858d5a0d3ae2f65f217 data/minecraft/tags/block/mineable/hoe.json
-039856cc1645d4c247212127b8cd6b698748444c data/minecraft/tags/block/mineable/pickaxe.json
+d04b03186eaa98769e536ed95af28ac868a411cb data/minecraft/tags/block/mineable/pickaxe.json
 bfd6c877570b1bca26bf0858d5a0d3ae2f65f217 data/minecraft/tags/block/mineable/shovel.json
-7fc3df464e3eb7712864d3bda9a127cd1fa57d57 data/minecraft/tags/block/needs_stone_tool.json
+4826ea083629028ba0c689f0f0e5655aada21597 data/minecraft/tags/block/needs_stone_tool.json
