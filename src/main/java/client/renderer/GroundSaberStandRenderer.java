@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import server.galaxyunderchaos.entity.GroundSaberStandBlockEntity;
 
-import static com.mojang.math.Axis.YP;
+import static com.mojang.math.Axis.*;
 
 public class GroundSaberStandRenderer implements BlockEntityRenderer<GroundSaberStandBlockEntity> {
 
@@ -34,9 +34,11 @@ public class GroundSaberStandRenderer implements BlockEntityRenderer<GroundSaber
         poseStack.pushPose();
 
         // Center & above the plate
-        poseStack.translate(0.5D, 0.2D, 0.5D);
-        poseStack.mulPose(YP.rotationDegrees(45.0F));
-        poseStack.scale(0.8F, 0.8F, 0.8F);
+        poseStack.translate(0.58D, 0.07D, 0.4D);
+        poseStack.mulPose(YN.rotationDegrees(90.0F));
+        poseStack.mulPose(XN.rotationDegrees(90.0F));
+        poseStack.mulPose(ZP.rotationDegrees(135.0F));
+        poseStack.scale(1.0F, 1.0F, 1.0F);
 
         itemRenderer.renderStatic(
                 stand.getItem(),

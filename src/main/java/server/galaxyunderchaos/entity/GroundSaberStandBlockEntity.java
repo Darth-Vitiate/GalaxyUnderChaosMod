@@ -3,6 +3,8 @@ package server.galaxyunderchaos.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -60,6 +62,17 @@ public class GroundSaberStandBlockEntity extends BlockEntity {
         if (!saber.isEmpty()) {
             tag.put("Saber", saber.save(provider, new CompoundTag()));
         }
+    }
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
+        handleUpdateTag(pkt.getTag(), provider);
     }
 
     @Override
