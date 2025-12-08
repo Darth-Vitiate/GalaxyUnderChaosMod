@@ -1,13 +1,13 @@
 {
   "variants": {
-    "facing=north,half=lower": { "model": "galaxyunderchaos:block/sith_coffin_lower", "y": 180 },
-    "facing=south,half=lower": { "model": "galaxyunderchaos:block/sith_coffin_lower" },
-    "facing=west,half=lower":  { "model": "galaxyunderchaos:block/sith_coffin_lower", "y": 90 },
-    "facing=east,half=lower":  { "model": "galaxyunderchaos:block/sith_coffin_lower", "y": 270 },
+    "facing=north,half=lower": { "model": "galaxyunderchaos:block/sith_coffin", "y": 180 },
+    "facing=south,half=lower": { "model": "galaxyunderchaos:block/sith_coffin" },
+    "facing=west,half=lower":  { "model": "galaxyunderchaos:block/sith_coffin", "y": 90 },
+    "facing=east,half=lower":  { "model": "galaxyunderchaos:block/sith_coffin", "y": 270 },
 
-    "facing=north,half=upper": { "model": "galaxyunderchaos:block/sith_coffin_upper", "y": 180 },
-    "facing=south,half=upper": { "model": "galaxyunderchaos:block/sith_coffin_upper" },
-    "facing=west,half=upper":  { "model": "galaxyunderchaos:block/sith_coffin_upper", "y": 90 },
-    "facing=east,half=upper":  { "model": "galaxyunderchaos:block/sith_coffin_upper", "y": 270 }
+    "facing=north,half=upper": { "model": "galaxyunderchaos:block/sith_coffin_empty", "y": 180 },
+    "facing=south,half=upper": { "model": "galaxyunderchaos:block/sith_coffin_empty" },
+    "facing=west,half=upper":  { "model": "galaxyunderchaos:block/sith_coffin_empty", "y": 90 },
+    "facing=east,half=upper":  { "model": "galaxyunderchaos:block/sith_coffin_empty", "y": 270 }
   }
 }

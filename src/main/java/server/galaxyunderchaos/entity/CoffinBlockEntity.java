@@ -1,10 +1,12 @@
 package server.galaxyunderchaos.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -12,9 +14,9 @@ import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 public class CoffinBlockEntity extends RandomizableContainerBlockEntity {
+
     private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
 
     public CoffinBlockEntity(BlockPos pos, BlockState blockState) {
@@ -27,7 +29,7 @@ public class CoffinBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected @NotNull AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+    protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
         return ChestMenu.threeRows(containerId, inventory, this);
     }
 
@@ -48,23 +50,24 @@ public class CoffinBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     public boolean stillValid(Player player) {
-        return SimpleContainer.stillValidBlockEntity(this, player);
+        return Container.stillValidBlockEntity(this, player);
     }
 
     @Override
-    protected void saveAdditional(net.minecraft.nbt.CompoundTag tag) {
-        super.saveAdditional(tag);
-        if (!trySaveLootTable(tag)) {
-            ContainerHelper.saveAllItems(tag, this.items);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.items, provider);
         }
     }
-
     @Override
-    public void load(net.minecraft.nbt.CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadCustomOnly(tag, provider);
+
         this.items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-        if (!tryLoadLootTable(tag)) {
-            ContainerHelper.loadAllItems(tag, this.items);
+
+        if (!this.tryLoadLootTable(tag)) {
+            ContainerHelper.loadAllItems(tag, this.items, provider);
         }
     }
 }

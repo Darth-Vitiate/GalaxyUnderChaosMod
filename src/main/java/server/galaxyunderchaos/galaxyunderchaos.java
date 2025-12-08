@@ -112,7 +112,7 @@ import java.util.function.Supplier;
     public static final RegistryObject<Item> PINK_MUSHROOM_BLOCK_ITEM = ITEMS.register("pink_mushroom_block", () -> new BlockItem(PINK_MUSHROOM_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Block> WHITE_MUSHROOM_BLOCK = BLOCKS.register("white_mushroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
     public static final RegistryObject<Item> WHITE_MUSHROOM_BLOCK_ITEM = ITEMS.register("white_mushroom_block", () -> new BlockItem(WHITE_MUSHROOM_BLOCK.get(), new Item.Properties()));
-    public static final RegistryObject<Block> MUSHROOM_BLOCK_INSIDE = BLOCKS.register("mushroom_block_inside", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
+    public static final RegistryObject<Block> MUSHROOM_BLOCK_INSIDE = BLOCKS.register("mushroom_block_inside", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
     public static final RegistryObject<Item> MUSHROOM_BLOCK_INSIDE_ITEM = ITEMS.register("mushroom_block_inside", () -> new BlockItem(MUSHROOM_BLOCK_INSIDE.get(), new Item.Properties()));
     public static final RegistryObject<Block> TEMPLE_STONE_PILLAR = BLOCKS.register("temple_stone_pillar", TempleStonePillar::new);
     public static final RegistryObject<Item> TEMPLE_STONE_PILLAR_ITEM = ITEMS.register("temple_stone_pillar", () -> new BlockItem(TEMPLE_STONE_PILLAR.get(), new Item.Properties()));
@@ -221,6 +221,16 @@ import java.util.function.Supplier;
 
     public static final RegistryObject<Block> JEDI_GUARD_STATUE = BLOCKS.register("jedi_guard_statue", JediGuard::new);
     public static final RegistryObject<Item> JEDI_GUARD_STATUE_ITEM = ITEMS.register("jedi_guard_statue", () -> new BlockItem(JEDI_GUARD_STATUE.get(), new Item.Properties()));
+// server.galaxyunderchaos.registry.ModBlockEntities
+
+    public static final RegistryObject<Block> GROUND_SABER_STAND =
+            BLOCKS.register("ground_lightsaber_stand",
+                    () -> new GroundSaberStandBlock(
+                            BlockBehaviour.Properties.of()
+                                    .strength(2.0f)
+                                    .noOcclusion()
+                    ));
+    public static final RegistryObject<Item> GROUND_SABER_STAND_ITEM = ITEMS.register("ground_lightsaber_stand", () -> new BlockItem(GROUND_SABER_STAND.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Block> TYTHON_JEDI_IDLE_HEAD_STATUE = BLOCKS.register("tython_jedi_idle_head_statue", TythonJediStatueHEAD::new);
@@ -809,7 +819,7 @@ import java.util.function.Supplier;
                 BlockEntityRenderers.register(ModBlockEntities.AK_HANGING_SIGN_BE.get(), HangingSignRenderer::new);
                 BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_SIGN_BE.get(),    SignRenderer::new);
                 BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_HANGING_SIGN_BE.get(), HangingSignRenderer::new);
-
+                BlockEntityRenderers.register(ModBlockEntities.SABER_STAND_BE.get(), GroundSaberStandRenderer::new);
 
             });
         }
@@ -832,6 +842,7 @@ import java.util.function.Supplier;
                             pr.addLayer(new LightsaberFirstPersonLayer(pr));
                         }
                     });
+            ItemBlockRenderTypes.setRenderLayer(galaxyunderchaos.GROUND_SABER_STAND.get(), RenderType.cutout());
 
             galaxyunderchaos.LIGHTSABERS.values()
                     .forEach(reg -> ItemBlockRenderTypes.setRenderLayer(

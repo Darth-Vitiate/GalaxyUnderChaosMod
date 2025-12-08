@@ -53,6 +53,12 @@ public final class ModBlockEntities {
                                     galaxyunderchaos.JEDI_COFFIN.get(),
                                     galaxyunderchaos.SITH_COFFIN.get())
                             .build(null));
-
+    public static final RegistryObject<BlockEntityType<GroundSaberStandBlockEntity>>
+            SABER_STAND_BE =
+            BLOCK_ENTITIES.register("saber_stand",
+                    () -> BlockEntityType.Builder.of(
+                            GroundSaberStandBlockEntity::new,
+                            galaxyunderchaos.GROUND_SABER_STAND.get()
+                    ).build(null));
     private ModBlockEntities() {}   // no instantiation
 }

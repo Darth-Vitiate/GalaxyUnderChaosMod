@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-07T16:03:56.4861274	Registries
+// 1.21.1	2025-12-07T19:35:33.9358985	Registries
 bb62a54cce52456a67132e977e739b8b75f07bd3 data/galaxyunderchaos/dimension/ashla.json
 4f9349efda3b35272832d30ffc055b1e07e57b0e data/galaxyunderchaos/dimension/bogan.json
 dca0cc263c9061530f960d863841be40d5153f79 data/galaxyunderchaos/dimension/dantooine.json
@@ -47,9 +47,9 @@ ddd8d41c8c0a744acb3872bc53c3915f3735b83d data/galaxyunderchaos/worldgen/biome/os
 a37246c345d8ad984793ee3b573eddf6716f3ee2 data/galaxyunderchaos/worldgen/biome/ossus_mountains.json
 f5ee54482b3d19b37f0f185b2f21e0e3d08b6d5b data/galaxyunderchaos/worldgen/biome/ossus_ocean.json
 ddd8d41c8c0a744acb3872bc53c3915f3735b83d data/galaxyunderchaos/worldgen/biome/ossus_plains.json
-4bc33b9174a7a8184f4125b5485c729618b3376f data/galaxyunderchaos/worldgen/biome/tython_forest.json
-19d1bdc3dfddeca7e01afcfdc9b1b6e7e5eb126f data/galaxyunderchaos/worldgen/biome/tython_mountains.json
-22db8f18a7a26b532dcbc87894e53722d1e359f0 data/galaxyunderchaos/worldgen/biome/tython_plains.json
+20c610ecfd39d663bd3b26a712586ca7668be24f data/galaxyunderchaos/worldgen/biome/tython_forest.json
+2dec42b26a0b59e926b7c3c96fcb05e5f8ef6a27 data/galaxyunderchaos/worldgen/biome/tython_mountains.json
+3d9c22e67d6cce4cbb3d12d153e4ad3ae23a3b98 data/galaxyunderchaos/worldgen/biome/tython_plains.json
 7412e1bb49fe330455a244c86189e444a1bd9521 data/galaxyunderchaos/worldgen/configured_feature/ak_tree.json
 6cb35a2c5b265b4e93349c75ca77a3d306148f39 data/galaxyunderchaos/worldgen/configured_feature/ak_tree_pine.json
 c8ac3374f1fe25c9f81150985b53958a71f6e96d data/galaxyunderchaos/worldgen/configured_feature/blba.json

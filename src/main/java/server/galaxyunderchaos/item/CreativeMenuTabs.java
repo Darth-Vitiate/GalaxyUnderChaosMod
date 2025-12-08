@@ -216,6 +216,9 @@ public class CreativeMenuTabs {
                         output.accept(COUNCIL_CHAIR_3_ITEM.get());
                         output.accept(COUNCIL_CHAIR_4_ITEM.get());
                         output.accept(COUNCIL_CHAIR_5_ITEM.get());
+                        output.accept(JEDI_COFFIN_ITEM.get());
+                        output.accept(SITH_COFFIN_ITEM.get());
+                        output.accept(GROUND_SABER_STAND.get());
 
 
 

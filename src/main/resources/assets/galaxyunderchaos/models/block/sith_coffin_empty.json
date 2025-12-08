@@ -3,12 +3,12 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"3": "galaxyunderchaos:block/sith_coffin",
-		"particle": "galaxyunderchaos:block/sith_coffin"
+		"3": "galaxyunderchaos:block/empty",
+		"particle": "galaxyunderchaos:block/empty"
 	},
 	"elements": [
 		{
-			"from": [2, 0.1, 10],
+			"from": [2, 0, 10],
 			"to": [14, 32, 16],
 			"faces": {
 				"north": {"uv": [0, 0, 5, 13.50921], "texture": "#3"},
