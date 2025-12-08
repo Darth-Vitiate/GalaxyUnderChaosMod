@@ -1,4 +1,4 @@
-// 1.21.1	2025-12-07T19:35:33.9278713	Loot Tables
+// 1.21.1	2025-12-08T14:43:50.6081777	Loot Tables
 4ce6452a0d8c4435e79b67c01ba444e929165445 data/galaxyunderchaos/loot_table/blocks/ak_button.json
 06649a9b0a12780a6f4d17c22e58a3047267b109 data/galaxyunderchaos/loot_table/blocks/ak_door.json
 a2a1a765601ddb3015f0718578cdc6d44b023bb1 data/galaxyunderchaos/loot_table/blocks/ak_fence.json
@@ -54,6 +54,7 @@ f4e9e666c90f94ef78ae41be579788b9b65935dd data/galaxyunderchaos/loot_table/blocks
 6f556b100a4b247db198a965faf270365fb098a5 data/galaxyunderchaos/loot_table/blocks/dark_temple_stone_stairs.json
 bc2f0825b5c8784e281c6b0e4f4a776c0e4020b0 data/galaxyunderchaos/loot_table/blocks/dark_temple_stone_wall.json
 4f37c35ec36717734b2882eb4eea656b505d411f data/galaxyunderchaos/loot_table/blocks/green_crystal_ore.json
+34491d940a14335c418a5e2084ce59f1c63edbe3 data/galaxyunderchaos/loot_table/blocks/ground_lightsaber_stand.json
 994244306e9788c07a1b39f4a3a55513a18163f3 data/galaxyunderchaos/loot_table/blocks/heart_berry_button.json
 0be0d22f74dbbdee059ff7cc0bd6923e36040ddd data/galaxyunderchaos/loot_table/blocks/heart_berry_door.json
 eea08aaa0fba83d01d3788c3fd4706eeac9e8bea data/galaxyunderchaos/loot_table/blocks/heart_berry_fence.json
