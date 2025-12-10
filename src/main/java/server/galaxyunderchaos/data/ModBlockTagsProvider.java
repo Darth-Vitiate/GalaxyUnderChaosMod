@@ -89,6 +89,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(galaxyunderchaos.SITH_COFFIN.get())
                 .add(galaxyunderchaos.COUNCIL_CHAIR_5.get())
                 .add(galaxyunderchaos.GROUND_SABER_STAND.get())
+                .add(galaxyunderchaos.WHITE_GROUND_SABER_STAND.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_1.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_2.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_3.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_4.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_5.get())
                 .add(galaxyunderchaos.COUNCIL_CHAIR_4.get());
 
         tag(BlockTags.MINEABLE_WITH_HOE)
@@ -131,10 +137,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(galaxyunderchaos.COUNCIL_CHAIR_5.get())
                 .add(galaxyunderchaos.COUNCIL_CHAIR_4.get())
                 .add(galaxyunderchaos.GROUND_SABER_STAND.get())
+                .add(galaxyunderchaos.WHITE_GROUND_SABER_STAND.get())
                 .add(galaxyunderchaos.TYTHON_JEDI_CROSSED_TORSO_STATUE.get())
                 .add(galaxyunderchaos.TYTHON_JEDI_IDLE_HEAD_STATUE.get())
                 .add(galaxyunderchaos.TYTHON_JEDI_IDLE_LEG_1_STATUE.get())
                 .add(galaxyunderchaos.TYTHON_JEDI_IDLE_LEG_2_STATUE.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_1.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_2.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_3.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_4.get())
+                .add(galaxyunderchaos.TYTHON_TEMPLE_CHAIR_5.get())
                 .add(galaxyunderchaos.TYTHON_JEDI_IDLE_TORSO_STATUE.get());
     }
 }

@@ -216,9 +216,15 @@ public class CreativeMenuTabs {
                         output.accept(COUNCIL_CHAIR_3_ITEM.get());
                         output.accept(COUNCIL_CHAIR_4_ITEM.get());
                         output.accept(COUNCIL_CHAIR_5_ITEM.get());
+                        output.accept(TYTHON_TEMPLE_CHAIR_1_ITEM.get());
+                        output.accept(TYTHON_TEMPLE_CHAIR_2_ITEM.get());
+                        output.accept(TYTHON_TEMPLE_CHAIR_3_ITEM.get());
+                        output.accept(TYTHON_TEMPLE_CHAIR_4_ITEM.get());
+                        output.accept(TYTHON_TEMPLE_CHAIR_5_ITEM.get());
                         output.accept(JEDI_COFFIN_ITEM.get());
                         output.accept(SITH_COFFIN_ITEM.get());
                         output.accept(GROUND_SABER_STAND.get());
+                        output.accept(WHITE_GROUND_SABER_STAND.get());
 
 
 

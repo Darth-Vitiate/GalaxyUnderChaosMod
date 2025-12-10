@@ -556,6 +556,11 @@
   "block.galaxyunderchaos.council_chair_3": "Council Chair III",
   "block.galaxyunderchaos.council_chair_4": "Council Chair IV",
   "block.galaxyunderchaos.council_chair_5": "Council Chair V",
+  "block.galaxyunderchaos.tython_temple_chair_1": "Tython Temple Chair I",
+  "block.galaxyunderchaos.tython_temple_chair_2": "Tython Temple Chair II",
+  "block.galaxyunderchaos.tython_temple_chair_3": "Tython Temple Chair III",
+  "block.galaxyunderchaos.tython_temple_chair_4": "Tython Temple Chair IV",
+  "block.galaxyunderchaos.tython_temple_chair_5": "Tython Temple Chair V",
   "item.galaxyunderchaos.wingmaw_egg": "Wingmaw Egg",
   "container.galaxyunderchaos.coffin": "Coffin",
   "sounds.galaxyunderchaos.tomb_sound": "Coffin opens",
@@ -564,7 +569,8 @@
   "sounds.galaxyunderchaos.wingmaw_attack": "Wingmaw dives",
   "sounds.galaxyunderchaos.acid_spider_living": "Acid spider hisses",
   "sounds.galaxyunderchaos.acid_spider_hurt": "Acid spider screeches",
-  "block.galaxyunderchaos.ground_lightsaber_stand": "Ground Lightsaber Stand",
+  "block.galaxyunderchaos.ground_lightsaber_stand": "Black Ground Lightsaber Stand",
+  "block.galaxyunderchaos.white_ground_lightsaber_stand": "White Ground Lightsaber Stand",
   "sounds.galaxyunderchaos.acid_spider_attack": "Acid spider strikes"
 
 }

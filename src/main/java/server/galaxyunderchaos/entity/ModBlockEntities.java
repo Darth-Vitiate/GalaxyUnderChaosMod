@@ -58,7 +58,8 @@ public final class ModBlockEntities {
             BLOCK_ENTITIES.register("saber_stand",
                     () -> BlockEntityType.Builder.of(
                             GroundSaberStandBlockEntity::new,
-                            galaxyunderchaos.GROUND_SABER_STAND.get()
+                            galaxyunderchaos.GROUND_SABER_STAND.get(),
+                            galaxyunderchaos.WHITE_GROUND_SABER_STAND.get()
                     ).build(null));
     private ModBlockEntities() {}   // no instantiation
 }

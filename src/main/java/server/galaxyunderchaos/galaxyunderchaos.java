@@ -223,15 +223,11 @@ import java.util.function.Supplier;
     public static final RegistryObject<Item> JEDI_GUARD_STATUE_ITEM = ITEMS.register("jedi_guard_statue", () -> new BlockItem(JEDI_GUARD_STATUE.get(), new Item.Properties()));
 // server.galaxyunderchaos.registry.ModBlockEntities
 
-    public static final RegistryObject<Block> GROUND_SABER_STAND =
-            BLOCKS.register("ground_lightsaber_stand",
-                    () -> new GroundSaberStandBlock(
-                            BlockBehaviour.Properties.of()
-                                    .strength(2.0f)
-                                    .noOcclusion()
-                    ));
+    public static final RegistryObject<Block> GROUND_SABER_STAND = BLOCKS.register("ground_lightsaber_stand", () -> new GroundSaberStandBlock(BlockBehaviour.Properties.of().strength(2.0f).noOcclusion()));
     public static final RegistryObject<Item> GROUND_SABER_STAND_ITEM = ITEMS.register("ground_lightsaber_stand", () -> new BlockItem(GROUND_SABER_STAND.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> WHITE_GROUND_SABER_STAND = BLOCKS.register("white_ground_lightsaber_stand", () -> new GroundSaberStandBlock(BlockBehaviour.Properties.of().strength(2.0f).noOcclusion()));
+    public static final RegistryObject<Item> WHITE_GROUND_SABER_STAND_ITEM = ITEMS.register("white_ground_lightsaber_stand", () -> new BlockItem(WHITE_GROUND_SABER_STAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> TYTHON_JEDI_IDLE_HEAD_STATUE = BLOCKS.register("tython_jedi_idle_head_statue", TythonJediStatueHEAD::new);
     public static final RegistryObject<Item> TYTHON_JEDI_IDLE_HEAD_STATUE_ITEM = ITEMS.register("tython_jedi_idle_head_statue", () -> new BlockItem(TYTHON_JEDI_IDLE_HEAD_STATUE.get(), new Item.Properties()));
@@ -399,45 +395,28 @@ import java.util.function.Supplier;
             () -> new ForgeSpawnEggItem(galaxyunderchaos.ACID_SPIDER, 0x53524b, 0xdac741, new Item.Properties()));
     public static final RegistryObject<Item> WINGMAW_SPAWN_EGG = ITEMS.register("wingmaw_spawn_egg",
             () -> new ForgeSpawnEggItem(galaxyunderchaos.WINGMAW, 0x53524b, 0xdac741, new Item.Properties()));
-    public static final RegistryObject<Block> COUNCIL_CHAIR_1 =
-            BLOCKS.register("council_chair_1",
-                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
-                            .strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Block> COUNCIL_CHAIR_2 =
-            BLOCKS.register("council_chair_2",
-                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
-                            .strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Block> COUNCIL_CHAIR_3 =
-            BLOCKS.register("council_chair_3",
-                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
-                            .strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Block> COUNCIL_CHAIR_4 =
-            BLOCKS.register("council_chair_4",
-                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
-                            .strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Block> COUNCIL_CHAIR_5 =
-            BLOCKS.register("council_chair_5",
-                    () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of()
-                            .strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Item> COUNCIL_CHAIR_1_ITEM =
-            ITEMS.register("council_chair_1",
-                    () -> new BlockItem(COUNCIL_CHAIR_1.get(), new Item.Properties()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_1 = BLOCKS.register("council_chair_1", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_2 = BLOCKS.register("council_chair_2", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_3 = BLOCKS.register("council_chair_3", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_4 = BLOCKS.register("council_chair_4", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COUNCIL_CHAIR_5 = BLOCKS.register("council_chair_5", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_1_ITEM = ITEMS.register("council_chair_1", () -> new BlockItem(COUNCIL_CHAIR_1.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_2_ITEM = ITEMS.register("council_chair_2", () -> new BlockItem(COUNCIL_CHAIR_2.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_3_ITEM = ITEMS.register("council_chair_3", () -> new BlockItem(COUNCIL_CHAIR_3.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_4_ITEM = ITEMS.register("council_chair_4", () -> new BlockItem(COUNCIL_CHAIR_4.get(), new Item.Properties()));
+    public static final RegistryObject<Item> COUNCIL_CHAIR_5_ITEM = ITEMS.register("council_chair_5", () -> new BlockItem(COUNCIL_CHAIR_5.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> COUNCIL_CHAIR_2_ITEM =
-            ITEMS.register("council_chair_2",
-                    () -> new BlockItem(COUNCIL_CHAIR_2.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_CHAIR_1 = BLOCKS.register("tython_temple_chair_1", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_CHAIR_2 = BLOCKS.register("tython_temple_chair_2", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_CHAIR_3 = BLOCKS.register("tython_temple_chair_3", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_CHAIR_4 = BLOCKS.register("tython_temple_chair_4", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> TYTHON_TEMPLE_CHAIR_5 = BLOCKS.register("tython_temple_chair_5", () -> new RotatableSittableChairBlock(BlockBehaviour.Properties.of().strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_CHAIR_1_ITEM = ITEMS.register("tython_temple_chair_1", () -> new BlockItem(TYTHON_TEMPLE_CHAIR_1.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_CHAIR_2_ITEM = ITEMS.register("tython_temple_chair_2", () -> new BlockItem(TYTHON_TEMPLE_CHAIR_2.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_CHAIR_3_ITEM = ITEMS.register("tython_temple_chair_3", () -> new BlockItem(TYTHON_TEMPLE_CHAIR_3.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_CHAIR_4_ITEM = ITEMS.register("tython_temple_chair_4", () -> new BlockItem(TYTHON_TEMPLE_CHAIR_4.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TYTHON_TEMPLE_CHAIR_5_ITEM = ITEMS.register("tython_temple_chair_5", () -> new BlockItem(TYTHON_TEMPLE_CHAIR_5.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> COUNCIL_CHAIR_3_ITEM =
-            ITEMS.register("council_chair_3",
-                    () -> new BlockItem(COUNCIL_CHAIR_3.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> COUNCIL_CHAIR_4_ITEM =
-            ITEMS.register("council_chair_4",
-                    () -> new BlockItem(COUNCIL_CHAIR_4.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> COUNCIL_CHAIR_5_ITEM =
-            ITEMS.register("council_chair_5",
-                    () -> new BlockItem(COUNCIL_CHAIR_5.get(), new Item.Properties()));
 
     public static final Map<String, RegistryObject<Item>> LIGHTSABERS = new HashMap<>();
 
@@ -843,6 +822,7 @@ import java.util.function.Supplier;
                         }
                     });
             ItemBlockRenderTypes.setRenderLayer(galaxyunderchaos.GROUND_SABER_STAND.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(galaxyunderchaos.WHITE_GROUND_SABER_STAND.get(), RenderType.cutout());
 
             galaxyunderchaos.LIGHTSABERS.values()
                     .forEach(reg -> ItemBlockRenderTypes.setRenderLayer(
