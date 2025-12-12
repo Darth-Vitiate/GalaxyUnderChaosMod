@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import server.galaxyunderchaos.galaxyunderchaos;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -105,12 +106,26 @@ public enum LightsaberForm {
     private static final Map<String, LightsaberForm> BY_ID =
             Stream.of(values()).collect(Collectors.toUnmodifiableMap(Enum::name, f -> f));
 
+    private static final Map<String, LightsaberForm> BY_DISPLAY_NAME =
+            Stream.of(values()).collect(Collectors.toUnmodifiableMap(
+                    f -> normalize(f.displayName),
+                    f -> f
+            ));
+
     public static LightsaberForm fromId(String id) {
         return BY_ID.getOrDefault(id, SHII_CHO);
+    }
+
+    public static LightsaberForm fromDisplayName(String name) {
+        return BY_DISPLAY_NAME.getOrDefault(normalize(name), SHII_CHO);
     }
 
     public LightsaberForm next() {
         LightsaberForm[] vals = values();
         return vals[(ordinal() + 1) % vals.length];
+    }
+
+    private static String normalize(String value) {
+        return value.replaceAll("[^A-Za-z0-9]", "").toLowerCase(Locale.ROOT);
     }
 }
