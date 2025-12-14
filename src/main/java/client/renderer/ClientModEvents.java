@@ -13,9 +13,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+import client.model.BleedingTableModel;
 import server.galaxyunderchaos.entity.ModBlockEntities;
 import server.galaxyunderchaos.entity.ModEntityTypes;
 import server.galaxyunderchaos.galaxyunderchaos;
+import client.renderer.BleedingTableRenderer;
 
 @Mod.EventBusSubscriber(
         modid = galaxyunderchaos.MODID,
@@ -37,6 +39,8 @@ public final class ClientModEvents {
                 SignRenderer::new);
         e.registerBlockEntityRenderer(ModBlockEntities.HEART_BERRY_HANGING_SIGN_BE.get(),
                 HangingSignRenderer::new);
+        e.registerBlockEntityRenderer(ModBlockEntities.BLEEDING_TABLE_BE.get(),
+                BleedingTableRenderer::new);
 
     }
     @SubscribeEvent
@@ -45,6 +49,7 @@ public final class ClientModEvents {
         event.registerLayerDefinition(ModModelLayers.AK_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         event.registerLayerDefinition(ModModelLayers.HEART_BERRY_BOAT_LAYER, BoatModel::createBodyModel);
         event.registerLayerDefinition(ModModelLayers.HEART_BERRY_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        event.registerLayerDefinition(BleedingTableModel.LAYER_LOCATION, BleedingTableModel::createBodyLayer);
     }
     /* ──────────────────────────────
        Register Ak as a wood‑type so

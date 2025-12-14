@@ -1,5 +1,6 @@
 package server.galaxyunderchaos.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,9 +30,11 @@ import server.galaxyunderchaos.galaxyunderchaos;
 import java.util.List;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.Nullable;
+import server.galaxyunderchaos.entity.BleedingTableBlockEntity;
 
 
-public class BleedingTable extends Block {
+public class BleedingTable extends BaseEntityBlock {
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
     public static final VoxelShape SHAPE = Block.box(0.1, 0.1, 0.1, 16, 16, 16);
 
@@ -39,8 +43,16 @@ public class BleedingTable extends Block {
                 .strength(3.0f, 10.0f)
                 .requiresCorrectToolForDrops()
                 .sound(SoundType.STONE)
-                .pushReaction(PushReaction.NORMAL));
+                .pushReaction(PushReaction.NORMAL)
+                .noOcclusion());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+    }
+
+    private static final MapCodec<BleedingTable> CODEC = simpleCodec(BleedingTable::new);
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -50,7 +62,7 @@ public class BleedingTable extends Block {
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -73,6 +85,12 @@ public class BleedingTable extends Block {
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BleedingTableBlockEntity(pos, state);
+    }
+
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
@@ -85,7 +103,7 @@ public class BleedingTable extends Block {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 
-        @Override
+    @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos,
                                                Player pPlayer, BlockHitResult pHitResult) {
         pLevel.playSound(pPlayer, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1f, 1f);
