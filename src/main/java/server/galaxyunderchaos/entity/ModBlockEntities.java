@@ -61,5 +61,11 @@ public final class ModBlockEntities {
                             galaxyunderchaos.GROUND_SABER_STAND.get(),
                             galaxyunderchaos.WHITE_GROUND_SABER_STAND.get()
                     ).build(null));
+    public static final RegistryObject<BlockEntityType<BleedingTableBlockEntity>> BLEEDING_TABLE_BE =
+            BLOCK_ENTITIES.register("bleeding_table",
+                    () -> BlockEntityType.Builder.of(
+                            BleedingTableBlockEntity::new,
+                            galaxyunderchaos.BLEEDING_TABLE.get()
+                    ).build(null));
     private ModBlockEntities() {}   // no instantiation
 }

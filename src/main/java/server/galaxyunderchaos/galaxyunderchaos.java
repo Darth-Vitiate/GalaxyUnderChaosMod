@@ -799,6 +799,7 @@ import java.util.function.Supplier;
                 BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_SIGN_BE.get(),    SignRenderer::new);
                 BlockEntityRenderers.register(ModBlockEntities.HEART_BERRY_HANGING_SIGN_BE.get(), HangingSignRenderer::new);
                 BlockEntityRenderers.register(ModBlockEntities.SABER_STAND_BE.get(), GroundSaberStandRenderer::new);
+                BlockEntityRenderers.register(ModBlockEntities.BLEEDING_TABLE_BE.get(), BleedingTableRenderer::new);
 
             });
         }
