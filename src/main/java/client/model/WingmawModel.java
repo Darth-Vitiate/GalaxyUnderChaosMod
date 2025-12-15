@@ -236,9 +236,9 @@ public class WingmawModel<T extends WingmawEntity> extends HierarchicalModel<T> 
 		}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		// Reset pose for all parts (reset to default position before applying new animation)
-		this.Body1.getAllParts().forEach(ModelPart::resetPose);
+        public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+                // Reset pose for all parts (reset to default position before applying new animation)
+                this.root.getAllParts().forEach(ModelPart::resetPose);
 
 		// Handle walking animations for legs
 		float walkSpeed = 0.3F;
@@ -257,29 +257,28 @@ public class WingmawModel<T extends WingmawEntity> extends HierarchicalModel<T> 
 		this.Tail2.xRot = Mth.cos(limbSwing * walkSpeed) * 0.1F * limbSwingAmount;
 		this.Tail3.xRot = Mth.cos(limbSwing * walkSpeed) * 0.1F * limbSwingAmount;
 
-		// Flying animation logic
-		if (entity.isFallFlying()) {
-			// Reset leg and arm rotations for flight
-			this.Leftthigh.xRot = 0;
-			this.Rightthigh.xRot = 0;
-			this.LeftArm1.xRot = 0;
-			this.RightArm1.xRot = 0;
+                // Flying animation logic
+                boolean isFlying = !entity.isInWater() && (!entity.onGround() || entity.getNavigation().isInProgress());
+                if (isFlying) {
+                        // Reset leg rotations for flight tuck
+                        this.Leftthigh.xRot = -0.5F;
+                        this.Rightthigh.xRot = -0.5F;
 
-			// Add flying movement (flapping)
-			this.LeftArm1.xRot = Mth.cos(ageInTicks * 0.6F) * 0.6F;
-			this.RightArm1.xRot = -Mth.cos(ageInTicks * 0.6F) * 0.6F;
+                        // Add flying movement (flapping)
+                        float flapSpeed = 0.6F;
+                        float flapAmount = 1.2F;
+                        this.LeftArm1.xRot = 0.3F;
+                        this.RightArm1.xRot = 0.3F;
+                        this.LeftArm1.zRot = Mth.cos(ageInTicks * flapSpeed) * flapAmount;
+                        this.RightArm1.zRot = -Mth.cos(ageInTicks * flapSpeed) * flapAmount;
 
-			// Tail swinging for flying motion
-			this.Tail1.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
-			this.Tail2.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
-			this.Tail3.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
-
-			// Optional: Wing flap animations, if you have wings
-			if (this.LeftArm1 != null && this.RightArm1 != null) {
-				this.LeftArm1.zRot = Mth.cos(ageInTicks * 0.5F) * 1.0F;
-				this.LeftArm1.zRot = -Mth.cos(ageInTicks * 0.5F) * 1.0F;
-			}
-		}
+                        // Tail swinging for flying motion
+                        float tailSpeed = 0.4F;
+                        float tailAmount = 0.3F;
+                        this.Tail1.xRot = Mth.cos(ageInTicks * tailSpeed) * tailAmount;
+                        this.Tail2.xRot = Mth.cos(ageInTicks * tailSpeed) * tailAmount;
+                        this.Tail3.xRot = Mth.cos(ageInTicks * tailSpeed) * tailAmount;
+                }
 
 		// Animate head and neck based on the player's view (yaw/pitch)
 //		this.Head.xRot = headPitch * 0.01F;
