@@ -12,7 +12,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -26,44 +28,71 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import server.galaxyunderchaos.galaxyunderchaos;
-import java.util.List;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 import server.galaxyunderchaos.entity.BleedingTableBlockEntity;
+import server.galaxyunderchaos.galaxyunderchaos;
 
+import java.util.List;
 
 public class BleedingTable extends BaseEntityBlock {
-    public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
-    public static final VoxelShape SHAPE = Block.box(0.1, 0.1, 0.1, 16, 16, 16);
 
-    public BleedingTable() {
-        super(BlockBehaviour.Properties.of()
-                .strength(3.0f, 10.0f)
-                .requiresCorrectToolForDrops()
-                .sound(SoundType.STONE)
-                .pushReaction(PushReaction.NORMAL)
-                .noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
+    public static final DirectionProperty FACING =
+            DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
-    private static final MapCodec<BleedingTable> CODEC = simpleCodec(BleedingTable::new);
+    public static final VoxelShape SHAPE =
+            Block.box(0.1, 0.1, 0.1, 16, 16, 16);
+
+    /* ----------------------------------------------------------------------- */
+    /*  CODEC (REQUIRED FOR 1.20+ BLOCKS)                                       */
+    /* ----------------------------------------------------------------------- */
+
+    private static final MapCodec<BleedingTable> CODEC =
+            simpleCodec(BleedingTable::new);
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
+    /* ----------------------------------------------------------------------- */
+    /*  CONSTRUCTORS                                                           */
+    /* ----------------------------------------------------------------------- */
+
+    /** Constructor used by the codec */
+    public BleedingTable(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(
+                this.stateDefinition.any().setValue(FACING, Direction.NORTH)
+        );
+    }
+
+    /** Convenience constructor used during registration */
+    public BleedingTable() {
+        this(BlockBehaviour.Properties.of()
+                .strength(3.0f, 10.0f)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.STONE)
+                .pushReaction(PushReaction.NORMAL)
+                .noOcclusion());
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /*  SHAPE / RENDERING                                                       */
+    /* ----------------------------------------------------------------------- */
+
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
+
+    /* ----------------------------------------------------------------------- */
+    /*  BLOCK STATE                                                             */
+    /* ----------------------------------------------------------------------- */
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -72,7 +101,8 @@ public class BleedingTable extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -81,9 +111,13 @@ public class BleedingTable extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
+
+    /* ----------------------------------------------------------------------- */
+    /*  BLOCK ENTITY                                                            */
+    /* ----------------------------------------------------------------------- */
 
     @Nullable
     @Override
@@ -92,64 +126,90 @@ public class BleedingTable extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    public void onRemove(BlockState oldState, Level level, BlockPos pos,
+                         BlockState newState, boolean isMoving) {
+        if (oldState.getBlock() != newState.getBlock()) {
+            super.onRemove(oldState, level, pos, newState, isMoving);
         }
     }
-    @Override
-    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        pTooltipComponents.add(Component.translatable("tooltip.galaxyunderchaos.bleeding_table.tooltip"));
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    }
+
+    /* ----------------------------------------------------------------------- */
+    /*  TOOLTIP                                                                */
+    /* ----------------------------------------------------------------------- */
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos,
-                                               Player pPlayer, BlockHitResult pHitResult) {
-        pLevel.playSound(pPlayer, pPos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1f, 1f);
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context,
+                                List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable(
+                "tooltip.galaxyunderchaos.bleeding_table.tooltip"
+        ));
+        super.appendHoverText(stack, context, tooltip, flag);
+    }
+
+    /* ----------------------------------------------------------------------- */
+    /*  INTERACTION                                                             */
+    /* ----------------------------------------------------------------------- */
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level,
+                                               BlockPos pos, Player player,
+                                               BlockHitResult hit) {
+        level.playSound(player, pos,
+                SoundEvents.AMETHYST_CLUSTER_PLACE,
+                SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        if (pEntity instanceof ItemEntity itemEntity) {
-            ItemStack itemStack = itemEntity.getItem();
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (entity instanceof ItemEntity itemEntity) {
+            ItemStack stack = itemEntity.getItem();
 
-            if (itemStack.getItem() == galaxyunderchaos.ORANGE_KYBER.get()) {
-                itemEntity.setItem(new ItemStack(galaxyunderchaos.BLOOD_ORANGE_KYBER.get(), itemStack.getCount()));
-                summonLightningEffect(pLevel, pPos);
-                pLevel.playSound(null, pPos, SoundEvents.AMETHYST_BLOCK_STEP, SoundSource.BLOCKS, 1f, 1f);
-            } else if (isValidKyber(itemStack)) {
-                itemEntity.setItem(new ItemStack(galaxyunderchaos.RED_KYBER.get(), itemStack.getCount()));
-                summonLightningEffect(pLevel, pPos);
-                pLevel.playSound(null, pPos, SoundEvents.AMETHYST_BLOCK_STEP, SoundSource.BLOCKS, 1f, 1f);
+            if (stack.getItem() == galaxyunderchaos.ORANGE_KYBER.get()) {
+                itemEntity.setItem(
+                        new ItemStack(galaxyunderchaos.BLOOD_ORANGE_KYBER.get(),
+                                stack.getCount()));
+                summonLightningEffect(level, pos);
+            } else if (isValidKyber(stack)) {
+                itemEntity.setItem(
+                        new ItemStack(galaxyunderchaos.RED_KYBER.get(),
+                                stack.getCount()));
+                summonLightningEffect(level, pos);
             }
+
+            level.playSound(null, pos,
+                    SoundEvents.AMETHYST_BLOCK_STEP,
+                    SoundSource.BLOCKS, 1f, 1f);
         }
 
-        super.stepOn(pLevel, pPos, pState, pEntity);
+        super.stepOn(level, pos, state, entity);
     }
 
-    private boolean isValidKyber(ItemStack item) {
-        return item.getItem() == galaxyunderchaos.BLUE_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.GREEN_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.YELLOW_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.CYAN_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.WHITE_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.MAGENTA_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.PURPLE_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.PINK_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.LIME_GREEN_KYBER.get() ||
-                item.getItem() == galaxyunderchaos.TURQUOISE_KYBER.get();
+    /* ----------------------------------------------------------------------- */
+    /*  HELPERS                                                                 */
+    /* ----------------------------------------------------------------------- */
+
+    private boolean isValidKyber(ItemStack stack) {
+        return stack.getItem() == galaxyunderchaos.BLUE_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.GREEN_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.YELLOW_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.CYAN_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.WHITE_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.MAGENTA_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.PURPLE_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.PINK_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.LIME_GREEN_KYBER.get()
+                || stack.getItem() == galaxyunderchaos.TURQUOISE_KYBER.get();
     }
 
-    private void summonLightningEffect(Level pLevel, BlockPos pPos) {
-        if (!pLevel.isClientSide) {
-            LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(pLevel);
-            if (lightningBolt != null) {
-                lightningBolt.moveTo(pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5);
-                lightningBolt.setCause(null); // Set the cause to null to prevent fire
-                lightningBolt.setVisualOnly(true); // Ensure it is visual only (no fire)
-                pLevel.addFreshEntity(lightningBolt);
+    private void summonLightningEffect(Level level, BlockPos pos) {
+        if (!level.isClientSide) {
+            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
+            if (bolt != null) {
+                bolt.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                bolt.setCause(null);
+                bolt.setVisualOnly(true);
+                level.addFreshEntity(bolt);
             }
         }
     }

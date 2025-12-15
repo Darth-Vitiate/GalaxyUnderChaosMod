@@ -41,7 +41,7 @@ public class BleedingTableRenderer implements BlockEntityRenderer<BleedingTableB
         poseStack.mulPose(XP.rotationDegrees(180.0F));
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
-        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        model.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, -1);
         poseStack.popPose();
     }
 }
