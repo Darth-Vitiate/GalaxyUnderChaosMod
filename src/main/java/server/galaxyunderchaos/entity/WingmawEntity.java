@@ -2,17 +2,20 @@ package server.galaxyunderchaos.entity;
 
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.FollowMobGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
@@ -28,13 +31,15 @@ public class WingmawEntity extends Monster {
 
     public WingmawEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.moveControl = new FlyingMoveControl(this, 20, true);
+        this.setNoGravity(true);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FlyingGoal(this));  // Flying behavior
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true)); // Aggressive melee attack
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0)); // Wanders when no target
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0)); // Wanders when no target
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F)); // Watches players
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this)); // Looks around randomly
 
@@ -51,6 +56,13 @@ public class WingmawEntity extends Monster {
                 .add(Attributes.ARMOR, 2.0D) // Slight armor to resist hits
                 .add(Attributes.FOLLOW_RANGE, 24.0D) // Aggressive range
                 .add(Attributes.FLYING_SPEED, 0.5D);  // Adjust flying speed if necessary
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
+        navigation.setCanFloat(true);
+        return navigation;
     }
 
     @Override
@@ -94,6 +106,12 @@ public class WingmawEntity extends Monster {
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
+    }
+
+    @Override
+    public void aiStep() {
+        this.setNoGravity(true);
+        super.aiStep();
     }
 
     public static class FlyingGoal extends Goal {

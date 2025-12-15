@@ -235,59 +235,136 @@ public class WingmawModel<T extends WingmawEntity> extends HierarchicalModel<T> 
 		return LayerDefinition.create(meshdefinition, 256, 128);
 		}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		// Reset pose for all parts (reset to default position before applying new animation)
-		this.Body1.getAllParts().forEach(ModelPart::resetPose);
 
-		// Handle walking animations for legs
-		float walkSpeed = 0.3F;
-		float walkAmount = 0.3F;
+        @Override
+        public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+                // Reset pose for all parts (reset to default position before applying new animation)
+                this.root.getAllParts().forEach(ModelPart::resetPose);
 
-		// Animate legs
-		this.Leftthigh.xRot = Mth.cos(limbSwing * walkSpeed) * walkAmount * limbSwingAmount;
-		this.Rightthigh.xRot = Mth.cos(limbSwing * walkSpeed + 3.14159F) * walkAmount * limbSwingAmount;
+                ModelPart[] neck = new ModelPart[]{this.Head, this.Neck2, this.Neck};
+                ModelPart[] tail = new ModelPart[]{this.Tail6, this.Tail5, this.Tail4, this.Tail3, this.Tail2, this.Tail1};
+                ModelPart[] wingLeft = new ModelPart[]{this.LeftArm4, this.LeftArm3, this.LeftArm2, this.LeftArm1};
+                ModelPart[] wingRight = new ModelPart[]{this.RightArm4, this.RightArm3, this.RightArm2, this.RightArm1};
+                ModelPart[] legLeft = new ModelPart[]{this.Leftthigh, this.Leftcalf, this.Leftupperfoot, this.Leftfoot};
+                ModelPart[] legRight = new ModelPart[]{this.Rightthigh, this.rightcalf, this.Rightupperfoot, this.Rightfoot};
 
-		// Animate arms
-//		this.LeftArm1.zRot = Mth.cos(limbSwing * walkSpeed) * walkAmount * limbSwingAmount;
-//		this.RightArm1.zRot = Mth.cos(limbSwing * walkSpeed + 3.14159F) * walkAmount * limbSwingAmount;
-//
-//		// Animate tail for walking motion
-		this.Tail1.xRot = Mth.cos(limbSwing * walkSpeed) * 0.1F * limbSwingAmount;
-		this.Tail2.xRot = Mth.cos(limbSwing * walkSpeed) * 0.1F * limbSwingAmount;
-		this.Tail3.xRot = Mth.cos(limbSwing * walkSpeed) * 0.1F * limbSwingAmount;
+                float globalSpeed = 0.8F;
+                float globalHeight = 2F;
+                float frontOffset = -1.35F;
 
-		// Flying animation logic
-		if (entity.isFallFlying()) {
-			// Reset leg and arm rotations for flight
-			this.Leftthigh.xRot = 0;
-			this.Rightthigh.xRot = 0;
-			this.LeftArm1.xRot = 0;
-			this.RightArm1.xRot = 0;
+                boolean grounded = entity.onGround();
+                if (grounded) {
+                        this.bob(this.Body1, globalSpeed, globalHeight, limbSwing, limbSwingAmount);
+                        this.bob(this.Leftthigh, globalSpeed, globalHeight, limbSwing, limbSwingAmount);
+                        this.bob(this.Rightthigh, globalSpeed, globalHeight, limbSwing, limbSwingAmount);
+                        this.walk(this.Body1, globalSpeed, -0.08F * globalHeight, false, 0, 0.1F, limbSwing, limbSwingAmount);
+                        this.walk(this.LeftArm1, globalSpeed, -0.08F * globalHeight, true, 0, 0, limbSwing, limbSwingAmount);
+                        this.walk(this.RightArm1, globalSpeed, -0.08F * globalHeight, true, 0, 0, limbSwing, limbSwingAmount);
+                        this.chainWave(neck, globalSpeed, -0.15F * globalHeight, 4, limbSwing, limbSwingAmount);
+                        this.chainWave(tail, globalSpeed, 0.1F * globalHeight, 1, limbSwing, limbSwingAmount);
 
-			// Add flying movement (flapping)
-			this.LeftArm1.xRot = Mth.cos(ageInTicks * 0.6F) * 0.6F;
-			this.RightArm1.xRot = -Mth.cos(ageInTicks * 0.6F) * 0.6F;
+                        this.walk(this.Leftthigh, 0.5F * globalSpeed, 0.7F, false, (float) Math.PI, 0.2F, limbSwing, limbSwingAmount);
+                        this.walk(this.Leftcalf, 0.5F * globalSpeed, 0.6F, false, 1.5F, 0.3F, limbSwing, limbSwingAmount);
+                        this.walk(this.Leftupperfoot, 0.5F * globalSpeed, 0.8F, false, -2F, -0.4F, limbSwing, limbSwingAmount);
 
-			// Tail swinging for flying motion
-			this.Tail1.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
-			this.Tail2.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
-			this.Tail3.xRot = Mth.cos(ageInTicks * 0.4F) * 0.3F;
+                        this.walk(this.Rightthigh, 0.5F * globalSpeed, 0.7F, true, (float) Math.PI, 0.2F, limbSwing, limbSwingAmount);
+                        this.walk(this.rightcalf, 0.5F * globalSpeed, 0.6F, true, 1.5F, 0.3F, limbSwing, limbSwingAmount);
+                        this.walk(this.Rightupperfoot, 0.5F * globalSpeed, 0.8F, true, -2F, -0.4F, limbSwing, limbSwingAmount);
 
-			// Optional: Wing flap animations, if you have wings
-			if (this.LeftArm1 != null && this.RightArm1 != null) {
-				this.LeftArm1.zRot = Mth.cos(ageInTicks * 0.5F) * 1.0F;
-				this.LeftArm1.zRot = -Mth.cos(ageInTicks * 0.5F) * 1.0F;
-			}
-		}
+                        this.walk(this.LeftArm1, 0.5F * globalSpeed, 0.5F, true, -3.14F + frontOffset, 0.5F, limbSwing, limbSwingAmount);
+                        this.walk(this.LeftArm2, 0.5F * globalSpeed, 0.4F, true, -1.5F + frontOffset, -0.3F, limbSwing, limbSwingAmount);
+                        this.walk(this.LeftArm3, 0.5F * globalSpeed, 0.7F, true, 2F + frontOffset, 0.4F, limbSwing, limbSwingAmount);
 
-		// Animate head and neck based on the player's view (yaw/pitch)
-//		this.Head.xRot = headPitch * 0.01F;
-//		this.Head.yRot = netHeadYaw * 0.01F;
-//
-//		this.Neck.xRot = headPitch * 0.01F;
-//		this.Neck2.xRot = headPitch * 0.01F;
-	}
+                        this.walk(this.RightArm1, 0.5F * globalSpeed, 0.5F, false, -3.14F + frontOffset, 0.5F, limbSwing, limbSwingAmount);
+                        this.walk(this.RightArm2, 0.5F * globalSpeed, 0.4F, false, -1.5F + frontOffset, -0.3F, limbSwing, limbSwingAmount);
+                        this.walk(this.RightArm3, 0.5F * globalSpeed, 0.7F, false, 2F + frontOffset, 0.4F, limbSwing, limbSwingAmount);
+                } else {
+                        this.Body1.xRot += 0.3F;
+                        this.Neck.xRot -= 0.1F;
+                        this.Leftthigh.xRot += 0.8F;
+                        this.Rightthigh.xRot += 0.8F;
+                        this.Leftcalf.xRot += 0.7F;
+                        this.rightcalf.xRot += 0.7F;
+                        this.Leftupperfoot.xRot -= 0.3F;
+                        this.Rightupperfoot.xRot -= 0.3F;
+                        this.Leftfoot.xRot += 2F;
+                        this.Rightfoot.xRot += 2F;
+                        this.LeftArm1.zRot -= 1F;
+                        this.LeftArm2.zRot -= 0.4F;
+                        this.LeftArm3.zRot -= 0.1F;
+                        this.LeftArm4.zRot += 3.3F;
+                        this.LeftArm4.yRot += 2.6F;
+                        this.LeftArm4.xRot += 1.2F;
+                        this.RightArm1.zRot += 1F;
+                        this.RightArm2.zRot += 0.4F;
+                        this.RightArm3.zRot += 0.1F;
+                        this.RightArm4.zRot -= 3.3F;
+                        this.RightArm4.yRot -= 2.6F;
+                        this.RightArm4.xRot += 1.2F;
+
+                        boolean movingAnim = limbSwingAmount > 0.05F || entity.getDeltaMovement().lengthSqr() > 0.0004;
+                        if (movingAnim) {
+                                float speed = 0.3F;
+                                this.bob(this.Body1, speed, 7F, limbSwing, limbSwingAmount);
+                                this.bob(this.Leftthigh, speed, 7F, limbSwing, limbSwingAmount);
+                                this.bob(this.Rightthigh, speed, 7F, limbSwing, limbSwingAmount);
+                                this.walk(this.Body1, speed, 0.2F, true, 1F, 0, limbSwing, limbSwingAmount);
+                                this.swing(this.LeftArm1, speed, 0.2F, false, 1F, 0, limbSwing, limbSwingAmount);
+                                this.swing(this.LeftArm2, speed, 0.2F, false, 1F, 0, limbSwing, limbSwingAmount);
+                                this.walk(this.Neck, speed, 0.2F, false, 1F, 0.2F, limbSwing, limbSwingAmount);
+                                this.walk(this.Head, speed, 0.2F, true, 1F, -0.4F, limbSwing, limbSwingAmount);
+
+                                this.bob(this.LeftArm1, speed, 7F, limbSwing, limbSwingAmount);
+                                this.chainFlap(wingLeft, speed, 0.8F, 2, limbSwing, limbSwingAmount);
+                                this.walk(this.LeftArm1, speed, 0.6F, false, -1F, -0.2F, limbSwing, limbSwingAmount);
+                                this.walk(this.LeftArm2, speed, 1.2F, true, -1F, 0, limbSwing, limbSwingAmount);
+                                this.walk(this.LeftArm3, speed, 0.7F, false, -1F, 0.2F, limbSwing, limbSwingAmount);
+
+                                this.bob(this.RightArm1, speed, 7F, limbSwing, limbSwingAmount);
+                                this.chainFlap(wingRight, speed, -0.8F, 2, limbSwing, limbSwingAmount);
+                                this.walk(this.RightArm1, speed, 0.6F, false, -1F, -0.2F, limbSwing, limbSwingAmount);
+                                this.walk(this.RightArm2, speed, 1.2F, true, -1F, 0, limbSwing, limbSwingAmount);
+                                this.walk(this.RightArm3, speed, 0.7F, false, -1F, 0.2F, limbSwing, limbSwingAmount);
+
+                                this.chainWave(legLeft, speed, 0.2F, -3, limbSwing, limbSwingAmount);
+                                this.chainWave(legRight, speed, 0.2F, -3, limbSwing, limbSwingAmount);
+                                this.chainWave(tail, speed, 0.2F, 1, limbSwing, limbSwingAmount);
+                                this.chainWave(neck, speed, 0.4F, 4, limbSwing, limbSwingAmount);
+                        } else {
+                                float s = 0.22F;
+                                float a = 0.65F;
+
+                                this.bob(this.Body1, s, 3.0F, ageInTicks, 1.0F);
+                                this.bob(this.Leftthigh, s, 3.0F, ageInTicks, 1.0F);
+                                this.bob(this.Rightthigh, s, 3.0F, ageInTicks, 1.0F);
+
+                                this.chainFlap(wingLeft, s, a, 2, ageInTicks, 1.0F);
+                                this.chainFlap(wingRight, s, -a, 2, ageInTicks, 1.0F);
+                                this.walk(this.LeftArm1, s, 0.45F, false, -1F, -0.1F, ageInTicks, 1.0F);
+                                this.walk(this.LeftArm2, s, 0.90F, true, -1F, 0.0F, ageInTicks, 1.0F);
+                                this.walk(this.LeftArm3, s, 0.55F, false, -1F, 0.1F, ageInTicks, 1.0F);
+                                this.walk(this.RightArm1, s, 0.45F, false, -1F, -0.1F, ageInTicks, 1.0F);
+                                this.walk(this.RightArm2, s, 0.90F, true, -1F, 0.0F, ageInTicks, 1.0F);
+                                this.walk(this.RightArm3, s, 0.55F, false, -1F, 0.1F, ageInTicks, 1.0F);
+
+                                this.chainWave(tail, s, 0.15F, 1, ageInTicks, 1.0F);
+                                this.chainWave(neck, s, 0.20F, 4, ageInTicks, 1.0F);
+                        }
+                }
+
+                this.walk(this.Body1, 0.08F, -0.05F, false, 0, 0, ageInTicks, 0.25F);
+                this.chainWave(neck, 0.08F, 0.03F, 2, ageInTicks, 0.25F);
+                this.walk(this.LeftArm1, 0.08F, 0.1F, false, 0, 0, ageInTicks, 0.25F);
+                this.walk(this.RightArm1, 0.08F, 0.1F, false, 0, 0, ageInTicks, 0.25F);
+                this.walk(this.LeftArm2, 0.08F, 0.1F, false, 0, 0, ageInTicks, 0.25F);
+                this.walk(this.RightArm2, 0.08F, 0.1F, false, 0, 0, ageInTicks, 0.25F);
+                this.walk(this.LeftArm3, 0.08F, 0.2F, true, 0, 0, ageInTicks, 0.25F);
+                this.walk(this.RightArm3, 0.08F, 0.2F, true, 0, 0, ageInTicks, 0.25F);
+                this.flap(this.LeftArm1, 0.08F, 0.03F, false, 0, 0, ageInTicks, 0.25F);
+                this.flap(this.RightArm1, 0.08F, 0.03F, true, 0, 0, ageInTicks, 0.25F);
+                this.LeftArm1.z -= 1 * Math.cos(ageInTicks * 0.08F);
+                this.RightArm1.z -= 1 * Math.cos(ageInTicks * 0.08F);
+        }
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
@@ -298,8 +375,39 @@ public class WingmawModel<T extends WingmawEntity> extends HierarchicalModel<T> 
 		Rightthigh.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 
-	@Override
-	public ModelPart root() {
-		return Body1;
-	}
+        @Override
+        public ModelPart root() {
+                return Body1;
+        }
+
+        private void walk(ModelPart part, float speed, float degree, boolean invert, float offset, float weight, float limbSwing, float limbSwingAmount) {
+                float direction = invert ? -1.0F : 1.0F;
+                part.xRot += direction * (Mth.cos(limbSwing * speed + offset) * degree * limbSwingAmount + weight * limbSwingAmount);
+        }
+
+        private void swing(ModelPart part, float speed, float degree, boolean invert, float offset, float weight, float limbSwing, float limbSwingAmount) {
+                float direction = invert ? -1.0F : 1.0F;
+                part.yRot += direction * (Mth.cos(limbSwing * speed + offset) * degree * limbSwingAmount + weight * limbSwingAmount);
+        }
+
+        private void flap(ModelPart part, float speed, float degree, boolean invert, float offset, float weight, float limbSwing, float limbSwingAmount) {
+                float direction = invert ? -1.0F : 1.0F;
+                part.zRot += direction * (Mth.cos(limbSwing * speed + offset) * degree * limbSwingAmount + weight * limbSwingAmount);
+        }
+
+        private void bob(ModelPart part, float speed, float degree, float limbSwing, float limbSwingAmount) {
+                part.y += Mth.cos(limbSwing * speed) * degree * limbSwingAmount;
+        }
+
+        private void chainWave(ModelPart[] parts, float speed, float degree, int offset, float limbSwing, float limbSwingAmount) {
+                for (int i = 0; i < parts.length; ++i) {
+                        parts[i].xRot += Mth.cos(limbSwing * speed + offset * i) * degree * limbSwingAmount;
+                }
+        }
+
+        private void chainFlap(ModelPart[] parts, float speed, float degree, int offset, float limbSwing, float limbSwingAmount) {
+                for (int i = 0; i < parts.length; ++i) {
+                        parts[i].zRot += Mth.cos(limbSwing * speed + offset * i) * degree * limbSwingAmount;
+                }
+        }
 }
